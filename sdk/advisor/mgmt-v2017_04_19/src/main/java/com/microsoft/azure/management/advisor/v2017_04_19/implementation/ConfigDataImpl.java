@@ -12,7 +12,8 @@ package com.microsoft.azure.management.advisor.v2017_04_19.implementation;
 import com.microsoft.azure.management.advisor.v2017_04_19.ConfigData;
 import com.microsoft.azure.arm.model.implementation.WrapperImpl;
 import rx.Observable;
-import com.microsoft.azure.management.advisor.v2017_04_19.ConfigDataProperties;
+import java.util.List;
+import com.microsoft.azure.management.advisor.v2017_04_19.DigestConfig;
 
 class ConfigDataImpl extends WrapperImpl<ConfigDataInner> implements ConfigData {
     private final AdvisorManager manager;
@@ -30,18 +31,28 @@ class ConfigDataImpl extends WrapperImpl<ConfigDataInner> implements ConfigData 
 
 
     @Override
+    public List<DigestConfig> digests() {
+        return this.inner().digests();
+    }
+
+    @Override
+    public Boolean exclude() {
+        return this.inner().exclude();
+    }
+
+    @Override
     public String id() {
         return this.inner().id();
     }
 
     @Override
-    public String name() {
-        return this.inner().name();
+    public String lowCpuThreshold() {
+        return this.inner().lowCpuThreshold();
     }
 
     @Override
-    public ConfigDataProperties properties() {
-        return this.inner().properties();
+    public String name() {
+        return this.inner().name();
     }
 
     @Override

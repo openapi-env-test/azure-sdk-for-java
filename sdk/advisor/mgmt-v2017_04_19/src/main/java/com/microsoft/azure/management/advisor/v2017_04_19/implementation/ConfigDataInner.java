@@ -8,13 +8,36 @@
 
 package com.microsoft.azure.management.advisor.v2017_04_19.implementation;
 
-import com.microsoft.azure.management.advisor.v2017_04_19.ConfigDataProperties;
+import java.util.List;
+import com.microsoft.azure.management.advisor.v2017_04_19.DigestConfig;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.rest.serializer.JsonFlatten;
 
 /**
  * The Advisor configuration data structure.
  */
+@JsonFlatten
 public class ConfigDataInner {
+    /**
+     * Exclude the resource from Advisor evaluations. Valid values: False
+     * (default) or True.
+     */
+    @JsonProperty(value = "properties.exclude")
+    private Boolean exclude;
+
+    /**
+     * Minimum percentage threshold for Advisor low CPU utilization evaluation.
+     * Valid only for subscriptions. Valid values: 5 (default), 10, 15 or 20.
+     */
+    @JsonProperty(value = "properties.low_cpu_threshold")
+    private String lowCpuThreshold;
+
+    /**
+     * Advisor digest configuration. Valid only for subscriptions.
+     */
+    @JsonProperty(value = "properties.digests")
+    private List<DigestConfig> digests;
+
     /**
      * The resource Id of the configuration resource.
      */
@@ -34,10 +57,64 @@ public class ConfigDataInner {
     private String name;
 
     /**
-     * The list of property name/value pairs.
+     * Get exclude the resource from Advisor evaluations. Valid values: False (default) or True.
+     *
+     * @return the exclude value
      */
-    @JsonProperty(value = "properties")
-    private ConfigDataProperties properties;
+    public Boolean exclude() {
+        return this.exclude;
+    }
+
+    /**
+     * Set exclude the resource from Advisor evaluations. Valid values: False (default) or True.
+     *
+     * @param exclude the exclude value to set
+     * @return the ConfigDataInner object itself.
+     */
+    public ConfigDataInner withExclude(Boolean exclude) {
+        this.exclude = exclude;
+        return this;
+    }
+
+    /**
+     * Get minimum percentage threshold for Advisor low CPU utilization evaluation. Valid only for subscriptions. Valid values: 5 (default), 10, 15 or 20.
+     *
+     * @return the lowCpuThreshold value
+     */
+    public String lowCpuThreshold() {
+        return this.lowCpuThreshold;
+    }
+
+    /**
+     * Set minimum percentage threshold for Advisor low CPU utilization evaluation. Valid only for subscriptions. Valid values: 5 (default), 10, 15 or 20.
+     *
+     * @param lowCpuThreshold the lowCpuThreshold value to set
+     * @return the ConfigDataInner object itself.
+     */
+    public ConfigDataInner withLowCpuThreshold(String lowCpuThreshold) {
+        this.lowCpuThreshold = lowCpuThreshold;
+        return this;
+    }
+
+    /**
+     * Get advisor digest configuration. Valid only for subscriptions.
+     *
+     * @return the digests value
+     */
+    public List<DigestConfig> digests() {
+        return this.digests;
+    }
+
+    /**
+     * Set advisor digest configuration. Valid only for subscriptions.
+     *
+     * @param digests the digests value to set
+     * @return the ConfigDataInner object itself.
+     */
+    public ConfigDataInner withDigests(List<DigestConfig> digests) {
+        this.digests = digests;
+        return this;
+    }
 
     /**
      * Get the resource Id of the configuration resource.
@@ -96,26 +173,6 @@ public class ConfigDataInner {
      */
     public ConfigDataInner withName(String name) {
         this.name = name;
-        return this;
-    }
-
-    /**
-     * Get the list of property name/value pairs.
-     *
-     * @return the properties value
-     */
-    public ConfigDataProperties properties() {
-        return this.properties;
-    }
-
-    /**
-     * Set the list of property name/value pairs.
-     *
-     * @param properties the properties value to set
-     * @return the ConfigDataInner object itself.
-     */
-    public ConfigDataInner withProperties(ConfigDataProperties properties) {
-        this.properties = properties;
         return this;
     }
 

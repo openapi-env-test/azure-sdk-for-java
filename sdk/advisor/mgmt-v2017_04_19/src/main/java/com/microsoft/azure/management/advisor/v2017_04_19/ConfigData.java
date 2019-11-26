@@ -12,25 +12,36 @@ import com.microsoft.azure.arm.model.HasInner;
 import com.microsoft.azure.management.advisor.v2017_04_19.implementation.ConfigDataInner;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.advisor.v2017_04_19.implementation.AdvisorManager;
+import java.util.List;
 
 /**
  * Type representing ConfigData.
  */
 public interface ConfigData extends HasInner<ConfigDataInner>, HasManager<AdvisorManager> {
     /**
+     * @return the digests value.
+     */
+    List<DigestConfig> digests();
+
+    /**
+     * @return the exclude value.
+     */
+    Boolean exclude();
+
+    /**
      * @return the id value.
      */
     String id();
 
     /**
+     * @return the lowCpuThreshold value.
+     */
+    String lowCpuThreshold();
+
+    /**
      * @return the name value.
      */
     String name();
-
-    /**
-     * @return the properties value.
-     */
-    ConfigDataProperties properties();
 
     /**
      * @return the type value.
