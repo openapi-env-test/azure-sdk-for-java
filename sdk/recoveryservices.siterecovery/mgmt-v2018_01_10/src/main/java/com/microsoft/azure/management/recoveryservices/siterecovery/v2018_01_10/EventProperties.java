@@ -43,6 +43,12 @@ public class EventProperties {
     private String affectedObjectFriendlyName;
 
     /**
+     * The affected object correlationId for the event.
+     */
+    @JsonProperty(value = "affectedObjectCorrelationId")
+    private String affectedObjectCorrelationId;
+
+    /**
      * The severity of the event.
      */
     @JsonProperty(value = "severity")
@@ -156,6 +162,26 @@ public class EventProperties {
      */
     public EventProperties withAffectedObjectFriendlyName(String affectedObjectFriendlyName) {
         this.affectedObjectFriendlyName = affectedObjectFriendlyName;
+        return this;
+    }
+
+    /**
+     * Get the affected object correlationId for the event.
+     *
+     * @return the affectedObjectCorrelationId value
+     */
+    public String affectedObjectCorrelationId() {
+        return this.affectedObjectCorrelationId;
+    }
+
+    /**
+     * Set the affected object correlationId for the event.
+     *
+     * @param affectedObjectCorrelationId the affectedObjectCorrelationId value to set
+     * @return the EventProperties object itself.
+     */
+    public EventProperties withAffectedObjectCorrelationId(String affectedObjectCorrelationId) {
+        this.affectedObjectCorrelationId = affectedObjectCorrelationId;
         return this;
     }
 
