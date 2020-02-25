@@ -12,25 +12,23 @@ import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * The parameters to the list SAS request.
+ * The ListContainerSasInput model.
  */
 public class ListContainerSasInput {
     /**
-     * The permissions to set on the SAS URL. Possible values include: 'Read',
-     * 'ReadWrite', 'ReadWriteDelete'.
+     * Possible values include: 'Read', 'ReadWrite', 'ReadWriteDelete'.
      */
     @JsonProperty(value = "permissions")
     private AssetContainerPermission permissions;
 
     /**
-     * The SAS URL expiration time.  This must be less than 24 hours from the
-     * current time.
+     * The expiryTime property.
      */
     @JsonProperty(value = "expiryTime")
     private DateTime expiryTime;
 
     /**
-     * Get the permissions to set on the SAS URL. Possible values include: 'Read', 'ReadWrite', 'ReadWriteDelete'.
+     * Get possible values include: 'Read', 'ReadWrite', 'ReadWriteDelete'.
      *
      * @return the permissions value
      */
@@ -39,7 +37,7 @@ public class ListContainerSasInput {
     }
 
     /**
-     * Set the permissions to set on the SAS URL. Possible values include: 'Read', 'ReadWrite', 'ReadWriteDelete'.
+     * Set possible values include: 'Read', 'ReadWrite', 'ReadWriteDelete'.
      *
      * @param permissions the permissions value to set
      * @return the ListContainerSasInput object itself.
@@ -50,7 +48,7 @@ public class ListContainerSasInput {
     }
 
     /**
-     * Get the SAS URL expiration time.  This must be less than 24 hours from the current time.
+     * Get the expiryTime value.
      *
      * @return the expiryTime value
      */
@@ -59,7 +57,7 @@ public class ListContainerSasInput {
     }
 
     /**
-     * Set the SAS URL expiration time.  This must be less than 24 hours from the current time.
+     * Set the expiryTime value.
      *
      * @param expiryTime the expiryTime value to set
      * @return the ListContainerSasInput object itself.
