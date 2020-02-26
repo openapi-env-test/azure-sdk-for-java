@@ -51,18 +51,6 @@ public class ManagementLockClientImpl extends AzureServiceClient {
         return this;
     }
 
-    /** The API version to use for the operation. */
-    private String apiVersion;
-
-    /**
-     * Gets The API version to use for the operation.
-     *
-     * @return the apiVersion value.
-     */
-    public String apiVersion() {
-        return this.apiVersion;
-    }
-
     /** The preferred language for the response. */
     private String acceptLanguage;
 
@@ -189,7 +177,6 @@ public class ManagementLockClientImpl extends AzureServiceClient {
     }
 
     protected void initialize() {
-        this.apiVersion = "2016-09-01";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
