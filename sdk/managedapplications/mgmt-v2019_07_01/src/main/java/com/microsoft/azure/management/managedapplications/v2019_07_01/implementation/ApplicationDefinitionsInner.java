@@ -31,7 +31,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.HTTP;
 import retrofit2.http.Path;
 import retrofit2.http.PUT;
-import retrofit2.http.Query;
 import retrofit2.http.Url;
 import retrofit2.Response;
 import rx.functions.Func1;
@@ -65,47 +64,47 @@ public class ApplicationDefinitionsInner implements InnerSupportsGet<Application
     interface ApplicationDefinitionsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.managedapplications.v2019_07_01.ApplicationDefinitions getByResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}")
-        Observable<Response<ResponseBody>> getByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("applicationDefinitionName") String applicationDefinitionName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("applicationDefinitionName") String applicationDefinitionName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.managedapplications.v2019_07_01.ApplicationDefinitions delete" })
         @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> delete(@Path("resourceGroupName") String resourceGroupName, @Path("applicationDefinitionName") String applicationDefinitionName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> delete(@Path("resourceGroupName") String resourceGroupName, @Path("applicationDefinitionName") String applicationDefinitionName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.managedapplications.v2019_07_01.ApplicationDefinitions beginDelete" })
         @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> beginDelete(@Path("resourceGroupName") String resourceGroupName, @Path("applicationDefinitionName") String applicationDefinitionName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginDelete(@Path("resourceGroupName") String resourceGroupName, @Path("applicationDefinitionName") String applicationDefinitionName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.managedapplications.v2019_07_01.ApplicationDefinitions createOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}")
-        Observable<Response<ResponseBody>> createOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("applicationDefinitionName") String applicationDefinitionName, @Path("subscriptionId") String subscriptionId, @Body ApplicationDefinitionInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> createOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("applicationDefinitionName") String applicationDefinitionName, @Path("subscriptionId") String subscriptionId, @Body ApplicationDefinitionInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.managedapplications.v2019_07_01.ApplicationDefinitions beginCreateOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}")
-        Observable<Response<ResponseBody>> beginCreateOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("applicationDefinitionName") String applicationDefinitionName, @Path("subscriptionId") String subscriptionId, @Body ApplicationDefinitionInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginCreateOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("applicationDefinitionName") String applicationDefinitionName, @Path("subscriptionId") String subscriptionId, @Body ApplicationDefinitionInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.managedapplications.v2019_07_01.ApplicationDefinitions listByResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions")
-        Observable<Response<ResponseBody>> listByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.managedapplications.v2019_07_01.ApplicationDefinitions getById" })
         @GET("{applicationDefinitionId}")
-        Observable<Response<ResponseBody>> getById(@Path(value = "applicationDefinitionId", encoded = true) String applicationDefinitionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getById(@Path(value = "applicationDefinitionId", encoded = true) String applicationDefinitionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.managedapplications.v2019_07_01.ApplicationDefinitions deleteById" })
         @HTTP(path = "{applicationDefinitionId}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> deleteById(@Path(value = "applicationDefinitionId", encoded = true) String applicationDefinitionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> deleteById(@Path(value = "applicationDefinitionId", encoded = true) String applicationDefinitionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.managedapplications.v2019_07_01.ApplicationDefinitions beginDeleteById" })
         @HTTP(path = "{applicationDefinitionId}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> beginDeleteById(@Path(value = "applicationDefinitionId", encoded = true) String applicationDefinitionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginDeleteById(@Path(value = "applicationDefinitionId", encoded = true) String applicationDefinitionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.managedapplications.v2019_07_01.ApplicationDefinitions createOrUpdateById" })
         @PUT("{applicationDefinitionId}")
-        Observable<Response<ResponseBody>> createOrUpdateById(@Path(value = "applicationDefinitionId", encoded = true) String applicationDefinitionId, @Body ApplicationDefinitionInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> createOrUpdateById(@Path(value = "applicationDefinitionId", encoded = true) String applicationDefinitionId, @Body ApplicationDefinitionInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.managedapplications.v2019_07_01.ApplicationDefinitions beginCreateOrUpdateById" })
         @PUT("{applicationDefinitionId}")
-        Observable<Response<ResponseBody>> beginCreateOrUpdateById(@Path(value = "applicationDefinitionId", encoded = true) String applicationDefinitionId, @Body ApplicationDefinitionInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginCreateOrUpdateById(@Path(value = "applicationDefinitionId", encoded = true) String applicationDefinitionId, @Body ApplicationDefinitionInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.managedapplications.v2019_07_01.ApplicationDefinitions listByResourceGroupNext" })
         @GET
@@ -175,10 +174,7 @@ public class ApplicationDefinitionsInner implements InnerSupportsGet<Application
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getByResourceGroup(resourceGroupName, applicationDefinitionName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.getByResourceGroup(resourceGroupName, applicationDefinitionName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ApplicationDefinitionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ApplicationDefinitionInner>> call(Response<ResponseBody> response) {
@@ -260,10 +256,7 @@ public class ApplicationDefinitionsInner implements InnerSupportsGet<Application
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Observable<Response<ResponseBody>> observable = service.delete(resourceGroupName, applicationDefinitionName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.delete(resourceGroupName, applicationDefinitionName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
@@ -328,10 +321,7 @@ public class ApplicationDefinitionsInner implements InnerSupportsGet<Application
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.beginDelete(resourceGroupName, applicationDefinitionName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginDelete(resourceGroupName, applicationDefinitionName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -423,11 +413,8 @@ public class ApplicationDefinitionsInner implements InnerSupportsGet<Application
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, applicationDefinitionName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, applicationDefinitionName, this.client.subscriptionId(), parameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ApplicationDefinitionInner>() { }.getType());
     }
 
@@ -500,11 +487,8 @@ public class ApplicationDefinitionsInner implements InnerSupportsGet<Application
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        return service.beginCreateOrUpdate(resourceGroupName, applicationDefinitionName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateOrUpdate(resourceGroupName, applicationDefinitionName, this.client.subscriptionId(), parameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ApplicationDefinitionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ApplicationDefinitionInner>> call(Response<ResponseBody> response) {
@@ -617,10 +601,7 @@ public class ApplicationDefinitionsInner implements InnerSupportsGet<Application
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByResourceGroup(resourceGroupName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByResourceGroup(resourceGroupName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<ApplicationDefinitionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ApplicationDefinitionInner>>> call(Response<ResponseBody> response) {
@@ -693,10 +674,7 @@ public class ApplicationDefinitionsInner implements InnerSupportsGet<Application
         if (applicationDefinitionId == null) {
             throw new IllegalArgumentException("Parameter applicationDefinitionId is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getById(applicationDefinitionId, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.getById(applicationDefinitionId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ApplicationDefinitionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ApplicationDefinitionInner>> call(Response<ResponseBody> response) {
@@ -768,10 +746,7 @@ public class ApplicationDefinitionsInner implements InnerSupportsGet<Application
         if (applicationDefinitionId == null) {
             throw new IllegalArgumentException("Parameter applicationDefinitionId is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Observable<Response<ResponseBody>> observable = service.deleteById(applicationDefinitionId, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.deleteById(applicationDefinitionId, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
@@ -826,10 +801,7 @@ public class ApplicationDefinitionsInner implements InnerSupportsGet<Application
         if (applicationDefinitionId == null) {
             throw new IllegalArgumentException("Parameter applicationDefinitionId is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.beginDeleteById(applicationDefinitionId, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginDeleteById(applicationDefinitionId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -911,11 +883,8 @@ public class ApplicationDefinitionsInner implements InnerSupportsGet<Application
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        Observable<Response<ResponseBody>> observable = service.createOrUpdateById(applicationDefinitionId, parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createOrUpdateById(applicationDefinitionId, parameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ApplicationDefinitionInner>() { }.getType());
     }
 
@@ -978,11 +947,8 @@ public class ApplicationDefinitionsInner implements InnerSupportsGet<Application
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        return service.beginCreateOrUpdateById(applicationDefinitionId, parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateOrUpdateById(applicationDefinitionId, parameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ApplicationDefinitionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ApplicationDefinitionInner>> call(Response<ResponseBody> response) {

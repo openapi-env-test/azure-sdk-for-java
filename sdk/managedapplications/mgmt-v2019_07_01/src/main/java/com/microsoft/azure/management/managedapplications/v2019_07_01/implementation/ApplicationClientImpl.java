@@ -26,7 +26,6 @@ import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
-import retrofit2.http.Query;
 import retrofit2.http.Url;
 import retrofit2.Response;
 import rx.functions.Func1;
@@ -70,18 +69,6 @@ public class ApplicationClientImpl extends AzureServiceClient {
     public ApplicationClientImpl withSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
         return this;
-    }
-
-    /** The API version to use for this operation. */
-    private String apiVersion;
-
-    /**
-     * Gets The API version to use for this operation.
-     *
-     * @return the apiVersion value.
-     */
-    public String apiVersion() {
-        return this.apiVersion;
     }
 
     /** The preferred language for the response. */
@@ -223,7 +210,6 @@ public class ApplicationClientImpl extends AzureServiceClient {
     }
 
     protected void initialize() {
-        this.apiVersion = "2019-07-01";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
@@ -255,7 +241,7 @@ public class ApplicationClientImpl extends AzureServiceClient {
     interface ApplicationClientService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.managedapplications.v2019_07_01.ApplicationClient listOperations" })
         @GET("providers/Microsoft.Solutions/operations")
-        Observable<Response<ResponseBody>> listOperations(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listOperations(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.managedapplications.v2019_07_01.ApplicationClient listOperationsNext" })
         @GET
@@ -343,10 +329,7 @@ public class ApplicationClientImpl extends AzureServiceClient {
      * @return the PagedList&lt;OperationInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<OperationInner>>> listOperationsSinglePageAsync() {
-        if (this.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
-        }
-        return service.listOperations(this.apiVersion(), this.acceptLanguage(), this.userAgent())
+        return service.listOperations(this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<OperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<OperationInner>>> call(Response<ResponseBody> response) {
@@ -360,7 +343,7 @@ public class ApplicationClientImpl extends AzureServiceClient {
             });
     }
 
-    private ServiceResponse<PageImpl<OperationInner>> listOperationsDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+    private ServiceResponse<PageImpl<OperationInner>> listOperationsDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.restClient().responseBuilderFactory().<PageImpl<OperationInner>, CloudException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<OperationInner>>() { }.getType())
                 .registerError(CloudException.class)

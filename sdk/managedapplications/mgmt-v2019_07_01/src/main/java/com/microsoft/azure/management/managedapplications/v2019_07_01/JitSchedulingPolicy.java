@@ -24,7 +24,7 @@ public class JitSchedulingPolicy {
     private JitSchedulingType type;
 
     /**
-     * The required duration of the JIT request.
+     * The duration property.
      */
     @JsonProperty(value = "duration", required = true)
     private Period duration;
