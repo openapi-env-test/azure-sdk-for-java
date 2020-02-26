@@ -68,123 +68,127 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
     interface DeploymentsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments deleteAtManagementGroupScope" })
         @HTTP(path = "providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> deleteAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> deleteAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments beginDeleteAtManagementGroupScope" })
         @HTTP(path = "providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> beginDeleteAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginDeleteAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments checkExistenceAtManagementGroupScope" })
         @HEAD("providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}")
-        Observable<Response<Void>> checkExistenceAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<Void>> checkExistenceAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments createOrUpdateAtManagementGroupScope" })
         @PUT("providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}")
-        Observable<Response<ResponseBody>> createOrUpdateAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Body DeploymentInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> createOrUpdateAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Body DeploymentInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments beginCreateOrUpdateAtManagementGroupScope" })
         @PUT("providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}")
-        Observable<Response<ResponseBody>> beginCreateOrUpdateAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Body DeploymentInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginCreateOrUpdateAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Body DeploymentInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments getAtManagementGroupScope" })
         @GET("providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}")
-        Observable<Response<ResponseBody>> getAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments cancelAtManagementGroupScope" })
         @POST("providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel")
-        Observable<Response<ResponseBody>> cancelAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> cancelAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments validateAtManagementGroupScope" })
         @POST("providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/validate")
-        Observable<Response<ResponseBody>> validateAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Body DeploymentInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> validateAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Body DeploymentInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments exportTemplateAtManagementGroupScope" })
         @POST("providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate")
-        Observable<Response<ResponseBody>> exportTemplateAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> exportTemplateAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments listAtManagementGroupScope" })
         @GET("providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/")
-        Observable<Response<ResponseBody>> listAtManagementGroupScope(@Path("groupId") String groupId, @Query("$filter") String filter, @Query("$top") Integer top, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listAtManagementGroupScope(@Path("groupId") String groupId, @Query("$filter") String filter, @Query("$top") Integer top, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments deleteAtSubscriptionScope" })
         @HTTP(path = "subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> deleteAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> deleteAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments beginDeleteAtSubscriptionScope" })
         @HTTP(path = "subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> beginDeleteAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginDeleteAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments checkExistenceAtSubscriptionScope" })
         @HEAD("subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}")
-        Observable<Response<Void>> checkExistenceAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<Void>> checkExistenceAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments createOrUpdateAtSubscriptionScope" })
         @PUT("subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}")
-        Observable<Response<ResponseBody>> createOrUpdateAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Body DeploymentInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> createOrUpdateAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Body DeploymentInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments beginCreateOrUpdateAtSubscriptionScope" })
         @PUT("subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}")
-        Observable<Response<ResponseBody>> beginCreateOrUpdateAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Body DeploymentInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginCreateOrUpdateAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Body DeploymentInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments getAtSubscriptionScope" })
         @GET("subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}")
-        Observable<Response<ResponseBody>> getAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments cancelAtSubscriptionScope" })
         @POST("subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel")
-        Observable<Response<ResponseBody>> cancelAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> cancelAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments validateAtSubscriptionScope" })
         @POST("subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/validate")
-        Observable<Response<ResponseBody>> validateAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Body DeploymentInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> validateAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Body DeploymentInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments exportTemplateAtSubscriptionScope" })
         @POST("subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate")
-        Observable<Response<ResponseBody>> exportTemplateAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> exportTemplateAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments list" })
         @GET("subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/")
-        Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Query("$filter") String filter, @Query("$top") Integer top, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Query("$filter") String filter, @Query("$top") Integer top, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments delete" })
         @HTTP(path = "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> delete(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> delete(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments beginDelete" })
         @HTTP(path = "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> beginDelete(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginDelete(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments checkExistence" })
         @HEAD("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}")
-        Observable<Response<Void>> checkExistence(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<Void>> checkExistence(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments createOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}")
-        Observable<Response<ResponseBody>> createOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Body DeploymentInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> createOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Body DeploymentInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments beginCreateOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}")
-        Observable<Response<ResponseBody>> beginCreateOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Body DeploymentInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginCreateOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Body DeploymentInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments getByResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}")
-        Observable<Response<ResponseBody>> getByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments cancel" })
         @POST("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel")
-        Observable<Response<ResponseBody>> cancel(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> cancel(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments validate" })
         @POST("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/validate")
-        Observable<Response<ResponseBody>> validate(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Body DeploymentInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> validate(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Body DeploymentInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments exportTemplate" })
         @POST("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate")
-        Observable<Response<ResponseBody>> exportTemplate(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> exportTemplate(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments listByResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/")
-        Observable<Response<ResponseBody>> listByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Query("$filter") String filter, @Query("$top") Integer top, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Query("$filter") String filter, @Query("$top") Integer top, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments calculateTemplateHash" })
+        @POST("providers/Microsoft.Resources/calculateTemplateHash")
+        Observable<Response<ResponseBody>> calculateTemplateHash(@Body Object template, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_05_01.Deployments listAtManagementGroupScopeNext" })
         @GET
@@ -262,10 +266,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (deploymentName == null) {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Observable<Response<ResponseBody>> observable = service.deleteAtManagementGroupScope(groupId, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.deleteAtManagementGroupScope(groupId, deploymentName, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
@@ -331,10 +332,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (deploymentName == null) {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.beginDeleteAtManagementGroupScope(groupId, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginDeleteAtManagementGroupScope(groupId, deploymentName, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -415,10 +413,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (deploymentName == null) {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.checkExistenceAtManagementGroupScope(groupId, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.checkExistenceAtManagementGroupScope(groupId, deploymentName, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Boolean>>>() {
                 @Override
                 public Observable<ServiceResponse<Boolean>> call(Response<Void> response) {
@@ -510,11 +505,8 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        Observable<Response<ResponseBody>> observable = service.createOrUpdateAtManagementGroupScope(groupId, deploymentName, parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createOrUpdateAtManagementGroupScope(groupId, deploymentName, parameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<DeploymentExtendedInner>() { }.getType());
     }
 
@@ -588,11 +580,8 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        return service.beginCreateOrUpdateAtManagementGroupScope(groupId, deploymentName, parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateOrUpdateAtManagementGroupScope(groupId, deploymentName, parameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentExtendedInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentExtendedInner>> call(Response<ResponseBody> response) {
@@ -673,10 +662,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (deploymentName == null) {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getAtManagementGroupScope(groupId, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.getAtManagementGroupScope(groupId, deploymentName, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentExtendedInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentExtendedInner>> call(Response<ResponseBody> response) {
@@ -759,10 +745,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (deploymentName == null) {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.cancelAtManagementGroupScope(groupId, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.cancelAtManagementGroupScope(groupId, deploymentName, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -849,11 +832,8 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        return service.validateAtManagementGroupScope(groupId, deploymentName, parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.validateAtManagementGroupScope(groupId, deploymentName, parameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentValidateResultInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentValidateResultInner>> call(Response<ResponseBody> response) {
@@ -934,10 +914,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (deploymentName == null) {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.exportTemplateAtManagementGroupScope(groupId, deploymentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.exportTemplateAtManagementGroupScope(groupId, deploymentName, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentExportResultInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentExportResultInner>> call(Response<ResponseBody> response) {
@@ -1046,12 +1023,9 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (groupId == null) {
             throw new IllegalArgumentException("Parameter groupId is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String filter = null;
         final Integer top = null;
-        return service.listAtManagementGroupScope(groupId, filter, top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listAtManagementGroupScope(groupId, filter, top, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentExtendedInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentExtendedInner>>> call(Response<ResponseBody> response) {
@@ -1163,10 +1137,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (groupId == null) {
             throw new IllegalArgumentException("Parameter groupId is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listAtManagementGroupScope(groupId, filter, top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listAtManagementGroupScope(groupId, filter, top, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentExtendedInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentExtendedInner>>> call(Response<ResponseBody> response) {
@@ -1245,10 +1216,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Observable<Response<ResponseBody>> observable = service.deleteAtSubscriptionScope(deploymentName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.deleteAtSubscriptionScope(deploymentName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
@@ -1310,10 +1278,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.beginDeleteAtSubscriptionScope(deploymentName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginDeleteAtSubscriptionScope(deploymentName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -1390,10 +1355,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.checkExistenceAtSubscriptionScope(deploymentName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.checkExistenceAtSubscriptionScope(deploymentName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Boolean>>>() {
                 @Override
                 public Observable<ServiceResponse<Boolean>> call(Response<Void> response) {
@@ -1481,11 +1443,8 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        Observable<Response<ResponseBody>> observable = service.createOrUpdateAtSubscriptionScope(deploymentName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createOrUpdateAtSubscriptionScope(deploymentName, this.client.subscriptionId(), parameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<DeploymentExtendedInner>() { }.getType());
     }
 
@@ -1555,11 +1514,8 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        return service.beginCreateOrUpdateAtSubscriptionScope(deploymentName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateOrUpdateAtSubscriptionScope(deploymentName, this.client.subscriptionId(), parameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentExtendedInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentExtendedInner>> call(Response<ResponseBody> response) {
@@ -1636,10 +1592,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getAtSubscriptionScope(deploymentName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.getAtSubscriptionScope(deploymentName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentExtendedInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentExtendedInner>> call(Response<ResponseBody> response) {
@@ -1718,10 +1671,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.cancelAtSubscriptionScope(deploymentName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.cancelAtSubscriptionScope(deploymentName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -1804,11 +1754,8 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        return service.validateAtSubscriptionScope(deploymentName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.validateAtSubscriptionScope(deploymentName, this.client.subscriptionId(), parameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentValidateResultInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentValidateResultInner>> call(Response<ResponseBody> response) {
@@ -1885,10 +1832,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.exportTemplateAtSubscriptionScope(deploymentName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.exportTemplateAtSubscriptionScope(deploymentName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentExportResultInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentExportResultInner>> call(Response<ResponseBody> response) {
@@ -1992,12 +1936,9 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String filter = null;
         final Integer top = null;
-        return service.list(this.client.subscriptionId(), filter, top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.list(this.client.subscriptionId(), filter, top, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentExtendedInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentExtendedInner>>> call(Response<ResponseBody> response) {
@@ -2104,10 +2045,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.list(this.client.subscriptionId(), filter, top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.list(this.client.subscriptionId(), filter, top, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentExtendedInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentExtendedInner>>> call(Response<ResponseBody> response) {
@@ -2193,10 +2131,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Observable<Response<ResponseBody>> observable = service.delete(resourceGroupName, deploymentName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.delete(resourceGroupName, deploymentName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
@@ -2265,10 +2200,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.beginDelete(resourceGroupName, deploymentName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginDelete(resourceGroupName, deploymentName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -2352,10 +2284,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.checkExistence(resourceGroupName, deploymentName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.checkExistence(resourceGroupName, deploymentName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Boolean>>>() {
                 @Override
                 public Observable<ServiceResponse<Boolean>> call(Response<Void> response) {
@@ -2450,11 +2379,8 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, deploymentName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, deploymentName, this.client.subscriptionId(), parameters, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<DeploymentExtendedInner>() { }.getType());
     }
 
@@ -2531,11 +2457,8 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        return service.beginCreateOrUpdate(resourceGroupName, deploymentName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateOrUpdate(resourceGroupName, deploymentName, this.client.subscriptionId(), parameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentExtendedInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentExtendedInner>> call(Response<ResponseBody> response) {
@@ -2619,10 +2542,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getByResourceGroup(resourceGroupName, deploymentName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.getByResourceGroup(resourceGroupName, deploymentName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentExtendedInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentExtendedInner>> call(Response<ResponseBody> response) {
@@ -2708,10 +2628,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.cancel(resourceGroupName, deploymentName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.cancel(resourceGroupName, deploymentName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -2801,11 +2718,8 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        return service.validate(resourceGroupName, deploymentName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.validate(resourceGroupName, deploymentName, this.client.subscriptionId(), parameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentValidateResultInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentValidateResultInner>> call(Response<ResponseBody> response) {
@@ -2889,10 +2803,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.exportTemplate(resourceGroupName, deploymentName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.exportTemplate(resourceGroupName, deploymentName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentExportResultInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentExportResultInner>> call(Response<ResponseBody> response) {
@@ -3004,12 +2915,9 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String filter = null;
         final Integer top = null;
-        return service.listByResourceGroup(resourceGroupName, this.client.subscriptionId(), filter, top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByResourceGroup(resourceGroupName, this.client.subscriptionId(), filter, top, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentExtendedInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentExtendedInner>>> call(Response<ResponseBody> response) {
@@ -3124,10 +3032,7 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByResourceGroup(resourceGroupName, this.client.subscriptionId(), filter, top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByResourceGroup(resourceGroupName, this.client.subscriptionId(), filter, top, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentExtendedInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentExtendedInner>>> call(Response<ResponseBody> response) {
@@ -3144,6 +3049,79 @@ public class DeploymentsInner implements InnerSupportsGet<DeploymentExtendedInne
     private ServiceResponse<PageImpl<DeploymentExtendedInner>> listByResourceGroupDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<PageImpl<DeploymentExtendedInner>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<DeploymentExtendedInner>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * Calculate the hash of the given template.
+     *
+     * @param template The template provided to calculate hash.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the TemplateHashResultInner object if successful.
+     */
+    public TemplateHashResultInner calculateTemplateHash(Object template) {
+        return calculateTemplateHashWithServiceResponseAsync(template).toBlocking().single().body();
+    }
+
+    /**
+     * Calculate the hash of the given template.
+     *
+     * @param template The template provided to calculate hash.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<TemplateHashResultInner> calculateTemplateHashAsync(Object template, final ServiceCallback<TemplateHashResultInner> serviceCallback) {
+        return ServiceFuture.fromResponse(calculateTemplateHashWithServiceResponseAsync(template), serviceCallback);
+    }
+
+    /**
+     * Calculate the hash of the given template.
+     *
+     * @param template The template provided to calculate hash.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the TemplateHashResultInner object
+     */
+    public Observable<TemplateHashResultInner> calculateTemplateHashAsync(Object template) {
+        return calculateTemplateHashWithServiceResponseAsync(template).map(new Func1<ServiceResponse<TemplateHashResultInner>, TemplateHashResultInner>() {
+            @Override
+            public TemplateHashResultInner call(ServiceResponse<TemplateHashResultInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Calculate the hash of the given template.
+     *
+     * @param template The template provided to calculate hash.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the TemplateHashResultInner object
+     */
+    public Observable<ServiceResponse<TemplateHashResultInner>> calculateTemplateHashWithServiceResponseAsync(Object template) {
+        if (template == null) {
+            throw new IllegalArgumentException("Parameter template is required and cannot be null.");
+        }
+        return service.calculateTemplateHash(template, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<TemplateHashResultInner>>>() {
+                @Override
+                public Observable<ServiceResponse<TemplateHashResultInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<TemplateHashResultInner> clientResponse = calculateTemplateHashDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<TemplateHashResultInner> calculateTemplateHashDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<TemplateHashResultInner, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<TemplateHashResultInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
