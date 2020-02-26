@@ -23,7 +23,6 @@ import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
-import retrofit2.http.Query;
 import retrofit2.http.Url;
 import retrofit2.Response;
 import rx.functions.Func1;
@@ -57,7 +56,7 @@ public class TenantsInner {
     interface TenantsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2016_06_01.Tenants list" })
         @GET("tenants")
-        Observable<Response<ResponseBody>> list(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> list(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2016_06_01.Tenants listNext" })
         @GET
@@ -145,15 +144,12 @@ public class TenantsInner {
      * @return the PagedList&lt;TenantIdDescriptionInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<TenantIdDescriptionInner>>> listSinglePageAsync() {
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.list(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.list(this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<TenantIdDescriptionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<TenantIdDescriptionInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl1<TenantIdDescriptionInner>> result = listDelegate(response);
+                        ServiceResponse<PageImpl<TenantIdDescriptionInner>> result = listDelegate(response);
                         return Observable.just(new ServiceResponse<Page<TenantIdDescriptionInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -162,9 +158,9 @@ public class TenantsInner {
             });
     }
 
-    private ServiceResponse<PageImpl1<TenantIdDescriptionInner>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl1<TenantIdDescriptionInner>, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl1<TenantIdDescriptionInner>>() { }.getType())
+    private ServiceResponse<PageImpl<TenantIdDescriptionInner>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<TenantIdDescriptionInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<TenantIdDescriptionInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -250,7 +246,7 @@ public class TenantsInner {
     /**
      * Gets the tenants for your account.
      *
-    ServiceResponse<PageImpl1<TenantIdDescriptionInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl<TenantIdDescriptionInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;TenantIdDescriptionInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
@@ -264,7 +260,7 @@ public class TenantsInner {
                 @Override
                 public Observable<ServiceResponse<Page<TenantIdDescriptionInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl1<TenantIdDescriptionInner>> result = listNextDelegate(response);
+                        ServiceResponse<PageImpl<TenantIdDescriptionInner>> result = listNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<TenantIdDescriptionInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -273,9 +269,9 @@ public class TenantsInner {
             });
     }
 
-    private ServiceResponse<PageImpl1<TenantIdDescriptionInner>> listNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl1<TenantIdDescriptionInner>, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl1<TenantIdDescriptionInner>>() { }.getType())
+    private ServiceResponse<PageImpl<TenantIdDescriptionInner>> listNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<TenantIdDescriptionInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<TenantIdDescriptionInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }

@@ -25,7 +25,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import retrofit2.http.Url;
 import retrofit2.Response;
 import rx.functions.Func1;
@@ -59,15 +58,15 @@ public class SubscriptionsInner {
     interface SubscriptionsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2016_06_01.Subscriptions listLocations" })
         @GET("subscriptions/{subscriptionId}/locations")
-        Observable<Response<ResponseBody>> listLocations(@Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listLocations(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2016_06_01.Subscriptions get" })
         @GET("subscriptions/{subscriptionId}")
-        Observable<Response<ResponseBody>> get(@Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> get(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2016_06_01.Subscriptions list" })
         @GET("subscriptions")
-        Observable<Response<ResponseBody>> list(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> list(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2016_06_01.Subscriptions listNext" })
         @GET
@@ -131,15 +130,12 @@ public class SubscriptionsInner {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listLocations(subscriptionId, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listLocations(subscriptionId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<LocationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<LocationInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl<LocationInner>> result = listLocationsDelegate(response);
+                        ServiceResponse<PageImpl1<LocationInner>> result = listLocationsDelegate(response);
                         List<LocationInner> items = null;
                         if (result.body() != null) {
                             items = result.body().items();
@@ -153,9 +149,9 @@ public class SubscriptionsInner {
             });
     }
 
-    private ServiceResponse<PageImpl<LocationInner>> listLocationsDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl<LocationInner>, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl<LocationInner>>() { }.getType())
+    private ServiceResponse<PageImpl1<LocationInner>> listLocationsDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl1<LocationInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl1<LocationInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -212,10 +208,7 @@ public class SubscriptionsInner {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(subscriptionId, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.get(subscriptionId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SubscriptionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<SubscriptionInner>> call(Response<ResponseBody> response) {
@@ -316,15 +309,12 @@ public class SubscriptionsInner {
      * @return the PagedList&lt;SubscriptionInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<SubscriptionInner>>> listSinglePageAsync() {
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.list(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.list(this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<SubscriptionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<SubscriptionInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl1<SubscriptionInner>> result = listDelegate(response);
+                        ServiceResponse<PageImpl<SubscriptionInner>> result = listDelegate(response);
                         return Observable.just(new ServiceResponse<Page<SubscriptionInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -333,9 +323,9 @@ public class SubscriptionsInner {
             });
     }
 
-    private ServiceResponse<PageImpl1<SubscriptionInner>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl1<SubscriptionInner>, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl1<SubscriptionInner>>() { }.getType())
+    private ServiceResponse<PageImpl<SubscriptionInner>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<SubscriptionInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<SubscriptionInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -421,7 +411,7 @@ public class SubscriptionsInner {
     /**
      * Gets all subscriptions for a tenant.
      *
-    ServiceResponse<PageImpl1<SubscriptionInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl<SubscriptionInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;SubscriptionInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
@@ -435,7 +425,7 @@ public class SubscriptionsInner {
                 @Override
                 public Observable<ServiceResponse<Page<SubscriptionInner>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PageImpl1<SubscriptionInner>> result = listNextDelegate(response);
+                        ServiceResponse<PageImpl<SubscriptionInner>> result = listNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<SubscriptionInner>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -444,9 +434,9 @@ public class SubscriptionsInner {
             });
     }
 
-    private ServiceResponse<PageImpl1<SubscriptionInner>> listNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PageImpl1<SubscriptionInner>, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PageImpl1<SubscriptionInner>>() { }.getType())
+    private ServiceResponse<PageImpl<SubscriptionInner>> listNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<SubscriptionInner>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PageImpl<SubscriptionInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }

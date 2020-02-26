@@ -28,23 +28,11 @@ public class SubscriptionClientImpl extends AzureServiceClient {
         return this.azureClient;
     }
 
-    /** The API version to use for the operation. */
-    private String apiVersion;
-
-    /**
-     * Gets The API version to use for the operation.
-     *
-     * @return the apiVersion value.
-     */
-    public String apiVersion() {
-        return this.apiVersion;
-    }
-
-    /** Gets or sets the preferred language for the response. */
+    /** The preferred language for the response. */
     private String acceptLanguage;
 
     /**
-     * Gets Gets or sets the preferred language for the response.
+     * Gets The preferred language for the response.
      *
      * @return the acceptLanguage value.
      */
@@ -53,7 +41,7 @@ public class SubscriptionClientImpl extends AzureServiceClient {
     }
 
     /**
-     * Sets Gets or sets the preferred language for the response.
+     * Sets The preferred language for the response.
      *
      * @param acceptLanguage the acceptLanguage value.
      * @return the service client itself
@@ -63,11 +51,11 @@ public class SubscriptionClientImpl extends AzureServiceClient {
         return this;
     }
 
-    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
+    /** The retry timeout in seconds for Long Running Operations. Default value is 30. */
     private int longRunningOperationRetryTimeout;
 
     /**
-     * Gets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     * Gets The retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @return the longRunningOperationRetryTimeout value.
      */
@@ -76,7 +64,7 @@ public class SubscriptionClientImpl extends AzureServiceClient {
     }
 
     /**
-     * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     * Sets The retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself
@@ -86,11 +74,11 @@ public class SubscriptionClientImpl extends AzureServiceClient {
         return this;
     }
 
-    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    /** Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
     private boolean generateClientRequestId;
 
     /**
-     * Gets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     * Gets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @return the generateClientRequestId value.
      */
@@ -99,7 +87,7 @@ public class SubscriptionClientImpl extends AzureServiceClient {
     }
 
     /**
-     * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     * Sets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself
@@ -107,6 +95,19 @@ public class SubscriptionClientImpl extends AzureServiceClient {
     public SubscriptionClientImpl withGenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
         return this;
+    }
+
+    /**
+     * The OperationsInner object to access its operations.
+     */
+    private OperationsInner operations;
+
+    /**
+     * Gets the OperationsInner object to access its operations.
+     * @return the OperationsInner object.
+     */
+    public OperationsInner operations() {
+        return this.operations;
     }
 
     /**
@@ -166,10 +167,10 @@ public class SubscriptionClientImpl extends AzureServiceClient {
     }
 
     protected void initialize() {
-        this.apiVersion = "2016-06-01";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
+        this.operations = new OperationsInner(restClient().retrofit(), this);
         this.subscriptions = new SubscriptionsInner(restClient().retrofit(), this);
         this.tenants = new TenantsInner(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
@@ -182,6 +183,6 @@ public class SubscriptionClientImpl extends AzureServiceClient {
      */
     @Override
     public String userAgent() {
-        return String.format("%s (%s, %s)", super.userAgent(), "SubscriptionClient", "2016-06-01");
+        return String.format("%s (%s, %s, auto-generated)", super.userAgent(), "SubscriptionClient", "2016-06-01");
     }
 }
