@@ -29,7 +29,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.HTTP;
 import retrofit2.http.Path;
 import retrofit2.http.PUT;
-import retrofit2.http.Query;
 import retrofit2.http.Url;
 import retrofit2.Response;
 import rx.functions.Func1;
@@ -63,27 +62,27 @@ public class StorageTargetsInner {
     interface StorageTargetsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.StorageTargets listByCache" })
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets")
-        Observable<Response<ResponseBody>> listByCache(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listByCache(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.StorageTargets delete" })
         @HTTP(path = "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> delete(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Path("storageTargetName") String storageTargetName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> delete(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Path("storageTargetName") String storageTargetName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.StorageTargets beginDelete" })
         @HTTP(path = "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> beginDelete(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Path("storageTargetName") String storageTargetName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginDelete(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Path("storageTargetName") String storageTargetName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.StorageTargets get" })
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}")
-        Observable<Response<ResponseBody>> get(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Path("storageTargetName") String storageTargetName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> get(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Path("storageTargetName") String storageTargetName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.StorageTargets createOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}")
-        Observable<Response<ResponseBody>> createOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Path("storageTargetName") String storageTargetName, @Query("api-version") String apiVersion, @Body StorageTargetInner storagetarget, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> createOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Path("storageTargetName") String storageTargetName, @Body StorageTargetInner storagetarget, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.StorageTargets beginCreateOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}")
-        Observable<Response<ResponseBody>> beginCreateOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Path("storageTargetName") String storageTargetName, @Query("api-version") String apiVersion, @Body StorageTargetInner storagetarget, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginCreateOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Path("storageTargetName") String storageTargetName, @Body StorageTargetInner storagetarget, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.StorageTargets listByCacheNext" })
         @GET
@@ -190,10 +189,7 @@ public class StorageTargetsInner {
         if (cacheName == null) {
             throw new IllegalArgumentException("Parameter cacheName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByCache(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByCache(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<StorageTargetInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<StorageTargetInner>>> call(Response<ResponseBody> response) {
@@ -283,10 +279,7 @@ public class StorageTargetsInner {
         if (storageTargetName == null) {
             throw new IllegalArgumentException("Parameter storageTargetName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Observable<Response<ResponseBody>> observable = service.delete(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.delete(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Object>() { }.getType());
     }
 
@@ -359,10 +352,7 @@ public class StorageTargetsInner {
         if (storageTargetName == null) {
             throw new IllegalArgumentException("Parameter storageTargetName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.beginDelete(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginDelete(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
                 @Override
                 public Observable<ServiceResponse<Object>> call(Response<ResponseBody> response) {
@@ -454,10 +444,7 @@ public class StorageTargetsInner {
         if (storageTargetName == null) {
             throw new IllegalArgumentException("Parameter storageTargetName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.get(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<StorageTargetInner>>>() {
                 @Override
                 public Observable<ServiceResponse<StorageTargetInner>> call(Response<ResponseBody> response) {
@@ -547,11 +534,8 @@ public class StorageTargetsInner {
         if (storageTargetName == null) {
             throw new IllegalArgumentException("Parameter storageTargetName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final StorageTargetInner storagetarget = null;
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, this.client.apiVersion(), storagetarget, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, storagetarget, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<StorageTargetInner>() { }.getType());
     }
     /**
@@ -627,11 +611,8 @@ public class StorageTargetsInner {
         if (storageTargetName == null) {
             throw new IllegalArgumentException("Parameter storageTargetName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(storagetarget);
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, this.client.apiVersion(), storagetarget, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, storagetarget, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<StorageTargetInner>() { }.getType());
     }
 
@@ -704,11 +685,8 @@ public class StorageTargetsInner {
         if (storageTargetName == null) {
             throw new IllegalArgumentException("Parameter storageTargetName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final StorageTargetInner storagetarget = null;
-        return service.beginCreateOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, this.client.apiVersion(), storagetarget, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, storagetarget, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<StorageTargetInner>>>() {
                 @Override
                 public Observable<ServiceResponse<StorageTargetInner>> call(Response<ResponseBody> response) {
@@ -795,11 +773,8 @@ public class StorageTargetsInner {
         if (storageTargetName == null) {
             throw new IllegalArgumentException("Parameter storageTargetName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(storagetarget);
-        return service.beginCreateOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, this.client.apiVersion(), storagetarget, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, storagetarget, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<StorageTargetInner>>>() {
                 @Override
                 public Observable<ServiceResponse<StorageTargetInner>> call(Response<ResponseBody> response) {

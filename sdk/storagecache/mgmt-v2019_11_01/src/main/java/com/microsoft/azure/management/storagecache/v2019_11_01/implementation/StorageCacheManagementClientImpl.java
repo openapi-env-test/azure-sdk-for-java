@@ -51,18 +51,6 @@ public class StorageCacheManagementClientImpl extends AzureServiceClient {
         return this;
     }
 
-    /** Client API version. */
-    private String apiVersion;
-
-    /**
-     * Gets Client API version.
-     *
-     * @return the apiVersion value.
-     */
-    public String apiVersion() {
-        return this.apiVersion;
-    }
-
     /** The preferred language for the response. */
     private String acceptLanguage;
 
@@ -228,7 +216,6 @@ public class StorageCacheManagementClientImpl extends AzureServiceClient {
     }
 
     protected void initialize() {
-        this.apiVersion = "2019-11-01";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;

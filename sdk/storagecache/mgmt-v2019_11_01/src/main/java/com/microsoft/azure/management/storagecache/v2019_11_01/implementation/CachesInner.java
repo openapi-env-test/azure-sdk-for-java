@@ -34,7 +34,6 @@ import retrofit2.http.PATCH;
 import retrofit2.http.Path;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
-import retrofit2.http.Query;
 import retrofit2.http.Url;
 import retrofit2.Response;
 import rx.functions.Func1;
@@ -68,67 +67,67 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
     interface CachesService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.Caches list" })
         @GET("subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/caches")
-        Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.Caches listByResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches")
-        Observable<Response<ResponseBody>> listByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.Caches delete" })
         @HTTP(path = "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> delete(@Path("resourceGroupName") String resourceGroupName, @Path("cacheName") String cacheName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> delete(@Path("resourceGroupName") String resourceGroupName, @Path("cacheName") String cacheName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.Caches beginDelete" })
         @HTTP(path = "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> beginDelete(@Path("resourceGroupName") String resourceGroupName, @Path("cacheName") String cacheName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginDelete(@Path("resourceGroupName") String resourceGroupName, @Path("cacheName") String cacheName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.Caches getByResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}")
-        Observable<Response<ResponseBody>> getByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("cacheName") String cacheName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("cacheName") String cacheName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.Caches createOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}")
-        Observable<Response<ResponseBody>> createOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Query("api-version") String apiVersion, @Body CacheInner cache, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> createOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Body CacheInner cache, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.Caches beginCreateOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}")
-        Observable<Response<ResponseBody>> beginCreateOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Query("api-version") String apiVersion, @Body CacheInner cache, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginCreateOrUpdate(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Body CacheInner cache, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.Caches update" })
         @PATCH("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}")
-        Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Query("api-version") String apiVersion, @Body CacheInner cache, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Body CacheInner cache, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.Caches flush" })
         @POST("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/flush")
-        Observable<Response<ResponseBody>> flush(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> flush(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.Caches beginFlush" })
         @POST("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/flush")
-        Observable<Response<ResponseBody>> beginFlush(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginFlush(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.Caches start" })
         @POST("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/start")
-        Observable<Response<ResponseBody>> start(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> start(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.Caches beginStart" })
         @POST("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/start")
-        Observable<Response<ResponseBody>> beginStart(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginStart(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.Caches stop" })
         @POST("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/stop")
-        Observable<Response<ResponseBody>> stop(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> stop(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.Caches beginStop" })
         @POST("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/stop")
-        Observable<Response<ResponseBody>> beginStop(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginStop(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.Caches upgradeFirmware" })
         @POST("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/upgrade")
-        Observable<Response<ResponseBody>> upgradeFirmware(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> upgradeFirmware(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.Caches beginUpgradeFirmware" })
         @POST("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/upgrade")
-        Observable<Response<ResponseBody>> beginUpgradeFirmware(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginUpgradeFirmware(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Path("cacheName") String cacheName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_11_01.Caches listNext" })
         @GET
@@ -223,10 +222,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.list(this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.list(this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<CacheInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<CacheInner>>> call(Response<ResponseBody> response) {
@@ -338,10 +334,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByResourceGroup(resourceGroupName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByResourceGroup(resourceGroupName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<CacheInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<CacheInner>>> call(Response<ResponseBody> response) {
@@ -424,10 +417,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Observable<Response<ResponseBody>> observable = service.delete(resourceGroupName, cacheName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.delete(resourceGroupName, cacheName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Object>() { }.getType());
     }
 
@@ -493,10 +483,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.beginDelete(resourceGroupName, cacheName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginDelete(resourceGroupName, cacheName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
                 @Override
                 public Observable<ServiceResponse<Object>> call(Response<ResponseBody> response) {
@@ -581,10 +568,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getByResourceGroup(resourceGroupName, cacheName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.getByResourceGroup(resourceGroupName, cacheName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<CacheInner>>>() {
                 @Override
                 public Observable<ServiceResponse<CacheInner>> call(Response<ResponseBody> response) {
@@ -667,11 +651,8 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (cacheName == null) {
             throw new IllegalArgumentException("Parameter cacheName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final CacheInner cache = null;
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), cache, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, cache, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<CacheInner>() { }.getType());
     }
     /**
@@ -740,11 +721,8 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (cacheName == null) {
             throw new IllegalArgumentException("Parameter cacheName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(cache);
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), cache, this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, cache, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<CacheInner>() { }.getType());
     }
 
@@ -810,11 +788,8 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (cacheName == null) {
             throw new IllegalArgumentException("Parameter cacheName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final CacheInner cache = null;
-        return service.beginCreateOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), cache, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, cache, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<CacheInner>>>() {
                 @Override
                 public Observable<ServiceResponse<CacheInner>> call(Response<ResponseBody> response) {
@@ -894,11 +869,8 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (cacheName == null) {
             throw new IllegalArgumentException("Parameter cacheName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(cache);
-        return service.beginCreateOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), cache, this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginCreateOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, cache, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<CacheInner>>>() {
                 @Override
                 public Observable<ServiceResponse<CacheInner>> call(Response<ResponseBody> response) {
@@ -982,11 +954,8 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (cacheName == null) {
             throw new IllegalArgumentException("Parameter cacheName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final CacheInner cache = null;
-        return service.update(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), cache, this.client.acceptLanguage(), this.client.userAgent())
+        return service.update(resourceGroupName, this.client.subscriptionId(), cacheName, cache, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<CacheInner>>>() {
                 @Override
                 public Observable<ServiceResponse<CacheInner>> call(Response<ResponseBody> response) {
@@ -1066,11 +1035,8 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (cacheName == null) {
             throw new IllegalArgumentException("Parameter cacheName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(cache);
-        return service.update(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), cache, this.client.acceptLanguage(), this.client.userAgent())
+        return service.update(resourceGroupName, this.client.subscriptionId(), cacheName, cache, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<CacheInner>>>() {
                 @Override
                 public Observable<ServiceResponse<CacheInner>> call(Response<ResponseBody> response) {
@@ -1153,10 +1119,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (cacheName == null) {
             throw new IllegalArgumentException("Parameter cacheName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Observable<Response<ResponseBody>> observable = service.flush(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.flush(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Object>() { }.getType());
     }
 
@@ -1222,10 +1185,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (cacheName == null) {
             throw new IllegalArgumentException("Parameter cacheName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.beginFlush(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginFlush(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
                 @Override
                 public Observable<ServiceResponse<Object>> call(Response<ResponseBody> response) {
@@ -1310,10 +1270,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (cacheName == null) {
             throw new IllegalArgumentException("Parameter cacheName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Observable<Response<ResponseBody>> observable = service.start(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.start(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Object>() { }.getType());
     }
 
@@ -1379,10 +1336,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (cacheName == null) {
             throw new IllegalArgumentException("Parameter cacheName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.beginStart(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginStart(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
                 @Override
                 public Observable<ServiceResponse<Object>> call(Response<ResponseBody> response) {
@@ -1467,10 +1421,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (cacheName == null) {
             throw new IllegalArgumentException("Parameter cacheName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Observable<Response<ResponseBody>> observable = service.stop(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.stop(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Object>() { }.getType());
     }
 
@@ -1536,10 +1487,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (cacheName == null) {
             throw new IllegalArgumentException("Parameter cacheName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.beginStop(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginStop(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
                 @Override
                 public Observable<ServiceResponse<Object>> call(Response<ResponseBody> response) {
@@ -1624,10 +1572,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (cacheName == null) {
             throw new IllegalArgumentException("Parameter cacheName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Observable<Response<ResponseBody>> observable = service.upgradeFirmware(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.upgradeFirmware(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Object>() { }.getType());
     }
 
@@ -1693,10 +1638,7 @@ public class CachesInner implements InnerSupportsGet<CacheInner>, InnerSupportsD
         if (cacheName == null) {
             throw new IllegalArgumentException("Parameter cacheName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.beginUpgradeFirmware(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.beginUpgradeFirmware(resourceGroupName, this.client.subscriptionId(), cacheName, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
                 @Override
                 public Observable<ServiceResponse<Object>> call(Response<ResponseBody> response) {
