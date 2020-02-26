@@ -29,7 +29,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.HTTP;
 import retrofit2.http.Path;
 import retrofit2.http.PUT;
-import retrofit2.http.Query;
 import retrofit2.http.Url;
 import retrofit2.Response;
 import rx.functions.Func1;
@@ -63,43 +62,43 @@ public class PolicyDefinitionsInner {
     interface PolicyDefinitionsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyDefinitions createOrUpdate" })
         @PUT("subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}")
-        Observable<Response<ResponseBody>> createOrUpdate(@Path("policyDefinitionName") String policyDefinitionName, @Path("subscriptionId") String subscriptionId, @Body PolicyDefinitionInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> createOrUpdate(@Path("policyDefinitionName") String policyDefinitionName, @Path("subscriptionId") String subscriptionId, @Body PolicyDefinitionInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyDefinitions delete" })
         @HTTP(path = "subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> delete(@Path("policyDefinitionName") String policyDefinitionName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> delete(@Path("policyDefinitionName") String policyDefinitionName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyDefinitions get" })
         @GET("subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}")
-        Observable<Response<ResponseBody>> get(@Path("policyDefinitionName") String policyDefinitionName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> get(@Path("policyDefinitionName") String policyDefinitionName, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyDefinitions getBuiltIn" })
         @GET("providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}")
-        Observable<Response<ResponseBody>> getBuiltIn(@Path("policyDefinitionName") String policyDefinitionName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getBuiltIn(@Path("policyDefinitionName") String policyDefinitionName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyDefinitions createOrUpdateAtManagementGroup" })
         @PUT("providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}")
-        Observable<Response<ResponseBody>> createOrUpdateAtManagementGroup(@Path("policyDefinitionName") String policyDefinitionName, @Path("managementGroupId") String managementGroupId, @Body PolicyDefinitionInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> createOrUpdateAtManagementGroup(@Path("policyDefinitionName") String policyDefinitionName, @Path("managementGroupId") String managementGroupId, @Body PolicyDefinitionInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyDefinitions deleteAtManagementGroup" })
         @HTTP(path = "providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> deleteAtManagementGroup(@Path("policyDefinitionName") String policyDefinitionName, @Path("managementGroupId") String managementGroupId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> deleteAtManagementGroup(@Path("policyDefinitionName") String policyDefinitionName, @Path("managementGroupId") String managementGroupId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyDefinitions getAtManagementGroup" })
         @GET("providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}")
-        Observable<Response<ResponseBody>> getAtManagementGroup(@Path("policyDefinitionName") String policyDefinitionName, @Path("managementGroupId") String managementGroupId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getAtManagementGroup(@Path("policyDefinitionName") String policyDefinitionName, @Path("managementGroupId") String managementGroupId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyDefinitions list" })
         @GET("subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions")
-        Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyDefinitions listBuiltIn" })
         @GET("providers/Microsoft.Authorization/policyDefinitions")
-        Observable<Response<ResponseBody>> listBuiltIn(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listBuiltIn(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyDefinitions listByManagementGroup" })
         @GET("providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions")
-        Observable<Response<ResponseBody>> listByManagementGroup(@Path("managementGroupId") String managementGroupId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listByManagementGroup(@Path("managementGroupId") String managementGroupId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyDefinitions listNext" })
         @GET
@@ -177,11 +176,8 @@ public class PolicyDefinitionsInner {
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        return service.createOrUpdate(policyDefinitionName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.createOrUpdate(policyDefinitionName, this.client.subscriptionId(), parameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<PolicyDefinitionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<PolicyDefinitionInner>> call(Response<ResponseBody> response) {
@@ -256,10 +252,7 @@ public class PolicyDefinitionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.delete(policyDefinitionName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.delete(policyDefinitionName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -336,10 +329,7 @@ public class PolicyDefinitionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(policyDefinitionName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.get(policyDefinitionName, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<PolicyDefinitionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<PolicyDefinitionInner>> call(Response<ResponseBody> response) {
@@ -412,10 +402,7 @@ public class PolicyDefinitionsInner {
         if (policyDefinitionName == null) {
             throw new IllegalArgumentException("Parameter policyDefinitionName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getBuiltIn(policyDefinitionName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.getBuiltIn(policyDefinitionName, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<PolicyDefinitionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<PolicyDefinitionInner>> call(Response<ResponseBody> response) {
@@ -502,11 +489,8 @@ public class PolicyDefinitionsInner {
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        return service.createOrUpdateAtManagementGroup(policyDefinitionName, managementGroupId, parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.createOrUpdateAtManagementGroup(policyDefinitionName, managementGroupId, parameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<PolicyDefinitionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<PolicyDefinitionInner>> call(Response<ResponseBody> response) {
@@ -585,10 +569,7 @@ public class PolicyDefinitionsInner {
         if (managementGroupId == null) {
             throw new IllegalArgumentException("Parameter managementGroupId is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.deleteAtManagementGroup(policyDefinitionName, managementGroupId, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.deleteAtManagementGroup(policyDefinitionName, managementGroupId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -669,10 +650,7 @@ public class PolicyDefinitionsInner {
         if (managementGroupId == null) {
             throw new IllegalArgumentException("Parameter managementGroupId is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getAtManagementGroup(policyDefinitionName, managementGroupId, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.getAtManagementGroup(policyDefinitionName, managementGroupId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<PolicyDefinitionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<PolicyDefinitionInner>> call(Response<ResponseBody> response) {
@@ -776,10 +754,7 @@ public class PolicyDefinitionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.list(this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.list(this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<PolicyDefinitionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<PolicyDefinitionInner>>> call(Response<ResponseBody> response) {
@@ -880,10 +855,7 @@ public class PolicyDefinitionsInner {
      * @return the PagedList&lt;PolicyDefinitionInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<PolicyDefinitionInner>>> listBuiltInSinglePageAsync() {
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listBuiltIn(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listBuiltIn(this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<PolicyDefinitionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<PolicyDefinitionInner>>> call(Response<ResponseBody> response) {
@@ -897,7 +869,7 @@ public class PolicyDefinitionsInner {
             });
     }
 
-    private ServiceResponse<PageImpl<PolicyDefinitionInner>> listBuiltInDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+    private ServiceResponse<PageImpl<PolicyDefinitionInner>> listBuiltInDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<PageImpl<PolicyDefinitionInner>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<PolicyDefinitionInner>>() { }.getType())
                 .registerError(CloudException.class)
@@ -992,10 +964,7 @@ public class PolicyDefinitionsInner {
         if (managementGroupId == null) {
             throw new IllegalArgumentException("Parameter managementGroupId is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByManagementGroup(managementGroupId, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByManagementGroup(managementGroupId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<PolicyDefinitionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<PolicyDefinitionInner>>> call(Response<ResponseBody> response) {

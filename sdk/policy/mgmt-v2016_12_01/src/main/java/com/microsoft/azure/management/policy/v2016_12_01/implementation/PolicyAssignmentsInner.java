@@ -65,39 +65,39 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
     interface PolicyAssignmentsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyAssignments delete" })
         @HTTP(path = "{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> delete(@Path(value = "scope", encoded = true) String scope, @Path("policyAssignmentName") String policyAssignmentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> delete(@Path(value = "scope", encoded = true) String scope, @Path("policyAssignmentName") String policyAssignmentName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyAssignments create" })
         @PUT("{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}")
-        Observable<Response<ResponseBody>> create(@Path(value = "scope", encoded = true) String scope, @Path("policyAssignmentName") String policyAssignmentName, @Body PolicyAssignmentInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> create(@Path(value = "scope", encoded = true) String scope, @Path("policyAssignmentName") String policyAssignmentName, @Body PolicyAssignmentInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyAssignments get" })
         @GET("{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}")
-        Observable<Response<ResponseBody>> get(@Path(value = "scope", encoded = true) String scope, @Path("policyAssignmentName") String policyAssignmentName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> get(@Path(value = "scope", encoded = true) String scope, @Path("policyAssignmentName") String policyAssignmentName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyAssignments listByResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/policyAssignments")
-        Observable<Response<ResponseBody>> listByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Query(value = "$filter", encoded = true) String filter, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Query(value = "$filter", encoded = true) String filter, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyAssignments listForResource" })
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/policyAssignments")
-        Observable<Response<ResponseBody>> listForResource(@Path("resourceGroupName") String resourceGroupName, @Path("resourceProviderNamespace") String resourceProviderNamespace, @Path(value = "parentResourcePath", encoded = true) String parentResourcePath, @Path(value = "resourceType", encoded = true) String resourceType, @Path("resourceName") String resourceName, @Path("subscriptionId") String subscriptionId, @Query("$filter") String filter, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listForResource(@Path("resourceGroupName") String resourceGroupName, @Path("resourceProviderNamespace") String resourceProviderNamespace, @Path(value = "parentResourcePath", encoded = true) String parentResourcePath, @Path(value = "resourceType", encoded = true) String resourceType, @Path("resourceName") String resourceName, @Path("subscriptionId") String subscriptionId, @Query("$filter") String filter, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyAssignments list" })
         @GET("subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyAssignments")
-        Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Query("$filter") String filter, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Query("$filter") String filter, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyAssignments deleteById" })
         @HTTP(path = "{policyAssignmentId}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> deleteById(@Path(value = "policyAssignmentId", encoded = true) String policyAssignmentId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> deleteById(@Path(value = "policyAssignmentId", encoded = true) String policyAssignmentId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyAssignments createById" })
         @PUT("{policyAssignmentId}")
-        Observable<Response<ResponseBody>> createById(@Path(value = "policyAssignmentId", encoded = true) String policyAssignmentId, @Body PolicyAssignmentInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> createById(@Path(value = "policyAssignmentId", encoded = true) String policyAssignmentId, @Body PolicyAssignmentInner parameters, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyAssignments getById" })
         @GET("{policyAssignmentId}")
-        Observable<Response<ResponseBody>> getById(@Path(value = "policyAssignmentId", encoded = true) String policyAssignmentId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getById(@Path(value = "policyAssignmentId", encoded = true) String policyAssignmentId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.policy.v2016_12_01.PolicyAssignments listByResourceGroupNext" })
         @GET
@@ -172,10 +172,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
         if (policyAssignmentName == null) {
             throw new IllegalArgumentException("Parameter policyAssignmentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.delete(scope, policyAssignmentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.delete(scope, policyAssignmentName, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<PolicyAssignmentInner>>>() {
                 @Override
                 public Observable<ServiceResponse<PolicyAssignmentInner>> call(Response<ResponseBody> response) {
@@ -267,11 +264,8 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        return service.create(scope, policyAssignmentName, parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.create(scope, policyAssignmentName, parameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<PolicyAssignmentInner>>>() {
                 @Override
                 public Observable<ServiceResponse<PolicyAssignmentInner>> call(Response<ResponseBody> response) {
@@ -351,10 +345,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
         if (policyAssignmentName == null) {
             throw new IllegalArgumentException("Parameter policyAssignmentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(scope, policyAssignmentName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.get(scope, policyAssignmentName, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<PolicyAssignmentInner>>>() {
                 @Override
                 public Observable<ServiceResponse<PolicyAssignmentInner>> call(Response<ResponseBody> response) {
@@ -466,11 +457,8 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String filter = null;
-        return service.listByResourceGroup(resourceGroupName, this.client.subscriptionId(), filter, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByResourceGroup(resourceGroupName, this.client.subscriptionId(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<PolicyAssignmentInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<PolicyAssignmentInner>>> call(Response<ResponseBody> response) {
@@ -580,10 +568,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByResourceGroup(resourceGroupName, this.client.subscriptionId(), filter, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByResourceGroup(resourceGroupName, this.client.subscriptionId(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<PolicyAssignmentInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<PolicyAssignmentInner>>> call(Response<ResponseBody> response) {
@@ -727,11 +712,8 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String filter = null;
-        return service.listForResource(resourceGroupName, resourceProviderNamespace, parentResourcePath, resourceType, resourceName, this.client.subscriptionId(), filter, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listForResource(resourceGroupName, resourceProviderNamespace, parentResourcePath, resourceType, resourceName, this.client.subscriptionId(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<PolicyAssignmentInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<PolicyAssignmentInner>>> call(Response<ResponseBody> response) {
@@ -873,10 +855,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listForResource(resourceGroupName, resourceProviderNamespace, parentResourcePath, resourceType, resourceName, this.client.subscriptionId(), filter, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listForResource(resourceGroupName, resourceProviderNamespace, parentResourcePath, resourceType, resourceName, this.client.subscriptionId(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<PolicyAssignmentInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<PolicyAssignmentInner>>> call(Response<ResponseBody> response) {
@@ -980,11 +959,8 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String filter = null;
-        return service.list(this.client.subscriptionId(), filter, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.list(this.client.subscriptionId(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<PolicyAssignmentInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<PolicyAssignmentInner>>> call(Response<ResponseBody> response) {
@@ -1086,10 +1062,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.list(this.client.subscriptionId(), filter, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.list(this.client.subscriptionId(), filter, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<PolicyAssignmentInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<PolicyAssignmentInner>>> call(Response<ResponseBody> response) {
@@ -1112,7 +1085,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
 
     /**
      * Deletes a policy assignment by ID.
-     * When providing a scope for the assigment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
+     * When providing a scope for the assignment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
      *
      * @param policyAssignmentId The ID of the policy assignment to delete. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1126,7 +1099,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
 
     /**
      * Deletes a policy assignment by ID.
-     * When providing a scope for the assigment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
+     * When providing a scope for the assignment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
      *
      * @param policyAssignmentId The ID of the policy assignment to delete. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1139,7 +1112,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
 
     /**
      * Deletes a policy assignment by ID.
-     * When providing a scope for the assigment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
+     * When providing a scope for the assignment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
      *
      * @param policyAssignmentId The ID of the policy assignment to delete. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1156,7 +1129,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
 
     /**
      * Deletes a policy assignment by ID.
-     * When providing a scope for the assigment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
+     * When providing a scope for the assignment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
      *
      * @param policyAssignmentId The ID of the policy assignment to delete. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1166,10 +1139,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
         if (policyAssignmentId == null) {
             throw new IllegalArgumentException("Parameter policyAssignmentId is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.deleteById(policyAssignmentId, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.deleteById(policyAssignmentId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<PolicyAssignmentInner>>>() {
                 @Override
                 public Observable<ServiceResponse<PolicyAssignmentInner>> call(Response<ResponseBody> response) {
@@ -1192,7 +1162,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
 
     /**
      * Creates a policy assignment by ID.
-     * Policy assignments are inherited by child resources. For example, when you apply a policy to a resource group that policy is assigned to all resources in the group. When providing a scope for the assigment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
+     * Policy assignments are inherited by child resources. For example, when you apply a policy to a resource group that policy is assigned to all resources in the group. When providing a scope for the assignment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
      *
      * @param policyAssignmentId The ID of the policy assignment to create. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'.
      * @param parameters Parameters for policy assignment.
@@ -1207,7 +1177,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
 
     /**
      * Creates a policy assignment by ID.
-     * Policy assignments are inherited by child resources. For example, when you apply a policy to a resource group that policy is assigned to all resources in the group. When providing a scope for the assigment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
+     * Policy assignments are inherited by child resources. For example, when you apply a policy to a resource group that policy is assigned to all resources in the group. When providing a scope for the assignment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
      *
      * @param policyAssignmentId The ID of the policy assignment to create. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'.
      * @param parameters Parameters for policy assignment.
@@ -1221,7 +1191,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
 
     /**
      * Creates a policy assignment by ID.
-     * Policy assignments are inherited by child resources. For example, when you apply a policy to a resource group that policy is assigned to all resources in the group. When providing a scope for the assigment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
+     * Policy assignments are inherited by child resources. For example, when you apply a policy to a resource group that policy is assigned to all resources in the group. When providing a scope for the assignment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
      *
      * @param policyAssignmentId The ID of the policy assignment to create. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'.
      * @param parameters Parameters for policy assignment.
@@ -1239,7 +1209,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
 
     /**
      * Creates a policy assignment by ID.
-     * Policy assignments are inherited by child resources. For example, when you apply a policy to a resource group that policy is assigned to all resources in the group. When providing a scope for the assigment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
+     * Policy assignments are inherited by child resources. For example, when you apply a policy to a resource group that policy is assigned to all resources in the group. When providing a scope for the assignment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
      *
      * @param policyAssignmentId The ID of the policy assignment to create. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'.
      * @param parameters Parameters for policy assignment.
@@ -1253,11 +1223,8 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        return service.createById(policyAssignmentId, parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.createById(policyAssignmentId, parameters, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<PolicyAssignmentInner>>>() {
                 @Override
                 public Observable<ServiceResponse<PolicyAssignmentInner>> call(Response<ResponseBody> response) {
@@ -1280,7 +1247,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
 
     /**
      * Gets a policy assignment by ID.
-     * When providing a scope for the assigment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
+     * When providing a scope for the assignment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
      *
      * @param policyAssignmentId The ID of the policy assignment to get. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1294,7 +1261,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
 
     /**
      * Gets a policy assignment by ID.
-     * When providing a scope for the assigment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
+     * When providing a scope for the assignment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
      *
      * @param policyAssignmentId The ID of the policy assignment to get. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -1307,7 +1274,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
 
     /**
      * Gets a policy assignment by ID.
-     * When providing a scope for the assigment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
+     * When providing a scope for the assignment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
      *
      * @param policyAssignmentId The ID of the policy assignment to get. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1324,7 +1291,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
 
     /**
      * Gets a policy assignment by ID.
-     * When providing a scope for the assigment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
+     * When providing a scope for the assignment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.
      *
      * @param policyAssignmentId The ID of the policy assignment to get. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -1334,10 +1301,7 @@ public class PolicyAssignmentsInner implements InnerSupportsDelete<PolicyAssignm
         if (policyAssignmentId == null) {
             throw new IllegalArgumentException("Parameter policyAssignmentId is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getById(policyAssignmentId, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.getById(policyAssignmentId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<PolicyAssignmentInner>>>() {
                 @Override
                 public Observable<ServiceResponse<PolicyAssignmentInner>> call(Response<ResponseBody> response) {
