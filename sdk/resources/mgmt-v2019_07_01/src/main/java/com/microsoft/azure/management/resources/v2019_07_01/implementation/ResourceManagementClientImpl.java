@@ -10,6 +10,8 @@ package com.microsoft.azure.management.resources.v2019_07_01.implementation;
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
+import com.microsoft.azure.LongRunningFinalState;
+import com.microsoft.azure.LongRunningOperationOptions;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
 
@@ -49,18 +51,6 @@ public class ResourceManagementClientImpl extends AzureServiceClient {
     public ResourceManagementClientImpl withSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
         return this;
-    }
-
-    /** The API version to use for this operation. */
-    private String apiVersion;
-
-    /**
-     * Gets The API version to use for this operation.
-     *
-     * @return the apiVersion value.
-     */
-    public String apiVersion() {
-        return this.apiVersion;
     }
 
     /** The preferred language for the response. */
@@ -254,7 +244,6 @@ public class ResourceManagementClientImpl extends AzureServiceClient {
     }
 
     protected void initialize() {
-        this.apiVersion = "2019-07-01";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;

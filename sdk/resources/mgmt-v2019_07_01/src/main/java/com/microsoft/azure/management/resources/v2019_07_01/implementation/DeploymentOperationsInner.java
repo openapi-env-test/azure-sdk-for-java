@@ -59,43 +59,43 @@ public class DeploymentOperationsInner {
     interface DeploymentOperationsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_07_01.DeploymentOperations getAtScope" })
         @GET("{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}")
-        Observable<Response<ResponseBody>> getAtScope(@Path("scope") String scope, @Path("deploymentName") String deploymentName, @Path("operationId") String operationId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getAtScope(@Path("scope") String scope, @Path("deploymentName") String deploymentName, @Path("operationId") String operationId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_07_01.DeploymentOperations listAtScope" })
         @GET("{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations")
-        Observable<Response<ResponseBody>> listAtScope(@Path("scope") String scope, @Path("deploymentName") String deploymentName, @Query("$top") Integer top, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listAtScope(@Path("scope") String scope, @Path("deploymentName") String deploymentName, @Query("$top") Integer top, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_07_01.DeploymentOperations getAtTenantScope" })
         @GET("providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}")
-        Observable<Response<ResponseBody>> getAtTenantScope(@Path("deploymentName") String deploymentName, @Path("operationId") String operationId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getAtTenantScope(@Path("deploymentName") String deploymentName, @Path("operationId") String operationId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_07_01.DeploymentOperations listAtTenantScope" })
         @GET("providers/Microsoft.Resources/deployments/{deploymentName}/operations")
-        Observable<Response<ResponseBody>> listAtTenantScope(@Path("deploymentName") String deploymentName, @Query("$top") Integer top, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listAtTenantScope(@Path("deploymentName") String deploymentName, @Query("$top") Integer top, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_07_01.DeploymentOperations getAtManagementGroupScope" })
         @GET("providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}")
-        Observable<Response<ResponseBody>> getAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Path("operationId") String operationId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Path("operationId") String operationId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_07_01.DeploymentOperations listAtManagementGroupScope" })
         @GET("providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/operations")
-        Observable<Response<ResponseBody>> listAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Query("$top") Integer top, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listAtManagementGroupScope(@Path("groupId") String groupId, @Path("deploymentName") String deploymentName, @Query("$top") Integer top, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_07_01.DeploymentOperations getAtSubscriptionScope" })
         @GET("subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}")
-        Observable<Response<ResponseBody>> getAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("operationId") String operationId, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("operationId") String operationId, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_07_01.DeploymentOperations listAtSubscriptionScope" })
         @GET("subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/operations")
-        Observable<Response<ResponseBody>> listAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Query("$top") Integer top, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listAtSubscriptionScope(@Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Query("$top") Integer top, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_07_01.DeploymentOperations get" })
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/{deploymentName}/operations/{operationId}")
-        Observable<Response<ResponseBody>> get(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("operationId") String operationId, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> get(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("operationId") String operationId, @Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_07_01.DeploymentOperations listByResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/{deploymentName}/operations")
-        Observable<Response<ResponseBody>> listByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Query("$top") Integer top, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("deploymentName") String deploymentName, @Path("subscriptionId") String subscriptionId, @Query("$top") Integer top, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.resources.v2019_07_01.DeploymentOperations listAtScopeNext" })
         @GET
@@ -185,10 +185,7 @@ public class DeploymentOperationsInner {
         if (operationId == null) {
             throw new IllegalArgumentException("Parameter operationId is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getAtScope(scope, deploymentName, operationId, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.getAtScope(scope, deploymentName, operationId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentOperationInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentOperationInner>> call(Response<ResponseBody> response) {
@@ -305,11 +302,8 @@ public class DeploymentOperationsInner {
         if (deploymentName == null) {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final Integer top = null;
-        return service.listAtScope(scope, deploymentName, top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listAtScope(scope, deploymentName, top, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentOperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentOperationInner>>> call(Response<ResponseBody> response) {
@@ -424,10 +418,7 @@ public class DeploymentOperationsInner {
         if (deploymentName == null) {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listAtScope(scope, deploymentName, top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listAtScope(scope, deploymentName, top, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentOperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentOperationInner>>> call(Response<ResponseBody> response) {
@@ -507,10 +498,7 @@ public class DeploymentOperationsInner {
         if (operationId == null) {
             throw new IllegalArgumentException("Parameter operationId is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getAtTenantScope(deploymentName, operationId, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.getAtTenantScope(deploymentName, operationId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentOperationInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentOperationInner>> call(Response<ResponseBody> response) {
@@ -619,11 +607,8 @@ public class DeploymentOperationsInner {
         if (deploymentName == null) {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final Integer top = null;
-        return service.listAtTenantScope(deploymentName, top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listAtTenantScope(deploymentName, top, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentOperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentOperationInner>>> call(Response<ResponseBody> response) {
@@ -730,10 +715,7 @@ public class DeploymentOperationsInner {
         if (deploymentName == null) {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listAtTenantScope(deploymentName, top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listAtTenantScope(deploymentName, top, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentOperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentOperationInner>>> call(Response<ResponseBody> response) {
@@ -820,10 +802,7 @@ public class DeploymentOperationsInner {
         if (operationId == null) {
             throw new IllegalArgumentException("Parameter operationId is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getAtManagementGroupScope(groupId, deploymentName, operationId, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.getAtManagementGroupScope(groupId, deploymentName, operationId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentOperationInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentOperationInner>> call(Response<ResponseBody> response) {
@@ -940,11 +919,8 @@ public class DeploymentOperationsInner {
         if (deploymentName == null) {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final Integer top = null;
-        return service.listAtManagementGroupScope(groupId, deploymentName, top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listAtManagementGroupScope(groupId, deploymentName, top, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentOperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentOperationInner>>> call(Response<ResponseBody> response) {
@@ -1059,10 +1035,7 @@ public class DeploymentOperationsInner {
         if (deploymentName == null) {
             throw new IllegalArgumentException("Parameter deploymentName is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listAtManagementGroupScope(groupId, deploymentName, top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listAtManagementGroupScope(groupId, deploymentName, top, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentOperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentOperationInner>>> call(Response<ResponseBody> response) {
@@ -1145,10 +1118,7 @@ public class DeploymentOperationsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getAtSubscriptionScope(deploymentName, operationId, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.getAtSubscriptionScope(deploymentName, operationId, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentOperationInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentOperationInner>> call(Response<ResponseBody> response) {
@@ -1260,11 +1230,8 @@ public class DeploymentOperationsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final Integer top = null;
-        return service.listAtSubscriptionScope(deploymentName, this.client.subscriptionId(), top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listAtSubscriptionScope(deploymentName, this.client.subscriptionId(), top, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentOperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentOperationInner>>> call(Response<ResponseBody> response) {
@@ -1374,10 +1341,7 @@ public class DeploymentOperationsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listAtSubscriptionScope(deploymentName, this.client.subscriptionId(), top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listAtSubscriptionScope(deploymentName, this.client.subscriptionId(), top, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentOperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentOperationInner>>> call(Response<ResponseBody> response) {
@@ -1467,10 +1431,7 @@ public class DeploymentOperationsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(resourceGroupName, deploymentName, operationId, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.get(resourceGroupName, deploymentName, operationId, this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DeploymentOperationInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DeploymentOperationInner>> call(Response<ResponseBody> response) {
@@ -1590,11 +1551,8 @@ public class DeploymentOperationsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final Integer top = null;
-        return service.listByResourceGroup(resourceGroupName, deploymentName, this.client.subscriptionId(), top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByResourceGroup(resourceGroupName, deploymentName, this.client.subscriptionId(), top, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentOperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentOperationInner>>> call(Response<ResponseBody> response) {
@@ -1712,10 +1670,7 @@ public class DeploymentOperationsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByResourceGroup(resourceGroupName, deploymentName, this.client.subscriptionId(), top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByResourceGroup(resourceGroupName, deploymentName, this.client.subscriptionId(), top, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DeploymentOperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DeploymentOperationInner>>> call(Response<ResponseBody> response) {
