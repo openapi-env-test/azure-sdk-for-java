@@ -24,7 +24,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import retrofit2.http.Url;
 import retrofit2.Response;
 import rx.functions.Func1;
@@ -38,7 +37,7 @@ public class UsageModelsInner {
     /** The Retrofit service to perform REST calls. */
     private UsageModelsService service;
     /** The service client containing this operation class. */
-    private StorageCacheMgmtClientImpl client;
+    private StorageCacheManagementClientImpl client;
 
     /**
      * Initializes an instance of UsageModelsInner.
@@ -46,7 +45,7 @@ public class UsageModelsInner {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public UsageModelsInner(Retrofit retrofit, StorageCacheMgmtClientImpl client) {
+    public UsageModelsInner(Retrofit retrofit, StorageCacheManagementClientImpl client) {
         this.service = retrofit.create(UsageModelsService.class);
         this.client = client;
     }
@@ -58,7 +57,7 @@ public class UsageModelsInner {
     interface UsageModelsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_08_01.UsageModels list" })
         @GET("subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/usageModels")
-        Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_08_01.UsageModels listNext" })
         @GET
@@ -149,10 +148,7 @@ public class UsageModelsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.list(this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.list(this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<UsageModelInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<UsageModelInner>>> call(Response<ResponseBody> response) {

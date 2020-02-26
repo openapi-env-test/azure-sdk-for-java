@@ -23,7 +23,6 @@ import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
-import retrofit2.http.Query;
 import retrofit2.http.Url;
 import retrofit2.Response;
 import rx.functions.Func1;
@@ -37,7 +36,7 @@ public class OperationsInner {
     /** The Retrofit service to perform REST calls. */
     private OperationsService service;
     /** The service client containing this operation class. */
-    private StorageCacheMgmtClientImpl client;
+    private StorageCacheManagementClientImpl client;
 
     /**
      * Initializes an instance of OperationsInner.
@@ -45,7 +44,7 @@ public class OperationsInner {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public OperationsInner(Retrofit retrofit, StorageCacheMgmtClientImpl client) {
+    public OperationsInner(Retrofit retrofit, StorageCacheManagementClientImpl client) {
         this.service = retrofit.create(OperationsService.class);
         this.client = client;
     }
@@ -57,7 +56,7 @@ public class OperationsInner {
     interface OperationsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_08_01.Operations list" })
         @GET("providers/Microsoft.StorageCache/operations")
-        Observable<Response<ResponseBody>> list(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> list(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.storagecache.v2019_08_01.Operations listNext" })
         @GET
@@ -145,10 +144,7 @@ public class OperationsInner {
      * @return the PagedList&lt;ApiOperationInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<ApiOperationInner>>> listSinglePageAsync() {
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.list(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.list(this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<ApiOperationInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ApiOperationInner>>> call(Response<ResponseBody> response) {
@@ -162,7 +158,7 @@ public class OperationsInner {
             });
     }
 
-    private ServiceResponse<PageImpl<ApiOperationInner>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+    private ServiceResponse<PageImpl<ApiOperationInner>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<PageImpl<ApiOperationInner>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<ApiOperationInner>>() { }.getType())
                 .registerError(CloudException.class)
