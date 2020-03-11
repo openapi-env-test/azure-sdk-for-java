@@ -484,82 +484,6 @@ public class StorageTargetsInner {
      * @param resourceGroupName Target resource group.
      * @param cacheName Name of Cache.
      * @param storageTargetName Name of the Storage Target.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the StorageTargetInner object if successful.
-     */
-    public StorageTargetInner createOrUpdate(String resourceGroupName, String cacheName, String storageTargetName) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, cacheName, storageTargetName).toBlocking().last().body();
-    }
-
-    /**
-     * Create or update a Storage Target. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the Cache is healthy again.
-     *
-     * @param resourceGroupName Target resource group.
-     * @param cacheName Name of Cache.
-     * @param storageTargetName Name of the Storage Target.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<StorageTargetInner> createOrUpdateAsync(String resourceGroupName, String cacheName, String storageTargetName, final ServiceCallback<StorageTargetInner> serviceCallback) {
-        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, cacheName, storageTargetName), serviceCallback);
-    }
-
-    /**
-     * Create or update a Storage Target. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the Cache is healthy again.
-     *
-     * @param resourceGroupName Target resource group.
-     * @param cacheName Name of Cache.
-     * @param storageTargetName Name of the Storage Target.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
-     */
-    public Observable<StorageTargetInner> createOrUpdateAsync(String resourceGroupName, String cacheName, String storageTargetName) {
-        return createOrUpdateWithServiceResponseAsync(resourceGroupName, cacheName, storageTargetName).map(new Func1<ServiceResponse<StorageTargetInner>, StorageTargetInner>() {
-            @Override
-            public StorageTargetInner call(ServiceResponse<StorageTargetInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Create or update a Storage Target. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the Cache is healthy again.
-     *
-     * @param resourceGroupName Target resource group.
-     * @param cacheName Name of Cache.
-     * @param storageTargetName Name of the Storage Target.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
-     */
-    public Observable<ServiceResponse<StorageTargetInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String cacheName, String storageTargetName) {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (cacheName == null) {
-            throw new IllegalArgumentException("Parameter cacheName is required and cannot be null.");
-        }
-        if (storageTargetName == null) {
-            throw new IllegalArgumentException("Parameter storageTargetName is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        final StorageTargetInner storagetarget = null;
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, this.client.apiVersion(), storagetarget, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<StorageTargetInner>() { }.getType());
-    }
-    /**
-     * Create or update a Storage Target. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the Cache is healthy again.
-     *
-     * @param resourceGroupName Target resource group.
-     * @param cacheName Name of Cache.
-     * @param storageTargetName Name of the Storage Target.
      * @param storagetarget Object containing the definition of a Storage Target.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -630,96 +554,12 @@ public class StorageTargetsInner {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
+        if (storagetarget == null) {
+            throw new IllegalArgumentException("Parameter storagetarget is required and cannot be null.");
+        }
         Validator.validate(storagetarget);
         Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, this.client.apiVersion(), storagetarget, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<StorageTargetInner>() { }.getType());
-    }
-
-    /**
-     * Create or update a Storage Target. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the Cache is healthy again.
-     *
-     * @param resourceGroupName Target resource group.
-     * @param cacheName Name of Cache.
-     * @param storageTargetName Name of the Storage Target.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the StorageTargetInner object if successful.
-     */
-    public StorageTargetInner beginCreateOrUpdate(String resourceGroupName, String cacheName, String storageTargetName) {
-        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, cacheName, storageTargetName).toBlocking().single().body();
-    }
-
-    /**
-     * Create or update a Storage Target. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the Cache is healthy again.
-     *
-     * @param resourceGroupName Target resource group.
-     * @param cacheName Name of Cache.
-     * @param storageTargetName Name of the Storage Target.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<StorageTargetInner> beginCreateOrUpdateAsync(String resourceGroupName, String cacheName, String storageTargetName, final ServiceCallback<StorageTargetInner> serviceCallback) {
-        return ServiceFuture.fromResponse(beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, cacheName, storageTargetName), serviceCallback);
-    }
-
-    /**
-     * Create or update a Storage Target. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the Cache is healthy again.
-     *
-     * @param resourceGroupName Target resource group.
-     * @param cacheName Name of Cache.
-     * @param storageTargetName Name of the Storage Target.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the StorageTargetInner object
-     */
-    public Observable<StorageTargetInner> beginCreateOrUpdateAsync(String resourceGroupName, String cacheName, String storageTargetName) {
-        return beginCreateOrUpdateWithServiceResponseAsync(resourceGroupName, cacheName, storageTargetName).map(new Func1<ServiceResponse<StorageTargetInner>, StorageTargetInner>() {
-            @Override
-            public StorageTargetInner call(ServiceResponse<StorageTargetInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Create or update a Storage Target. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the Cache is healthy again.
-     *
-     * @param resourceGroupName Target resource group.
-     * @param cacheName Name of Cache.
-     * @param storageTargetName Name of the Storage Target.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the StorageTargetInner object
-     */
-    public Observable<ServiceResponse<StorageTargetInner>> beginCreateOrUpdateWithServiceResponseAsync(String resourceGroupName, String cacheName, String storageTargetName) {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (cacheName == null) {
-            throw new IllegalArgumentException("Parameter cacheName is required and cannot be null.");
-        }
-        if (storageTargetName == null) {
-            throw new IllegalArgumentException("Parameter storageTargetName is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        final StorageTargetInner storagetarget = null;
-        return service.beginCreateOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, this.client.apiVersion(), storagetarget, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<StorageTargetInner>>>() {
-                @Override
-                public Observable<ServiceResponse<StorageTargetInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<StorageTargetInner> clientResponse = beginCreateOrUpdateDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
     }
 
     /**
@@ -797,6 +637,9 @@ public class StorageTargetsInner {
         }
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        if (storagetarget == null) {
+            throw new IllegalArgumentException("Parameter storagetarget is required and cannot be null.");
         }
         Validator.validate(storagetarget);
         return service.beginCreateOrUpdate(resourceGroupName, this.client.subscriptionId(), cacheName, storageTargetName, this.client.apiVersion(), storagetarget, this.client.acceptLanguage(), this.client.userAgent())
