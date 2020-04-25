@@ -165,6 +165,18 @@ class FactoriesImpl extends GroupableResourcesCoreImpl<Factory, FactoryImpl, Fac
     }
 
     @Override
+    public Observable<Factory> resetFactoryRepoAsync(String locationId, FactoryRepoUpdate factoryRepoUpdate) {
+        FactoriesInner client = this.inner();
+        return client.resetFactoryRepoAsync(locationId, factoryRepoUpdate)
+        .map(new Func1<FactoryInner, Factory>() {
+            @Override
+            public Factory call(FactoryInner inner) {
+                return new FactoryImpl(inner.name(), inner, manager());
+            }
+        });
+    }
+
+    @Override
     public Observable<Factory> configureFactoryRepoAsync(String locationId, FactoryRepoUpdate factoryRepoUpdate) {
         FactoriesInner client = this.inner();
         return client.configureFactoryRepoAsync(locationId, factoryRepoUpdate)
