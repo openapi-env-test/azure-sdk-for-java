@@ -26,7 +26,6 @@ import com.microsoft.azure.management.datafactory.v2018_06_01.GitHubAccessTokenR
 import com.microsoft.azure.management.datafactory.v2018_06_01.AccessPolicyResponse;
 import com.microsoft.azure.management.datafactory.v2018_06_01.GitHubAccessTokenRequest;
 import com.microsoft.azure.management.datafactory.v2018_06_01.UserAccessPolicy;
-import com.microsoft.azure.management.datafactory.v2018_06_01.FactoryRepoUpdate;
 
 class FactoriesImpl extends GroupableResourcesCoreImpl<Factory, FactoryImpl, FactoryInner, FactoriesInner, DataFactoryManager>  implements Factories {
     protected FactoriesImpl(DataFactoryManager manager) {
@@ -162,18 +161,6 @@ class FactoriesImpl extends GroupableResourcesCoreImpl<Factory, FactoryImpl, Fac
     @Override
     protected FactoryImpl wrapModel(String name) {
         return new FactoryImpl(name, new FactoryInner(), this.manager());
-    }
-
-    @Override
-    public Observable<Factory> configureFactoryRepoAsync(String locationId, FactoryRepoUpdate factoryRepoUpdate) {
-        FactoriesInner client = this.inner();
-        return client.configureFactoryRepoAsync(locationId, factoryRepoUpdate)
-        .map(new Func1<FactoryInner, Factory>() {
-            @Override
-            public Factory call(FactoryInner inner) {
-                return new FactoryImpl(inner.name(), inner, manager());
-            }
-        });
     }
 
 }

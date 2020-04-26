@@ -44,14 +44,4 @@ public interface Factories extends SupportsCreating<Factory.DefinitionStages.Bla
      */
     Observable<AccessPolicyResponse> getDataPlaneAccessAsync(String resourceGroupName, String factoryName, UserAccessPolicy policy);
 
-    /**
-     * Updates a factory's repo information.
-     *
-     * @param locationId The location identifier.
-     * @param factoryRepoUpdate Update factory repo request definition.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable for the request
-     */
-    Observable<Factory> configureFactoryRepoAsync(String locationId, FactoryRepoUpdate factoryRepoUpdate);
-
 }
