@@ -21,6 +21,12 @@ public class DataFlowSink extends Transformation {
     private DatasetReference dataset;
 
     /**
+     * Linked service reference.
+     */
+    @JsonProperty(value = "linkedService")
+    private LinkedServiceReference linkedService;
+
+    /**
      * Get dataset reference.
      *
      * @return the dataset value
@@ -37,6 +43,26 @@ public class DataFlowSink extends Transformation {
      */
     public DataFlowSink withDataset(DatasetReference dataset) {
         this.dataset = dataset;
+        return this;
+    }
+
+    /**
+     * Get linked service reference.
+     *
+     * @return the linkedService value
+     */
+    public LinkedServiceReference linkedService() {
+        return this.linkedService;
+    }
+
+    /**
+     * Set linked service reference.
+     *
+     * @param linkedService the linkedService value to set
+     * @return the DataFlowSink object itself.
+     */
+    public DataFlowSink withLinkedService(LinkedServiceReference linkedService) {
+        this.linkedService = linkedService;
         return this;
     }
 
