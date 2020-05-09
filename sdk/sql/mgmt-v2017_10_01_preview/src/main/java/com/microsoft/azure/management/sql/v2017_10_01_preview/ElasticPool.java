@@ -50,6 +50,11 @@ public interface ElasticPool extends HasInner<ElasticPoolInner>, Indexable, Refr
     String location();
 
     /**
+     * @return the maintenanceConfigurationId value.
+     */
+    String maintenanceConfigurationId();
+
+    /**
      * @return the maxSizeBytes value.
      */
     Long maxSizeBytes();
@@ -143,6 +148,18 @@ public interface ElasticPool extends HasInner<ElasticPoolInner>, Indexable, Refr
         }
 
         /**
+         * The stage of the elasticpool definition allowing to specify MaintenanceConfigurationId.
+         */
+        interface WithMaintenanceConfigurationId {
+            /**
+             * Specifies maintenanceConfigurationId.
+             * @param maintenanceConfigurationId Maintenance configuration id assigned to the elastic pool
+             * @return the next definition stage
+             */
+            WithCreate withMaintenanceConfigurationId(String maintenanceConfigurationId);
+        }
+
+        /**
          * The stage of the elasticpool definition allowing to specify MaxSizeBytes.
          */
         interface WithMaxSizeBytes {
@@ -172,7 +189,11 @@ public interface ElasticPool extends HasInner<ElasticPoolInner>, Indexable, Refr
         interface WithSku {
             /**
              * Specifies sku.
-             * @param sku the sku parameter value
+             * @param sku The elastic pool SKU.
+ The list of SKUs may vary by region and support offer. To determine the SKUs (including the SKU name, tier/edition, family, and capacity) that are available to your subscription in an Azure region, use the `Capabilities_ListByLocation` REST API or the following command:
+ ```azurecli
+ az sql elastic-pool list-editions -l &lt;location&gt; -o table
+ ````
              * @return the next definition stage
              */
             WithCreate withSku(Sku sku);
@@ -207,13 +228,13 @@ public interface ElasticPool extends HasInner<ElasticPoolInner>, Indexable, Refr
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<ElasticPool>, DefinitionStages.WithLicenseType, DefinitionStages.WithMaxSizeBytes, DefinitionStages.WithPerDatabaseSettings, DefinitionStages.WithSku, DefinitionStages.WithTags, DefinitionStages.WithZoneRedundant {
+        interface WithCreate extends Creatable<ElasticPool>, DefinitionStages.WithLicenseType, DefinitionStages.WithMaintenanceConfigurationId, DefinitionStages.WithMaxSizeBytes, DefinitionStages.WithPerDatabaseSettings, DefinitionStages.WithSku, DefinitionStages.WithTags, DefinitionStages.WithZoneRedundant {
         }
     }
     /**
      * The template for a ElasticPool update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<ElasticPool>, UpdateStages.WithLicenseType, UpdateStages.WithMaxSizeBytes, UpdateStages.WithPerDatabaseSettings, UpdateStages.WithSku, UpdateStages.WithTags, UpdateStages.WithZoneRedundant {
+    interface Update extends Appliable<ElasticPool>, UpdateStages.WithLicenseType, UpdateStages.WithMaintenanceConfigurationId, UpdateStages.WithMaxSizeBytes, UpdateStages.WithPerDatabaseSettings, UpdateStages.WithSku, UpdateStages.WithTags, UpdateStages.WithZoneRedundant {
     }
 
     /**
@@ -230,6 +251,18 @@ public interface ElasticPool extends HasInner<ElasticPoolInner>, Indexable, Refr
              * @return the next update stage
              */
             Update withLicenseType(ElasticPoolLicenseType licenseType);
+        }
+
+        /**
+         * The stage of the elasticpool update allowing to specify MaintenanceConfigurationId.
+         */
+        interface WithMaintenanceConfigurationId {
+            /**
+             * Specifies maintenanceConfigurationId.
+             * @param maintenanceConfigurationId Maintenance configuration id assigned to the elastic pool
+             * @return the next update stage
+             */
+            Update withMaintenanceConfigurationId(String maintenanceConfigurationId);
         }
 
         /**

@@ -102,6 +102,11 @@ class DatabaseImpl extends CreatableUpdatableImpl<Database, DatabaseInner, Datab
     }
 
     @Override
+    public Integer autoPauseDelay() {
+        return this.inner().autoPauseDelay();
+    }
+
+    @Override
     public CatalogCollationType catalogCollation() {
         return this.inner().catalogCollation();
     }
@@ -182,6 +187,11 @@ class DatabaseImpl extends CreatableUpdatableImpl<Database, DatabaseInner, Datab
     }
 
     @Override
+    public String maintenanceConfigurationId() {
+        return this.inner().maintenanceConfigurationId();
+    }
+
+    @Override
     public String managedBy() {
         return this.inner().managedBy();
     }
@@ -197,8 +207,23 @@ class DatabaseImpl extends CreatableUpdatableImpl<Database, DatabaseInner, Datab
     }
 
     @Override
+    public Double minCapacity() {
+        return this.inner().minCapacity();
+    }
+
+    @Override
     public String name() {
         return this.inner().name();
+    }
+
+    @Override
+    public DateTime pausedDate() {
+        return this.inner().pausedDate();
+    }
+
+    @Override
+    public Integer readReplicaCount() {
+        return this.inner().readReplicaCount();
     }
 
     @Override
@@ -229,6 +254,11 @@ class DatabaseImpl extends CreatableUpdatableImpl<Database, DatabaseInner, Datab
     @Override
     public DateTime restorePointInTime() {
         return this.inner().restorePointInTime();
+    }
+
+    @Override
+    public DateTime resumedDate() {
+        return this.inner().resumedDate();
     }
 
     @Override
@@ -281,6 +311,16 @@ class DatabaseImpl extends CreatableUpdatableImpl<Database, DatabaseInner, Datab
     @Override
     public DatabaseImpl withLocation(String location) {
         this.inner().withLocation(location);
+        return this;
+    }
+
+    @Override
+    public DatabaseImpl withAutoPauseDelay(Integer autoPauseDelay) {
+        if (isInCreateMode()) {
+            this.inner().withAutoPauseDelay(autoPauseDelay);
+        } else {
+            this.updateParameter.withAutoPauseDelay(autoPauseDelay);
+        }
         return this;
     }
 
@@ -345,11 +385,41 @@ class DatabaseImpl extends CreatableUpdatableImpl<Database, DatabaseInner, Datab
     }
 
     @Override
+    public DatabaseImpl withMaintenanceConfigurationId(String maintenanceConfigurationId) {
+        if (isInCreateMode()) {
+            this.inner().withMaintenanceConfigurationId(maintenanceConfigurationId);
+        } else {
+            this.updateParameter.withMaintenanceConfigurationId(maintenanceConfigurationId);
+        }
+        return this;
+    }
+
+    @Override
     public DatabaseImpl withMaxSizeBytes(Long maxSizeBytes) {
         if (isInCreateMode()) {
             this.inner().withMaxSizeBytes(maxSizeBytes);
         } else {
             this.updateParameter.withMaxSizeBytes(maxSizeBytes);
+        }
+        return this;
+    }
+
+    @Override
+    public DatabaseImpl withMinCapacity(Double minCapacity) {
+        if (isInCreateMode()) {
+            this.inner().withMinCapacity(minCapacity);
+        } else {
+            this.updateParameter.withMinCapacity(minCapacity);
+        }
+        return this;
+    }
+
+    @Override
+    public DatabaseImpl withReadReplicaCount(Integer readReplicaCount) {
+        if (isInCreateMode()) {
+            this.inner().withReadReplicaCount(readReplicaCount);
+        } else {
+            this.updateParameter.withReadReplicaCount(readReplicaCount);
         }
         return this;
     }
