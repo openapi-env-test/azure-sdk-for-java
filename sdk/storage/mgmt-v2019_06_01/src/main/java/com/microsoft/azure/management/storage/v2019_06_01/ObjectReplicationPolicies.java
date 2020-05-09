@@ -11,43 +11,43 @@ package com.microsoft.azure.management.storage.v2019_06_01;
 import com.microsoft.azure.arm.collection.SupportsCreating;
 import rx.Completable;
 import rx.Observable;
-import com.microsoft.azure.management.storage.v2019_06_01.implementation.PrivateEndpointConnectionsInner;
+import com.microsoft.azure.management.storage.v2019_06_01.implementation.ObjectReplicationPoliciesInner;
 import com.microsoft.azure.arm.model.HasInner;
 
 /**
- * Type representing PrivateEndpointConnections.
+ * Type representing ObjectReplicationPolicies.
  */
-public interface PrivateEndpointConnections extends SupportsCreating<PrivateEndpointConnection.DefinitionStages.Blank>, HasInner<PrivateEndpointConnectionsInner> {
+public interface ObjectReplicationPolicies extends SupportsCreating<ObjectReplicationPolicy.DefinitionStages.Blank>, HasInner<ObjectReplicationPoliciesInner> {
     /**
-     * Gets the specified private endpoint connection associated with the storage account.
+     * Get the object replication policy of the storage account by policy ID.
      *
      * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param privateEndpointConnectionName The name of the private endpoint connection associated with the Storage Account
+     * @param objectReplicationPolicyId The ID of object replication policy or 'default' if the policy ID is unknown.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<PrivateEndpointConnection> getAsync(String resourceGroupName, String accountName, String privateEndpointConnectionName);
+    Observable<ObjectReplicationPolicy> getAsync(String resourceGroupName, String accountName, String objectReplicationPolicyId);
 
     /**
-     * List all the private endpoint connections associated with the storage account.
+     * List the object replication policies associated with the storage account.
      *
      * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Observable<PrivateEndpointConnection> listAsync(String resourceGroupName, String accountName);
+    Observable<ObjectReplicationPolicy> listAsync(String resourceGroupName, String accountName);
 
     /**
-     * Deletes the specified private endpoint connection associated with the storage account.
+     * Deletes the object replication policy associated with the specified storage account.
      *
      * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param privateEndpointConnectionName The name of the private endpoint connection associated with the Storage Account
+     * @param objectReplicationPolicyId The ID of object replication policy or 'default' if the policy ID is unknown.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    Completable deleteAsync(String resourceGroupName, String accountName, String privateEndpointConnectionName);
+    Completable deleteAsync(String resourceGroupName, String accountName, String objectReplicationPolicyId);
 
 }
