@@ -32,16 +32,6 @@ class ListContainerItemImpl extends WrapperImpl<ListContainerItemInner> implemen
     }
 
     @Override
-    public String defaultEncryptionScope() {
-        return this.inner().defaultEncryptionScope();
-    }
-
-    @Override
-    public Boolean denyEncryptionScopeOverride() {
-        return this.inner().denyEncryptionScopeOverride();
-    }
-
-    @Override
     public String etag() {
         return this.inner().etag();
     }

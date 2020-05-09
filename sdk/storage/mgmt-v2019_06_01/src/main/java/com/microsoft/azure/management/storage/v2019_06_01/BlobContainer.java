@@ -16,23 +16,13 @@ import com.microsoft.azure.arm.model.Appliable;
 import com.microsoft.azure.arm.model.Creatable;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.microsoft.azure.management.storage.v2019_06_01.implementation.StorageManager;
-import org.joda.time.DateTime;
 import java.util.Map;
+import org.joda.time.DateTime;
 
 /**
  * Type representing BlobContainer.
  */
 public interface BlobContainer extends HasInner<BlobContainerInner>, Indexable, Updatable<BlobContainer.Update>, HasManager<StorageManager> {
-    /**
-     * @return the defaultEncryptionScope value.
-     */
-    String defaultEncryptionScope();
-
-    /**
-     * @return the denyEncryptionScopeOverride value.
-     */
-    Boolean denyEncryptionScopeOverride();
-
     /**
      * @return the etag value.
      */
@@ -106,7 +96,7 @@ public interface BlobContainer extends HasInner<BlobContainerInner>, Indexable, 
     /**
      * The entirety of the BlobContainer definition.
      */
-    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithBlobService, DefinitionStages.WithCreate {
+    interface Definition extends DefinitionStages.Blank, DefinitionStages.WithBlobService, DefinitionStages.WithPublicAccess, DefinitionStages.WithMetadata, DefinitionStages.WithCreate {
     }
 
     /**
@@ -129,55 +119,31 @@ public interface BlobContainer extends HasInner<BlobContainerInner>, Indexable, 
             * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only
             * @return the next definition stage
             */
-            WithCreate withExistingBlobService(String resourceGroupName, String accountName);
-        }
-
-        /**
-         * The stage of the blobcontainer definition allowing to specify DefaultEncryptionScope.
-         */
-        interface WithDefaultEncryptionScope {
-            /**
-             * Specifies defaultEncryptionScope.
-             * @param defaultEncryptionScope Default the container to use specified encryption scope for all writes
-             * @return the next definition stage
-             */
-            WithCreate withDefaultEncryptionScope(String defaultEncryptionScope);
-        }
-
-        /**
-         * The stage of the blobcontainer definition allowing to specify DenyEncryptionScopeOverride.
-         */
-        interface WithDenyEncryptionScopeOverride {
-            /**
-             * Specifies denyEncryptionScopeOverride.
-             * @param denyEncryptionScopeOverride Block override of encryption scope from the container default
-             * @return the next definition stage
-             */
-            WithCreate withDenyEncryptionScopeOverride(Boolean denyEncryptionScopeOverride);
-        }
-
-        /**
-         * The stage of the blobcontainer definition allowing to specify Metadata.
-         */
-        interface WithMetadata {
-            /**
-             * Specifies metadata.
-             * @param metadata A name-value pair to associate with the container as metadata
-             * @return the next definition stage
-             */
-            WithCreate withMetadata(Map<String, String> metadata);
+            WithPublicAccess withExistingBlobService(String resourceGroupName, String accountName);
         }
 
         /**
          * The stage of the blobcontainer definition allowing to specify PublicAccess.
          */
         interface WithPublicAccess {
-            /**
-             * Specifies publicAccess.
-             * @param publicAccess Specifies whether data in the container may be accessed publicly and the level of access. Possible values include: 'Container', 'Blob', 'None'
-             * @return the next definition stage
-             */
-            WithCreate withPublicAccess(PublicAccess publicAccess);
+           /**
+            * Specifies publicAccess.
+            * @param publicAccess Specifies whether data in the container may be accessed publicly and the level of access. Possible values include: 'Container', 'Blob', 'None'
+            * @return the next definition stage
+            */
+            WithMetadata withPublicAccess(PublicAccess publicAccess);
+        }
+
+        /**
+         * The stage of the blobcontainer definition allowing to specify Metadata.
+         */
+        interface WithMetadata {
+           /**
+            * Specifies metadata.
+            * @param metadata A name-value pair to associate with the container as metadata
+            * @return the next definition stage
+            */
+            WithCreate withMetadata(Map<String, String> metadata);
         }
 
         /**
@@ -185,13 +151,13 @@ public interface BlobContainer extends HasInner<BlobContainerInner>, Indexable, 
          * the resource to be created (via {@link WithCreate#create()}), but also allows
          * for any other optional settings to be specified.
          */
-        interface WithCreate extends Creatable<BlobContainer>, DefinitionStages.WithDefaultEncryptionScope, DefinitionStages.WithDenyEncryptionScopeOverride, DefinitionStages.WithMetadata, DefinitionStages.WithPublicAccess {
+        interface WithCreate extends Creatable<BlobContainer> {
         }
     }
     /**
      * The template for a BlobContainer update operation, containing all the settings that can be modified.
      */
-    interface Update extends Appliable<BlobContainer>, UpdateStages.WithDefaultEncryptionScope, UpdateStages.WithDenyEncryptionScopeOverride, UpdateStages.WithMetadata, UpdateStages.WithPublicAccess {
+    interface Update extends Appliable<BlobContainer>, UpdateStages.WithPublicAccess, UpdateStages.WithMetadata {
     }
 
     /**
@@ -199,27 +165,15 @@ public interface BlobContainer extends HasInner<BlobContainerInner>, Indexable, 
      */
     interface UpdateStages {
         /**
-         * The stage of the blobcontainer update allowing to specify DefaultEncryptionScope.
+         * The stage of the blobcontainer update allowing to specify PublicAccess.
          */
-        interface WithDefaultEncryptionScope {
+        interface WithPublicAccess {
             /**
-             * Specifies defaultEncryptionScope.
-             * @param defaultEncryptionScope Default the container to use specified encryption scope for all writes
+             * Specifies publicAccess.
+             * @param publicAccess Specifies whether data in the container may be accessed publicly and the level of access. Possible values include: 'Container', 'Blob', 'None'
              * @return the next update stage
              */
-            Update withDefaultEncryptionScope(String defaultEncryptionScope);
-        }
-
-        /**
-         * The stage of the blobcontainer update allowing to specify DenyEncryptionScopeOverride.
-         */
-        interface WithDenyEncryptionScopeOverride {
-            /**
-             * Specifies denyEncryptionScopeOverride.
-             * @param denyEncryptionScopeOverride Block override of encryption scope from the container default
-             * @return the next update stage
-             */
-            Update withDenyEncryptionScopeOverride(Boolean denyEncryptionScopeOverride);
+            Update withPublicAccess(PublicAccess publicAccess);
         }
 
         /**
@@ -232,18 +186,6 @@ public interface BlobContainer extends HasInner<BlobContainerInner>, Indexable, 
              * @return the next update stage
              */
             Update withMetadata(Map<String, String> metadata);
-        }
-
-        /**
-         * The stage of the blobcontainer update allowing to specify PublicAccess.
-         */
-        interface WithPublicAccess {
-            /**
-             * Specifies publicAccess.
-             * @param publicAccess Specifies whether data in the container may be accessed publicly and the level of access. Possible values include: 'Container', 'Blob', 'None'
-             * @return the next update stage
-             */
-            Update withPublicAccess(PublicAccess publicAccess);
         }
 
     }
