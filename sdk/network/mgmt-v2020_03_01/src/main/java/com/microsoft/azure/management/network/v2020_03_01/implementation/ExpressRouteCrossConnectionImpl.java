@@ -135,6 +135,18 @@ class ExpressRouteCrossConnectionImpl extends GroupableResourceCoreImpl<ExpressR
     }
 
     @Override
+    public ExpressRouteCrossConnectionImpl withPrimaryAzurePort(String primaryAzurePort) {
+        this.inner().withPrimaryAzurePort(primaryAzurePort);
+        return this;
+    }
+
+    @Override
+    public ExpressRouteCrossConnectionImpl withSecondaryAzurePort(String secondaryAzurePort) {
+        this.inner().withSecondaryAzurePort(secondaryAzurePort);
+        return this;
+    }
+
+    @Override
     public ExpressRouteCrossConnectionImpl withServiceProviderNotes(String serviceProviderNotes) {
         this.inner().withServiceProviderNotes(serviceProviderNotes);
         return this;
