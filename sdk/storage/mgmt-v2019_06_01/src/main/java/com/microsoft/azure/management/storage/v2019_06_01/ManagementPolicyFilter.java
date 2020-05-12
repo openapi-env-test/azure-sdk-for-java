@@ -29,13 +29,6 @@ public class ManagementPolicyFilter {
     private List<String> blobTypes;
 
     /**
-     * An array of blob index tag based filters, there can be at most 10 tag
-     * filters.
-     */
-    @JsonProperty(value = "blobIndexMatch")
-    private List<TagFilter> blobIndexMatch;
-
-    /**
      * Get an array of strings for prefixes to be match.
      *
      * @return the prefixMatch value
@@ -72,26 +65,6 @@ public class ManagementPolicyFilter {
      */
     public ManagementPolicyFilter withBlobTypes(List<String> blobTypes) {
         this.blobTypes = blobTypes;
-        return this;
-    }
-
-    /**
-     * Get an array of blob index tag based filters, there can be at most 10 tag filters.
-     *
-     * @return the blobIndexMatch value
-     */
-    public List<TagFilter> blobIndexMatch() {
-        return this.blobIndexMatch;
-    }
-
-    /**
-     * Set an array of blob index tag based filters, there can be at most 10 tag filters.
-     *
-     * @param blobIndexMatch the blobIndexMatch value to set
-     * @return the ManagementPolicyFilter object itself.
-     */
-    public ManagementPolicyFilter withBlobIndexMatch(List<TagFilter> blobIndexMatch) {
-        this.blobIndexMatch = blobIndexMatch;
         return this;
     }
 

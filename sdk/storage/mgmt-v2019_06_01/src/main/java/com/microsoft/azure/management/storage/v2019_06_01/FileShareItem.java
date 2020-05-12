@@ -20,36 +20,6 @@ import java.util.Map;
  */
 public interface FileShareItem extends HasInner<FileShareItemInner>, HasManager<StorageManager> {
     /**
-     * @return the accessTier value.
-     */
-    ShareAccessTier accessTier();
-
-    /**
-     * @return the accessTierChangeTime value.
-     */
-    DateTime accessTierChangeTime();
-
-    /**
-     * @return the accessTierStatus value.
-     */
-    String accessTierStatus();
-
-    /**
-     * @return the deleted value.
-     */
-    Boolean deleted();
-
-    /**
-     * @return the deletedTime value.
-     */
-    DateTime deletedTime();
-
-    /**
-     * @return the enabledProtocols value.
-     */
-    EnabledProtocols enabledProtocols();
-
-    /**
      * @return the etag value.
      */
     String etag();
@@ -75,33 +45,13 @@ public interface FileShareItem extends HasInner<FileShareItemInner>, HasManager<
     String name();
 
     /**
-     * @return the remainingRetentionDays value.
-     */
-    Integer remainingRetentionDays();
-
-    /**
-     * @return the rootSquash value.
-     */
-    RootSquashType rootSquash();
-
-    /**
      * @return the shareQuota value.
      */
     Integer shareQuota();
 
     /**
-     * @return the shareUsageBytes value.
-     */
-    Integer shareUsageBytes();
-
-    /**
      * @return the type value.
      */
     String type();
-
-    /**
-     * @return the version value.
-     */
-    String version();
 
 }
