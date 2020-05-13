@@ -54,4 +54,14 @@ public interface Factories extends SupportsCreating<Factory.DefinitionStages.Bla
      */
     Observable<Factory> configureFactoryRepoAsync(String locationId, FactoryRepoUpdate factoryRepoUpdate);
 
+    /**
+     * Updates a factory's repo information.
+     *
+     * @param locationId The location identifier.
+     * @param factoryRepoUpdate Update factory repo request definition.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<Factory> resetFactoryRepoAsync(String locationId, FactoryRepoUpdate factoryRepoUpdate);
+
 }

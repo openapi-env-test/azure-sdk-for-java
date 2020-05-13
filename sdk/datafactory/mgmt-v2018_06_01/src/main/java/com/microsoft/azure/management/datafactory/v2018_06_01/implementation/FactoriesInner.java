@@ -78,6 +78,10 @@ public class FactoriesInner implements InnerSupportsGet<FactoryInner>, InnerSupp
         @POST("subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/configureFactoryRepo")
         Observable<Response<ResponseBody>> configureFactoryRepo(@Path("subscriptionId") String subscriptionId, @Path("locationId") String locationId, @Query("api-version") String apiVersion, @Body FactoryRepoUpdate factoryRepoUpdate, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.datafactory.v2018_06_01.Factories resetFactoryRepo" })
+        @POST("subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/resetFactoryRepo")
+        Observable<Response<ResponseBody>> resetFactoryRepo(@Path("subscriptionId") String subscriptionId, @Path("locationId") String locationId, @Query("api-version") String apiVersion, @Body FactoryRepoUpdate factoryRepoUpdate, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.datafactory.v2018_06_01.Factories listByResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories")
         Observable<Response<ResponseBody>> listByResourceGroup(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -304,6 +308,93 @@ public class FactoriesInner implements InnerSupportsGet<FactoryInner>, InnerSupp
     }
 
     private ServiceResponse<FactoryInner> configureFactoryRepoDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<FactoryInner, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<FactoryInner>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * Updates a factory's repo information.
+     *
+     * @param locationId The location identifier.
+     * @param factoryRepoUpdate Update factory repo request definition.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the FactoryInner object if successful.
+     */
+    public FactoryInner resetFactoryRepo(String locationId, FactoryRepoUpdate factoryRepoUpdate) {
+        return resetFactoryRepoWithServiceResponseAsync(locationId, factoryRepoUpdate).toBlocking().single().body();
+    }
+
+    /**
+     * Updates a factory's repo information.
+     *
+     * @param locationId The location identifier.
+     * @param factoryRepoUpdate Update factory repo request definition.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<FactoryInner> resetFactoryRepoAsync(String locationId, FactoryRepoUpdate factoryRepoUpdate, final ServiceCallback<FactoryInner> serviceCallback) {
+        return ServiceFuture.fromResponse(resetFactoryRepoWithServiceResponseAsync(locationId, factoryRepoUpdate), serviceCallback);
+    }
+
+    /**
+     * Updates a factory's repo information.
+     *
+     * @param locationId The location identifier.
+     * @param factoryRepoUpdate Update factory repo request definition.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the FactoryInner object
+     */
+    public Observable<FactoryInner> resetFactoryRepoAsync(String locationId, FactoryRepoUpdate factoryRepoUpdate) {
+        return resetFactoryRepoWithServiceResponseAsync(locationId, factoryRepoUpdate).map(new Func1<ServiceResponse<FactoryInner>, FactoryInner>() {
+            @Override
+            public FactoryInner call(ServiceResponse<FactoryInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Updates a factory's repo information.
+     *
+     * @param locationId The location identifier.
+     * @param factoryRepoUpdate Update factory repo request definition.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the FactoryInner object
+     */
+    public Observable<ServiceResponse<FactoryInner>> resetFactoryRepoWithServiceResponseAsync(String locationId, FactoryRepoUpdate factoryRepoUpdate) {
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (locationId == null) {
+            throw new IllegalArgumentException("Parameter locationId is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        if (factoryRepoUpdate == null) {
+            throw new IllegalArgumentException("Parameter factoryRepoUpdate is required and cannot be null.");
+        }
+        Validator.validate(factoryRepoUpdate);
+        return service.resetFactoryRepo(this.client.subscriptionId(), locationId, this.client.apiVersion(), factoryRepoUpdate, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<FactoryInner>>>() {
+                @Override
+                public Observable<ServiceResponse<FactoryInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<FactoryInner> clientResponse = resetFactoryRepoDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<FactoryInner> resetFactoryRepoDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<FactoryInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<FactoryInner>() { }.getType())
                 .registerError(CloudException.class)
