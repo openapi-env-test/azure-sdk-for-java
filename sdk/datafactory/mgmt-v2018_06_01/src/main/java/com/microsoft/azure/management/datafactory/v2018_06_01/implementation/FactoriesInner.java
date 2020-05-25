@@ -32,6 +32,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 import retrofit2.Response;
@@ -75,6 +76,10 @@ public class FactoriesInner implements InnerSupportsListing<FactoryInner> {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.datafactory.v2018_06_01.Factories listByResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories")
         Observable<Response<ResponseBody>> listByResourceGroup(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.datafactory.v2018_06_01.Factories createOrUpdate" })
+        @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}")
+        Observable<Response<ResponseBody>> createOrUpdate(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("factoryName") String factoryName, @Query("api-version") String apiVersion, @Body FactoryInner factory, @Header("If-Match") String ifMatch, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.microsoft.azure.management.datafactory.v2018_06_01.Factories getGitHubAccessToken" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getGitHubAccessToken")
@@ -399,6 +404,192 @@ public class FactoriesInner implements InnerSupportsListing<FactoryInner> {
     private ServiceResponse<PageImpl<FactoryInner>> listByResourceGroupDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<PageImpl<FactoryInner>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<FactoryInner>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * Creates or updates a factory.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param factoryName The factory name.
+     * @param factory Factory resource definition.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the FactoryInner object if successful.
+     */
+    public FactoryInner createOrUpdate(String resourceGroupName, String factoryName, FactoryInner factory) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, factoryName, factory).toBlocking().single().body();
+    }
+
+    /**
+     * Creates or updates a factory.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param factoryName The factory name.
+     * @param factory Factory resource definition.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<FactoryInner> createOrUpdateAsync(String resourceGroupName, String factoryName, FactoryInner factory, final ServiceCallback<FactoryInner> serviceCallback) {
+        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, factoryName, factory), serviceCallback);
+    }
+
+    /**
+     * Creates or updates a factory.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param factoryName The factory name.
+     * @param factory Factory resource definition.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the FactoryInner object
+     */
+    public Observable<FactoryInner> createOrUpdateAsync(String resourceGroupName, String factoryName, FactoryInner factory) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, factoryName, factory).map(new Func1<ServiceResponse<FactoryInner>, FactoryInner>() {
+            @Override
+            public FactoryInner call(ServiceResponse<FactoryInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Creates or updates a factory.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param factoryName The factory name.
+     * @param factory Factory resource definition.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the FactoryInner object
+     */
+    public Observable<ServiceResponse<FactoryInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String factoryName, FactoryInner factory) {
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (factoryName == null) {
+            throw new IllegalArgumentException("Parameter factoryName is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        if (factory == null) {
+            throw new IllegalArgumentException("Parameter factory is required and cannot be null.");
+        }
+        Validator.validate(factory);
+        final String ifMatch = null;
+        return service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, factoryName, this.client.apiVersion(), factory, ifMatch, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<FactoryInner>>>() {
+                @Override
+                public Observable<ServiceResponse<FactoryInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<FactoryInner> clientResponse = createOrUpdateDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    /**
+     * Creates or updates a factory.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param factoryName The factory name.
+     * @param factory Factory resource definition.
+     * @param ifMatch ETag of the factory entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the FactoryInner object if successful.
+     */
+    public FactoryInner createOrUpdate(String resourceGroupName, String factoryName, FactoryInner factory, String ifMatch) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, factoryName, factory, ifMatch).toBlocking().single().body();
+    }
+
+    /**
+     * Creates or updates a factory.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param factoryName The factory name.
+     * @param factory Factory resource definition.
+     * @param ifMatch ETag of the factory entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<FactoryInner> createOrUpdateAsync(String resourceGroupName, String factoryName, FactoryInner factory, String ifMatch, final ServiceCallback<FactoryInner> serviceCallback) {
+        return ServiceFuture.fromResponse(createOrUpdateWithServiceResponseAsync(resourceGroupName, factoryName, factory, ifMatch), serviceCallback);
+    }
+
+    /**
+     * Creates or updates a factory.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param factoryName The factory name.
+     * @param factory Factory resource definition.
+     * @param ifMatch ETag of the factory entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the FactoryInner object
+     */
+    public Observable<FactoryInner> createOrUpdateAsync(String resourceGroupName, String factoryName, FactoryInner factory, String ifMatch) {
+        return createOrUpdateWithServiceResponseAsync(resourceGroupName, factoryName, factory, ifMatch).map(new Func1<ServiceResponse<FactoryInner>, FactoryInner>() {
+            @Override
+            public FactoryInner call(ServiceResponse<FactoryInner> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Creates or updates a factory.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param factoryName The factory name.
+     * @param factory Factory resource definition.
+     * @param ifMatch ETag of the factory entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the FactoryInner object
+     */
+    public Observable<ServiceResponse<FactoryInner>> createOrUpdateWithServiceResponseAsync(String resourceGroupName, String factoryName, FactoryInner factory, String ifMatch) {
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (factoryName == null) {
+            throw new IllegalArgumentException("Parameter factoryName is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        if (factory == null) {
+            throw new IllegalArgumentException("Parameter factory is required and cannot be null.");
+        }
+        Validator.validate(factory);
+        return service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, factoryName, this.client.apiVersion(), factory, ifMatch, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<FactoryInner>>>() {
+                @Override
+                public Observable<ServiceResponse<FactoryInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<FactoryInner> clientResponse = createOrUpdateDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<FactoryInner> createOrUpdateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<FactoryInner, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<FactoryInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }

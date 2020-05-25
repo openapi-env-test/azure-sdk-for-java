@@ -12,11 +12,13 @@ import com.microsoft.azure.arm.resources.models.implementation.GroupableResource
 import com.microsoft.azure.management.datafactory.v2018_06_01.Factory;
 import rx.Observable;
 import java.util.Map;
-import org.joda.time.DateTime;
 import com.microsoft.azure.management.datafactory.v2018_06_01.FactoryIdentity;
+import org.joda.time.DateTime;
 import com.microsoft.azure.management.datafactory.v2018_06_01.FactoryRepoConfiguration;
 
-class FactoryImpl extends GroupableResourceCoreImpl<Factory, FactoryInner, FactoryImpl, DataFactoryManager> implements Factory {
+class FactoryImpl extends GroupableResourceCoreImpl<Factory, FactoryInner, FactoryImpl, DataFactoryManager> implements Factory, Factory.Definition, Factory.Update {
+    private String cifMatch;
+    private String uifMatch;
     FactoryImpl(String name, FactoryInner inner, DataFactoryManager manager) {
         super(name, inner, manager);
     }
@@ -24,13 +26,15 @@ class FactoryImpl extends GroupableResourceCoreImpl<Factory, FactoryInner, Facto
     @Override
     public Observable<Factory> createResourceAsync() {
         FactoriesInner client = this.manager().inner().factories();
-        return null; // NOP createResourceAsync implementation as create is not supported
+        return client.createOrUpdateAsync(this.resourceGroupName(), this.name(), this.inner(), this.cifMatch)
+            .map(innerToFluentMap(this));
     }
 
     @Override
     public Observable<Factory> updateResourceAsync() {
         FactoriesInner client = this.manager().inner().factories();
-        return null; // NOP updateResourceAsync implementation as update is not supported
+        return client.createOrUpdateAsync(this.resourceGroupName(), this.name(), this.inner(), this.uifMatch)
+            .map(innerToFluentMap(this));
     }
 
     @Override
@@ -39,6 +43,10 @@ class FactoryImpl extends GroupableResourceCoreImpl<Factory, FactoryInner, Facto
         return null; // NOP getInnerAsync implementation as get is not supported
     }
 
+    @Override
+    public boolean isInCreateMode() {
+        return this.inner().id() == null;
+    }
 
 
     @Override
@@ -74,6 +82,34 @@ class FactoryImpl extends GroupableResourceCoreImpl<Factory, FactoryInner, Facto
     @Override
     public String version() {
         return this.inner().version();
+    }
+
+    @Override
+    public FactoryImpl withIfMatch(String ifMatch) {
+        if (isInCreateMode()) {
+            this.cifMatch = ifMatch;
+        } else {
+            this.uifMatch = ifMatch;
+        }
+        return this;
+    }
+
+    @Override
+    public FactoryImpl withAdditionalProperties(Map<String, Object> additionalProperties) {
+        this.inner().withAdditionalProperties(additionalProperties);
+        return this;
+    }
+
+    @Override
+    public FactoryImpl withIdentity(FactoryIdentity identity) {
+        this.inner().withIdentity(identity);
+        return this;
+    }
+
+    @Override
+    public FactoryImpl withRepoConfiguration(FactoryRepoConfiguration repoConfiguration) {
+        this.inner().withRepoConfiguration(repoConfiguration);
+        return this;
     }
 
 }

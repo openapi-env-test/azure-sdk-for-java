@@ -88,6 +88,11 @@ class FactoriesImpl extends GroupableResourcesCoreImpl<Factory, FactoryImpl, Fac
     }
 
     @Override
+    public FactoryImpl define(String name) {
+        return wrapModel(name);
+    }
+
+    @Override
     public Observable<GitHubAccessTokenResponse> getGitHubAccessTokenAsync(String resourceGroupName, String factoryName, GitHubAccessTokenRequest gitHubAccessTokenRequest) {
         FactoriesInner client = this.inner();
         return client.getGitHubAccessTokenAsync(resourceGroupName, factoryName, gitHubAccessTokenRequest)
@@ -118,7 +123,7 @@ class FactoriesImpl extends GroupableResourcesCoreImpl<Factory, FactoryImpl, Fac
 
     @Override
     protected FactoryImpl wrapModel(String name) {
-        return null; // Model is not creatable
+        return new FactoryImpl(name, new FactoryInner(), this.manager());
     }
 
     @Override
