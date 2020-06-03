@@ -13,6 +13,7 @@ import com.microsoft.azure.management.datafactory.v2018_06_01.Factory;
 import rx.Observable;
 import java.util.Map;
 import org.joda.time.DateTime;
+import com.microsoft.azure.management.datafactory.v2018_06_01.GlobalParameterSpecification;
 import com.microsoft.azure.management.datafactory.v2018_06_01.FactoryIdentity;
 import com.microsoft.azure.management.datafactory.v2018_06_01.FactoryRepoConfiguration;
 
@@ -54,6 +55,11 @@ class FactoryImpl extends GroupableResourceCoreImpl<Factory, FactoryInner, Facto
     @Override
     public String eTag() {
         return this.inner().eTag();
+    }
+
+    @Override
+    public Map<String, GlobalParameterSpecification> globalParameters() {
+        return this.inner().globalParameters();
     }
 
     @Override
