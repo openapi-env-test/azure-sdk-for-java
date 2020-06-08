@@ -51,18 +51,6 @@ public class SqlManagementClientImpl extends AzureServiceClient {
         return this;
     }
 
-    /** The API version to use for the request. */
-    private String apiVersion;
-
-    /**
-     * Gets The API version to use for the request.
-     *
-     * @return the apiVersion value.
-     */
-    public String apiVersion() {
-        return this.apiVersion;
-    }
-
     /** The preferred language for the response. */
     private String acceptLanguage;
 
@@ -592,7 +580,6 @@ public class SqlManagementClientImpl extends AzureServiceClient {
     }
 
     protected void initialize() {
-        this.apiVersion = "2017-03-01-preview";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
@@ -639,6 +626,6 @@ public class SqlManagementClientImpl extends AzureServiceClient {
      */
     @Override
     public String userAgent() {
-        return String.format("%s (%s, %s, auto-generated)", super.userAgent(), "SqlManagementClient", "2017-03-01-preview");
+        return String.format("%s (%s, %s, auto-generated)", super.userAgent(), "SqlManagementClient", "2017-03-01-preiew");
     }
 }

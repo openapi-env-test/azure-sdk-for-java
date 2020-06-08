@@ -200,11 +200,9 @@ public class SensitivityLabelsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
+        final String apiVersion = "2017-03-01-preview";
         final String filter = null;
-        return service.listCurrentByDatabase(resourceGroupName, serverName, databaseName, this.client.subscriptionId(), filter, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listCurrentByDatabase(resourceGroupName, serverName, databaseName, this.client.subscriptionId(), filter, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<SensitivityLabelInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<SensitivityLabelInner>>> call(Response<ResponseBody> response) {
@@ -330,10 +328,8 @@ public class SensitivityLabelsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listCurrentByDatabase(resourceGroupName, serverName, databaseName, this.client.subscriptionId(), filter, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listCurrentByDatabase(resourceGroupName, serverName, databaseName, this.client.subscriptionId(), filter, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<SensitivityLabelInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<SensitivityLabelInner>>> call(Response<ResponseBody> response) {
@@ -443,11 +439,9 @@ public class SensitivityLabelsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String sensitivityLabelSource = "recommended";
-        return service.enableRecommendation(resourceGroupName, serverName, databaseName, schemaName, tableName, columnName, sensitivityLabelSource, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.enableRecommendation(resourceGroupName, serverName, databaseName, schemaName, tableName, columnName, sensitivityLabelSource, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -557,11 +551,9 @@ public class SensitivityLabelsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String sensitivityLabelSource = "recommended";
-        return service.disableRecommendation(resourceGroupName, serverName, databaseName, schemaName, tableName, columnName, sensitivityLabelSource, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.disableRecommendation(resourceGroupName, serverName, databaseName, schemaName, tableName, columnName, sensitivityLabelSource, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -679,10 +671,8 @@ public class SensitivityLabelsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(resourceGroupName, serverName, databaseName, schemaName, tableName, columnName, sensitivityLabelSource, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.get(resourceGroupName, serverName, databaseName, schemaName, tableName, columnName, sensitivityLabelSource, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SensitivityLabelInner>>>() {
                 @Override
                 public Observable<ServiceResponse<SensitivityLabelInner>> call(Response<ResponseBody> response) {
@@ -800,12 +790,10 @@ public class SensitivityLabelsInner {
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
         final String sensitivityLabelSource = "current";
-        return service.createOrUpdate(resourceGroupName, serverName, databaseName, schemaName, tableName, columnName, sensitivityLabelSource, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.createOrUpdate(resourceGroupName, serverName, databaseName, schemaName, tableName, columnName, sensitivityLabelSource, this.client.subscriptionId(), parameters, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SensitivityLabelInner>>>() {
                 @Override
                 public Observable<ServiceResponse<SensitivityLabelInner>> call(Response<ResponseBody> response) {
@@ -916,11 +904,9 @@ public class SensitivityLabelsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String sensitivityLabelSource = "current";
-        return service.delete(resourceGroupName, serverName, databaseName, schemaName, tableName, columnName, sensitivityLabelSource, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.delete(resourceGroupName, serverName, databaseName, schemaName, tableName, columnName, sensitivityLabelSource, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {

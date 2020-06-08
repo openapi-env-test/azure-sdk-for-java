@@ -215,10 +215,8 @@ public class JobStepsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByVersion(resourceGroupName, serverName, jobAgentName, jobName, jobVersion, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByVersion(resourceGroupName, serverName, jobAgentName, jobName, jobVersion, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<JobStepInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<JobStepInner>>> call(Response<ResponseBody> response) {
@@ -326,10 +324,8 @@ public class JobStepsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getByVersion(resourceGroupName, serverName, jobAgentName, jobName, jobVersion, stepName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.getByVersion(resourceGroupName, serverName, jobAgentName, jobName, jobVersion, stepName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<JobStepInner>>>() {
                 @Override
                 public Observable<ServiceResponse<JobStepInner>> call(Response<ResponseBody> response) {
@@ -465,10 +461,8 @@ public class JobStepsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByJob(resourceGroupName, serverName, jobAgentName, jobName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByJob(resourceGroupName, serverName, jobAgentName, jobName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<JobStepInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<JobStepInner>>> call(Response<ResponseBody> response) {
@@ -572,10 +566,8 @@ public class JobStepsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(resourceGroupName, serverName, jobAgentName, jobName, stepName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.get(resourceGroupName, serverName, jobAgentName, jobName, stepName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<JobStepInner>>>() {
                 @Override
                 public Observable<ServiceResponse<JobStepInner>> call(Response<ResponseBody> response) {
@@ -686,11 +678,9 @@ public class JobStepsInner {
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
-        return service.createOrUpdate(resourceGroupName, serverName, jobAgentName, jobName, stepName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.createOrUpdate(resourceGroupName, serverName, jobAgentName, jobName, stepName, this.client.subscriptionId(), parameters, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<JobStepInner>>>() {
                 @Override
                 public Observable<ServiceResponse<JobStepInner>> call(Response<ResponseBody> response) {
@@ -794,10 +784,8 @@ public class JobStepsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.delete(resourceGroupName, serverName, jobAgentName, jobName, stepName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.delete(resourceGroupName, serverName, jobAgentName, jobName, stepName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {

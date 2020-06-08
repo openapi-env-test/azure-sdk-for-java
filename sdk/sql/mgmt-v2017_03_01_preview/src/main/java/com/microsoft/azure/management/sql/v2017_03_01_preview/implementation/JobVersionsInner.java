@@ -186,10 +186,8 @@ public class JobVersionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByJob(resourceGroupName, serverName, jobAgentName, jobName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByJob(resourceGroupName, serverName, jobAgentName, jobName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<JobVersionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<JobVersionInner>>> call(Response<ResponseBody> response) {
@@ -290,10 +288,8 @@ public class JobVersionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(resourceGroupName, serverName, jobAgentName, jobName, jobVersion, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.get(resourceGroupName, serverName, jobAgentName, jobName, jobVersion, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<JobVersionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<JobVersionInner>> call(Response<ResponseBody> response) {

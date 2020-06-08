@@ -147,10 +147,8 @@ public class RestorePointsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByDatabase(resourceGroupName, serverName, databaseName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByDatabase(resourceGroupName, serverName, databaseName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<RestorePointInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<RestorePointInner>>> call(Response<ResponseBody> response) {
@@ -249,15 +247,13 @@ public class RestorePointsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         if (restorePointLabel == null) {
             throw new IllegalArgumentException("Parameter restorePointLabel is required and cannot be null.");
         }
+        final String apiVersion = "2017-03-01-preview";
         CreateDatabaseRestorePointDefinition parameters = new CreateDatabaseRestorePointDefinition();
         parameters.withRestorePointLabel(restorePointLabel);
-        Observable<Response<ResponseBody>> observable = service.create(resourceGroupName, serverName, databaseName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.create(resourceGroupName, serverName, databaseName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), parameters, this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<RestorePointInner>() { }.getType());
     }
 
@@ -334,15 +330,13 @@ public class RestorePointsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         if (restorePointLabel == null) {
             throw new IllegalArgumentException("Parameter restorePointLabel is required and cannot be null.");
         }
+        final String apiVersion = "2017-03-01-preview";
         CreateDatabaseRestorePointDefinition parameters = new CreateDatabaseRestorePointDefinition();
         parameters.withRestorePointLabel(restorePointLabel);
-        return service.beginCreate(resourceGroupName, serverName, databaseName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent())
+        return service.beginCreate(resourceGroupName, serverName, databaseName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), parameters, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<RestorePointInner>>>() {
                 @Override
                 public Observable<ServiceResponse<RestorePointInner>> call(Response<ResponseBody> response) {
@@ -441,10 +435,8 @@ public class RestorePointsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(resourceGroupName, serverName, databaseName, restorePointName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.get(resourceGroupName, serverName, databaseName, restorePointName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<RestorePointInner>>>() {
                 @Override
                 public Observable<ServiceResponse<RestorePointInner>> call(Response<ResponseBody> response) {
@@ -540,10 +532,8 @@ public class RestorePointsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.delete(resourceGroupName, serverName, databaseName, restorePointName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.delete(resourceGroupName, serverName, databaseName, restorePointName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {

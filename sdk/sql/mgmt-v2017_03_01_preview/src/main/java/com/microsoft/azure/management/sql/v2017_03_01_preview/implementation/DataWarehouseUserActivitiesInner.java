@@ -126,11 +126,9 @@ public class DataWarehouseUserActivitiesInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String dataWarehouseUserActivityName = "current";
-        return service.get(resourceGroupName, serverName, databaseName, dataWarehouseUserActivityName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.get(resourceGroupName, serverName, databaseName, dataWarehouseUserActivityName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DataWarehouseUserActivityInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DataWarehouseUserActivityInner>> call(Response<ResponseBody> response) {

@@ -147,11 +147,9 @@ public class DatabaseBlobAuditingPoliciesInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String blobAuditingPolicyName = "default";
-        return service.get(resourceGroupName, serverName, databaseName, blobAuditingPolicyName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.get(resourceGroupName, serverName, databaseName, blobAuditingPolicyName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DatabaseBlobAuditingPolicyInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DatabaseBlobAuditingPolicyInner>> call(Response<ResponseBody> response) {
@@ -248,12 +246,10 @@ public class DatabaseBlobAuditingPoliciesInner {
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
         final String blobAuditingPolicyName = "default";
-        return service.createOrUpdate(resourceGroupName, serverName, databaseName, blobAuditingPolicyName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.createOrUpdate(resourceGroupName, serverName, databaseName, blobAuditingPolicyName, this.client.subscriptionId(), parameters, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DatabaseBlobAuditingPolicyInner>>>() {
                 @Override
                 public Observable<ServiceResponse<DatabaseBlobAuditingPolicyInner>> call(Response<ResponseBody> response) {
@@ -382,10 +378,8 @@ public class DatabaseBlobAuditingPoliciesInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByDatabase(resourceGroupName, serverName, databaseName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByDatabase(resourceGroupName, serverName, databaseName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<DatabaseBlobAuditingPolicyInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<DatabaseBlobAuditingPolicyInner>>> call(Response<ResponseBody> response) {

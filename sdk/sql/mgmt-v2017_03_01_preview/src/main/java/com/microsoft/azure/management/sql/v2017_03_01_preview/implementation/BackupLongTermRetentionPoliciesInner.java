@@ -141,11 +141,9 @@ public class BackupLongTermRetentionPoliciesInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String policyName = "default";
-        return service.get(resourceGroupName, serverName, databaseName, policyName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.get(resourceGroupName, serverName, databaseName, policyName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BackupLongTermRetentionPolicyInner>>>() {
                 @Override
                 public Observable<ServiceResponse<BackupLongTermRetentionPolicyInner>> call(Response<ResponseBody> response) {
@@ -242,12 +240,10 @@ public class BackupLongTermRetentionPoliciesInner {
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
         final String policyName = "default";
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, serverName, databaseName, policyName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        final String apiVersion = "2017-03-01-preview";
+        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, serverName, databaseName, policyName, this.client.subscriptionId(), parameters, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<BackupLongTermRetentionPolicyInner>() { }.getType());
     }
 
@@ -327,12 +323,10 @@ public class BackupLongTermRetentionPoliciesInner {
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
         final String policyName = "default";
-        return service.beginCreateOrUpdate(resourceGroupName, serverName, databaseName, policyName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.beginCreateOrUpdate(resourceGroupName, serverName, databaseName, policyName, this.client.subscriptionId(), parameters, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BackupLongTermRetentionPolicyInner>>>() {
                 @Override
                 public Observable<ServiceResponse<BackupLongTermRetentionPolicyInner>> call(Response<ResponseBody> response) {
@@ -423,10 +417,8 @@ public class BackupLongTermRetentionPoliciesInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByDatabase(resourceGroupName, serverName, databaseName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByDatabase(resourceGroupName, serverName, databaseName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BackupLongTermRetentionPolicyInner>>>() {
                 @Override
                 public Observable<ServiceResponse<BackupLongTermRetentionPolicyInner>> call(Response<ResponseBody> response) {

@@ -210,9 +210,7 @@ public class JobExecutionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
+        final String apiVersion = "2017-03-01-preview";
         final DateTime createTimeMin = null;
         final DateTime createTimeMax = null;
         final DateTime endTimeMin = null;
@@ -220,7 +218,7 @@ public class JobExecutionsInner {
         final Boolean isActive = null;
         final Integer skip = null;
         final Integer top = null;
-        return service.listByAgent(resourceGroupName, serverName, jobAgentName, this.client.subscriptionId(), createTimeMin, createTimeMax, endTimeMin, endTimeMax, isActive, skip, top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByAgent(resourceGroupName, serverName, jobAgentName, this.client.subscriptionId(), createTimeMin, createTimeMax, endTimeMin, endTimeMax, isActive, skip, top, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<JobExecutionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<JobExecutionInner>>> call(Response<ResponseBody> response) {
@@ -376,10 +374,8 @@ public class JobExecutionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByAgent(resourceGroupName, serverName, jobAgentName, this.client.subscriptionId(), createTimeMin, createTimeMax, endTimeMin, endTimeMax, isActive, skip, top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByAgent(resourceGroupName, serverName, jobAgentName, this.client.subscriptionId(), createTimeMin, createTimeMax, endTimeMin, endTimeMax, isActive, skip, top, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<JobExecutionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<JobExecutionInner>>> call(Response<ResponseBody> response) {
@@ -482,10 +478,8 @@ public class JobExecutionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.cancel(resourceGroupName, serverName, jobAgentName, jobName, jobExecutionId, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.cancel(resourceGroupName, serverName, jobAgentName, jobName, jobExecutionId, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -582,10 +576,8 @@ public class JobExecutionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Observable<Response<ResponseBody>> observable = service.create(resourceGroupName, serverName, jobAgentName, jobName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        final String apiVersion = "2017-03-01-preview";
+        Observable<Response<ResponseBody>> observable = service.create(resourceGroupName, serverName, jobAgentName, jobName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<JobExecutionInner>() { }.getType());
     }
 
@@ -665,10 +657,8 @@ public class JobExecutionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.beginCreate(resourceGroupName, serverName, jobAgentName, jobName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.beginCreate(resourceGroupName, serverName, jobAgentName, jobName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<JobExecutionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<JobExecutionInner>> call(Response<ResponseBody> response) {
@@ -805,9 +795,7 @@ public class JobExecutionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
+        final String apiVersion = "2017-03-01-preview";
         final DateTime createTimeMin = null;
         final DateTime createTimeMax = null;
         final DateTime endTimeMin = null;
@@ -815,7 +803,7 @@ public class JobExecutionsInner {
         final Boolean isActive = null;
         final Integer skip = null;
         final Integer top = null;
-        return service.listByJob(resourceGroupName, serverName, jobAgentName, jobName, this.client.subscriptionId(), createTimeMin, createTimeMax, endTimeMin, endTimeMax, isActive, skip, top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByJob(resourceGroupName, serverName, jobAgentName, jobName, this.client.subscriptionId(), createTimeMin, createTimeMax, endTimeMin, endTimeMax, isActive, skip, top, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<JobExecutionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<JobExecutionInner>>> call(Response<ResponseBody> response) {
@@ -979,10 +967,8 @@ public class JobExecutionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByJob(resourceGroupName, serverName, jobAgentName, jobName, this.client.subscriptionId(), createTimeMin, createTimeMax, endTimeMin, endTimeMax, isActive, skip, top, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByJob(resourceGroupName, serverName, jobAgentName, jobName, this.client.subscriptionId(), createTimeMin, createTimeMax, endTimeMin, endTimeMax, isActive, skip, top, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<JobExecutionInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<JobExecutionInner>>> call(Response<ResponseBody> response) {
@@ -1086,10 +1072,8 @@ public class JobExecutionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(resourceGroupName, serverName, jobAgentName, jobName, jobExecutionId, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.get(resourceGroupName, serverName, jobAgentName, jobName, jobExecutionId, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<JobExecutionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<JobExecutionInner>> call(Response<ResponseBody> response) {
@@ -1193,10 +1177,8 @@ public class JobExecutionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, serverName, jobAgentName, jobName, jobExecutionId, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        final String apiVersion = "2017-03-01-preview";
+        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, serverName, jobAgentName, jobName, jobExecutionId, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<JobExecutionInner>() { }.getType());
     }
 
@@ -1283,10 +1265,8 @@ public class JobExecutionsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.beginCreateOrUpdate(resourceGroupName, serverName, jobAgentName, jobName, jobExecutionId, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.beginCreateOrUpdate(resourceGroupName, serverName, jobAgentName, jobName, jobExecutionId, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<JobExecutionInner>>>() {
                 @Override
                 public Observable<ServiceResponse<JobExecutionInner>> call(Response<ResponseBody> response) {

@@ -216,10 +216,8 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.getByResourceGroup(resourceGroupName, locationName, longTermRetentionServerName, longTermRetentionDatabaseName, backupName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.getByResourceGroup(resourceGroupName, locationName, longTermRetentionServerName, longTermRetentionDatabaseName, backupName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<LongTermRetentionBackupInner>>>() {
                 @Override
                 public Observable<ServiceResponse<LongTermRetentionBackupInner>> call(Response<ResponseBody> response) {
@@ -322,10 +320,8 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Observable<Response<ResponseBody>> observable = service.deleteByResourceGroup(resourceGroupName, locationName, longTermRetentionServerName, longTermRetentionDatabaseName, backupName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        final String apiVersion = "2017-03-01-preview";
+        Observable<Response<ResponseBody>> observable = service.deleteByResourceGroup(resourceGroupName, locationName, longTermRetentionServerName, longTermRetentionDatabaseName, backupName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
@@ -411,10 +407,8 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.beginDeleteByResourceGroup(resourceGroupName, locationName, longTermRetentionServerName, longTermRetentionDatabaseName, backupName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.beginDeleteByResourceGroup(resourceGroupName, locationName, longTermRetentionServerName, longTermRetentionDatabaseName, backupName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -551,12 +545,10 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
+        final String apiVersion = "2017-03-01-preview";
         final Boolean onlyLatestPerDatabase = null;
         final LongTermRetentionDatabaseState databaseState = null;
-        return service.listByResourceGroupDatabase(resourceGroupName, locationName, longTermRetentionServerName, longTermRetentionDatabaseName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByResourceGroupDatabase(resourceGroupName, locationName, longTermRetentionServerName, longTermRetentionDatabaseName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>> call(Response<ResponseBody> response) {
@@ -695,10 +687,8 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByResourceGroupDatabase(resourceGroupName, locationName, longTermRetentionServerName, longTermRetentionDatabaseName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByResourceGroupDatabase(resourceGroupName, locationName, longTermRetentionServerName, longTermRetentionDatabaseName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>> call(Response<ResponseBody> response) {
@@ -818,12 +808,10 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
+        final String apiVersion = "2017-03-01-preview";
         final Boolean onlyLatestPerDatabase = null;
         final LongTermRetentionDatabaseState databaseState = null;
-        return service.listByResourceGroupLocation(resourceGroupName, locationName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByResourceGroupLocation(resourceGroupName, locationName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>> call(Response<ResponseBody> response) {
@@ -946,10 +934,8 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByResourceGroupLocation(resourceGroupName, locationName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByResourceGroupLocation(resourceGroupName, locationName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>> call(Response<ResponseBody> response) {
@@ -1077,12 +1063,10 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
+        final String apiVersion = "2017-03-01-preview";
         final Boolean onlyLatestPerDatabase = null;
         final LongTermRetentionDatabaseState databaseState = null;
-        return service.listByResourceGroupServer(resourceGroupName, locationName, longTermRetentionServerName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByResourceGroupServer(resourceGroupName, locationName, longTermRetentionServerName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>> call(Response<ResponseBody> response) {
@@ -1213,10 +1197,8 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByResourceGroupServer(resourceGroupName, locationName, longTermRetentionServerName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByResourceGroupServer(resourceGroupName, locationName, longTermRetentionServerName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>> call(Response<ResponseBody> response) {
@@ -1313,10 +1295,8 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(locationName, longTermRetentionServerName, longTermRetentionDatabaseName, backupName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.get(locationName, longTermRetentionServerName, longTermRetentionDatabaseName, backupName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<LongTermRetentionBackupInner>>>() {
                 @Override
                 public Observable<ServiceResponse<LongTermRetentionBackupInner>> call(Response<ResponseBody> response) {
@@ -1412,10 +1392,8 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Observable<Response<ResponseBody>> observable = service.delete(locationName, longTermRetentionServerName, longTermRetentionDatabaseName, backupName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        final String apiVersion = "2017-03-01-preview";
+        Observable<Response<ResponseBody>> observable = service.delete(locationName, longTermRetentionServerName, longTermRetentionDatabaseName, backupName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
@@ -1494,10 +1472,8 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.beginDelete(locationName, longTermRetentionServerName, longTermRetentionDatabaseName, backupName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.beginDelete(locationName, longTermRetentionServerName, longTermRetentionDatabaseName, backupName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -1626,12 +1602,10 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
+        final String apiVersion = "2017-03-01-preview";
         final Boolean onlyLatestPerDatabase = null;
         final LongTermRetentionDatabaseState databaseState = null;
-        return service.listByDatabase(locationName, longTermRetentionServerName, longTermRetentionDatabaseName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByDatabase(locationName, longTermRetentionServerName, longTermRetentionDatabaseName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>> call(Response<ResponseBody> response) {
@@ -1762,10 +1736,8 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByDatabase(locationName, longTermRetentionServerName, longTermRetentionDatabaseName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByDatabase(locationName, longTermRetentionServerName, longTermRetentionDatabaseName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>> call(Response<ResponseBody> response) {
@@ -1877,12 +1849,10 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
+        final String apiVersion = "2017-03-01-preview";
         final Boolean onlyLatestPerDatabase = null;
         final LongTermRetentionDatabaseState databaseState = null;
-        return service.listByLocation(locationName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByLocation(locationName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>> call(Response<ResponseBody> response) {
@@ -1997,10 +1967,8 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByLocation(locationName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByLocation(locationName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>> call(Response<ResponseBody> response) {
@@ -2120,12 +2088,10 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
+        final String apiVersion = "2017-03-01-preview";
         final Boolean onlyLatestPerDatabase = null;
         final LongTermRetentionDatabaseState databaseState = null;
-        return service.listByServer(locationName, longTermRetentionServerName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        return service.listByServer(locationName, longTermRetentionServerName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>> call(Response<ResponseBody> response) {
@@ -2248,10 +2214,8 @@ public class LongTermRetentionBackupsInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByServer(locationName, longTermRetentionServerName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByServer(locationName, longTermRetentionServerName, this.client.subscriptionId(), onlyLatestPerDatabase, databaseState, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<LongTermRetentionBackupInner>>> call(Response<ResponseBody> response) {

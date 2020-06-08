@@ -147,11 +147,9 @@ public class ManagedDatabaseSecurityAlertPoliciesInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String securityAlertPolicyName = "default";
-        return service.get(resourceGroupName, managedInstanceName, databaseName, securityAlertPolicyName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.get(resourceGroupName, managedInstanceName, databaseName, securityAlertPolicyName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ManagedDatabaseSecurityAlertPolicyInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ManagedDatabaseSecurityAlertPolicyInner>> call(Response<ResponseBody> response) {
@@ -248,12 +246,10 @@ public class ManagedDatabaseSecurityAlertPoliciesInner {
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
         final String securityAlertPolicyName = "default";
-        return service.createOrUpdate(resourceGroupName, managedInstanceName, databaseName, securityAlertPolicyName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.createOrUpdate(resourceGroupName, managedInstanceName, databaseName, securityAlertPolicyName, this.client.subscriptionId(), parameters, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ManagedDatabaseSecurityAlertPolicyInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ManagedDatabaseSecurityAlertPolicyInner>> call(Response<ResponseBody> response) {
@@ -382,10 +378,8 @@ public class ManagedDatabaseSecurityAlertPoliciesInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByDatabase(resourceGroupName, managedInstanceName, databaseName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByDatabase(resourceGroupName, managedInstanceName, databaseName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<ManagedDatabaseSecurityAlertPolicyInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ManagedDatabaseSecurityAlertPolicyInner>>> call(Response<ResponseBody> response) {

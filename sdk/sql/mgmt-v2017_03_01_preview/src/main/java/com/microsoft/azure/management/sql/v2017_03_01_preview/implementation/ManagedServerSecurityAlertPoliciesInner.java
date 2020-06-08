@@ -144,11 +144,9 @@ public class ManagedServerSecurityAlertPoliciesInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String securityAlertPolicyName = "Default";
-        return service.get(resourceGroupName, managedInstanceName, securityAlertPolicyName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.get(resourceGroupName, managedInstanceName, securityAlertPolicyName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ManagedServerSecurityAlertPolicyInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ManagedServerSecurityAlertPolicyInner>> call(Response<ResponseBody> response) {
@@ -238,12 +236,10 @@ public class ManagedServerSecurityAlertPoliciesInner {
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
         final String securityAlertPolicyName = "Default";
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, managedInstanceName, securityAlertPolicyName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        final String apiVersion = "2017-03-01-preview";
+        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, managedInstanceName, securityAlertPolicyName, this.client.subscriptionId(), parameters, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ManagedServerSecurityAlertPolicyInner>() { }.getType());
     }
 
@@ -316,12 +312,10 @@ public class ManagedServerSecurityAlertPoliciesInner {
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         Validator.validate(parameters);
         final String securityAlertPolicyName = "Default";
-        return service.beginCreateOrUpdate(resourceGroupName, managedInstanceName, securityAlertPolicyName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.beginCreateOrUpdate(resourceGroupName, managedInstanceName, securityAlertPolicyName, this.client.subscriptionId(), parameters, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ManagedServerSecurityAlertPolicyInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ManagedServerSecurityAlertPolicyInner>> call(Response<ResponseBody> response) {
@@ -442,10 +436,8 @@ public class ManagedServerSecurityAlertPoliciesInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByInstance(resourceGroupName, managedInstanceName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByInstance(resourceGroupName, managedInstanceName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<ManagedServerSecurityAlertPolicyInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ManagedServerSecurityAlertPolicyInner>>> call(Response<ResponseBody> response) {

@@ -159,11 +159,9 @@ public class ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesInn
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String policyName = "default";
-        return service.get(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.get(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ManagedBackupShortTermRetentionPolicyInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ManagedBackupShortTermRetentionPolicyInner>> call(Response<ResponseBody> response) {
@@ -253,14 +251,12 @@ public class ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesInn
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String policyName = "default";
+        final String apiVersion = "2017-03-01-preview";
         final Integer retentionDays = null;
         ManagedBackupShortTermRetentionPolicyInner parameters = new ManagedBackupShortTermRetentionPolicyInner();
         parameters.withRetentionDays(null);
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), parameters, this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ManagedBackupShortTermRetentionPolicyInner>() { }.getType());
     }
     /**
@@ -336,13 +332,11 @@ public class ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesInn
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String policyName = "default";
+        final String apiVersion = "2017-03-01-preview";
         ManagedBackupShortTermRetentionPolicyInner parameters = new ManagedBackupShortTermRetentionPolicyInner();
         parameters.withRetentionDays(retentionDays);
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createOrUpdate(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), parameters, this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ManagedBackupShortTermRetentionPolicyInner>() { }.getType());
     }
 
@@ -415,14 +409,12 @@ public class ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesInn
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String policyName = "default";
+        final String apiVersion = "2017-03-01-preview";
         final Integer retentionDays = null;
         ManagedBackupShortTermRetentionPolicyInner parameters = new ManagedBackupShortTermRetentionPolicyInner();
         parameters.withRetentionDays(null);
-        return service.beginCreateOrUpdate(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent())
+        return service.beginCreateOrUpdate(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), parameters, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ManagedBackupShortTermRetentionPolicyInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ManagedBackupShortTermRetentionPolicyInner>> call(Response<ResponseBody> response) {
@@ -509,13 +501,11 @@ public class ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesInn
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String policyName = "default";
+        final String apiVersion = "2017-03-01-preview";
         ManagedBackupShortTermRetentionPolicyInner parameters = new ManagedBackupShortTermRetentionPolicyInner();
         parameters.withRetentionDays(retentionDays);
-        return service.beginCreateOrUpdate(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent())
+        return service.beginCreateOrUpdate(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), parameters, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ManagedBackupShortTermRetentionPolicyInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ManagedBackupShortTermRetentionPolicyInner>> call(Response<ResponseBody> response) {
@@ -606,14 +596,12 @@ public class ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesInn
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String policyName = "default";
+        final String apiVersion = "2017-03-01-preview";
         final Integer retentionDays = null;
         ManagedBackupShortTermRetentionPolicyInner parameters = new ManagedBackupShortTermRetentionPolicyInner();
         parameters.withRetentionDays(null);
-        Observable<Response<ResponseBody>> observable = service.update(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.update(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), parameters, this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ManagedBackupShortTermRetentionPolicyInner>() { }.getType());
     }
     /**
@@ -689,13 +677,11 @@ public class ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesInn
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String policyName = "default";
+        final String apiVersion = "2017-03-01-preview";
         ManagedBackupShortTermRetentionPolicyInner parameters = new ManagedBackupShortTermRetentionPolicyInner();
         parameters.withRetentionDays(retentionDays);
-        Observable<Response<ResponseBody>> observable = service.update(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.update(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), parameters, this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ManagedBackupShortTermRetentionPolicyInner>() { }.getType());
     }
 
@@ -768,14 +754,12 @@ public class ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesInn
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String policyName = "default";
+        final String apiVersion = "2017-03-01-preview";
         final Integer retentionDays = null;
         ManagedBackupShortTermRetentionPolicyInner parameters = new ManagedBackupShortTermRetentionPolicyInner();
         parameters.withRetentionDays(null);
-        return service.beginUpdate(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent())
+        return service.beginUpdate(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), parameters, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ManagedBackupShortTermRetentionPolicyInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ManagedBackupShortTermRetentionPolicyInner>> call(Response<ResponseBody> response) {
@@ -862,13 +846,11 @@ public class ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesInn
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
         final String policyName = "default";
+        final String apiVersion = "2017-03-01-preview";
         ManagedBackupShortTermRetentionPolicyInner parameters = new ManagedBackupShortTermRetentionPolicyInner();
         parameters.withRetentionDays(retentionDays);
-        return service.beginUpdate(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), parameters, this.client.userAgent())
+        return service.beginUpdate(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, policyName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), parameters, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ManagedBackupShortTermRetentionPolicyInner>>>() {
                 @Override
                 public Observable<ServiceResponse<ManagedBackupShortTermRetentionPolicyInner>> call(Response<ResponseBody> response) {
@@ -997,10 +979,8 @@ public class ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesInn
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByRestorableDroppedDatabase(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByRestorableDroppedDatabase(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<ManagedBackupShortTermRetentionPolicyInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ManagedBackupShortTermRetentionPolicyInner>>> call(Response<ResponseBody> response) {

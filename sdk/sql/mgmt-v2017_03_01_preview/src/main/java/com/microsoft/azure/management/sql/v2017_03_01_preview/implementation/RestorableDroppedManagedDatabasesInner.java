@@ -170,10 +170,8 @@ public class RestorableDroppedManagedDatabasesInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listByInstance(resourceGroupName, managedInstanceName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.listByInstance(resourceGroupName, managedInstanceName, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<RestorableDroppedManagedDatabaseInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<RestorableDroppedManagedDatabaseInner>>> call(Response<ResponseBody> response) {
@@ -263,10 +261,8 @@ public class RestorableDroppedManagedDatabasesInner {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.get(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+        final String apiVersion = "2017-03-01-preview";
+        return service.get(resourceGroupName, managedInstanceName, restorableDroppedDatabaseId, this.client.subscriptionId(), apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<RestorableDroppedManagedDatabaseInner>>>() {
                 @Override
                 public Observable<ServiceResponse<RestorableDroppedManagedDatabaseInner>> call(Response<ResponseBody> response) {
