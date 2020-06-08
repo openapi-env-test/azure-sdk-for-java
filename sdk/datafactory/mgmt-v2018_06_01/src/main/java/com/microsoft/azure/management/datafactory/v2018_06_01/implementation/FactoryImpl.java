@@ -11,63 +11,35 @@ package com.microsoft.azure.management.datafactory.v2018_06_01.implementation;
 import com.microsoft.azure.arm.resources.models.implementation.GroupableResourceCoreImpl;
 import com.microsoft.azure.management.datafactory.v2018_06_01.Factory;
 import rx.Observable;
-import com.microsoft.azure.management.datafactory.v2018_06_01.FactoryUpdateParameters;
 import java.util.Map;
-import com.microsoft.azure.management.datafactory.v2018_06_01.FactoryIdentity;
 import org.joda.time.DateTime;
+import com.microsoft.azure.management.datafactory.v2018_06_01.FactoryIdentity;
 import com.microsoft.azure.management.datafactory.v2018_06_01.FactoryRepoConfiguration;
-import rx.functions.Func1;
 
-class FactoryImpl extends GroupableResourceCoreImpl<Factory, FactoryInner, FactoryImpl, DataFactoryManager> implements Factory, Factory.Definition, Factory.Update {
-    private String cifMatch;
-    private FactoryUpdateParameters updateParameter;
+class FactoryImpl extends GroupableResourceCoreImpl<Factory, FactoryInner, FactoryImpl, DataFactoryManager> implements Factory {
     FactoryImpl(String name, FactoryInner inner, DataFactoryManager manager) {
         super(name, inner, manager);
-        this.updateParameter = new FactoryUpdateParameters();
     }
 
     @Override
     public Observable<Factory> createResourceAsync() {
         FactoriesInner client = this.manager().inner().factories();
-        return client.createOrUpdateAsync(this.resourceGroupName(), this.name(), this.inner(), this.cifMatch)
-            .map(new Func1<FactoryInner, FactoryInner>() {
-               @Override
-               public FactoryInner call(FactoryInner resource) {
-                   resetCreateUpdateParameters();
-                   return resource;
-               }
-            })
-            .map(innerToFluentMap(this));
+        return null; // NOP createResourceAsync implementation as create is not supported
     }
 
     @Override
     public Observable<Factory> updateResourceAsync() {
         FactoriesInner client = this.manager().inner().factories();
-        return client.updateAsync(this.resourceGroupName(), this.name(), this.updateParameter)
-            .map(new Func1<FactoryInner, FactoryInner>() {
-               @Override
-               public FactoryInner call(FactoryInner resource) {
-                   resetCreateUpdateParameters();
-                   return resource;
-               }
-            })
-            .map(innerToFluentMap(this));
+        return null; // NOP updateResourceAsync implementation as update is not supported
     }
 
     @Override
     protected Observable<FactoryInner> getInnerAsync() {
         FactoriesInner client = this.manager().inner().factories();
-        return client.getByResourceGroupAsync(this.resourceGroupName(), this.name());
+        return null; // NOP getInnerAsync implementation as get is not supported
     }
 
-    @Override
-    public boolean isInCreateMode() {
-        return this.inner().id() == null;
-    }
 
-    private void resetCreateUpdateParameters() {
-        this.updateParameter = new FactoryUpdateParameters();
-    }
 
     @Override
     public Map<String, Object> additionalProperties() {
@@ -102,34 +74,6 @@ class FactoryImpl extends GroupableResourceCoreImpl<Factory, FactoryInner, Facto
     @Override
     public String version() {
         return this.inner().version();
-    }
-
-    @Override
-    public FactoryImpl withIfMatch(String ifMatch) {
-        this.cifMatch = ifMatch;
-        return this;
-    }
-
-    @Override
-    public FactoryImpl withAdditionalProperties(Map<String, Object> additionalProperties) {
-        this.inner().withAdditionalProperties(additionalProperties);
-        return this;
-    }
-
-    @Override
-    public FactoryImpl withRepoConfiguration(FactoryRepoConfiguration repoConfiguration) {
-        this.inner().withRepoConfiguration(repoConfiguration);
-        return this;
-    }
-
-    @Override
-    public FactoryImpl withIdentity(FactoryIdentity identity) {
-        if (isInCreateMode()) {
-            this.inner().withIdentity(identity);
-        } else {
-            this.updateParameter.withIdentity(identity);
-        }
-        return this;
     }
 
 }
