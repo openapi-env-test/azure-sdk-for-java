@@ -38,6 +38,11 @@ public interface Factory extends HasInner<FactoryInner>, Resource, GroupableReso
     String eTag();
 
     /**
+     * @return the globalParameters value.
+     */
+    Map<String, GlobalParameterSpecification> globalParameters();
+
+    /**
      * @return the identity value.
      */
     FactoryIdentity identity();
