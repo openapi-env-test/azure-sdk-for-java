@@ -48,9 +48,11 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
     @JsonSubTypes.Type(name = "TabularSource", value = TabularSource.class),
     @JsonSubTypes.Type(name = "BinarySource", value = BinarySource.class),
     @JsonSubTypes.Type(name = "OrcSource", value = OrcSource.class),
+    @JsonSubTypes.Type(name = "XmlSource", value = XmlSource.class),
     @JsonSubTypes.Type(name = "JsonSource", value = JsonSource.class),
     @JsonSubTypes.Type(name = "DelimitedTextSource", value = DelimitedTextSource.class),
     @JsonSubTypes.Type(name = "ParquetSource", value = ParquetSource.class),
+    @JsonSubTypes.Type(name = "ExcelSource", value = ExcelSource.class),
     @JsonSubTypes.Type(name = "AvroSource", value = AvroSource.class)
 })
 public class CopySource {
