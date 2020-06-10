@@ -14,6 +14,11 @@ import com.microsoft.azure.management.datafactory.v2018_06_01.Factories;
 import com.microsoft.azure.management.datafactory.v2018_06_01.Factory;
 import rx.Observable;
 import rx.Completable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import com.microsoft.azure.arm.resources.ResourceUtilsCore;
+import com.microsoft.azure.arm.utils.RXMapper;
 import rx.functions.Func1;
 import com.microsoft.azure.PagedList;
 import com.microsoft.azure.Page;
@@ -30,13 +35,46 @@ class FactoriesImpl extends GroupableResourcesCoreImpl<Factory, FactoryImpl, Fac
 
     @Override
     protected Observable<FactoryInner> getInnerAsync(String resourceGroupName, String name) {
-        return null; // NOP Retrieve by resource group not supported
+        FactoriesInner client = this.inner();
+        return client.getByResourceGroupAsync(resourceGroupName, name);
     }
 
     @Override
     protected Completable deleteInnerAsync(String resourceGroupName, String name) {
         FactoriesInner client = this.inner();
-        return Completable.error(new Throwable("Delete by RG not supported for this resource")); // NOP Delete by RG not supported
+        return client.deleteAsync(resourceGroupName, name).toCompletable();
+    }
+
+    @Override
+    public Observable<String> deleteByIdsAsync(Collection<String> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return Observable.empty();
+        }
+        Collection<Observable<String>> observables = new ArrayList<>();
+        for (String id : ids) {
+            final String resourceGroupName = ResourceUtilsCore.groupFromResourceId(id);
+            final String name = ResourceUtilsCore.nameFromResourceId(id);
+            Observable<String> o = RXMapper.map(this.inner().deleteAsync(resourceGroupName, name), id);
+            observables.add(o);
+        }
+        return Observable.mergeDelayError(observables);
+    }
+
+    @Override
+    public Observable<String> deleteByIdsAsync(String...ids) {
+        return this.deleteByIdsAsync(new ArrayList<String>(Arrays.asList(ids)));
+    }
+
+    @Override
+    public void deleteByIds(Collection<String> ids) {
+        if (ids != null && !ids.isEmpty()) {
+            this.deleteByIdsAsync(ids).toBlocking().last();
+        }
+    }
+
+    @Override
+    public void deleteByIds(String...ids) {
+        this.deleteByIds(new ArrayList<String>(Arrays.asList(ids)));
     }
 
     @Override
@@ -88,9 +126,26 @@ class FactoriesImpl extends GroupableResourcesCoreImpl<Factory, FactoryImpl, Fac
     }
 
     @Override
+    public FactoryImpl define(String name) {
+        return wrapModel(name);
+    }
+
+    @Override
     public Observable<GitHubAccessTokenResponse> getGitHubAccessTokenAsync(String resourceGroupName, String factoryName, GitHubAccessTokenRequest gitHubAccessTokenRequest) {
         FactoriesInner client = this.inner();
         return client.getGitHubAccessTokenAsync(resourceGroupName, factoryName, gitHubAccessTokenRequest)
+        .map(new Func1<GitHubAccessTokenResponseInner, GitHubAccessTokenResponse>() {
+            @Override
+            public GitHubAccessTokenResponse call(GitHubAccessTokenResponseInner inner) {
+                return new GitHubAccessTokenResponseImpl(inner, manager());
+            }
+        });
+    }
+
+    @Override
+    public Observable<GitHubAccessTokenResponse> getGitHubAccessTokenDemoAsync(String resourceGroupName, String factoryName, GitHubAccessTokenRequest gitHubAccessTokenRequest) {
+        FactoriesInner client = this.inner();
+        return client.getGitHubAccessTokenDemoAsync(resourceGroupName, factoryName, gitHubAccessTokenRequest)
         .map(new Func1<GitHubAccessTokenResponseInner, GitHubAccessTokenResponse>() {
             @Override
             public GitHubAccessTokenResponse call(GitHubAccessTokenResponseInner inner) {
@@ -118,7 +173,7 @@ class FactoriesImpl extends GroupableResourcesCoreImpl<Factory, FactoryImpl, Fac
 
     @Override
     protected FactoryImpl wrapModel(String name) {
-        return null; // Model is not creatable
+        return new FactoryImpl(name, new FactoryInner(), this.manager());
     }
 
     @Override

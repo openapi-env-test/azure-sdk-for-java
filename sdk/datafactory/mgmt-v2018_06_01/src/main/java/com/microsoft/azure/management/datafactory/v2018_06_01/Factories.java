@@ -8,16 +8,20 @@
 
 package com.microsoft.azure.management.datafactory.v2018_06_01;
 
+import com.microsoft.azure.arm.collection.SupportsCreating;
+import com.microsoft.azure.arm.resources.collection.SupportsDeletingByResourceGroup;
+import com.microsoft.azure.arm.resources.collection.SupportsBatchDeletion;
+import com.microsoft.azure.arm.resources.collection.SupportsGettingByResourceGroup;
+import rx.Observable;
 import com.microsoft.azure.arm.resources.collection.SupportsListingByResourceGroup;
 import com.microsoft.azure.arm.collection.SupportsListing;
-import rx.Observable;
 import com.microsoft.azure.management.datafactory.v2018_06_01.implementation.FactoriesInner;
 import com.microsoft.azure.arm.model.HasInner;
 
 /**
  * Type representing Factories.
  */
-public interface Factories extends SupportsListingByResourceGroup<Factory>, SupportsListing<Factory>, HasInner<FactoriesInner> {
+public interface Factories extends SupportsCreating<Factory.DefinitionStages.Blank>, SupportsDeletingByResourceGroup, SupportsBatchDeletion, SupportsGettingByResourceGroup<Factory>, SupportsListingByResourceGroup<Factory>, SupportsListing<Factory>, HasInner<FactoriesInner> {
     /**
      * Get GitHub Access Token.
      *
@@ -28,6 +32,17 @@ public interface Factories extends SupportsListingByResourceGroup<Factory>, Supp
      * @return the observable for the request
      */
     Observable<GitHubAccessTokenResponse> getGitHubAccessTokenAsync(String resourceGroupName, String factoryName, GitHubAccessTokenRequest gitHubAccessTokenRequest);
+
+    /**
+     * Get GitHub Access Token.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param factoryName The factory name.
+     * @param gitHubAccessTokenRequest Get GitHub access token request definition.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    Observable<GitHubAccessTokenResponse> getGitHubAccessTokenDemoAsync(String resourceGroupName, String factoryName, GitHubAccessTokenRequest gitHubAccessTokenRequest);
 
     /**
      * Get Data Plane access.

@@ -27,11 +27,10 @@ public class ScriptAction {
     private String uri;
 
     /**
-     * The node types on which the script action should be executed. Possible
-     * values include: 'Headnode', 'Workernode', 'Zookeeper'.
+     * The node types on which the script action should be executed.
      */
     @JsonProperty(value = "roles", required = true)
-    private HdiNodeTypes roles;
+    private Object roles;
 
     /**
      * The parameters for the script action.
@@ -80,21 +79,21 @@ public class ScriptAction {
     }
 
     /**
-     * Get the node types on which the script action should be executed. Possible values include: 'Headnode', 'Workernode', 'Zookeeper'.
+     * Get the node types on which the script action should be executed.
      *
      * @return the roles value
      */
-    public HdiNodeTypes roles() {
+    public Object roles() {
         return this.roles;
     }
 
     /**
-     * Set the node types on which the script action should be executed. Possible values include: 'Headnode', 'Workernode', 'Zookeeper'.
+     * Set the node types on which the script action should be executed.
      *
      * @param roles the roles value to set
      * @return the ScriptAction object itself.
      */
-    public ScriptAction withRoles(HdiNodeTypes roles) {
+    public ScriptAction withRoles(Object roles) {
         this.roles = roles;
         return this;
     }
