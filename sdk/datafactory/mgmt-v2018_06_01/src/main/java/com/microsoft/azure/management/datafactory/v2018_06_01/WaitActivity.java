@@ -24,14 +24,14 @@ public class WaitActivity extends ControlActivity {
      * Duration in seconds.
      */
     @JsonProperty(value = "typeProperties.waitTimeInSeconds", required = true)
-    private Object waitTimeInSeconds;
+    private int waitTimeInSeconds;
 
     /**
      * Get duration in seconds.
      *
      * @return the waitTimeInSeconds value
      */
-    public Object waitTimeInSeconds() {
+    public int waitTimeInSeconds() {
         return this.waitTimeInSeconds;
     }
 
@@ -41,7 +41,7 @@ public class WaitActivity extends ControlActivity {
      * @param waitTimeInSeconds the waitTimeInSeconds value to set
      * @return the WaitActivity object itself.
      */
-    public WaitActivity withWaitTimeInSeconds(Object waitTimeInSeconds) {
+    public WaitActivity withWaitTimeInSeconds(int waitTimeInSeconds) {
         this.waitTimeInSeconds = waitTimeInSeconds;
         return this;
     }
