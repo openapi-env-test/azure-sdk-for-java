@@ -109,9 +109,11 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
     @JsonSubTypes.Type(name = "AzureBlob", value = AzureBlobDataset.class),
     @JsonSubTypes.Type(name = "Binary", value = BinaryDataset.class),
     @JsonSubTypes.Type(name = "Orc", value = OrcDataset.class),
+    @JsonSubTypes.Type(name = "Xml", value = XmlDataset.class),
     @JsonSubTypes.Type(name = "Json", value = JsonDataset.class),
     @JsonSubTypes.Type(name = "DelimitedText", value = DelimitedTextDataset.class),
     @JsonSubTypes.Type(name = "Parquet", value = ParquetDataset.class),
+    @JsonSubTypes.Type(name = "Excel", value = ExcelDataset.class),
     @JsonSubTypes.Type(name = "Avro", value = AvroDataset.class),
     @JsonSubTypes.Type(name = "AmazonS3Object", value = AmazonS3Dataset.class)
 })
