@@ -14,11 +14,11 @@ import com.microsoft.azure.arm.collection.InnerSupportsListing;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
+import com.microsoft.azure.Page;
+import com.microsoft.azure.PagedList;
 import com.microsoft.azure.management.kusto.v2020_02_15.ClusterCheckNameRequest;
 import com.microsoft.azure.management.kusto.v2020_02_15.ClusterUpdate;
 import com.microsoft.azure.management.kusto.v2020_02_15.LanguageExtensionsList;
-import com.microsoft.azure.Page;
-import com.microsoft.azure.PagedList;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
@@ -26,19 +26,19 @@ import com.microsoft.rest.Validator;
 import java.io.IOException;
 import java.util.List;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
-import retrofit2.http.HTTP;
 import retrofit2.http.PATCH;
-import retrofit2.http.Path;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.Response;
-import rx.functions.Func1;
 import rx.Observable;
+import rx.functions.Func1;
 import com.microsoft.azure.LongRunningFinalState;
 import com.microsoft.azure.LongRunningOperationOptions;
 
@@ -1581,16 +1581,8 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;ClusterInner&gt; object if successful.
      */
-    public PagedList<ClusterInner> list() {
-        PageImpl<ClusterInner> page = new PageImpl<>();
-        page.setItems(listWithServiceResponseAsync().toBlocking().single().body());
-        page.setNextPageLink(null);
-        return new PagedList<ClusterInner>(page) {
-            @Override
-            public Page<ClusterInner> nextPage(String nextPageLink) {
-                return null;
-            }
-        };
+    public List<ClusterInner> list() {
+        return listWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1610,12 +1602,11 @@ public class ClustersInner implements InnerSupportsGet<ClusterInner>, InnerSuppo
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;ClusterInner&gt; object
      */
-    public Observable<Page<ClusterInner>> listAsync() {
-        return listWithServiceResponseAsync().map(new Func1<ServiceResponse<List<ClusterInner>>, Page<ClusterInner>>() {
-            public Page<ClusterInner> call(ServiceResponse<List<ClusterInner>> response) {
-                PageImpl<ClusterInner> page = new PageImpl<>();
-                page.setItems(response.body());
-                return page;
+    public Observable<List<ClusterInner>> listAsync() {
+        return listWithServiceResponseAsync().map(new Func1<ServiceResponse<List<ClusterInner>>, List<ClusterInner>>() {
+            @Override
+            public List<ClusterInner> call(ServiceResponse<List<ClusterInner>> response) {
+                return response.body();
             }
         });
     }
