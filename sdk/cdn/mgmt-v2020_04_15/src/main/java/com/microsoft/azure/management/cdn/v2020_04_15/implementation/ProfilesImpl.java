@@ -76,30 +76,6 @@ class ProfilesImpl extends GroupableResourcesCoreImpl<Profile, ProfileImpl, Prof
     }
 
     @Override
-    public PagedList<Profile> listByResourceGroup(String resourceGroupName) {
-        ProfilesInner client = this.inner();
-        return this.wrapList(client.listByResourceGroup(resourceGroupName));
-    }
-
-    @Override
-    public Observable<Profile> listByResourceGroupAsync(String resourceGroupName) {
-        ProfilesInner client = this.inner();
-        return client.listByResourceGroupAsync(resourceGroupName)
-        .flatMapIterable(new Func1<Page<ProfileInner>, Iterable<ProfileInner>>() {
-            @Override
-            public Iterable<ProfileInner> call(Page<ProfileInner> page) {
-                return page.items();
-            }
-        })
-        .map(new Func1<ProfileInner, Profile>() {
-            @Override
-            public Profile call(ProfileInner inner) {
-                return wrapModel(inner);
-            }
-        });
-    }
-
-    @Override
     public PagedList<Profile> list() {
         ProfilesInner client = this.inner();
         return this.wrapList(client.list());

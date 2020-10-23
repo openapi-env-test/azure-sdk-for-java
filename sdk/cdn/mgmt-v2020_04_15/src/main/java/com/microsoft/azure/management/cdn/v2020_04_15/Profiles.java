@@ -13,7 +13,6 @@ import com.microsoft.azure.arm.resources.collection.SupportsDeletingByResourceGr
 import com.microsoft.azure.arm.resources.collection.SupportsBatchDeletion;
 import com.microsoft.azure.arm.resources.collection.SupportsGettingByResourceGroup;
 import rx.Observable;
-import com.microsoft.azure.arm.resources.collection.SupportsListingByResourceGroup;
 import com.microsoft.azure.arm.collection.SupportsListing;
 import com.microsoft.azure.management.cdn.v2020_04_15.implementation.ProfilesInner;
 import com.microsoft.azure.arm.model.HasInner;
@@ -21,7 +20,7 @@ import com.microsoft.azure.arm.model.HasInner;
 /**
  * Type representing Profiles.
  */
-public interface Profiles extends SupportsCreating<Profile.DefinitionStages.Blank>, SupportsDeletingByResourceGroup, SupportsBatchDeletion, SupportsGettingByResourceGroup<Profile>, SupportsListingByResourceGroup<Profile>, SupportsListing<Profile>, HasInner<ProfilesInner> {
+public interface Profiles extends SupportsCreating<Profile.DefinitionStages.Blank>, SupportsDeletingByResourceGroup, SupportsBatchDeletion, SupportsGettingByResourceGroup<Profile>, SupportsListing<Profile>, HasInner<ProfilesInner> {
     /**
      * Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemental portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.
      *
