@@ -14,5 +14,10 @@
       "create_sdk_pull_requests": true,
       "sdk_generation_pull_request_base": "integration_branch"
     }
+  },
+  "generateOptions": {
+    "generateScript": {
+      "path": "./eng/mgmt/generate.py"
+    }
   }
 }
