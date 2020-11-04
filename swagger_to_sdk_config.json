@@ -15,6 +15,11 @@
       "sdk_generation_pull_request_base": "integration_branch"
     }
   },
+  "initOptions": {
+    "initScript": {
+      "path": "./eng/mgmt/init.sh"
+    }
+  },
   "generateOptions": {
     "generateScript": {
       "path": "./eng/mgmt/generate.py"

@@ -57,21 +57,21 @@ def generate(
 
 def add_module_to_pom(pom: str, module: str) -> (bool, str):
     if pom.find('<module>{0}</module>'.format(module)) >= 0:
-        logging.info('[Skip] pom already has module {0}'.format(module))
+        logging.info('[POM][Skip] pom already has module {0}'.format(module))
         return (False, '')
 
     if len(re.findall('<modules>', pom)) > 1:
-        logging.error('[Skip] find more than one <modules> in pom')
+        logging.error('[POM][Skip] find more than one <modules> in pom')
         return (False, '')
 
     pre_module = re.match(r'^[\s\S]*?<modules>', pom, re.M)
     if not pre_module:
-        logging.error('[Skip] Cannot find <modules> in pom')
+        logging.error('[POM][Skip] Cannot find <modules> in pom')
         return (False, '')
 
     post_module = re.search(r'[^\S\r\n]*</modules>[\s\S]*?$', pom)
     if not post_module:
-        logging.error('[Skip] Cannot find </modules> in pom')
+        logging.error('[POM][Skip] Cannot find </modules> in pom')
         return (False, '')
 
     modules = set(re.findall(r'<module>(.*?)</module>', pom))
@@ -85,19 +85,19 @@ def add_module_to_pom(pom: str, module: str) -> (bool, str):
 def update_root_pom(sdk_root: str, service: str):
     pom_file = os.path.join(sdk_root, 'pom.xml')
     if not os.path.exists(pom_file):
-        logging.error('[Skip] cannot find root pom')
+        logging.error('[POM][Skip] cannot find root pom')
         return
 
     module = 'sdk/{0}'.format(service)
     with open(pom_file, 'r') as fin:
         pom = fin.read()
 
-    logging.info('[Process] dealing with root pom')
+    logging.info('[POM][Process] dealing with root pom')
     success, pom = add_module_to_pom(pom, module)
     if success:
         with open(pom_file, 'w') as fout:
             fout.write(pom)
-        logging.info('[Success] Write to root pom')
+        logging.info('[POM][Success] Write to root pom')
 
 
 def update_service_ci_and_pom(sdk_root: str, service: str):
@@ -115,14 +115,14 @@ def update_service_ci_and_pom(sdk_root: str, service: str):
     if not (type(ci_yml.get('extends')) == dict and
             type(ci_yml['extends'].get('parameters')) == dict and
             type(ci_yml['extends']['parameters'].get('Artifacts')) == list):
-        logging.error('[Skip] Unexpected ci.yml format')
+        logging.error('[CI][Skip] Unexpected ci.yml format')
     else:
         artifacts: list = ci_yml['extends']['parameters']['Artifacts']
         for artifact in artifacts:
             if (artifact.get('name') == module and
                     artifact.get('groupId') == GROUP_ID):
                 logging.info(
-                    '[Skip] ci.yml already has module {0}'.format(module))
+                    '[CI][Skip] ci.yml already has module {0}'.format(module))
                 break
         else:
             artifacts.append({
@@ -136,7 +136,7 @@ def update_service_ci_and_pom(sdk_root: str, service: str):
             with open(ci_yml_file, 'w') as fout:
                 fout.write(CI_HEADER)
                 fout.write(ci_yml_str)
-            logging.info('[Success] Write to ci.yml')
+            logging.info('[CI][Success] Write to ci.yml')
 
     if os.path.exists(pom_xml_file):
         with open(pom_xml_file, 'r') as fin:
@@ -144,12 +144,12 @@ def update_service_ci_and_pom(sdk_root: str, service: str):
     else:
         pom_xml = POM_FORMAT.format(service)
 
-    logging.info('[Process] dealing with pom.xml')
+    logging.info('[POM][Process] dealing with pom.xml')
     success, pom_xml = add_module_to_pom(pom_xml, module)
     if success:
         with open(pom_xml_file, 'w') as fout:
             fout.write(pom_xml)
-        logging.info('[Success] Write to pom.xml')
+        logging.info('[POM][Success] Write to pom.xml')
 
 
 def parse_args() -> argparse.Namespace:
