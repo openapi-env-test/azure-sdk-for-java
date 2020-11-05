@@ -10,8 +10,8 @@ package com.microsoft.azure.management.cosmosdb.v2020_03_01.implementation;
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
-import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.credentials.ServiceClientCredentials;
 
 /**
  * Initializes a new instance of the CosmosDBManagementClientImpl class.
@@ -28,11 +28,11 @@ public class CosmosDBManagementClientImpl extends AzureServiceClient {
         return this.azureClient;
     }
 
-    /** Azure subscription ID. */
+    /** The ID of the target subscription. */
     private String subscriptionId;
 
     /**
-     * Gets Azure subscription ID.
+     * Gets The ID of the target subscription.
      *
      * @return the subscriptionId value.
      */
@@ -41,36 +41,13 @@ public class CosmosDBManagementClientImpl extends AzureServiceClient {
     }
 
     /**
-     * Sets Azure subscription ID.
+     * Sets The ID of the target subscription.
      *
      * @param subscriptionId the subscriptionId value.
      * @return the service client itself
      */
     public CosmosDBManagementClientImpl withSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
-        return this;
-    }
-
-    /** The ID of the target subscription. */
-    private String subscriptionId1;
-
-    /**
-     * Gets The ID of the target subscription.
-     *
-     * @return the subscriptionId1 value.
-     */
-    public String subscriptionId1() {
-        return this.subscriptionId1;
-    }
-
-    /**
-     * Sets The ID of the target subscription.
-     *
-     * @param subscriptionId1 the subscriptionId1 value.
-     * @return the service client itself
-     */
-    public CosmosDBManagementClientImpl withSubscriptionId1(String subscriptionId1) {
-        this.subscriptionId1 = subscriptionId1;
         return this;
     }
 
