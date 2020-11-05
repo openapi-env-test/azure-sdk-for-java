@@ -10,8 +10,8 @@ package com.microsoft.azure.management.commerce.v2015_06_01_preview.implementati
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
-import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.credentials.ServiceClientCredentials;
 
 /**
  * Initializes a new instance of the UsageManagementClientImpl class.

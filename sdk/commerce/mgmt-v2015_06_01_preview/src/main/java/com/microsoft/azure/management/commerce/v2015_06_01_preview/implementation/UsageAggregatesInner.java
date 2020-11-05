@@ -12,25 +12,25 @@ import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceFuture;
 import com.microsoft.azure.ListOperationCallback;
-import com.microsoft.azure.management.commerce.v2015_06_01_preview.AggregationGranularity;
-import com.microsoft.azure.management.commerce.v2015_06_01_preview.ErrorResponseException;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
+import com.microsoft.azure.management.commerce.v2015_06_01_preview.AggregationGranularity;
+import com.microsoft.azure.management.commerce.v2015_06_01_preview.ErrorResponseException;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
 import java.util.List;
 import okhttp3.ResponseBody;
 import org.joda.time.DateTime;
+import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
-import retrofit2.Response;
-import rx.functions.Func1;
 import rx.Observable;
+import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -69,7 +69,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Test Query aggregated Azure subscription consumption data for a date range.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -89,7 +89,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Test Query aggregated Azure subscription consumption data for a date range.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -110,7 +110,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Test Query aggregated Azure subscription consumption data for a date range.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -128,7 +128,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Test Query aggregated Azure subscription consumption data for a date range.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -150,7 +150,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Test Query aggregated Azure subscription consumption data for a date range.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -188,7 +188,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Test Query aggregated Azure subscription consumption data for a date range.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -211,7 +211,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Test Query aggregated Azure subscription consumption data for a date range.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -235,7 +235,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Test Query aggregated Azure subscription consumption data for a date range.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -256,7 +256,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Test Query aggregated Azure subscription consumption data for a date range.
      *
      * @param reportedStartTime The start of the time range to retrieve data for.
      * @param reportedEndTime The end of the time range to retrieve data for.
@@ -281,7 +281,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Test Query aggregated Azure subscription consumption data for a date range.
      *
     ServiceResponse<PageImpl<UsageAggregationInner>> * @param reportedStartTime The start of the time range to retrieve data for.
     ServiceResponse<PageImpl<UsageAggregationInner>> * @param reportedEndTime The end of the time range to retrieve data for.
@@ -326,7 +326,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Test Query aggregated Azure subscription consumption data for a date range.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -345,7 +345,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Test Query aggregated Azure subscription consumption data for a date range.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
@@ -366,7 +366,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Test Query aggregated Azure subscription consumption data for a date range.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -383,7 +383,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Test Query aggregated Azure subscription consumption data for a date range.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -404,7 +404,7 @@ public class UsageAggregatesInner {
     }
 
     /**
-     * Query aggregated Azure subscription consumption data for a date range.
+     * Test Query aggregated Azure subscription consumption data for a date range.
      *
     ServiceResponse<PageImpl<UsageAggregationInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
