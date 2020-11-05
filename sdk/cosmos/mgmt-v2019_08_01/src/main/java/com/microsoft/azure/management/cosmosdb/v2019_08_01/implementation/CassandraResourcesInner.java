@@ -21,17 +21,17 @@ import com.microsoft.rest.Validator;
 import java.io.IOException;
 import java.util.List;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
-import retrofit2.http.HTTP;
-import retrofit2.http.Path;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.Response;
-import rx.functions.Func1;
 import rx.Observable;
+import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -41,7 +41,7 @@ public class CassandraResourcesInner {
     /** The Retrofit service to perform REST calls. */
     private CassandraResourcesService service;
     /** The service client containing this operation class. */
-    private CosmosDBImpl client;
+    private CosmosDBManagementClientImpl client;
 
     /**
      * Initializes an instance of CassandraResourcesInner.
@@ -49,7 +49,7 @@ public class CassandraResourcesInner {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public CassandraResourcesInner(Retrofit retrofit, CosmosDBImpl client) {
+    public CassandraResourcesInner(Retrofit retrofit, CosmosDBManagementClientImpl client) {
         this.service = retrofit.create(CassandraResourcesService.class);
         this.client = client;
     }
