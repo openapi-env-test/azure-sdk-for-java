@@ -14,6 +14,8 @@ import com.microsoft.azure.arm.collection.InnerSupportsListing;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
+import com.microsoft.azure.Page;
+import com.microsoft.azure.PagedList;
 import com.microsoft.azure.management.cosmosdb.v2015_04_08.CassandraKeyspaceCreateUpdateParameters;
 import com.microsoft.azure.management.cosmosdb.v2015_04_08.CassandraTableCreateUpdateParameters;
 import com.microsoft.azure.management.cosmosdb.v2015_04_08.DatabaseAccountCreateUpdateParameters;
@@ -33,8 +35,6 @@ import com.microsoft.azure.management.cosmosdb.v2015_04_08.SqlDatabaseCreateUpda
 import com.microsoft.azure.management.cosmosdb.v2015_04_08.TableCreateUpdateParameters;
 import com.microsoft.azure.management.cosmosdb.v2015_04_08.ThroughputResource;
 import com.microsoft.azure.management.cosmosdb.v2015_04_08.ThroughputUpdateParameters;
-import com.microsoft.azure.Page;
-import com.microsoft.azure.PagedList;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
@@ -42,20 +42,20 @@ import com.microsoft.rest.Validator;
 import java.io.IOException;
 import java.util.List;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.HEAD;
+import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
-import retrofit2.http.HTTP;
 import retrofit2.http.PATCH;
-import retrofit2.http.Path;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.Response;
-import rx.functions.Func1;
 import rx.Observable;
+import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -65,7 +65,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountIn
     /** The Retrofit service to perform REST calls. */
     private DatabaseAccountsService service;
     /** The service client containing this operation class. */
-    private CosmosDBImpl client;
+    private CosmosDBManagementClientImpl client;
 
     /**
      * Initializes an instance of DatabaseAccountsInner.
@@ -73,7 +73,7 @@ public class DatabaseAccountsInner implements InnerSupportsGet<DatabaseAccountIn
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public DatabaseAccountsInner(Retrofit retrofit, CosmosDBImpl client) {
+    public DatabaseAccountsInner(Retrofit retrofit, CosmosDBManagementClientImpl client) {
         this.service = retrofit.create(DatabaseAccountsService.class);
         this.client = client;
     }
