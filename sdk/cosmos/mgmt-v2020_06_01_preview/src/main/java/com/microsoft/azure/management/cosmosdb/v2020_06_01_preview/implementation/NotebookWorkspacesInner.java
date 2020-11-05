@@ -19,18 +19,18 @@ import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
 import java.util.List;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
-import retrofit2.http.HTTP;
-import retrofit2.http.Path;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.Response;
-import rx.functions.Func1;
 import rx.Observable;
+import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -342,7 +342,7 @@ public class NotebookWorkspacesInner implements InnerSupportsDelete<Void> {
         }
         final String notebookWorkspaceName = "default";
         final String apiVersion = "2020-06-01-preview";
-        Observable<Response<ResponseBody>> observable = service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, accountName, notebookWorkspaceName, apiVersion, this.client.acceptLanguage(), new NotebookWorkspaceCreateUpdateParameters(), this.client.userAgent());
+        Observable<Response<ResponseBody>> observable = service.createOrUpdate(this.client.subscriptionId(), resourceGroupName, accountName, notebookWorkspaceName, apiVersion, this.client.acceptLanguage(), notebookCreateUpdateParameters, this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<NotebookWorkspaceInner>() { }.getType());
     }
 
@@ -410,7 +410,7 @@ public class NotebookWorkspacesInner implements InnerSupportsDelete<Void> {
         }
         final String notebookWorkspaceName = "default";
         final String apiVersion = "2020-06-01-preview";
-        return service.beginCreateOrUpdate(this.client.subscriptionId(), resourceGroupName, accountName, notebookWorkspaceName, apiVersion, this.client.acceptLanguage(), new NotebookWorkspaceCreateUpdateParameters(), this.client.userAgent())
+        return service.beginCreateOrUpdate(this.client.subscriptionId(), resourceGroupName, accountName, notebookWorkspaceName, apiVersion, this.client.acceptLanguage(), notebookCreateUpdateParameters, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<NotebookWorkspaceInner>>>() {
                 @Override
                 public Observable<ServiceResponse<NotebookWorkspaceInner>> call(Response<ResponseBody> response) {
