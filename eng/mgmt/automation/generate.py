@@ -26,12 +26,14 @@ def generate(
     tag: str = None,
     **kwargs,
 ):
+    module = ARTIFACT_FORMAT.format(service)
+    namespace = NAMESPACE_FORMAT.format(service)
     output_dir = os.path.join(
         sdk_root,
         'sdk/{0}'.format(service),
-        ARTIFACT_FORMAT.format(service),
+        module,
     )
-    shutil.rmtree(output_dir, ignore_errors = True)
+    shutil.rmtree(os.path.join(output_dir, 'src/main'), ignore_errors = True)
 
     if spec_root[-1] != '/':
         readme = spec_root + '/' + readme
@@ -39,7 +41,6 @@ def generate(
         readme = spec_root + readme
 
     tag_option = '--tag={0}'.format(tag) if tag else ''
-    namespace = NAMESPACE_FORMAT.format(service)
 
     command = 'autorest --version={0} --use={1} --java.azure-libraries-for-java-folder={2} --java.output-folder={3} --java.namespace={4} {5}'.format(
         autorest,
@@ -51,8 +52,16 @@ def generate(
     )
     logging.info(command)
     if os.system(command) != 0:
-        logging.error('Autorest fail')
-        sys.exit(1)
+        logging.error('[GENERATE] Autorest fail')
+        return False
+
+    if os.system(
+            'mvn clean verify package -f {0}/pom.xml -pl {1}:{2} -am'.format(
+                sdk_root, GROUP_ID, module)) != 0:
+        logging.error('[GENERATE] Maven build fail')
+        return False
+
+    return True
 
 
 def add_module_to_pom(pom: str, module: str) -> (bool, str):
@@ -152,6 +161,105 @@ def update_service_ci_and_pom(sdk_root: str, service: str):
         logging.info('[POM][Success] Write to pom.xml')
 
 
+def update_version(sdk_root: str, service: str):
+    pwd = os.getcwd()
+    try:
+        os.chdir(sdk_root)
+        os.system(
+            'python3 eng/versioning/update_version.py --ut library --bt client --sr'
+        )
+        os.system(
+            'python3 eng/versioning/update_version.py --ut library --bt client --tf sdk/{0}/{1}/README.md'
+            .format(service, ARTIFACT_FORMAT.format(service)))
+    finally:
+        os.chdir(pwd)
+
+def write_version(version_file: str, lines: list, index: int, project: str, stable_version: str, current_version: str):
+    lines[index] = '{0};{1};{2}'.format(project, stable_version, current_version)
+    with open(version_file, 'w') as fout:
+        fout.write('\n'.join(lines))
+
+
+def set_or_increase_version(
+    sdk_root: str,
+    service: str,
+    preview = True,
+    version = None,
+    **kwargs,
+):
+    version_file = os.path.join(sdk_root, 'eng/versioning/version_client.txt')
+    module = ARTIFACT_FORMAT.format(service)
+    project = '{0}:{1}'.format(GROUP_ID, module)
+    version_pattern = '(\d+)\.(\d+)\.(\d+)(-beta\.\d+)?'
+    version_format = '{0}.{1}.{2}{3}'
+    default_version = version if version else DEFAULT_VERSION
+
+    with open(version_file, 'r') as fin:
+        lines = fin.read().splitlines()
+        version_index = -1
+        for i, version_line in enumerate(lines):
+            version_line = version_line.strip()
+            if version_line.startswith('#'):
+                continue
+            version = version_line.split(';')
+            if version[0] == project:
+                if len(version) != 3:
+                    logging.error(
+                        '[VERSION][Fallback] Unexpected version format "{0}"'.
+                        format(version_line))
+                    stable_version = ''
+                    current_version = default_version
+                else:
+                    logging.info(
+                        '[VERSION][Found] current version "{0}"'.format(
+                            version_line))
+                    stable_version = version[1]
+                    current_version = version[2]
+                version_index = i
+                break
+        else:
+            logging.info(
+                '[VERSION][Not Found] cannot find version for "{0}"'.format(
+                    project))
+            for i, version_line in enumerate(lines):
+                if version_line.startswith('{0}:'.format(GROUP_ID)):
+                    version_index = i + 1
+            lines = lines[:version_index] + [] + lines[version_index:]
+            stable_version = ''
+            current_version = default_version
+
+    # version is given, set and return
+    if version:
+        if not stable_version:
+            stable_version = current_version
+        logging.info('[VERSION][Set] set to given version "{0}"'.format(version))
+        write_version(version_file, lines, version_index, project, stable_version, current_version)
+        update_version(sdk_root, service)
+        generate(sdk_root, service, **kwargs)
+        return
+
+    current_versions = list(re.findall(version_pattern, current_version)[0])
+    stable_versions = re.findall(version_pattern, stable_version)
+    # no stable version
+    if len(stable_versions) < 1 or stable_versions[0][-1] != '':
+        if not preview:
+            current_versions[-1] = ''
+        current_version = version_format.format(*current_versions)
+        if not stable_version:
+            stable_version = current_version
+        logging.warning(
+            '[VERSION][Not Found] cannot find stable version, current version "{0}"'
+            .format(current_version))
+
+        write_version(version_file, lines, version_index, project, stable_version, current_version)
+        update_version(sdk_root, service)
+        generate(sdk_root, service, **kwargs)
+    else:
+        ##### Update version later
+        ##### currently there always isn't stable version
+        raise NotImplementedError('No implementation for stable version')
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -212,16 +320,19 @@ def main():
     else:
         readmes = [args['readme']]
 
+    packages = []
     # deal with each readme
     for readme in readmes:
         args['readme'] = readme
         if 'data-plane' in readme:
             logging.info('[Skip] do not generate for {0}'.format(readme))
         else:
-            match = re.search('specification/([^/]+)/resource-manager', readme)
+            match = re.search(
+                'specification/([^/]+)/resource-manager/readme.md', readme,
+                re.IGNORECASE)
             if not match:
                 logging.error(
-                    '[Skip] readme path does not format as specification/*/resource-manager'
+                    '[Skip] readme path does not format as specification/*/resource-manager/readme.md'
                 )
             else:
                 spec = match.group(1)
@@ -230,9 +341,10 @@ def main():
                     service = spec
 
                 if service == 'resources':
-                    args['tag'] = 'package-resources-2020-06' ########   REMOVE LATER !!!!!
+                    args[
+                        'tag'] = 'package-resources-2020-06'  ########   REMOVE LATER !!!!!
 
-                generate(sdk_root = sdk_root, service = service, **args)
+                set_or_increase_version(sdk_root = sdk_root, service = service, **args)
                 update_service_ci_and_pom(
                     sdk_root = sdk_root,
                     service = service,
@@ -240,6 +352,31 @@ def main():
                 update_root_pom(sdk_root = sdk_root, service = service)
 
                 args['tag'] = None  ########   REMOVE LATER !!!!!
+
+                module = ARTIFACT_FORMAT.format(service)
+                packages.append({
+                    'packageName':
+                        NAMESPACE_FORMAT.format(service),
+                    'path': [
+                        'sdk/{0}/{1}'.format(service, module),
+                        'sdk/{0}/ci.yml'.format(service),
+                        'sdk/{0}/pom.xml'.format(service),
+                        'eng/versioning',
+                        'pom.xml',
+                    ],
+                    'readmeMd': [readme],
+                    'artifacts': [
+                        'sdk/{0}/{1}/pom.xml'.format(service, module),
+                        'sdk/{0}/{1}/target/*.jar'.format(service, module),
+                    ],
+                })
+
+    if args.get('config'):
+        output = {
+            'packages': packages,
+        }
+        with open(args['config'][1], 'w') as fout:
+            json.dump(output, fout)
 
 
 if __name__ == '__main__':

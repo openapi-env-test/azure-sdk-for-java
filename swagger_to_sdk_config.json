@@ -17,12 +17,16 @@
   },
   "initOptions": {
     "initScript": {
-      "path": "./eng/mgmt/init.sh"
+      "path": "./eng/mgmt/automation/init.sh",
+      "envs": ["JAVA_HOME_11_X64"]
     }
   },
   "generateOptions": {
     "generateScript": {
-      "path": "./eng/mgmt/generate.py"
+      "path": "./eng/mgmt/automation/generate.py"
     }
+  },
+  "advanceOptions": {
+    "generationCallMode": "one-per-config"
   }
 }

@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
-SDK_ROOT = '../../'  # related to running dir
+SDK_ROOT = '../../../'  # related to file dir
 AUTOREST_CORE_VERSION = '3.0.6326'
 AUTOREST_JAVA = '@autorest/java@4.0.4'
+DEFAULT_VERSION = '1.0.0-beta.1'
 SUFFIX = 'generated'
 GROUP_ID = 'com.azure.resourcemanager'
 
