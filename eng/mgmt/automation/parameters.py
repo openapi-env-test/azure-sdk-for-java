@@ -6,11 +6,15 @@ AUTOREST_JAVA = '@autorest/java@4.0.4'
 DEFAULT_VERSION = '1.0.0-beta.1'
 SUFFIX = 'generated'
 GROUP_ID = 'com.azure.resourcemanager'
+API_SPECS_FILE = 'api-specs.yaml'
 
 NAMESPACE_SUFFIX = '.{0}'.format(SUFFIX)
 ARTIFACT_SUFFIX = '-{0}'.format(SUFFIX)
 NAMESPACE_FORMAT = 'com.azure.resourcemanager.{{0}}{0}'.format(NAMESPACE_SUFFIX)
 ARTIFACT_FORMAT = 'azure-resourcemanager-{{0}}{0}'.format(ARTIFACT_SUFFIX)
+OUTPUT_FOLDER_FORMAT = 'sdk/{{0}}/{0}'.format(ARTIFACT_FORMAT)
+CI_FILE_FORMAT = 'sdk/{0}/ci.yml'
+POM_FILE_FORMAT = 'sdk/{0}/pom.xml'
 README_FORMAT = 'specification/{0}/resource-manager/readme.md'
 
 MODELERFOUR_ARGUMENTS = '--pipeline.modelerfour.additional-checks=false --pipeline.modelerfour.lenient-model-deduplication=true'

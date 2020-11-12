@@ -1,6 +1,0 @@
-{
-    "eventhub": "eventhubs",
-    "web": "appservice",
-    "operationalinsights": "loganalytics",
-    "vmware": "avs"
-}

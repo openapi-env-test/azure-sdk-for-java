@@ -3,15 +3,16 @@ import os
 import re
 import sys
 import json
+import glob
 import yaml
 import shutil
 import logging
 import argparse
 import collections
-import yaml.resolver
+import urllib.parse
 
 pwd = os.getcwd()
-os.chdir(os.path.dirname(sys.argv[0]))
+os.chdir(os.path.abspath(os.path.dirname(sys.argv[0])))
 from parameters import *
 os.chdir(pwd)
 
@@ -35,10 +36,10 @@ def generate(
     )
     shutil.rmtree(os.path.join(output_dir, 'src/main'), ignore_errors = True)
 
-    if spec_root[-1] != '/':
-        readme = spec_root + '/' + readme
+    if re.match(r'https?://', spec_root):
+        readme = urllib.parse.urljoin(spec_root, readme)
     else:
-        readme = spec_root + readme
+        readme = os.path.join(spec_root, readme)
 
     tag_option = '--tag={0}'.format(tag) if tag else ''
 
@@ -174,8 +175,17 @@ def update_version(sdk_root: str, service: str):
     finally:
         os.chdir(pwd)
 
-def write_version(version_file: str, lines: list, index: int, project: str, stable_version: str, current_version: str):
-    lines[index] = '{0};{1};{2}'.format(project, stable_version, current_version)
+
+def write_version(
+    version_file: str,
+    lines: list,
+    index: int,
+    project: str,
+    stable_version: str,
+    current_version: str,
+):
+    lines[index] = '{0};{1};{2}'.format(project, stable_version,
+                                        current_version)
     with open(version_file, 'w') as fout:
         fout.write('\n'.join(lines))
 
@@ -201,9 +211,9 @@ def set_or_increase_version(
             version_line = version_line.strip()
             if version_line.startswith('#'):
                 continue
-            version = version_line.split(';')
-            if version[0] == project:
-                if len(version) != 3:
+            versions = version_line.split(';')
+            if versions[0] == project:
+                if len(versions) != 3:
                     logging.error(
                         '[VERSION][Fallback] Unexpected version format "{0}"'.
                         format(version_line))
@@ -213,8 +223,8 @@ def set_or_increase_version(
                     logging.info(
                         '[VERSION][Found] current version "{0}"'.format(
                             version_line))
-                    stable_version = version[1]
-                    current_version = version[2]
+                    stable_version = versions[1]
+                    current_version = versions[2]
                 version_index = i
                 break
         else:
@@ -232,8 +242,10 @@ def set_or_increase_version(
     if version:
         if not stable_version:
             stable_version = current_version
-        logging.info('[VERSION][Set] set to given version "{0}"'.format(version))
-        write_version(version_file, lines, version_index, project, stable_version, current_version)
+        logging.info(
+            '[VERSION][Set] set to given version "{0}"'.format(version))
+        write_version(version_file, lines, version_index, project,
+                      stable_version, current_version)
         update_version(sdk_root, service)
         generate(sdk_root, service, **kwargs)
         return
@@ -251,7 +263,8 @@ def set_or_increase_version(
             '[VERSION][Not Found] cannot find stable version, current version "{0}"'
             .format(current_version))
 
-        write_version(version_file, lines, version_index, project, stable_version, current_version)
+        write_version(version_file, lines, version_index, project,
+                      stable_version, current_version)
         update_version(sdk_root, service)
         generate(sdk_root, service, **kwargs)
     else:
@@ -263,8 +276,7 @@ def set_or_increase_version(
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '-s',
-        '--spec_root',
+        '--spec-root',
         default =
         'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/',
         help = 'Spec root folder',
@@ -273,8 +285,11 @@ def parse_args() -> argparse.Namespace:
         '-r',
         '--readme',
         help =
-        'Readme path, Sample: "specification/storage/resource-manager/readme.md"',
+        'Readme path, Sample: "storage" or "specification/storage/resource-manager/readme.md"',
     )
+    parser.add_argument('-t', '--tag', help = 'Specific tag')
+    parser.add_argument('-v', '--version', help = 'Specific sdk version')
+    parser.add_argument('-s', '--service', help = 'Service Name if not the same as spec name')
     parser.add_argument(
         '-u',
         '--use',
@@ -294,89 +309,138 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def main():
-    args = vars(parse_args())
+def valid_service(service: str):
+    return re.sub('[^a-z0-9_]', '', service.lower())
 
+
+def get_and_update_api_specs(
+    api_specs_file: str,
+    spec: str,
+    service: str = None,
+):
+    SPECIAL_SPEC = {'resources'}
+    if spec in SPECIAL_SPEC:
+        if not service:
+            service = spec
+        return valid_service(service)
+
+    with open(api_specs_file) as fin:
+        lines = fin.readlines()
+
+    comment = ''
+
+    for i, line in enumerate(lines):
+        if not line.strip().startswith('#'):
+            comment = ''.join(lines[:i])
+            api_specs = yaml.safe_load(''.join(lines[i:]))
+            break
+
+    api_spec = api_specs.get(spec)
+    if not service:
+        if api_spec:
+            service = api_spec.get('service')
+        if not service:
+            service = valid_service(spec)
+
+    if service != spec:
+        api_specs[spec] = dict() if not api_spec else api_spec
+        api_specs[spec]['service'] = service
+
+    with open(api_specs_file, 'w') as fout:
+        fout.write(comment)
+        fout.write(yaml.safe_dump(api_specs, sort_keys = False))
+
+    return valid_service(service)
+
+
+def sdk_automation(input_file: str, output_file: str):
     base_dir = os.path.abspath(os.path.dirname(sys.argv[0]))
-    sdk_root = os.path.join(base_dir, SDK_ROOT)
-    spec_to_service_file = os.path.join(base_dir, 'spec_to_service.json')
-
-    spec_to_service = dict()
-    if os.path.isfile(spec_to_service_file):
-        with open(spec_to_service_file, 'r') as fin:
-            spec_to_service = json.load(fin)
-
-    # parse config or args
-    readmes = []
-    if args.get('config'):
-        with open(args['config'][0], 'r') as fin:
-            config = json.load(fin)
-            args['spec_root'] = config['specFolder']
-            readmes = config['relatedReadmeMdFiles']
-    elif not args.get('readme'):
-        logging.error(
-            '[Exit] Cannot find readme in any config or input arguments')
-        sys.exit(1)
-    else:
-        readmes = [args['readme']]
+    sdk_root = os.path.abspath(os.path.join(base_dir, SDK_ROOT))
+    api_specs_file = os.path.join(base_dir, API_SPECS_FILE)
+    with open(input_file, 'r') as fin:
+        config = json.load(fin)
 
     packages = []
-    # deal with each readme
-    for readme in readmes:
-        args['readme'] = readme
-        if 'data-plane' in readme:
-            logging.info('[Skip] do not generate for {0}'.format(readme))
+    for readme in config['relatedReadmeMdFiles']:
+        match = re.search(
+            'specification/([^/]+)/resource-manager/readme.md',
+            readme,
+            re.IGNORECASE,
+        )
+        if not match:
+            logging.error(
+                '[Skip] readme path does not format as specification/*/resource-manager/readme.md'
+            )
         else:
-            match = re.search(
-                'specification/([^/]+)/resource-manager/readme.md', readme,
-                re.IGNORECASE)
-            if not match:
-                logging.error(
-                    '[Skip] readme path does not format as specification/*/resource-manager/readme.md'
-                )
-            else:
-                spec = match.group(1)
-                service = spec_to_service.get(spec)
-                if not service:
-                    service = spec
+            spec = match.group(1)
+            service = get_and_update_api_specs(api_specs_file, spec)
+            set_or_increase_version(sdk_root,
+                                    service,
+                                    spec_root = config['specFolder'],
+                                    readme = readme,
+                                    autorest = AUTOREST_CORE_VERSION,
+                                    use = AUTOREST_JAVA)
+            update_service_ci_and_pom(sdk_root, service)
+            update_root_pom(sdk_root, service)
 
-                if service == 'resources':
-                    args[
-                        'tag'] = 'package-resources-2020-06'  ########   REMOVE LATER !!!!!
+            generated_folder = OUTPUT_FOLDER_FORMAT.format(service)
+            packages.append({
+                'packageName':
+                    NAMESPACE_FORMAT.format(service),
+                'path': [
+                    generated_folder,
+                    CI_FILE_FORMAT.format(service),
+                    POM_FILE_FORMAT.format(service),
+                    'eng/versioning',
+                    'pom.xml',
+                ],
+                'readmeMd': [readme],
+                'artifacts': [
+                    '{0}/pom.xml'.format(generated_folder),
+                ] + [
+                    jar for jar in glob.glob('{0}/target/*.jar'.format(
+                        generated_folder))
+                ],
+                'result':
+                    'succeeded',
+            })
 
-                set_or_increase_version(sdk_root = sdk_root, service = service, **args)
-                update_service_ci_and_pom(
-                    sdk_root = sdk_root,
-                    service = service,
-                )
-                update_root_pom(sdk_root = sdk_root, service = service)
-
-                args['tag'] = None  ########   REMOVE LATER !!!!!
-
-                module = ARTIFACT_FORMAT.format(service)
-                packages.append({
-                    'packageName':
-                        NAMESPACE_FORMAT.format(service),
-                    'path': [
-                        'sdk/{0}/{1}'.format(service, module),
-                        'sdk/{0}/ci.yml'.format(service),
-                        'sdk/{0}/pom.xml'.format(service),
-                        'eng/versioning',
-                        'pom.xml',
-                    ],
-                    'readmeMd': [readme],
-                    'artifacts': [
-                        'sdk/{0}/{1}/pom.xml'.format(service, module),
-                        'sdk/{0}/{1}/target/*.jar'.format(service, module),
-                    ],
-                })
-
-    if args.get('config'):
+    with open(output_file, 'w') as fout:
         output = {
             'packages': packages,
         }
-        with open(args['config'][1], 'w') as fout:
-            json.dump(output, fout)
+        json.dump(output, fout)
+
+
+def main():
+    args = vars(parse_args())
+
+    if args.get('config'):
+        return sdk_automation(args['config'][0], args['config'][1])
+
+    base_dir = os.path.abspath(os.path.dirname(sys.argv[0]))
+    sdk_root = os.path.join(base_dir, SDK_ROOT)
+    api_specs_file = os.path.join(base_dir, API_SPECS_FILE)
+
+    readme = args['readme']
+    match = re.match(
+        'specification/([^/]+)/resource-manager/readme.md',
+        readme,
+        re.IGNORECASE,
+    )
+    if not match:
+        spec = readme
+        readme = 'specification/{0}/resource-manager/readme.md'.format(spec)
+    else:
+        spec = match.group(1)
+
+    args['readme'] = readme
+    args['spec'] = spec
+
+    service = get_and_update_api_specs(api_specs_file, spec)
+    set_or_increase_version(sdk_root, service, **args)
+    update_service_ci_and_pom(sdk_root, service)
+    update_root_pom(sdk_root, service)
 
 
 if __name__ == '__main__':
