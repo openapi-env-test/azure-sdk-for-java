@@ -24,11 +24,10 @@ steps:
   displayName: Base Config
 
 - bash: |
-    export PATH=$JAVA_HOME_11_X64/bin:$PATH
     sudo apt-get install -y --upgrade python3-pip python3-setuptools
     pip3 install --upgrade wheel
     pip3 install --upgrade PyYAML
-  displayName: Update java and python
+  displayName: Update python
 
 - task: NodeTool@0
   displayName: 'Install Node.js $(NodeVersion)'
@@ -41,6 +40,7 @@ steps:
   displayName: 'Install autorest'
 
 - bash: |
+    export PATH=$JAVA_HOME_11_X64/bin:$PATH
     java -version
     ./eng/mgmt/automation/generate.py --readme "$(README)" --tag "$(TAG)" --service "$(SERVICE)" --version "$(VERSION)"
   displayName: Generation and Compile
