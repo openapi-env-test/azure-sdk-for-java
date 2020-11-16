@@ -82,7 +82,7 @@ def add_module_to_pom(pom: str, module: str) -> (bool, str):
         logging.error('[POM][Skip] Cannot find <modules> in pom')
         return (False, '')
 
-    post_module = re.search(r'[^\S\r\n]*</modules>[\s\S]*?$', pom)
+    post_module = re.search(r'[^\S\r\n]*</modules>[\s\S]*$', pom)
     if not post_module:
         logging.error('[POM][Skip] Cannot find </modules> in pom')
         return (False, '')
@@ -174,8 +174,8 @@ def update_version(sdk_root: str, service: str):
             'python3 eng/versioning/update_versions.py --ut library --bt client --sr'
         )
         os.system(
-            'python3 eng/versioning/update_versions.py --ut library --bt client --tf sdk/{0}/{1}/README.md'
-            .format(service, ARTIFACT_FORMAT.format(service)))
+            'python3 eng/versioning/update_versions.py --ut library --bt client --tf {0}/README.md'
+            .format(OUTPUT_FOLDER_FORMAT.format(service)))
     finally:
         os.chdir(pwd)
 
@@ -192,6 +192,7 @@ def write_version(
                                         current_version)
     with open(version_file, 'w') as fout:
         fout.write('\n'.join(lines))
+        fout.write('\n')
 
 
 def set_or_increase_version_and_generate(
@@ -238,7 +239,7 @@ def set_or_increase_version_and_generate(
             for i, version_line in enumerate(lines):
                 if version_line.startswith('{0}:'.format(GROUP_ID)):
                     version_index = i + 1
-            lines = lines[:version_index] + [] + lines[version_index:]
+            lines = lines[:version_index] + [''] + lines[version_index:]
             stable_version = ''
             current_version = default_version
 

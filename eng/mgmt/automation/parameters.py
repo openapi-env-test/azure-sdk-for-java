@@ -35,7 +35,7 @@ trigger:
       - release/*
   paths:
     include:
-      - sdk/{0}
+      - sdk/{0}/
 
 pr:
   branches:
@@ -46,7 +46,7 @@ pr:
       - release/*
   paths:
     include:
-      - sdk/{0}
+      - sdk/{0}/
 
 extends:
   template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
