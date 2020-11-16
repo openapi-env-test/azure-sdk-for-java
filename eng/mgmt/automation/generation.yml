@@ -1,0 +1,30 @@
+trigger: none
+
+pr: none
+
+pool:
+  vmImage: 'ubuntu-18.04'
+
+steps:
+- bash: |
+    git config --global user.name "Azure-Fluent"
+    git config --global user.email "azfluent@microsoft.com"
+    export PATH=$JAVA_HOME_11_X64/bin:$PATH
+    sudo apt-get install -y --upgrade python3-pip python3-setuptools
+    pip3 install --upgrade wheel
+    pip3 install --upgrade PyYAML
+  displayName: Base Config
+
+- bash: |
+    java -version
+    ./eng/mgmt/automation/generate.py --readme "$(README)" --tag "$(TAG)" --service "$(SERVICE)" --version "$(VERSION)"
+  displayName: Generation and Compile
+
+- bash: |
+    git log -2
+    git push https://$(GITHUB_TOKEN)@github.com/azure-fluent/azure-sdk-for-java HEAD:refs/heads/$(README) -f
+    # python3 tools/pull-request.py azure azure-libraries-for-java "Generate $(README)" "azure-fluent:$(README)"
+  displayName: Create pull request
+  env:
+    GITHUB_TOKEN: $(GITHUB_TOKEN)
+  condition: succeeded()
