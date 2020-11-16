@@ -56,6 +56,9 @@ def generate(
         logging.error('[GENERATE] Autorest fail')
         return False
 
+    update_service_ci_and_pom(sdk_root, service)
+    update_root_pom(sdk_root, service)
+    update_version(sdk_root, service)
     if os.system(
             'mvn clean verify package -f {0}/pom.xml -pl {1}:{2} -am'.format(
                 sdk_root, GROUP_ID, module)) != 0:
@@ -166,11 +169,12 @@ def update_version(sdk_root: str, service: str):
     pwd = os.getcwd()
     try:
         os.chdir(sdk_root)
+        print(os.getcwd())
         os.system(
-            'python3 eng/versioning/update_version.py --ut library --bt client --sr'
+            'python3 eng/versioning/update_versions.py --ut library --bt client --sr'
         )
         os.system(
-            'python3 eng/versioning/update_version.py --ut library --bt client --tf sdk/{0}/{1}/README.md'
+            'python3 eng/versioning/update_versions.py --ut library --bt client --tf sdk/{0}/{1}/README.md'
             .format(service, ARTIFACT_FORMAT.format(service)))
     finally:
         os.chdir(pwd)
@@ -190,7 +194,7 @@ def write_version(
         fout.write('\n'.join(lines))
 
 
-def set_or_increase_version(
+def set_or_increase_version_and_generate(
     sdk_root: str,
     service: str,
     preview = True,
@@ -246,7 +250,6 @@ def set_or_increase_version(
             '[VERSION][Set] set to given version "{0}"'.format(version))
         write_version(version_file, lines, version_index, project,
                       stable_version, current_version)
-        update_version(sdk_root, service)
         generate(sdk_root, service, **kwargs)
         return
 
@@ -265,7 +268,6 @@ def set_or_increase_version(
 
         write_version(version_file, lines, version_index, project,
                       stable_version, current_version)
-        update_version(sdk_root, service)
         generate(sdk_root, service, **kwargs)
     else:
         ##### Update version later
@@ -374,14 +376,12 @@ def sdk_automation(input_file: str, output_file: str):
         else:
             spec = match.group(1)
             service = get_and_update_api_specs(api_specs_file, spec)
-            set_or_increase_version(sdk_root,
+            set_or_increase_version_and_generate(sdk_root,
                                     service,
                                     spec_root = config['specFolder'],
                                     readme = readme,
                                     autorest = AUTOREST_CORE_VERSION,
                                     use = AUTOREST_JAVA)
-            update_service_ci_and_pom(sdk_root, service)
-            update_root_pom(sdk_root, service)
 
             generated_folder = OUTPUT_FOLDER_FORMAT.format(service)
             packages.append({
@@ -440,9 +440,7 @@ def main():
     service = get_and_update_api_specs(api_specs_file, spec, args['service'])
     args['service'] = service
 
-    set_or_increase_version(sdk_root, **args)
-    update_service_ci_and_pom(sdk_root, service)
-    update_root_pom(sdk_root, service)
+    set_or_increase_version_and_generate(sdk_root, **args)
 
 
 if __name__ == '__main__':
