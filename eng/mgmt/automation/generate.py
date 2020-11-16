@@ -437,8 +437,10 @@ def main():
     args['readme'] = readme
     args['spec'] = spec
 
-    service = get_and_update_api_specs(api_specs_file, spec)
-    set_or_increase_version(sdk_root, service, **args)
+    service = get_and_update_api_specs(api_specs_file, spec, args['service'])
+    args['service'] = service
+
+    set_or_increase_version(sdk_root, **args)
     update_service_ci_and_pom(sdk_root, service)
     update_root_pom(sdk_root, service)
 
