@@ -5,5 +5,5 @@ pip3 install --upgrade wheel
 pip3 install --upgrade PyYAML
 
 cat << EOF > $2
-{"envs": {"PATH": "$JAVA_HOME_11_X64/bin:$PATH" }}
+{"envs": {"PATH": "$JAVA_HOME_11_X64/bin:$PATH", "JAVA_HOME": "$JAVA_HOME_11_X64"}}
 EOF

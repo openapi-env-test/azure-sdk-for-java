@@ -450,9 +450,7 @@ def main():
     args['readme'] = readme
     args['spec'] = spec
 
-    service = get_and_update_api_specs(api_specs_file, spec, args['service'])
-    args['service'] = service
-
+    args['service'] = get_and_update_api_specs(api_specs_file, spec, args['service'])
     set_or_increase_version_and_generate(sdk_root, **args)
 
     if args.get('auto_commit_generated_code'):
