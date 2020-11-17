@@ -292,7 +292,11 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument('-t', '--tag', help = 'Specific tag')
     parser.add_argument('-v', '--version', help = 'Specific sdk version')
-    parser.add_argument('-s', '--service', help = 'Service Name if not the same as spec name')
+    parser.add_argument(
+        '-s',
+        '--service',
+        help = 'Service Name if not the same as spec name',
+    )
     parser.add_argument(
         '-u',
         '--use',
@@ -303,6 +307,11 @@ def parse_args() -> argparse.Namespace:
         '--autorest',
         default = AUTOREST_CORE_VERSION,
         help = 'Autorest version',
+    )
+    parser.add_argument(
+        '--auto-commit-generated-code',
+        action = 'store_true',
+        help = 'Automatic commit the generated code',
     )
     parser.add_argument(
         'config',
@@ -377,12 +386,13 @@ def sdk_automation(input_file: str, output_file: str):
         else:
             spec = match.group(1)
             service = get_and_update_api_specs(api_specs_file, spec)
-            set_or_increase_version_and_generate(sdk_root,
-                                    service,
-                                    spec_root = config['specFolder'],
-                                    readme = readme,
-                                    autorest = AUTOREST_CORE_VERSION,
-                                    use = AUTOREST_JAVA)
+            set_or_increase_version_and_generate(
+                sdk_root,
+                service,
+                spec_root = config['specFolder'],
+                readme = readme,
+                autorest = AUTOREST_CORE_VERSION,
+                use = AUTOREST_JAVA)
 
             generated_folder = OUTPUT_FOLDER_FORMAT.format(service)
             packages.append({
@@ -420,7 +430,7 @@ def main():
         return sdk_automation(args['config'][0], args['config'][1])
 
     base_dir = os.path.abspath(os.path.dirname(sys.argv[0]))
-    sdk_root = os.path.join(base_dir, SDK_ROOT)
+    sdk_root = os.path.abspath(os.path.join(base_dir, SDK_ROOT))
     api_specs_file = os.path.join(base_dir, API_SPECS_FILE)
 
     readme = args['readme']
@@ -442,6 +452,14 @@ def main():
     args['service'] = service
 
     set_or_increase_version_and_generate(sdk_root, **args)
+
+    if args.get('auto_commit_generated_code'):
+        os.system('git add {0}'.format(
+            os.path.abspath(
+                os.path.join(sdk_root, OUTPUT_FOLDER_FORMAT.format(service)))))
+        os.system(
+            'git commit -m "[Automation] Generate Fluent Lite from {0}#{1}"'.
+            format(spec, args.get('tag', '')))
 
 
 if __name__ == '__main__':

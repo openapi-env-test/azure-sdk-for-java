@@ -44,14 +44,14 @@ steps:
 - bash: |
     export PATH=$JAVA_HOME_11_X64/bin:$PATH
     java -version
-    ./eng/mgmt/automation/generate.py --readme "$(README)" --tag "$(TAG)" --service "$(SERVICE)" --version "$(VERSION)"
+    ./eng/mgmt/automation/generate.py --readme "$(README)" --tag "$(TAG)" --service "$(SERVICE)" --version "$(VERSION)" --auto-commit-generated-code
   displayName: Generation and Compile
 
 - bash: |
     export MESSAGE="[Automation] Generate Fluent Lite from $(README)#$(TAG)"
     export BRANCH="Fluent-lite-generation-$(Build.BuildId)"
     git add -A
-    git commit -m "$MESSAGE"
+    git commit -m "[Automation] Update other files outside generation folder"
     git log -2
     git push https://$(GITHUB_TOKEN)@github.com/azure-fluent/azure-sdk-for-java HEAD:refs/heads/$BRANCH -f
     python3 eng/mgmt/pull-request.py chentanyi azure-sdk-for-java "$MESSAGE" "azure-fluent:$BRANCH"
