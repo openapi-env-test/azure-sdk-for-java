@@ -275,7 +275,16 @@ def set_or_increase_version_and_generate(
     else:
         ##### Update version later
         ##### currently there always isn't stable version
-        raise NotImplementedError('No implementation for stable version')
+        current_version = version_format.format(*current_versions)
+        if not stable_version:
+            stable_version = current_version
+        logging.warning(
+            '[VERSION][Not Implement] set to current version "{0}" by default'.
+            format(current_version))
+
+        write_version(version_file, lines, version_index, project,
+                      stable_version, current_version)
+        generate(sdk_root, service, version = current_version, **kwargs)
 
 
 def parse_args() -> argparse.Namespace:
@@ -399,7 +408,7 @@ def sdk_automation(input_file: str, output_file: str):
             generated_folder = OUTPUT_FOLDER_FORMAT.format(service)
             packages.append({
                 'packageName':
-                    NAMESPACE_FORMAT.format(service),
+                    '{0}'.format(ARTIFACT_FORMAT.format(service)),
                 'path': [
                     generated_folder,
                     CI_FILE_FORMAT.format(service),
@@ -450,7 +459,8 @@ def main():
     args['readme'] = readme
     args['spec'] = spec
 
-    args['service'] = get_and_update_api_specs(api_specs_file, spec, args['service'])
+    args['service'] = get_and_update_api_specs(api_specs_file, spec,
+                                               args['service'])
     set_or_increase_version_and_generate(sdk_root, **args)
 
     if args.get('auto_commit_generated_code'):
