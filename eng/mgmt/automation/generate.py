@@ -25,6 +25,7 @@ def generate(
     autorest: str,
     use: str,
     tag: str = None,
+    version: str = None,
     **kwargs,
 ):
     module = ARTIFACT_FORMAT.format(service)
@@ -42,6 +43,7 @@ def generate(
         readme = os.path.join(spec_root, readme)
 
     tag_option = '--tag={0}'.format(tag) if tag else ''
+    version_option = '--package-version={0}'.format(version) if version else ''
 
     command = 'autorest --version={0} --use={1} --java.azure-libraries-for-java-folder={2} --java.output-folder={3} --java.namespace={4} {5}'.format(
         autorest,
@@ -49,7 +51,7 @@ def generate(
         os.path.abspath(sdk_root),
         os.path.abspath(output_dir),
         namespace,
-        ' '.join((tag_option, FLUENTLITE_ARGUMENTS, readme)),
+        ' '.join((tag_option, version_option, FLUENTLITE_ARGUMENTS, readme)),
     )
     logging.info(command)
     if os.system(command) != 0:
@@ -251,7 +253,7 @@ def set_or_increase_version_and_generate(
             '[VERSION][Set] set to given version "{0}"'.format(version))
         write_version(version_file, lines, version_index, project,
                       stable_version, current_version)
-        generate(sdk_root, service, **kwargs)
+        generate(sdk_root, service, version = version, **kwargs)
         return
 
     current_versions = list(re.findall(version_pattern, current_version)[0])
@@ -269,7 +271,7 @@ def set_or_increase_version_and_generate(
 
         write_version(version_file, lines, version_index, project,
                       stable_version, current_version)
-        generate(sdk_root, service, **kwargs)
+        generate(sdk_root, service, version = current_version, **kwargs)
     else:
         ##### Update version later
         ##### currently there always isn't stable version
