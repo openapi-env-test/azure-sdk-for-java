@@ -17,7 +17,7 @@ CI_FILE_FORMAT = 'sdk/{0}/ci.yml'
 POM_FILE_FORMAT = 'sdk/{0}/pom.xml'
 README_FORMAT = 'specification/{0}/resource-manager/readme.md'
 
-MODELERFOUR_ARGUMENTS = '--pipeline.modelerfour.additional-checks=false --pipeline.modelerfour.lenient-model-deduplication=true'
+MODELERFOUR_ARGUMENTS = '--pipeline.modelerfour.additional-checks=false --pipeline.modelerfour.lenient-model-deduplication=true --pipeline.modelerfour.flatten-payloads=false'
 FLUENTLITE_ARGUMENTS = '--java {0} --azure-arm --payload-flattening-threshold=0 --verbose --sdk-integration --fluent=lite --java.fluent=lite --java.license-header=MICROSOFT_MIT_SMALL'.format(
     MODELERFOUR_ARGUMENTS)
 
