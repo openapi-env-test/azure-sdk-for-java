@@ -21,9 +21,12 @@ def main():
 
     artifact_id: str = config.get('packageName', '')
     group_id = 'com.azure.resourcemanager'
+    logging.debug('Got artifact_id: {0}'.format(artifact_id))
 
     for artifact in config.get('artifacts', []):
+        logging.debug('Got artifact: {0}'.format(artifact))
         if re.match('{0}-\d+\.\d+\.\d+(-beta\.\d+)?\.jar', artifact):
+            logging.debug('Match jar package: {0}'.format(artifact))
             download_url = urllib.parse.urljoin(
                 config.get('downloadUrlPrefix', ''), artifact)
             with open(sys.argv[2], 'w') as fout:
@@ -36,6 +39,7 @@ def main():
                     artifact,
                 )  # 1.0.0-beta.0 will not be conflict with any existing one
                 output = {'full': command}
+                logging.debug('output: {0}'.format(json.dumps(output)))
                 json.dump(output, fout)
             sys.exit(0)
 
