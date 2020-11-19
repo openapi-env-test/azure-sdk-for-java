@@ -28,8 +28,7 @@ def main():
         if re.match('{0}-\d+\.\d+\.\d+(-beta\.\d+)?\.jar'.format(artifact_id),
                     artifact):
             logging.debug('Match jar package: {0}'.format(artifact))
-            download_url = urllib.parse.urljoin(
-                config.get('downloadUrlPrefix', ''), artifact)
+            download_url = config.get('downloadUrlPrefix', '') + artifact
             with open(sys.argv[2], 'w') as fout:
                 command = config.get('downloadCommandTemplate', '').format(
                     URL = download_url,
