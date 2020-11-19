@@ -28,7 +28,7 @@
   },
   "artifactOptions": {
     "installInstructionScript": {
-      "path": "python3 ./eng/mgmt/automation/install_instruction.py"
+      "path": "./eng/mgmt/automation/install_instruction.py"
     }
   },
   "advanceOptions": {
