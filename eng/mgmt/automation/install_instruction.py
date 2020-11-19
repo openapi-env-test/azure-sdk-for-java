@@ -25,7 +25,8 @@ def main():
 
     for artifact in config.get('artifacts', []):
         logging.debug('Got artifact: {0}'.format(artifact))
-        if re.match('{0}-\d+\.\d+\.\d+(-beta\.\d+)?\.jar', artifact):
+        if re.match('{0}-\d+\.\d+\.\d+(-beta\.\d+)?\.jar'.format(artifact_id),
+                    artifact):
             logging.debug('Match jar package: {0}'.format(artifact))
             download_url = urllib.parse.urljoin(
                 config.get('downloadUrlPrefix', ''), artifact)
