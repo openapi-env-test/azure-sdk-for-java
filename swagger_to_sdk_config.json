@@ -14,5 +14,26 @@
       "create_sdk_pull_requests": true,
       "sdk_generation_pull_request_base": "integration_branch"
     }
+  },
+  "initOptions": {
+    "initScript": {
+      "path": "./eng/mgmt/automation/init.sh",
+      "envs": [
+        "JAVA_HOME_11_X64"
+      ]
+    }
+  },
+  "generateOptions": {
+    "generateScript": {
+      "path": "./eng/mgmt/automation/generate.py"
+    }
+  },
+  "artifactOptions": {
+    "installInstructionScript": {
+      "path": "./eng/mgmt/automation/install_instruction.py"
+    }
+  },
+  "advanceOptions": {
+    "generationCallMode": "one-per-config"
   }
 }
