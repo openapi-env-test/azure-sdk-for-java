@@ -6,7 +6,6 @@ package com.azure.resourcemanager.mediaservices.fluent;
 
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.management.polling.PollResult;
 import com.azure.core.util.Context;
@@ -16,33 +15,6 @@ import com.azure.resourcemanager.mediaservices.models.LiveEventActionInput;
 
 /** An instance of this class provides access to all the operations defined in LiveEventsClient. */
 public interface LiveEventsClient {
-    /**
-     * Lists all the live events in the account.
-     *
-     * @param resourceGroupName The name of the resource group within the Azure subscription.
-     * @param accountName The Media Services account name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the LiveEvent list result.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<LiveEventInner> list(String resourceGroupName, String accountName);
-
-    /**
-     * Lists all the live events in the account.
-     *
-     * @param resourceGroupName The name of the resource group within the Azure subscription.
-     * @param accountName The Media Services account name.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the LiveEvent list result.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<LiveEventInner> list(String resourceGroupName, String accountName, Context context);
-
     /**
      * Gets properties of a live event.
      *
