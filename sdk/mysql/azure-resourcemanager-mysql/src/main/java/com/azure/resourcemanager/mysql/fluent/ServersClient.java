@@ -373,7 +373,7 @@ public interface ServersClient {
     void start(String resourceGroupName, String serverName, Context context);
 
     /**
-     * Stops a running server.
+     * Test Stops a running server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
@@ -383,10 +383,10 @@ public interface ServersClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    SyncPoller<PollResult<Void>, Void> beginStop(String resourceGroupName, String serverName);
+    SyncPoller<PollResult<Void>, Void> beginStopTest(String resourceGroupName, String serverName);
 
     /**
-     * Stops a running server.
+     * Test Stops a running server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
@@ -397,10 +397,10 @@ public interface ServersClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    SyncPoller<PollResult<Void>, Void> beginStop(String resourceGroupName, String serverName, Context context);
+    SyncPoller<PollResult<Void>, Void> beginStopTest(String resourceGroupName, String serverName, Context context);
 
     /**
-     * Stops a running server.
+     * Test Stops a running server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
@@ -409,10 +409,10 @@ public interface ServersClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    void stop(String resourceGroupName, String serverName);
+    void stopTest(String resourceGroupName, String serverName);
 
     /**
-     * Stops a running server.
+     * Test Stops a running server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
@@ -422,7 +422,7 @@ public interface ServersClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    void stop(String resourceGroupName, String serverName, Context context);
+    void stopTest(String resourceGroupName, String serverName, Context context);
 
     /**
      * Upgrade server version.

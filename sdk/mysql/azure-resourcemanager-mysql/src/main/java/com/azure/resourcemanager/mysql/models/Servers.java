@@ -148,7 +148,7 @@ public interface Servers {
     void start(String resourceGroupName, String serverName, Context context);
 
     /**
-     * Stops a running server.
+     * Test Stops a running server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
@@ -156,10 +156,10 @@ public interface Servers {
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void stop(String resourceGroupName, String serverName);
+    void stopTest(String resourceGroupName, String serverName);
 
     /**
-     * Stops a running server.
+     * Test Stops a running server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
@@ -168,7 +168,7 @@ public interface Servers {
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void stop(String resourceGroupName, String serverName, Context context);
+    void stopTest(String resourceGroupName, String serverName, Context context);
 
     /**
      * Upgrade server version.
