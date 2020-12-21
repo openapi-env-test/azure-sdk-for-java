@@ -28,6 +28,7 @@ import com.azure.resourcemanager.mediaservices.implementation.AzureMediaServices
 import com.azure.resourcemanager.mediaservices.implementation.ContentKeyPoliciesImpl;
 import com.azure.resourcemanager.mediaservices.implementation.JobsImpl;
 import com.azure.resourcemanager.mediaservices.implementation.LiveEventsImpl;
+import com.azure.resourcemanager.mediaservices.implementation.LiveEventsTestsImpl;
 import com.azure.resourcemanager.mediaservices.implementation.LiveOutputsImpl;
 import com.azure.resourcemanager.mediaservices.implementation.LocationsImpl;
 import com.azure.resourcemanager.mediaservices.implementation.MediaservicesImpl;
@@ -44,6 +45,7 @@ import com.azure.resourcemanager.mediaservices.models.Assets;
 import com.azure.resourcemanager.mediaservices.models.ContentKeyPolicies;
 import com.azure.resourcemanager.mediaservices.models.Jobs;
 import com.azure.resourcemanager.mediaservices.models.LiveEvents;
+import com.azure.resourcemanager.mediaservices.models.LiveEventsTests;
 import com.azure.resourcemanager.mediaservices.models.LiveOutputs;
 import com.azure.resourcemanager.mediaservices.models.Locations;
 import com.azure.resourcemanager.mediaservices.models.Mediaservices;
@@ -87,6 +89,8 @@ public final class MediaservicesManager {
     private StreamingPolicies streamingPolicies;
 
     private StreamingLocators streamingLocators;
+
+    private LiveEventsTests liveEventsTests;
 
     private LiveEvents liveEvents;
 
@@ -221,7 +225,7 @@ public final class MediaservicesManager {
                     new UserAgentPolicy(
                         null,
                         "com.azure.resourcemanager.mediaservices",
-                        "1.0.0-beta.1",
+                        "1.0.0-beta.2",
                         Configuration.getGlobalConfiguration()));
             policies.add(new RequestIdPolicy());
             HttpPolicyProviders.addBeforeRetryPolicies(policies);
@@ -345,6 +349,14 @@ public final class MediaservicesManager {
             this.streamingLocators = new StreamingLocatorsImpl(clientObject.getStreamingLocators(), this);
         }
         return streamingLocators;
+    }
+
+    /** @return Resource collection API of LiveEventsTests. */
+    public LiveEventsTests liveEventsTests() {
+        if (this.liveEventsTests == null) {
+            this.liveEventsTests = new LiveEventsTestsImpl(clientObject.getLiveEventsTests(), this);
+        }
+        return liveEventsTests;
     }
 
     /** @return Resource collection API of LiveEvents. */

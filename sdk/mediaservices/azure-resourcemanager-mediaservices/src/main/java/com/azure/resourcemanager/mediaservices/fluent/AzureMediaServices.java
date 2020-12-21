@@ -136,6 +136,13 @@ public interface AzureMediaServices {
     StreamingLocatorsClient getStreamingLocators();
 
     /**
+     * Gets the LiveEventsTestsClient object to access its operations.
+     *
+     * @return the LiveEventsTestsClient object.
+     */
+    LiveEventsTestsClient getLiveEventsTests();
+
+    /**
      * Gets the LiveEventsClient object to access its operations.
      *
      * @return the LiveEventsClient object.

@@ -28,6 +28,7 @@ import com.azure.resourcemanager.mediaservices.fluent.AzureMediaServices;
 import com.azure.resourcemanager.mediaservices.fluent.ContentKeyPoliciesClient;
 import com.azure.resourcemanager.mediaservices.fluent.JobsClient;
 import com.azure.resourcemanager.mediaservices.fluent.LiveEventsClient;
+import com.azure.resourcemanager.mediaservices.fluent.LiveEventsTestsClient;
 import com.azure.resourcemanager.mediaservices.fluent.LiveOutputsClient;
 import com.azure.resourcemanager.mediaservices.fluent.LocationsClient;
 import com.azure.resourcemanager.mediaservices.fluent.MediaservicesClient;
@@ -281,6 +282,18 @@ public final class AzureMediaServicesImpl implements AzureMediaServices {
         return this.streamingLocators;
     }
 
+    /** The LiveEventsTestsClient object to access its operations. */
+    private final LiveEventsTestsClient liveEventsTests;
+
+    /**
+     * Gets the LiveEventsTestsClient object to access its operations.
+     *
+     * @return the LiveEventsTestsClient object.
+     */
+    public LiveEventsTestsClient getLiveEventsTests() {
+        return this.liveEventsTests;
+    }
+
     /** The LiveEventsClient object to access its operations. */
     private final LiveEventsClient liveEvents;
 
@@ -353,6 +366,7 @@ public final class AzureMediaServicesImpl implements AzureMediaServices {
         this.jobs = new JobsClientImpl(this);
         this.streamingPolicies = new StreamingPoliciesClientImpl(this);
         this.streamingLocators = new StreamingLocatorsClientImpl(this);
+        this.liveEventsTests = new LiveEventsTestsClientImpl(this);
         this.liveEvents = new LiveEventsClientImpl(this);
         this.liveOutputs = new LiveOutputsClientImpl(this);
         this.streamingEndpoints = new StreamingEndpointsClientImpl(this);

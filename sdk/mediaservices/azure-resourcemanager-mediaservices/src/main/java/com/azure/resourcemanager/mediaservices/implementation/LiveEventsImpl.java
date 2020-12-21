@@ -4,7 +4,6 @@
 
 package com.azure.resourcemanager.mediaservices.implementation;
 
-import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
@@ -27,16 +26,6 @@ public final class LiveEventsImpl implements LiveEvents {
     public LiveEventsImpl(LiveEventsClient innerClient, MediaservicesManager serviceManager) {
         this.innerClient = innerClient;
         this.serviceManager = serviceManager;
-    }
-
-    public PagedIterable<LiveEvent> list(String resourceGroupName, String accountName) {
-        PagedIterable<LiveEventInner> inner = this.serviceClient().list(resourceGroupName, accountName);
-        return inner.mapPage(inner1 -> new LiveEventImpl(inner1, this.manager()));
-    }
-
-    public PagedIterable<LiveEvent> list(String resourceGroupName, String accountName, Context context) {
-        PagedIterable<LiveEventInner> inner = this.serviceClient().list(resourceGroupName, accountName, context);
-        return inner.mapPage(inner1 -> new LiveEventImpl(inner1, this.manager()));
     }
 
     public LiveEvent get(String resourceGroupName, String accountName, String liveEventName) {
