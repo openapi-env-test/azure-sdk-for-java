@@ -97,12 +97,12 @@ public final class ServersImpl implements Servers {
         this.serviceClient().start(resourceGroupName, serverName, context);
     }
 
-    public void stop(String resourceGroupName, String serverName) {
-        this.serviceClient().stop(resourceGroupName, serverName);
+    public void stopTest(String resourceGroupName, String serverName) {
+        this.serviceClient().stopTest(resourceGroupName, serverName);
     }
 
-    public void stop(String resourceGroupName, String serverName, Context context) {
-        this.serviceClient().stop(resourceGroupName, serverName, context);
+    public void stopTest(String resourceGroupName, String serverName, Context context) {
+        this.serviceClient().stopTest(resourceGroupName, serverName, context);
     }
 
     public void upgrade(String resourceGroupName, String serverName, ServerUpgradeParameters parameters) {

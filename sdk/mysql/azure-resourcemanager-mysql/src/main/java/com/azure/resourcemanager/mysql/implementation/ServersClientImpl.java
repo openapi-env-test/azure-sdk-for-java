@@ -192,7 +192,7 @@ public final class ServersClientImpl implements ServersClient {
                 + "/{serverName}/stop")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<Flux<ByteBuffer>>> stop(
+        Mono<Response<Flux<ByteBuffer>>> stopTest(
             @HostParam("$host") String endpoint,
             @QueryParam("api-version") String apiVersion,
             @PathParam("subscriptionId") String subscriptionId,
@@ -1856,7 +1856,7 @@ public final class ServersClientImpl implements ServersClient {
     }
 
     /**
-     * Stops a running server.
+     * Test Stops a running server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
@@ -1866,7 +1866,7 @@ public final class ServersClientImpl implements ServersClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Flux<ByteBuffer>>> stopWithResponseAsync(String resourceGroupName, String serverName) {
+    private Mono<Response<Flux<ByteBuffer>>> stopTestWithResponseAsync(String resourceGroupName, String serverName) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -1892,7 +1892,7 @@ public final class ServersClientImpl implements ServersClient {
             .withContext(
                 context ->
                     service
-                        .stop(
+                        .stopTest(
                             this.client.getEndpoint(),
                             apiVersion,
                             this.client.getSubscriptionId(),
@@ -1904,7 +1904,7 @@ public final class ServersClientImpl implements ServersClient {
     }
 
     /**
-     * Stops a running server.
+     * Test Stops a running server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
@@ -1915,7 +1915,7 @@ public final class ServersClientImpl implements ServersClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Flux<ByteBuffer>>> stopWithResponseAsync(
+    private Mono<Response<Flux<ByteBuffer>>> stopTestWithResponseAsync(
         String resourceGroupName, String serverName, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -1940,7 +1940,7 @@ public final class ServersClientImpl implements ServersClient {
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .stop(
+            .stopTest(
                 this.client.getEndpoint(),
                 apiVersion,
                 this.client.getSubscriptionId(),
@@ -1951,7 +1951,7 @@ public final class ServersClientImpl implements ServersClient {
     }
 
     /**
-     * Stops a running server.
+     * Test Stops a running server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
@@ -1961,15 +1961,15 @@ public final class ServersClientImpl implements ServersClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private PollerFlux<PollResult<Void>, Void> beginStopAsync(String resourceGroupName, String serverName) {
-        Mono<Response<Flux<ByteBuffer>>> mono = stopWithResponseAsync(resourceGroupName, serverName);
+    private PollerFlux<PollResult<Void>, Void> beginStopTestAsync(String resourceGroupName, String serverName) {
+        Mono<Response<Flux<ByteBuffer>>> mono = stopTestWithResponseAsync(resourceGroupName, serverName);
         return this
             .client
             .<Void, Void>getLroResult(mono, this.client.getHttpPipeline(), Void.class, Void.class, Context.NONE);
     }
 
     /**
-     * Stops a running server.
+     * Test Stops a running server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
@@ -1980,17 +1980,17 @@ public final class ServersClientImpl implements ServersClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private PollerFlux<PollResult<Void>, Void> beginStopAsync(
+    private PollerFlux<PollResult<Void>, Void> beginStopTestAsync(
         String resourceGroupName, String serverName, Context context) {
         context = this.client.mergeContext(context);
-        Mono<Response<Flux<ByteBuffer>>> mono = stopWithResponseAsync(resourceGroupName, serverName, context);
+        Mono<Response<Flux<ByteBuffer>>> mono = stopTestWithResponseAsync(resourceGroupName, serverName, context);
         return this
             .client
             .<Void, Void>getLroResult(mono, this.client.getHttpPipeline(), Void.class, Void.class, context);
     }
 
     /**
-     * Stops a running server.
+     * Test Stops a running server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
@@ -2000,12 +2000,12 @@ public final class ServersClientImpl implements ServersClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SyncPoller<PollResult<Void>, Void> beginStop(String resourceGroupName, String serverName) {
-        return beginStopAsync(resourceGroupName, serverName).getSyncPoller();
+    public SyncPoller<PollResult<Void>, Void> beginStopTest(String resourceGroupName, String serverName) {
+        return beginStopTestAsync(resourceGroupName, serverName).getSyncPoller();
     }
 
     /**
-     * Stops a running server.
+     * Test Stops a running server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
@@ -2016,12 +2016,13 @@ public final class ServersClientImpl implements ServersClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SyncPoller<PollResult<Void>, Void> beginStop(String resourceGroupName, String serverName, Context context) {
-        return beginStopAsync(resourceGroupName, serverName, context).getSyncPoller();
+    public SyncPoller<PollResult<Void>, Void> beginStopTest(
+        String resourceGroupName, String serverName, Context context) {
+        return beginStopTestAsync(resourceGroupName, serverName, context).getSyncPoller();
     }
 
     /**
-     * Stops a running server.
+     * Test Stops a running server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
@@ -2031,12 +2032,12 @@ public final class ServersClientImpl implements ServersClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Void> stopAsync(String resourceGroupName, String serverName) {
-        return beginStopAsync(resourceGroupName, serverName).last().flatMap(this.client::getLroFinalResultOrError);
+    private Mono<Void> stopTestAsync(String resourceGroupName, String serverName) {
+        return beginStopTestAsync(resourceGroupName, serverName).last().flatMap(this.client::getLroFinalResultOrError);
     }
 
     /**
-     * Stops a running server.
+     * Test Stops a running server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
@@ -2047,14 +2048,14 @@ public final class ServersClientImpl implements ServersClient {
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Void> stopAsync(String resourceGroupName, String serverName, Context context) {
-        return beginStopAsync(resourceGroupName, serverName, context)
+    private Mono<Void> stopTestAsync(String resourceGroupName, String serverName, Context context) {
+        return beginStopTestAsync(resourceGroupName, serverName, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
     }
 
     /**
-     * Stops a running server.
+     * Test Stops a running server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
@@ -2063,12 +2064,12 @@ public final class ServersClientImpl implements ServersClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void stop(String resourceGroupName, String serverName) {
-        stopAsync(resourceGroupName, serverName).block();
+    public void stopTest(String resourceGroupName, String serverName) {
+        stopTestAsync(resourceGroupName, serverName).block();
     }
 
     /**
-     * Stops a running server.
+     * Test Stops a running server.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param serverName The name of the server.
@@ -2078,8 +2079,8 @@ public final class ServersClientImpl implements ServersClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void stop(String resourceGroupName, String serverName, Context context) {
-        stopAsync(resourceGroupName, serverName, context).block();
+    public void stopTest(String resourceGroupName, String serverName, Context context) {
+        stopTestAsync(resourceGroupName, serverName, context).block();
     }
 
     /**
