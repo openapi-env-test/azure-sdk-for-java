@@ -226,15 +226,13 @@ def update_version(sdk_root: str, service: str):
             'python3 eng/versioning/update_versions.py --ut library --bt client --sr',
             stdout = subprocess.DEVNULL,
             stderr = sys.stderr,
-            shell = True,
-        )
+            shell = True)
         subprocess.run(
             'python3 eng/versioning/update_versions.py --ut library --bt client --tf {0}/README.md'
             .format(OUTPUT_FOLDER_FORMAT.format(service)),
             stdout = subprocess.DEVNULL,
             stderr = sys.stderr,
-            shell = True,
-        )
+            shell = True)
     finally:
         os.chdir(pwd)
 
