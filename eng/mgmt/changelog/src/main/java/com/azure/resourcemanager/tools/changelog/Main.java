@@ -64,27 +64,27 @@ public class Main {
         StringBuilder newFeature = new StringBuilder();
         changeLogs.forEach(x -> {
             if (x.isClassLevelChanged()) {
-                breakingChange.append(x.getBreakingChange());
+                breakingChange.append(x.breakingChange());
             }
         });
         changeLogs.forEach(x -> {
             if (!x.isClassLevelChanged()) {
-                breakingChange.append(x.getBreakingChange());
+                breakingChange.append(x.breakingChange());
             }
         });
         changeLogs.forEach(x -> {
             if (x.isClassLevelChanged()) {
-                newFeature.append(x.getNewFeature());
+                newFeature.append(x.newFeature());
             }
         });
         changeLogs.forEach(x -> {
             if (!x.isClassLevelChanged()) {
-                newFeature.append(x.getNewFeature());
+                newFeature.append(x.newFeature());
             }
         });
 
-        String changelog = (breakingChange.length() > 0 ? BREAKING_CHANGE_TITLE + breakingChange.toString().replace(namespaces.getBase() + ".", "") : "") +
-            (newFeature.length() > 0 ? NEW_FEATURE_TITLE + newFeature.toString().replace(namespaces.getBase() + ".", "") : "");
+        String changelog = (breakingChange.length() > 0 ? BREAKING_CHANGE_TITLE + breakingChange.toString().replace(namespaces.base() + ".", "") : "") +
+            (newFeature.length() > 0 ? NEW_FEATURE_TITLE + newFeature.toString().replace(namespaces.base() + ".", "") : "");
 
         JSONObject json = new JSONObject();
         json.put("breaking", breakingChange.length() > 0);
