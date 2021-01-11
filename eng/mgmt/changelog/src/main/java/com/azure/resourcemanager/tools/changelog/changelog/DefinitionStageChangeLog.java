@@ -27,37 +27,29 @@ public class DefinitionStageChangeLog extends ChangeLog {
         oldMethodStages = new ArrayList<>();
         newMethodStages = new ArrayList<>();
         AllMethods blankStage = allStages.entrySet().stream().filter(x -> ClassName.name(x.getKey()).equals("Blank")).findAny().get().getValue();
-        calcMethodStages(blankStage, allStages, method -> method.getReturnType().getOldReturnType(), oldMethodStages);
-        calcMethodStages(blankStage, allStages, method -> method.getReturnType().getNewReturnType(), newMethodStages);
+        calcMethodStages(blankStage, allStages, oldMethodStages, x -> x.getReturnType().getOldReturnType());
+        calcMethodStages(blankStage, allStages, newMethodStages, x -> x.getReturnType().getNewReturnType());
         calcChangeLog();
     }
 
-    /**
-     * Use BFS to search all definition stages function graph. Start from BlankStage and end to FinalStage.
-     *
-     * @param blankStage The start point for BFS, which is the first stage.
-     * @param stageToMethods contains all stages. Map from Stage name to all methods it has.
-     * @param getReturnType The function to map a JApiMethod to its according return type, which is the next stage name.
-     * @param resultForMethodsByStageIndex The result contains list of methods. The index represents which stage the method locates.
-     */
-    private void calcMethodStages(AllMethods blankStage, Map<String, AllMethods> stageToMethods, Function<JApiMethod, String> getReturnType, List<Set<JApiMethod>> resultForMethodsByStageIndex) {
-        resultForMethodsByStageIndex.add(new HashSet<>(blankStage.getMethods()));
-        Set<JApiMethod> methodUsed = new HashSet<>(blankStage.getMethods());
-        for (int i = 0; i < resultForMethodsByStageIndex.size(); ++i) {
-            Set<JApiMethod> methodsForNextStage = new HashSet<>();
-            resultForMethodsByStageIndex.get(i).forEach(method -> {
-                String nextStageName = getReturnType.apply(method);
-                if (stageToMethods.containsKey(nextStageName)) {
-                    stageToMethods.get(nextStageName).getMethods().forEach(nextMethod -> {
-                        if (!methodUsed.contains(nextMethod)) {
-                            methodsForNextStage.add(nextMethod);
-                            methodUsed.add(nextMethod);
+    void calcMethodStages(AllMethods blankStage, Map<String, AllMethods> allStages, List<Set<JApiMethod>> results, Function<JApiMethod, String> getReturnType) {
+        results.add(new HashSet<>(blankStage.getMethods()));
+        Set<JApiMethod> used = new HashSet<>(blankStage.getMethods());
+        for (int i = 0; i < results.size(); ++i) {
+            Set<JApiMethod> nextStage = new HashSet<>();
+            results.get(i).forEach(method -> {
+                String returnType = getReturnType.apply(method);
+                if (allStages.containsKey(returnType)) {
+                    allStages.get(returnType).getMethods().forEach(nextMethod -> {
+                        if (!used.contains(nextMethod)) {
+                            nextStage.add(nextMethod);
+                            used.add(nextMethod);
                         }
                     });
                 }
             });
-            if (!methodsForNextStage.isEmpty()) {
-                resultForMethodsByStageIndex.add(methodsForNextStage);
+            if (!nextStage.isEmpty()) {
+                results.add(nextStage);
             }
         }
     }
