@@ -92,16 +92,14 @@ def generate_changelog_and_breaking_change(
     old_jar,
     new_jar,
     **kwargs,
-) -> Tuple[bool, str]:
-    logging.info('[CHANGELOG] changelog jar: {0} -> {1}'.format(
-        old_jar, new_jar))
+) -> (bool, str):
     stdout = subprocess.run(
         'mvn clean compile exec:java -q -f {0}/eng/mgmt/changelog/pom.xml -DOLD_JAR="{1}" -DNEW_JAR="{2}"'
         .format(sdk_root, old_jar, new_jar),
         stdout = subprocess.PIPE,
         shell = True,
     ).stdout
-    logging.info('[CHANGELOG] changelog output: {0}'.format(stdout))
+    logging.info('changelog output: {0}'.format(stdout))
 
     config = json.loads(stdout)
     return (config.get('breaking', False), config.get('changelog', ''))
@@ -165,10 +163,8 @@ def compare_with_maven_package(sdk_root, service, stable_version,
         breaking, changelog = generate_changelog_and_breaking_change(
             sdk_root, old_jar, new_jar)
         if changelog and changelog.strip() != '':
-            changelog_file = os.path.join(
-                sdk_root,
-                CHANGELOG_FORMAT.format(service = service,
-                                        artifact_id = module))
+            changelog_file = CHANGELOG_FORMAT.format(service = service,
+                                                     artifact_id = module)
             update_changelog(changelog_file, changelog)
         else:
             logging.error('[Changelog][Skip] Cannot get changelog')
@@ -331,7 +327,6 @@ def get_version(
             versions = version_line.split(';')
             if versions[0] == project:
                 return version_line
-    logging.error('Cannot get version of {0}'.format(project))
     return None
 
 
@@ -378,7 +373,7 @@ def set_or_increase_version(
     preview = True,
     version = None,
     **kwargs,
-) -> Tuple[str, str]:
+) -> (str, str):
     version_file = os.path.join(sdk_root, 'eng/versioning/version_client.txt')
     module = ARTIFACT_FORMAT.format(service)
     project = '{0}:{1}'.format(GROUP_ID, module)
@@ -428,6 +423,7 @@ def set_or_increase_version(
             '[VERSION][Set] set to given version "{0}"'.format(version))
         write_version(version_file, lines, version_index, project,
                       stable_version, version)
+        generate(sdk_root, service, version = version, **kwargs)
         return stable_version, version
 
     current_versions = list(re.findall(version_pattern, current_version)[0])
@@ -456,6 +452,8 @@ def set_or_increase_version(
 
         write_version(version_file, lines, version_index, project,
                       stable_version, current_version)
+
+    return stable_version, current_version
 
     return stable_version, current_version
 
@@ -711,11 +709,8 @@ def main():
     service = get_and_update_service_from_api_specs(api_specs_file, spec,
                                                     args['service'])
     args['service'] = service
-    stable_version, current_version = set_or_increase_version(sdk_root, **args)
-    args['version'] = current_version
-    generate(sdk_root, **args)
-
-    compile_package(sdk_root, service)
+    stable_version, current_version = set_or_increase_version_and_generate(
+        sdk_root, **args)
     compare_with_maven_package(sdk_root, service, stable_version,
                                current_version)
 
