@@ -104,16 +104,14 @@ def generate_changelog_and_breaking_change(
     old_jar,
     new_jar,
     **kwargs,
-) -> Tuple[bool, str]:
-    logging.info('[CHANGELOG] changelog jar: {0} -> {1}'.format(
-        old_jar, new_jar))
+) -> (bool, str):
     stdout = subprocess.run(
         'mvn --no-transfer-progress clean compile exec:java -q -f {0}/eng/mgmt/changelog/pom.xml -DOLD_JAR="{1}" -DNEW_JAR="{2}"'
         .format(sdk_root, old_jar, new_jar),
         stdout = subprocess.PIPE,
         shell = True,
     ).stdout
-    logging.info('[CHANGELOG] changelog output: {0}'.format(stdout))
+    logging.info('changelog output: {0}'.format(stdout))
 
     config = json.loads(stdout)
     return (config.get('breaking', False), config.get('changelog', ''))
@@ -183,11 +181,9 @@ def compare_with_maven_package(sdk_root, service, stable_version,
             raise Exception('Cannot found built jar in {0}'.format(new_jar))
         breaking, changelog = generate_changelog_and_breaking_change(
             sdk_root, old_jar, new_jar)
-        if changelog:
-            changelog_file = os.path.join(
-                sdk_root,
-                CHANGELOG_FORMAT.format(service = service,
-                                        artifact_id = module))
+        if changelog and changelog.strip() != '':
+            changelog_file = CHANGELOG_FORMAT.format(service = service,
+                                                     artifact_id = module)
             update_changelog(changelog_file, changelog)
         else:
             logging.error('[Changelog][Skip] Cannot get changelog')
@@ -211,8 +207,135 @@ def get_version(
             versions = version_line.split(';')
             if versions[0] == project:
                 return version_line
-    logging.error('Cannot get version of {0}'.format(project))
     return None
+
+
+def update_version(sdk_root: str, service: str):
+    pwd = os.getcwd()
+    try:
+        os.chdir(sdk_root)
+        print(os.getcwd())
+        subprocess.run(
+            'python3 eng/versioning/update_versions.py --ut library --bt client --sr',
+            stdout = subprocess.DEVNULL,
+            stderr = sys.stderr,
+            shell = True,
+        )
+        subprocess.run(
+            'python3 eng/versioning/update_versions.py --ut library --bt client --tf {0}/README.md'
+            .format(OUTPUT_FOLDER_FORMAT.format(service)),
+            stdout = subprocess.DEVNULL,
+            stderr = sys.stderr,
+            shell = True,
+        )
+    finally:
+        os.chdir(pwd)
+
+
+def write_version(
+    version_file: str,
+    lines: list,
+    index: int,
+    project: str,
+    stable_version: str,
+    current_version: str,
+):
+    lines[index] = '{0};{1};{2}'.format(project, stable_version,
+                                        current_version)
+    with open(version_file, 'w') as fout:
+        fout.write('\n'.join(lines))
+        fout.write('\n')
+
+
+def set_or_increase_version(
+    sdk_root: str,
+    service: str,
+    preview = True,
+    version = None,
+    **kwargs,
+) -> (str, str):
+    version_file = os.path.join(sdk_root, 'eng/versioning/version_client.txt')
+    module = ARTIFACT_FORMAT.format(service)
+    project = '{0}:{1}'.format(GROUP_ID, module)
+    version_pattern = '(\d+)\.(\d+)\.(\d+)(-beta\.\d+)?'
+    version_format = '{0}.{1}.{2}{3}'
+    default_version = version if version else DEFAULT_VERSION
+
+    with open(version_file, 'r') as fin:
+        lines = fin.read().splitlines()
+        version_index = -1
+        for i, version_line in enumerate(lines):
+            version_line = version_line.strip()
+            if version_line.startswith('#'):
+                continue
+            versions = version_line.split(';')
+            if versions[0] == project:
+                if len(versions) != 3:
+                    logging.error(
+                        '[VERSION][Fallback] Unexpected version format "{0}"'.
+                        format(version_line))
+                    stable_version = ''
+                    current_version = default_version
+                else:
+                    logging.info(
+                        '[VERSION][Found] current version "{0}"'.format(
+                            version_line))
+                    stable_version = versions[1]
+                    current_version = versions[2]
+                version_index = i
+                break
+        else:
+            logging.info(
+                '[VERSION][Not Found] cannot find version for "{0}"'.format(
+                    project))
+            for i, version_line in enumerate(lines):
+                if version_line.startswith('{0}:'.format(GROUP_ID)):
+                    version_index = i + 1
+            lines = lines[:version_index] + [''] + lines[version_index:]
+            stable_version = ''
+            current_version = default_version
+
+    # version is given, set and return
+    if version:
+        if not stable_version:
+            stable_version = version
+        logging.info(
+            '[VERSION][Set] set to given version "{0}"'.format(version))
+        write_version(version_file, lines, version_index, project,
+                      stable_version, version)
+        generate(sdk_root, service, version = version, **kwargs)
+        return stable_version, version
+
+    current_versions = list(re.findall(version_pattern, current_version)[0])
+    stable_versions = re.findall(version_pattern, stable_version)
+    # no stable version
+    if len(stable_versions) < 1 or stable_versions[0][-1] != '':
+        if not preview:
+            current_versions[-1] = ''
+        current_version = version_format.format(*current_versions)
+        if not stable_version:
+            stable_version = current_version
+        logging.info(
+            '[VERSION][Not Found] cannot find stable version, current version "{0}"'
+            .format(current_version))
+
+        write_version(version_file, lines, version_index, project,
+                      stable_version, current_version)
+    else:
+        # TODO: auto-increase for stable version and beta version if possible
+        current_version = version_format.format(*current_versions)
+        if not stable_version:
+            stable_version = current_version
+        logging.warning(
+            '[VERSION][Not Implement] set to current version "{0}" by default'.
+            format(current_version))
+
+        write_version(version_file, lines, version_index, project,
+                      stable_version, current_version)
+
+    return stable_version, current_version
+
+    return stable_version, current_version
 
 
 def parse_args() -> argparse.Namespace:
@@ -473,16 +596,10 @@ def main():
     service = get_and_update_service_from_api_specs(api_specs_file, spec,
                                                     args['service'])
     args['service'] = service
-    module = ARTIFACT_FORMAT.format(service)
-    stable_version, current_version = set_or_increase_version(sdk_root, GROUP_ID, module, **args)
-    args['version'] = current_version
-    succeeded = generate(sdk_root, **args)
-
-    if succeeded:
-        succeeded = compile_package(sdk_root, service)
-        if succeeded:
-            compare_with_maven_package(sdk_root, service, stable_version,
-                                    current_version)
+    stable_version, current_version = set_or_increase_version_and_generate(
+        sdk_root, **args)
+    compare_with_maven_package(sdk_root, service, stable_version,
+                               current_version)
 
             if args.get('auto_commit_external_change') and args.get(
                     'user_name') and args.get('user_email'):
