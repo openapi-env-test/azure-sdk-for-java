@@ -91,7 +91,7 @@ def generate_changelog_and_breaking_change(
     old_jar,
     new_jar,
     **kwargs,
-) -> (bool, str):
+) -> Tuple[bool, str]:
     stdout = subprocess.run(
         'mvn clean compile exec:java -q -f {0}/eng/mgmt/changelog/pom.xml -DOLD_JAR="{1}" -DNEW_JAR="{2}"'
         .format(sdk_root, old_jar, new_jar),
@@ -372,7 +372,7 @@ def set_or_increase_version(
     preview = True,
     version = None,
     **kwargs,
-) -> (str, str):
+) -> Tuple[str, str]:
     version_file = os.path.join(sdk_root, 'eng/versioning/version_client.txt')
     module = ARTIFACT_FORMAT.format(service)
     project = '{0}:{1}'.format(GROUP_ID, module)
