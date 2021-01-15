@@ -105,13 +105,14 @@ def generate_changelog_and_breaking_change(
     new_jar,
     **kwargs,
 ) -> Tuple[bool, str]:
+    logging.info('[CHANGELOG] changelog jar: {0} -> {1}'.format(old_jar, new_jar))
     stdout = subprocess.run(
         'mvn --no-transfer-progress clean compile exec:java -q -f {0}/eng/mgmt/changelog/pom.xml -DOLD_JAR="{1}" -DNEW_JAR="{2}"'
         .format(sdk_root, old_jar, new_jar),
         stdout = subprocess.PIPE,
         shell = True,
     ).stdout
-    logging.info('changelog output: {0}'.format(stdout))
+    logging.info('[CHANGELOG] changelog output: {0}'.format(stdout))
 
     config = json.loads(stdout)
     return (config.get('breaking', False), config.get('changelog', ''))
@@ -207,6 +208,7 @@ def get_version(
             versions = version_line.split(';')
             if versions[0] == project:
                 return version_line
+    logging.error('Cannot get version of {0}'.format(project))
     return None
 
 
@@ -303,7 +305,6 @@ def set_or_increase_version(
             '[VERSION][Set] set to given version "{0}"'.format(version))
         write_version(version_file, lines, version_index, project,
                       stable_version, version)
-        generate(sdk_root, service, version = version, **kwargs)
         return stable_version, version
 
     current_versions = list(re.findall(version_pattern, current_version)[0])
@@ -332,8 +333,6 @@ def set_or_increase_version(
 
         write_version(version_file, lines, version_index, project,
                       stable_version, current_version)
-
-    return stable_version, current_version
 
     return stable_version, current_version
 
@@ -515,11 +514,6 @@ def sdk_automation(input_file: str, output_file: str):
             module = ARTIFACT_FORMAT.format(service)
             stable_version, current_version = set_or_increase_version(
                 sdk_root,
-                GROUP_ID,
-                module
-            )
-            succeeded = generate(
-                sdk_root,
                 service,
                 spec_root = config['specFolder'],
                 readme = readme,
@@ -527,8 +521,7 @@ def sdk_automation(input_file: str, output_file: str):
                 use = AUTOREST_JAVA,
                 tag = tag,
             )
-            if succeeded:
-                compile_package(sdk_root, service)
+            compile_package(sdk_root, service, version = current_version)
 
             generated_folder = OUTPUT_FOLDER_FORMAT.format(service)
             packages.append({
@@ -596,8 +589,11 @@ def main():
     service = get_and_update_service_from_api_specs(api_specs_file, spec,
                                                     args['service'])
     args['service'] = service
-    stable_version, current_version = set_or_increase_version_and_generate(
-        sdk_root, **args)
+    stable_version, current_version = set_or_increase_version(sdk_root, **args)
+    args['version'] = current_version
+    generate(sdk_root, **args)
+
+    compile_package(sdk_root, service)
     compare_with_maven_package(sdk_root, service, stable_version,
                                current_version)
 
