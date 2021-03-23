@@ -603,6 +603,7 @@
         <module>sdk/costmanagement</module>
         <module>sdk/datadog</module>
         <module>sdk/deviceupdate</module>
+        <module>sdk/devspaces</module>
         <module>sdk/digitaltwins</module>
         <module>sdk/eventgrid</module>
         <module>sdk/eventhubs</module>
