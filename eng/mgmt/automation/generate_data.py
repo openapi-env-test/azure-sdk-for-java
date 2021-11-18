@@ -44,6 +44,7 @@ def sdk_automation(config: dict) -> List[dict]:
             generated_folder = 'sdk/{0}/{1}'.format(group, module)
 
             if succeeded:
+                install_build_tools(sdk_root)
                 succeeded = compile_package(os.path.join(sdk_root, generated_folder))
 
             artifacts = [
@@ -110,7 +111,16 @@ def generate(
     return True
 
 
-def compile_package(output_dir):
+def install_build_tools(sdk_root: str):
+    command = 'mvn --no-transfer-progress clean install -f {0} -pl com.azure:sdk-build-tools'.format(os.path.join(sdk_root, 'pom.xml'))
+    logging.info(command)
+    if os.system(command) != 0:
+        logging.error('[COMPILE] Maven build fail for sdk-build-tools')
+        return False
+    return True
+
+
+def compile_package(output_dir: str):
     command = 'mvn --no-transfer-progress clean verify package -f {0}'.format(os.path.join(output_dir, 'pom.xml'))
     logging.info(command)
     if os.system(command) != 0:
@@ -181,6 +191,7 @@ def main():
         sdk_root,
         'sdk', args['group'], args['module']
     )
+    install_build_tools(sdk_root)
     compile_package(output_dir)
 
 
