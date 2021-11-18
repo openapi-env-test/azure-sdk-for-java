@@ -45,7 +45,7 @@ def sdk_automation(config: dict) -> List[dict]:
 
             if succeeded:
                 install_build_tools(sdk_root)
-                succeeded = compile_package(os.path.join(sdk_root, generated_folder))
+                compile_package(os.path.join(sdk_root, generated_folder))
 
             artifacts = [
                 '{0}/pom.xml'.format(generated_folder)
@@ -121,7 +121,7 @@ def install_build_tools(sdk_root: str):
 
 
 def compile_package(output_dir: str):
-    command = 'mvn --no-transfer-progress clean verify package -f {0} -Dcheckstyle.skip'.format(os.path.join(output_dir, 'pom.xml'))
+    command = 'mvn --no-transfer-progress clean verify package -f {0}'.format(os.path.join(output_dir, 'pom.xml'))
     logging.info(command)
     if os.system(command) != 0:
         logging.error('[COMPILE] Maven build fail')
