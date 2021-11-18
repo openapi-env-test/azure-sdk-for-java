@@ -19,20 +19,20 @@ import com.azure.resourcemanager.eventgrid.models.DomainUpdateParameters;
 /** An instance of this class provides access to all the operations defined in DomainsClient. */
 public interface DomainsClient {
     /**
-     * Get properties of a domain.
+     * Get properties of a domain touch.
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param domainName Name of the domain.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return properties of a domain.
+     * @return properties of a domain touch.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     DomainInner getByResourceGroup(String resourceGroupName, String domainName);
 
     /**
-     * Get properties of a domain.
+     * Get properties of a domain touch.
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param domainName Name of the domain.
@@ -40,7 +40,7 @@ public interface DomainsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return properties of a domain.
+     * @return properties of a domain touch.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<DomainInner> getByResourceGroupWithResponse(String resourceGroupName, String domainName, Context context);

@@ -11,19 +11,19 @@ import com.azure.core.util.Context;
 /** Resource collection API of Domains. */
 public interface Domains {
     /**
-     * Get properties of a domain.
+     * Get properties of a domain touch.
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param domainName Name of the domain.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return properties of a domain.
+     * @return properties of a domain touch.
      */
     Domain getByResourceGroup(String resourceGroupName, String domainName);
 
     /**
-     * Get properties of a domain.
+     * Get properties of a domain touch.
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param domainName Name of the domain.
@@ -31,7 +31,7 @@ public interface Domains {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return properties of a domain.
+     * @return properties of a domain touch.
      */
     Response<Domain> getByResourceGroupWithResponse(String resourceGroupName, String domainName, Context context);
 
@@ -173,25 +173,25 @@ public interface Domains {
         String resourceGroupName, String domainName, DomainRegenerateKeyRequest regenerateKeyRequest, Context context);
 
     /**
-     * Get properties of a domain.
+     * Get properties of a domain touch.
      *
      * @param id the resource ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return properties of a domain.
+     * @return properties of a domain touch.
      */
     Domain getById(String id);
 
     /**
-     * Get properties of a domain.
+     * Get properties of a domain touch.
      *
      * @param id the resource ID.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return properties of a domain.
+     * @return properties of a domain touch.
      */
     Response<Domain> getByIdWithResponse(String id, Context context);
 

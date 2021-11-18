@@ -212,14 +212,14 @@ public final class DomainsClientImpl implements DomainsClient {
     }
 
     /**
-     * Get properties of a domain.
+     * Get properties of a domain touch.
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param domainName Name of the domain.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return properties of a domain.
+     * @return properties of a domain touch.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<DomainInner>> getByResourceGroupWithResponseAsync(
@@ -260,7 +260,7 @@ public final class DomainsClientImpl implements DomainsClient {
     }
 
     /**
-     * Get properties of a domain.
+     * Get properties of a domain touch.
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param domainName Name of the domain.
@@ -268,7 +268,7 @@ public final class DomainsClientImpl implements DomainsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return properties of a domain.
+     * @return properties of a domain touch.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<DomainInner>> getByResourceGroupWithResponseAsync(
@@ -306,14 +306,14 @@ public final class DomainsClientImpl implements DomainsClient {
     }
 
     /**
-     * Get properties of a domain.
+     * Get properties of a domain touch.
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param domainName Name of the domain.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return properties of a domain.
+     * @return properties of a domain touch.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<DomainInner> getByResourceGroupAsync(String resourceGroupName, String domainName) {
@@ -329,14 +329,14 @@ public final class DomainsClientImpl implements DomainsClient {
     }
 
     /**
-     * Get properties of a domain.
+     * Get properties of a domain touch.
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param domainName Name of the domain.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return properties of a domain.
+     * @return properties of a domain touch.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DomainInner getByResourceGroup(String resourceGroupName, String domainName) {
@@ -344,7 +344,7 @@ public final class DomainsClientImpl implements DomainsClient {
     }
 
     /**
-     * Get properties of a domain.
+     * Get properties of a domain touch.
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param domainName Name of the domain.
@@ -352,7 +352,7 @@ public final class DomainsClientImpl implements DomainsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return properties of a domain.
+     * @return properties of a domain touch.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DomainInner> getByResourceGroupWithResponse(
