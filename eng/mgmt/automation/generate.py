@@ -624,7 +624,7 @@ def sdk_automation(input_file: str, output_file: str):
             re.IGNORECASE,
         )
         if not match:
-            logging.error(
+            logging.info(
                 '[Skip] readme path does not format as specification/*/resource-manager/readme.md'
             )
         else:
@@ -651,7 +651,7 @@ def sdk_automation(input_file: str, output_file: str):
                 sdk_root,
                 service,
             )
-            generate(
+            succeeded = generate(
                 sdk_root,
                 service,
                 spec_root = config['specFolder'],
@@ -660,7 +660,8 @@ def sdk_automation(input_file: str, output_file: str):
                 use = AUTOREST_JAVA,
                 tag = tag,
             )
-            compile_package(sdk_root, service)
+            if succeeded:
+                succeeded = compile_package(sdk_root, service)
 
             generated_folder = OUTPUT_FOLDER_FORMAT.format(service)
             packages.append({
@@ -681,7 +682,7 @@ def sdk_automation(input_file: str, output_file: str):
                         generated_folder))
                 ],
                 'result':
-                    'succeeded',
+                    'succeeded' if succeeded else 'failed',
             })
 
             update_parameters(pre_suffix)

@@ -37,11 +37,14 @@ def sdk_automation(config: dict) -> List[dict]:
             credential_types = 'tokencredential'
             credential_scopes = 'https://{0}.azure.com/.default'.format(group)
 
-            generate(sdk_root, input_file,
-                     group, module, credential_types, credential_scopes,
-                     AUTOREST_CORE_VERSION, AUTOREST_JAVA, '')
+            succeeded = generate(sdk_root, input_file,
+                                 group, module, credential_types, credential_scopes,
+                                 AUTOREST_CORE_VERSION, AUTOREST_JAVA, '')
 
             generated_folder = 'sdk/{0}/{1}'.format(group, module)
+
+            if succeeded:
+                succeeded = compile_package(os.path.join(sdk_root, generated_folder))
 
             artifacts = [
                 '{0}/pom.xml'.format(generated_folder)
@@ -50,12 +53,13 @@ def sdk_automation(config: dict) -> List[dict]:
                 jar for jar in glob.glob('{0}/target/*.jar'.format(
                     generated_folder))
             ]
+            result = 'succeeded' if succeeded else 'failed'
 
             packages.append({
                 'packageName': module,
                 'path': [generated_folder],
                 'artifacts': artifacts,
-                'result': 'succeeded',
+                'result': result,
             })
         else:
             logging.info('[Skip] changed file {0}'.format(file_path))
