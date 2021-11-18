@@ -18,6 +18,7 @@ from typing import Tuple
 pwd = os.getcwd()
 os.chdir(os.path.abspath(os.path.dirname(sys.argv[0])))
 from parameters import *
+from generate_data import sdk_automation as sdk_automation_data
 os.chdir(pwd)
 
 
@@ -684,6 +685,10 @@ def sdk_automation(input_file: str, output_file: str):
             })
 
             update_parameters(pre_suffix)
+
+    if not packages:
+        # try data-plane codegen
+        packages = sdk_automation_data(config)
 
     with open(output_file, 'w') as fout:
         output = {
