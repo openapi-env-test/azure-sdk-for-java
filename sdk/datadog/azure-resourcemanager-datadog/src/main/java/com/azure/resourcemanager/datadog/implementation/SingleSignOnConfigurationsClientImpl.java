@@ -438,7 +438,7 @@ public final class SingleSignOnConfigurationsClientImpl implements SingleSignOnC
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<DatadogSingleSignOnResourceInner>, DatadogSingleSignOnResourceInner>
         beginCreateOrUpdateAsync(
             String resourceGroupName,
@@ -470,7 +470,7 @@ public final class SingleSignOnConfigurationsClientImpl implements SingleSignOnC
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<DatadogSingleSignOnResourceInner>, DatadogSingleSignOnResourceInner>
         beginCreateOrUpdateAsync(
             String resourceGroupName,
@@ -503,7 +503,7 @@ public final class SingleSignOnConfigurationsClientImpl implements SingleSignOnC
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<DatadogSingleSignOnResourceInner>, DatadogSingleSignOnResourceInner>
         beginCreateOrUpdate(
             String resourceGroupName,
@@ -526,7 +526,7 @@ public final class SingleSignOnConfigurationsClientImpl implements SingleSignOnC
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<DatadogSingleSignOnResourceInner>, DatadogSingleSignOnResourceInner>
         beginCreateOrUpdate(
             String resourceGroupName,

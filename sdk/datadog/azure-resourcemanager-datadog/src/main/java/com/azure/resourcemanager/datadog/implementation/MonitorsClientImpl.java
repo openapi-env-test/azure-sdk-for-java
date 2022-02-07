@@ -1937,7 +1937,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<DatadogMonitorResourceInner>, DatadogMonitorResourceInner> beginCreateAsync(
         String resourceGroupName, String monitorName, DatadogMonitorResourceInner body) {
         Mono<Response<Flux<ByteBuffer>>> mono = createWithResponseAsync(resourceGroupName, monitorName, body);
@@ -1963,7 +1963,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<DatadogMonitorResourceInner>, DatadogMonitorResourceInner> beginCreateAsync(
         String resourceGroupName, String monitorName, DatadogMonitorResourceInner body, Context context) {
         context = this.client.mergeContext(context);
@@ -1989,7 +1989,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<DatadogMonitorResourceInner>, DatadogMonitorResourceInner> beginCreate(
         String resourceGroupName, String monitorName, DatadogMonitorResourceInner body) {
         return beginCreateAsync(resourceGroupName, monitorName, body).getSyncPoller();
@@ -2007,7 +2007,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<DatadogMonitorResourceInner>, DatadogMonitorResourceInner> beginCreate(
         String resourceGroupName, String monitorName, DatadogMonitorResourceInner body, Context context) {
         return beginCreateAsync(resourceGroupName, monitorName, body, context).getSyncPoller();
@@ -2236,7 +2236,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<DatadogMonitorResourceInner>, DatadogMonitorResourceInner> beginUpdateAsync(
         String resourceGroupName, String monitorName, DatadogMonitorResourceUpdateParameters body) {
         Mono<Response<Flux<ByteBuffer>>> mono = updateWithResponseAsync(resourceGroupName, monitorName, body);
@@ -2262,7 +2262,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<DatadogMonitorResourceInner>, DatadogMonitorResourceInner> beginUpdateAsync(
         String resourceGroupName, String monitorName, DatadogMonitorResourceUpdateParameters body, Context context) {
         context = this.client.mergeContext(context);
@@ -2288,7 +2288,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<DatadogMonitorResourceInner>, DatadogMonitorResourceInner> beginUpdate(
         String resourceGroupName, String monitorName, DatadogMonitorResourceUpdateParameters body) {
         return beginUpdateAsync(resourceGroupName, monitorName, body).getSyncPoller();
@@ -2306,7 +2306,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<DatadogMonitorResourceInner>, DatadogMonitorResourceInner> beginUpdate(
         String resourceGroupName, String monitorName, DatadogMonitorResourceUpdateParameters body, Context context) {
         return beginUpdateAsync(resourceGroupName, monitorName, body, context).getSyncPoller();
@@ -2523,7 +2523,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsync(String resourceGroupName, String monitorName) {
         Mono<Response<Flux<ByteBuffer>>> mono = deleteWithResponseAsync(resourceGroupName, monitorName);
         return this
@@ -2542,7 +2542,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsync(
         String resourceGroupName, String monitorName, Context context) {
         context = this.client.mergeContext(context);
@@ -2562,7 +2562,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete(String resourceGroupName, String monitorName) {
         return beginDeleteAsync(resourceGroupName, monitorName).getSyncPoller();
     }
@@ -2578,7 +2578,7 @@ public final class MonitorsClientImpl implements MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete(
         String resourceGroupName, String monitorName, Context context) {
         return beginDeleteAsync(resourceGroupName, monitorName, context).getSyncPoller();

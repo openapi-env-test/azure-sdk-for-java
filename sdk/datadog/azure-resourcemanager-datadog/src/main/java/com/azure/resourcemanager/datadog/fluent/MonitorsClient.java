@@ -273,7 +273,7 @@ public interface MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<DatadogMonitorResourceInner>, DatadogMonitorResourceInner> beginCreate(
         String resourceGroupName, String monitorName, DatadogMonitorResourceInner body);
 
@@ -289,7 +289,7 @@ public interface MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<DatadogMonitorResourceInner>, DatadogMonitorResourceInner> beginCreate(
         String resourceGroupName, String monitorName, DatadogMonitorResourceInner body, Context context);
 
@@ -347,7 +347,7 @@ public interface MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<DatadogMonitorResourceInner>, DatadogMonitorResourceInner> beginUpdate(
         String resourceGroupName, String monitorName, DatadogMonitorResourceUpdateParameters body);
 
@@ -363,7 +363,7 @@ public interface MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<DatadogMonitorResourceInner>, DatadogMonitorResourceInner> beginUpdate(
         String resourceGroupName, String monitorName, DatadogMonitorResourceUpdateParameters body, Context context);
 
@@ -421,7 +421,7 @@ public interface MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<Void>, Void> beginDelete(String resourceGroupName, String monitorName);
 
     /**
@@ -435,7 +435,7 @@ public interface MonitorsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<Void>, Void> beginDelete(String resourceGroupName, String monitorName, Context context);
 
     /**
