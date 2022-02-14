@@ -122,7 +122,7 @@ public final class DataLakeStoreAccountsClientImpl implements DataLakeStoreAccou
         @Delete(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics"
                 + "/accounts/{accountName}/dataLakeStoreAccounts/{dataLakeStoreAccountName}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Void>> delete(
             @HostParam("$host") String endpoint,

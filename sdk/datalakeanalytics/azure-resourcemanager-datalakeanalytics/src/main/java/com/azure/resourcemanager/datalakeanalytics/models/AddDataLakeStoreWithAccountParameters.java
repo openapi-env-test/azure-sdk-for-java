@@ -5,15 +5,14 @@
 package com.azure.resourcemanager.datalakeanalytics.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.util.logging.ClientLogger;
+import com.azure.resourcemanager.datalakeanalytics.fluent.models.AddDataLakeStoreProperties;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The parameters used to add a new Data Lake Store account while creating a new Data Lake Analytics account. */
-@JsonFlatten
 @Fluent
-public class AddDataLakeStoreWithAccountParameters {
+public final class AddDataLakeStoreWithAccountParameters {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(AddDataLakeStoreWithAccountParameters.class);
 
     /*
@@ -23,10 +22,11 @@ public class AddDataLakeStoreWithAccountParameters {
     private String name;
 
     /*
-     * The optional suffix for the Data Lake Store account.
+     * The Data Lake Store account properties to use when adding a new Data
+     * Lake Store account.
      */
-    @JsonProperty(value = "properties.suffix")
-    private String suffix;
+    @JsonProperty(value = "properties")
+    private AddDataLakeStoreProperties innerProperties;
 
     /**
      * Get the name property: The unique name of the Data Lake Store account to add.
@@ -49,12 +49,22 @@ public class AddDataLakeStoreWithAccountParameters {
     }
 
     /**
+     * Get the innerProperties property: The Data Lake Store account properties to use when adding a new Data Lake Store
+     * account.
+     *
+     * @return the innerProperties value.
+     */
+    private AddDataLakeStoreProperties innerProperties() {
+        return this.innerProperties;
+    }
+
+    /**
      * Get the suffix property: The optional suffix for the Data Lake Store account.
      *
      * @return the suffix value.
      */
     public String suffix() {
-        return this.suffix;
+        return this.innerProperties() == null ? null : this.innerProperties().suffix();
     }
 
     /**
@@ -64,7 +74,10 @@ public class AddDataLakeStoreWithAccountParameters {
      * @return the AddDataLakeStoreWithAccountParameters object itself.
      */
     public AddDataLakeStoreWithAccountParameters withSuffix(String suffix) {
-        this.suffix = suffix;
+        if (this.innerProperties() == null) {
+            this.innerProperties = new AddDataLakeStoreProperties();
+        }
+        this.innerProperties().withSuffix(suffix);
         return this;
     }
 
@@ -79,6 +92,9 @@ public class AddDataLakeStoreWithAccountParameters {
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property name in model AddDataLakeStoreWithAccountParameters"));
+        }
+        if (innerProperties() != null) {
+            innerProperties().validate();
         }
     }
 }

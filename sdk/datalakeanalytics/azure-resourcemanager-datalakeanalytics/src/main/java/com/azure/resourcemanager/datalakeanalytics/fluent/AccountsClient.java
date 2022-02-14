@@ -113,7 +113,7 @@ public interface AccountsClient {
      * @return a Data Lake Analytics account object, containing all information associated with the named Data Lake
      *     Analytics account.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<DataLakeAnalyticsAccountInner>, DataLakeAnalyticsAccountInner> beginCreate(
         String resourceGroupName, String accountName, CreateDataLakeAnalyticsAccountParameters parameters);
 
@@ -131,7 +131,7 @@ public interface AccountsClient {
      * @return a Data Lake Analytics account object, containing all information associated with the named Data Lake
      *     Analytics account.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<DataLakeAnalyticsAccountInner>, DataLakeAnalyticsAccountInner> beginCreate(
         String resourceGroupName,
         String accountName,
@@ -217,7 +217,7 @@ public interface AccountsClient {
      * @return a Data Lake Analytics account object, containing all information associated with the named Data Lake
      *     Analytics account.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<DataLakeAnalyticsAccountInner>, DataLakeAnalyticsAccountInner> beginUpdate(
         String resourceGroupName, String accountName, UpdateDataLakeAnalyticsAccountParameters parameters);
 
@@ -235,7 +235,7 @@ public interface AccountsClient {
      * @return a Data Lake Analytics account object, containing all information associated with the named Data Lake
      *     Analytics account.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<DataLakeAnalyticsAccountInner>, DataLakeAnalyticsAccountInner> beginUpdate(
         String resourceGroupName,
         String accountName,
@@ -305,7 +305,7 @@ public interface AccountsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<Void>, Void> beginDelete(String resourceGroupName, String accountName);
 
     /**
@@ -319,7 +319,7 @@ public interface AccountsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<Void>, Void> beginDelete(String resourceGroupName, String accountName, Context context);
 
     /**

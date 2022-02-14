@@ -882,7 +882,7 @@ public final class AccountsClientImpl implements AccountsClient {
      * @return a Data Lake Analytics account object, containing all information associated with the named Data Lake
      *     Analytics account.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<DataLakeAnalyticsAccountInner>, DataLakeAnalyticsAccountInner> beginCreateAsync(
         String resourceGroupName, String accountName, CreateDataLakeAnalyticsAccountParameters parameters) {
         Mono<Response<Flux<ByteBuffer>>> mono = createWithResponseAsync(resourceGroupName, accountName, parameters);
@@ -910,7 +910,7 @@ public final class AccountsClientImpl implements AccountsClient {
      * @return a Data Lake Analytics account object, containing all information associated with the named Data Lake
      *     Analytics account.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<DataLakeAnalyticsAccountInner>, DataLakeAnalyticsAccountInner> beginCreateAsync(
         String resourceGroupName,
         String accountName,
@@ -942,7 +942,7 @@ public final class AccountsClientImpl implements AccountsClient {
      * @return a Data Lake Analytics account object, containing all information associated with the named Data Lake
      *     Analytics account.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<DataLakeAnalyticsAccountInner>, DataLakeAnalyticsAccountInner> beginCreate(
         String resourceGroupName, String accountName, CreateDataLakeAnalyticsAccountParameters parameters) {
         return beginCreateAsync(resourceGroupName, accountName, parameters).getSyncPoller();
@@ -962,7 +962,7 @@ public final class AccountsClientImpl implements AccountsClient {
      * @return a Data Lake Analytics account object, containing all information associated with the named Data Lake
      *     Analytics account.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<DataLakeAnalyticsAccountInner>, DataLakeAnalyticsAccountInner> beginCreate(
         String resourceGroupName,
         String accountName,
@@ -1332,7 +1332,7 @@ public final class AccountsClientImpl implements AccountsClient {
      * @return a Data Lake Analytics account object, containing all information associated with the named Data Lake
      *     Analytics account.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<DataLakeAnalyticsAccountInner>, DataLakeAnalyticsAccountInner> beginUpdateAsync(
         String resourceGroupName, String accountName, UpdateDataLakeAnalyticsAccountParameters parameters) {
         Mono<Response<Flux<ByteBuffer>>> mono = updateWithResponseAsync(resourceGroupName, accountName, parameters);
@@ -1360,7 +1360,7 @@ public final class AccountsClientImpl implements AccountsClient {
      * @return a Data Lake Analytics account object, containing all information associated with the named Data Lake
      *     Analytics account.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<DataLakeAnalyticsAccountInner>, DataLakeAnalyticsAccountInner> beginUpdateAsync(
         String resourceGroupName,
         String accountName,
@@ -1392,7 +1392,7 @@ public final class AccountsClientImpl implements AccountsClient {
      * @return a Data Lake Analytics account object, containing all information associated with the named Data Lake
      *     Analytics account.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<DataLakeAnalyticsAccountInner>, DataLakeAnalyticsAccountInner> beginUpdate(
         String resourceGroupName, String accountName, UpdateDataLakeAnalyticsAccountParameters parameters) {
         return beginUpdateAsync(resourceGroupName, accountName, parameters).getSyncPoller();
@@ -1412,7 +1412,7 @@ public final class AccountsClientImpl implements AccountsClient {
      * @return a Data Lake Analytics account object, containing all information associated with the named Data Lake
      *     Analytics account.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<DataLakeAnalyticsAccountInner>, DataLakeAnalyticsAccountInner> beginUpdate(
         String resourceGroupName,
         String accountName,
@@ -1650,7 +1650,7 @@ public final class AccountsClientImpl implements AccountsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsync(String resourceGroupName, String accountName) {
         Mono<Response<Flux<ByteBuffer>>> mono = deleteWithResponseAsync(resourceGroupName, accountName);
         return this
@@ -1669,7 +1669,7 @@ public final class AccountsClientImpl implements AccountsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsync(
         String resourceGroupName, String accountName, Context context) {
         context = this.client.mergeContext(context);
@@ -1689,7 +1689,7 @@ public final class AccountsClientImpl implements AccountsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete(String resourceGroupName, String accountName) {
         return beginDeleteAsync(resourceGroupName, accountName).getSyncPoller();
     }
@@ -1705,7 +1705,7 @@ public final class AccountsClientImpl implements AccountsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the completion.
      */
-    @ServiceMethod(returns = ReturnType.SINGLE)
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete(
         String resourceGroupName, String accountName, Context context) {
         return beginDeleteAsync(resourceGroupName, accountName, context).getSyncPoller();

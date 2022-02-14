@@ -151,7 +151,7 @@ public final class ComputePoliciesImpl implements ComputePolicies {
                         String
                             .format("The resource ID '%s' is not valid. Missing path segment 'computePolicies'.", id)));
         }
-        this.deleteWithResponse(resourceGroupName, accountName, computePolicyName, Context.NONE).getValue();
+        this.deleteWithResponse(resourceGroupName, accountName, computePolicyName, Context.NONE);
     }
 
     public Response<Void> deleteByIdWithResponse(String id, Context context) {

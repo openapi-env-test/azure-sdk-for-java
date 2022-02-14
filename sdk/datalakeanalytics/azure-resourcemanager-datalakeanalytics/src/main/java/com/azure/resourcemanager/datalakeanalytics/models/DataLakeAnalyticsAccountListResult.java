@@ -23,6 +23,13 @@ public final class DataLakeAnalyticsAccountListResult {
     private List<DataLakeAnalyticsAccountBasicInner> value;
 
     /*
+     * The current number of data lake analytics accounts under this
+     * subscription.
+     */
+    @JsonProperty(value = "count", access = JsonProperty.Access.WRITE_ONLY)
+    private Integer count;
+
+    /*
      * The link (url) to the next page of results.
      */
     @JsonProperty(value = "nextLink", access = JsonProperty.Access.WRITE_ONLY)
@@ -35,6 +42,15 @@ public final class DataLakeAnalyticsAccountListResult {
      */
     public List<DataLakeAnalyticsAccountBasicInner> value() {
         return this.value;
+    }
+
+    /**
+     * Get the count property: The current number of data lake analytics accounts under this subscription.
+     *
+     * @return the count value.
+     */
+    public Integer count() {
+        return this.count;
     }
 
     /**

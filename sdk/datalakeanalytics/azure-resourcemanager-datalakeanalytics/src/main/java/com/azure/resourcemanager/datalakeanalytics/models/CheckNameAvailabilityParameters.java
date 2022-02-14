@@ -25,7 +25,7 @@ public final class CheckNameAvailabilityParameters {
      * constant value is Microsoft.DataLakeAnalytics/accounts
      */
     @JsonProperty(value = "type", required = true)
-    private String type;
+    private String type = "Microsoft.DataLakeAnalytics/accounts";
 
     /** Creates an instance of CheckNameAvailabilityParameters class. */
     public CheckNameAvailabilityParameters() {

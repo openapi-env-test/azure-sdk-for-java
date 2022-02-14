@@ -5,16 +5,15 @@
 package com.azure.resourcemanager.datalakeanalytics.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.util.logging.ClientLogger;
+import com.azure.resourcemanager.datalakeanalytics.fluent.models.CreateOrUpdateComputePolicyProperties;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.UUID;
 
 /** The parameters used to create a new compute policy while creating a new Data Lake Analytics account. */
-@JsonFlatten
 @Fluent
-public class CreateComputePolicyWithAccountParameters {
+public final class CreateComputePolicyWithAccountParameters {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(CreateComputePolicyWithAccountParameters.class);
 
     /*
@@ -24,32 +23,10 @@ public class CreateComputePolicyWithAccountParameters {
     private String name;
 
     /*
-     * The AAD object identifier for the entity to create a policy for.
+     * The compute policy properties to use when creating a new compute policy.
      */
-    @JsonProperty(value = "properties.objectId", required = true)
-    private UUID objectId;
-
-    /*
-     * The type of AAD object the object identifier refers to.
-     */
-    @JsonProperty(value = "properties.objectType", required = true)
-    private AadObjectType objectType;
-
-    /*
-     * The maximum degree of parallelism per job this user can use to submit
-     * jobs. This property, the min priority per job property, or both must be
-     * passed.
-     */
-    @JsonProperty(value = "properties.maxDegreeOfParallelismPerJob")
-    private Integer maxDegreeOfParallelismPerJob;
-
-    /*
-     * The minimum priority per job this user can use to submit jobs. This
-     * property, the max degree of parallelism per job property, or both must
-     * be passed.
-     */
-    @JsonProperty(value = "properties.minPriorityPerJob")
-    private Integer minPriorityPerJob;
+    @JsonProperty(value = "properties", required = true)
+    private CreateOrUpdateComputePolicyProperties innerProperties = new CreateOrUpdateComputePolicyProperties();
 
     /**
      * Get the name property: The unique name of the compute policy to create.
@@ -72,12 +49,21 @@ public class CreateComputePolicyWithAccountParameters {
     }
 
     /**
+     * Get the innerProperties property: The compute policy properties to use when creating a new compute policy.
+     *
+     * @return the innerProperties value.
+     */
+    private CreateOrUpdateComputePolicyProperties innerProperties() {
+        return this.innerProperties;
+    }
+
+    /**
      * Get the objectId property: The AAD object identifier for the entity to create a policy for.
      *
      * @return the objectId value.
      */
     public UUID objectId() {
-        return this.objectId;
+        return this.innerProperties() == null ? null : this.innerProperties().objectId();
     }
 
     /**
@@ -87,7 +73,10 @@ public class CreateComputePolicyWithAccountParameters {
      * @return the CreateComputePolicyWithAccountParameters object itself.
      */
     public CreateComputePolicyWithAccountParameters withObjectId(UUID objectId) {
-        this.objectId = objectId;
+        if (this.innerProperties() == null) {
+            this.innerProperties = new CreateOrUpdateComputePolicyProperties();
+        }
+        this.innerProperties().withObjectId(objectId);
         return this;
     }
 
@@ -97,7 +86,7 @@ public class CreateComputePolicyWithAccountParameters {
      * @return the objectType value.
      */
     public AadObjectType objectType() {
-        return this.objectType;
+        return this.innerProperties() == null ? null : this.innerProperties().objectType();
     }
 
     /**
@@ -107,7 +96,10 @@ public class CreateComputePolicyWithAccountParameters {
      * @return the CreateComputePolicyWithAccountParameters object itself.
      */
     public CreateComputePolicyWithAccountParameters withObjectType(AadObjectType objectType) {
-        this.objectType = objectType;
+        if (this.innerProperties() == null) {
+            this.innerProperties = new CreateOrUpdateComputePolicyProperties();
+        }
+        this.innerProperties().withObjectType(objectType);
         return this;
     }
 
@@ -118,7 +110,7 @@ public class CreateComputePolicyWithAccountParameters {
      * @return the maxDegreeOfParallelismPerJob value.
      */
     public Integer maxDegreeOfParallelismPerJob() {
-        return this.maxDegreeOfParallelismPerJob;
+        return this.innerProperties() == null ? null : this.innerProperties().maxDegreeOfParallelismPerJob();
     }
 
     /**
@@ -130,7 +122,10 @@ public class CreateComputePolicyWithAccountParameters {
      */
     public CreateComputePolicyWithAccountParameters withMaxDegreeOfParallelismPerJob(
         Integer maxDegreeOfParallelismPerJob) {
-        this.maxDegreeOfParallelismPerJob = maxDegreeOfParallelismPerJob;
+        if (this.innerProperties() == null) {
+            this.innerProperties = new CreateOrUpdateComputePolicyProperties();
+        }
+        this.innerProperties().withMaxDegreeOfParallelismPerJob(maxDegreeOfParallelismPerJob);
         return this;
     }
 
@@ -141,7 +136,7 @@ public class CreateComputePolicyWithAccountParameters {
      * @return the minPriorityPerJob value.
      */
     public Integer minPriorityPerJob() {
-        return this.minPriorityPerJob;
+        return this.innerProperties() == null ? null : this.innerProperties().minPriorityPerJob();
     }
 
     /**
@@ -152,7 +147,10 @@ public class CreateComputePolicyWithAccountParameters {
      * @return the CreateComputePolicyWithAccountParameters object itself.
      */
     public CreateComputePolicyWithAccountParameters withMinPriorityPerJob(Integer minPriorityPerJob) {
-        this.minPriorityPerJob = minPriorityPerJob;
+        if (this.innerProperties() == null) {
+            this.innerProperties = new CreateOrUpdateComputePolicyProperties();
+        }
+        this.innerProperties().withMinPriorityPerJob(minPriorityPerJob);
         return this;
     }
 
@@ -168,17 +166,13 @@ public class CreateComputePolicyWithAccountParameters {
                     new IllegalArgumentException(
                         "Missing required property name in model CreateComputePolicyWithAccountParameters"));
         }
-        if (objectId() == null) {
+        if (innerProperties() == null) {
             throw logger
                 .logExceptionAsError(
                     new IllegalArgumentException(
-                        "Missing required property objectId in model CreateComputePolicyWithAccountParameters"));
-        }
-        if (objectType() == null) {
-            throw logger
-                .logExceptionAsError(
-                    new IllegalArgumentException(
-                        "Missing required property objectType in model CreateComputePolicyWithAccountParameters"));
+                        "Missing required property innerProperties in model CreateComputePolicyWithAccountParameters"));
+        } else {
+            innerProperties().validate();
         }
     }
 }

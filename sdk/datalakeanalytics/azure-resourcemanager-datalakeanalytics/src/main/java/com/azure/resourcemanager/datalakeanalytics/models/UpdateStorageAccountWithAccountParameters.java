@@ -5,15 +5,14 @@
 package com.azure.resourcemanager.datalakeanalytics.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.util.logging.ClientLogger;
+import com.azure.resourcemanager.datalakeanalytics.fluent.models.UpdateStorageAccountProperties;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The parameters used to update an Azure Storage account while updating a Data Lake Analytics account. */
-@JsonFlatten
 @Fluent
-public class UpdateStorageAccountWithAccountParameters {
+public final class UpdateStorageAccountWithAccountParameters {
     @JsonIgnore private final ClientLogger logger = new ClientLogger(UpdateStorageAccountWithAccountParameters.class);
 
     /*
@@ -23,17 +22,11 @@ public class UpdateStorageAccountWithAccountParameters {
     private String name;
 
     /*
-     * The updated access key associated with this Azure Storage account that
-     * will be used to connect to it.
+     * The Azure Storage account properties to use when updating an Azure
+     * Storage account.
      */
-    @JsonProperty(value = "properties.accessKey")
-    private String accessKey;
-
-    /*
-     * The optional suffix for the storage account.
-     */
-    @JsonProperty(value = "properties.suffix")
-    private String suffix;
+    @JsonProperty(value = "properties")
+    private UpdateStorageAccountProperties innerProperties;
 
     /**
      * Get the name property: The unique name of the Azure Storage account to update.
@@ -56,13 +49,23 @@ public class UpdateStorageAccountWithAccountParameters {
     }
 
     /**
+     * Get the innerProperties property: The Azure Storage account properties to use when updating an Azure Storage
+     * account.
+     *
+     * @return the innerProperties value.
+     */
+    private UpdateStorageAccountProperties innerProperties() {
+        return this.innerProperties;
+    }
+
+    /**
      * Get the accessKey property: The updated access key associated with this Azure Storage account that will be used
      * to connect to it.
      *
      * @return the accessKey value.
      */
     public String accessKey() {
-        return this.accessKey;
+        return this.innerProperties() == null ? null : this.innerProperties().accessKey();
     }
 
     /**
@@ -73,7 +76,10 @@ public class UpdateStorageAccountWithAccountParameters {
      * @return the UpdateStorageAccountWithAccountParameters object itself.
      */
     public UpdateStorageAccountWithAccountParameters withAccessKey(String accessKey) {
-        this.accessKey = accessKey;
+        if (this.innerProperties() == null) {
+            this.innerProperties = new UpdateStorageAccountProperties();
+        }
+        this.innerProperties().withAccessKey(accessKey);
         return this;
     }
 
@@ -83,7 +89,7 @@ public class UpdateStorageAccountWithAccountParameters {
      * @return the suffix value.
      */
     public String suffix() {
-        return this.suffix;
+        return this.innerProperties() == null ? null : this.innerProperties().suffix();
     }
 
     /**
@@ -93,7 +99,10 @@ public class UpdateStorageAccountWithAccountParameters {
      * @return the UpdateStorageAccountWithAccountParameters object itself.
      */
     public UpdateStorageAccountWithAccountParameters withSuffix(String suffix) {
-        this.suffix = suffix;
+        if (this.innerProperties() == null) {
+            this.innerProperties = new UpdateStorageAccountProperties();
+        }
+        this.innerProperties().withSuffix(suffix);
         return this;
     }
 
@@ -108,6 +117,9 @@ public class UpdateStorageAccountWithAccountParameters {
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property name in model UpdateStorageAccountWithAccountParameters"));
+        }
+        if (innerProperties() != null) {
+            innerProperties().validate();
         }
     }
 }

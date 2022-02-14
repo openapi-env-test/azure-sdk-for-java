@@ -148,7 +148,7 @@ public final class FirewallRulesImpl implements FirewallRules {
                     new IllegalArgumentException(
                         String.format("The resource ID '%s' is not valid. Missing path segment 'firewallRules'.", id)));
         }
-        this.deleteWithResponse(resourceGroupName, accountName, firewallRuleName, Context.NONE).getValue();
+        this.deleteWithResponse(resourceGroupName, accountName, firewallRuleName, Context.NONE);
     }
 
     public Response<Void> deleteByIdWithResponse(String id, Context context) {
