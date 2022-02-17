@@ -7,6 +7,7 @@ package com.azure.resourcemanager.advisor.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
@@ -31,6 +32,7 @@ public final class ResourceMetadata {
      * The action to view resource.
      */
     @JsonProperty(value = "action")
+    @JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)
     private Map<String, Object> action;
 
     /*

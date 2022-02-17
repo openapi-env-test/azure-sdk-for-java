@@ -191,7 +191,7 @@ public final class SuppressionsImpl implements Suppressions {
                     new IllegalArgumentException(
                         String.format("The resource ID '%s' is not valid. Missing path segment 'suppressions'.", id)));
         }
-        this.deleteWithResponse(resourceUri, recommendationId, name, Context.NONE).getValue();
+        this.deleteWithResponse(resourceUri, recommendationId, name, Context.NONE);
     }
 
     public Response<Void> deleteByIdWithResponse(String id, Context context) {
