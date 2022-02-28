@@ -157,7 +157,7 @@ public final class BareMetalInfrastructureClientImpl implements BareMetalInfrast
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
-        this.apiVersion = "2021-08-09";
+        this.apiVersion = "2021-08-10";
         this.azureBareMetalInstances = new AzureBareMetalInstancesClientImpl(this);
         this.operations = new OperationsClientImpl(this);
     }

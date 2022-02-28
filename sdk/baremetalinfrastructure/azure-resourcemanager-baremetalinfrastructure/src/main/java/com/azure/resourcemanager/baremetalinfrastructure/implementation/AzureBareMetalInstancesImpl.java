@@ -87,18 +87,12 @@ public final class AzureBareMetalInstancesImpl implements AzureBareMetalInstance
         }
     }
 
-    public Response<AzureBareMetalInstance> updateWithResponse(
+    public AzureBareMetalInstance update(
         String resourceGroupName, String azureBareMetalInstanceName, Tags tagsParameter, Context context) {
-        Response<AzureBareMetalInstanceInner> inner =
-            this
-                .serviceClient()
-                .updateWithResponse(resourceGroupName, azureBareMetalInstanceName, tagsParameter, context);
+        AzureBareMetalInstanceInner inner =
+            this.serviceClient().update(resourceGroupName, azureBareMetalInstanceName, tagsParameter, context);
         if (inner != null) {
-            return new SimpleResponse<>(
-                inner.getRequest(),
-                inner.getStatusCode(),
-                inner.getHeaders(),
-                new AzureBareMetalInstanceImpl(inner.getValue(), this.manager()));
+            return new AzureBareMetalInstanceImpl(inner, this.manager());
         } else {
             return null;
         }
