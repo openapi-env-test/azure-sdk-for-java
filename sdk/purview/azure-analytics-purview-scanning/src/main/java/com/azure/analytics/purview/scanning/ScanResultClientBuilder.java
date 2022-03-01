@@ -27,62 +27,43 @@ import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.JacksonAdapter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/** A builder for creating a new instance of the PurviewScanningClient type. */
-@ServiceClientBuilder(
-        serviceClients = {
-            KeyVaultConnectionsClient.class,
-            ClassificationRulesClient.class,
-            DataSourcesClient.class,
-            FiltersClient.class,
-            ScansClient.class,
-            ScanResultClient.class,
-            ScanRulesetsClient.class,
-            SystemScanRulesetsClient.class,
-            TriggersClient.class,
-            KeyVaultConnectionsAsyncClient.class,
-            ClassificationRulesAsyncClient.class,
-            DataSourcesAsyncClient.class,
-            FiltersAsyncClient.class,
-            ScansAsyncClient.class,
-            ScanResultAsyncClient.class,
-            ScanRulesetsAsyncClient.class,
-            SystemScanRulesetsAsyncClient.class,
-            TriggersAsyncClient.class
-        })
-public final class PurviewScanningClientBuilder {
+/** A builder for creating a new instance of the ScanResultClient type. */
+@ServiceClientBuilder(serviceClients = {ScanResultClient.class, ScanResultAsyncClient.class})
+public final class ScanResultClientBuilder {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated static final String[] DEFAULT_SCOPES = new String[] {"https://purview.azure.net/.default"};
+    @Generated private static final String[] DEFAULT_SCOPES = new String[] {"https://purview.azure.net/.default"};
 
-    @Generated private final Map<String, String> properties = new HashMap<>();
-
-    /** Create an instance of the PurviewScanningClientBuilder. */
     @Generated
-    public PurviewScanningClientBuilder() {
+    private final Map<String, String> properties =
+            CoreUtils.getProperties("azure-analytics-purview-scanning.properties");
+
+    /** Create an instance of the ScanResultClientBuilder. */
+    @Generated
+    public ScanResultClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
     /*
      * The scanning endpoint of your purview account. Example:
-     * https://{accountName}.scan.purview.azure.com
+     * https://{accountName}.purview.azure.com
      */
     @Generated private String endpoint;
 
     /**
-     * Sets The scanning endpoint of your purview account. Example: https://{accountName}.scan.purview.azure.com.
+     * Sets The scanning endpoint of your purview account. Example: https://{accountName}.purview.azure.com.
      *
      * @param endpoint the endpoint value.
-     * @return the PurviewScanningClientBuilder.
+     * @return the ScanResultClientBuilder.
      */
     @Generated
-    public PurviewScanningClientBuilder endpoint(String endpoint) {
+    public ScanResultClientBuilder endpoint(String endpoint) {
         this.endpoint = endpoint;
         return this;
     }
@@ -96,10 +77,10 @@ public final class PurviewScanningClientBuilder {
      * Sets Service version.
      *
      * @param serviceVersion the serviceVersion value.
-     * @return the PurviewScanningClientBuilder.
+     * @return the ScanResultClientBuilder.
      */
     @Generated
-    public PurviewScanningClientBuilder serviceVersion(PurviewScanningServiceVersion serviceVersion) {
+    public ScanResultClientBuilder serviceVersion(PurviewScanningServiceVersion serviceVersion) {
         this.serviceVersion = serviceVersion;
         return this;
     }
@@ -113,10 +94,10 @@ public final class PurviewScanningClientBuilder {
      * Sets The HTTP pipeline to send requests through.
      *
      * @param pipeline the pipeline value.
-     * @return the PurviewScanningClientBuilder.
+     * @return the ScanResultClientBuilder.
      */
     @Generated
-    public PurviewScanningClientBuilder pipeline(HttpPipeline pipeline) {
+    public ScanResultClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
@@ -130,10 +111,10 @@ public final class PurviewScanningClientBuilder {
      * Sets The HTTP client used to send the request.
      *
      * @param httpClient the httpClient value.
-     * @return the PurviewScanningClientBuilder.
+     * @return the ScanResultClientBuilder.
      */
     @Generated
-    public PurviewScanningClientBuilder httpClient(HttpClient httpClient) {
+    public ScanResultClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -148,10 +129,10 @@ public final class PurviewScanningClientBuilder {
      * Sets The configuration store that is used during construction of the service client.
      *
      * @param configuration the configuration value.
-     * @return the PurviewScanningClientBuilder.
+     * @return the ScanResultClientBuilder.
      */
     @Generated
-    public PurviewScanningClientBuilder configuration(Configuration configuration) {
+    public ScanResultClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -165,10 +146,10 @@ public final class PurviewScanningClientBuilder {
      * Sets The TokenCredential used for authentication.
      *
      * @param tokenCredential the tokenCredential value.
-     * @return the PurviewScanningClientBuilder.
+     * @return the ScanResultClientBuilder.
      */
     @Generated
-    public PurviewScanningClientBuilder credential(TokenCredential tokenCredential) {
+    public ScanResultClientBuilder credential(TokenCredential tokenCredential) {
         this.tokenCredential = tokenCredential;
         return this;
     }
@@ -182,10 +163,10 @@ public final class PurviewScanningClientBuilder {
      * Sets The logging configuration for HTTP requests and responses.
      *
      * @param httpLogOptions the httpLogOptions value.
-     * @return the PurviewScanningClientBuilder.
+     * @return the ScanResultClientBuilder.
      */
     @Generated
-    public PurviewScanningClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public ScanResultClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
     }
@@ -200,10 +181,10 @@ public final class PurviewScanningClientBuilder {
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      *
      * @param retryPolicy the retryPolicy value.
-     * @return the PurviewScanningClientBuilder.
+     * @return the ScanResultClientBuilder.
      */
     @Generated
-    public PurviewScanningClientBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public ScanResultClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
@@ -223,10 +204,10 @@ public final class PurviewScanningClientBuilder {
      * Sets The client options such as application ID and custom headers to set on a request.
      *
      * @param clientOptions the clientOptions value.
-     * @return the PurviewScanningClientBuilder.
+     * @return the ScanResultClientBuilder.
      */
     @Generated
-    public PurviewScanningClientBuilder clientOptions(ClientOptions clientOptions) {
+    public ScanResultClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
     }
@@ -235,10 +216,10 @@ public final class PurviewScanningClientBuilder {
      * Adds a custom Http pipeline policy.
      *
      * @param customPolicy The custom Http pipeline policy to add.
-     * @return the PurviewScanningClientBuilder.
+     * @return the ScanResultClientBuilder.
      */
     @Generated
-    public PurviewScanningClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public ScanResultClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         pipelinePolicies.add(customPolicy);
         return this;
     }
@@ -308,143 +289,13 @@ public final class PurviewScanningClientBuilder {
     }
 
     /**
-     * Builds an instance of KeyVaultConnectionsAsyncClient async client.
-     *
-     * @return an instance of KeyVaultConnectionsAsyncClient.
-     */
-    @Generated
-    public KeyVaultConnectionsAsyncClient buildKeyVaultConnectionsAsyncClient() {
-        return new KeyVaultConnectionsAsyncClient(buildInnerClient().getKeyVaultConnections());
-    }
-
-    /**
-     * Builds an instance of ClassificationRulesAsyncClient async client.
-     *
-     * @return an instance of ClassificationRulesAsyncClient.
-     */
-    @Generated
-    public ClassificationRulesAsyncClient buildClassificationRulesAsyncClient() {
-        return new ClassificationRulesAsyncClient(buildInnerClient().getClassificationRules());
-    }
-
-    /**
-     * Builds an instance of DataSourcesAsyncClient async client.
-     *
-     * @return an instance of DataSourcesAsyncClient.
-     */
-    @Generated
-    public DataSourcesAsyncClient buildDataSourcesAsyncClient() {
-        return new DataSourcesAsyncClient(buildInnerClient().getDataSources());
-    }
-
-    /**
-     * Builds an instance of FiltersAsyncClient async client.
-     *
-     * @return an instance of FiltersAsyncClient.
-     */
-    @Generated
-    public FiltersAsyncClient buildFiltersAsyncClient() {
-        return new FiltersAsyncClient(buildInnerClient().getFilters());
-    }
-
-    /**
-     * Builds an instance of ScansAsyncClient async client.
-     *
-     * @return an instance of ScansAsyncClient.
-     */
-    @Generated
-    public ScansAsyncClient buildScansAsyncClient() {
-        return new ScansAsyncClient(buildInnerClient().getScans());
-    }
-
-    /**
      * Builds an instance of ScanResultAsyncClient async client.
      *
      * @return an instance of ScanResultAsyncClient.
      */
     @Generated
-    public ScanResultAsyncClient buildScanResultAsyncClient() {
+    public ScanResultAsyncClient buildAsyncClient() {
         return new ScanResultAsyncClient(buildInnerClient().getScanResults());
-    }
-
-    /**
-     * Builds an instance of ScanRulesetsAsyncClient async client.
-     *
-     * @return an instance of ScanRulesetsAsyncClient.
-     */
-    @Generated
-    public ScanRulesetsAsyncClient buildScanRulesetsAsyncClient() {
-        return new ScanRulesetsAsyncClient(buildInnerClient().getScanRulesets());
-    }
-
-    /**
-     * Builds an instance of SystemScanRulesetsAsyncClient async client.
-     *
-     * @return an instance of SystemScanRulesetsAsyncClient.
-     */
-    @Generated
-    public SystemScanRulesetsAsyncClient buildSystemScanRulesetsAsyncClient() {
-        return new SystemScanRulesetsAsyncClient(buildInnerClient().getSystemScanRulesets());
-    }
-
-    /**
-     * Builds an instance of TriggersAsyncClient async client.
-     *
-     * @return an instance of TriggersAsyncClient.
-     */
-    @Generated
-    public TriggersAsyncClient buildTriggersAsyncClient() {
-        return new TriggersAsyncClient(buildInnerClient().getTriggers());
-    }
-
-    /**
-     * Builds an instance of KeyVaultConnectionsClient sync client.
-     *
-     * @return an instance of KeyVaultConnectionsClient.
-     */
-    @Generated
-    public KeyVaultConnectionsClient buildKeyVaultConnectionsClient() {
-        return new KeyVaultConnectionsClient(buildInnerClient().getKeyVaultConnections());
-    }
-
-    /**
-     * Builds an instance of ClassificationRulesClient sync client.
-     *
-     * @return an instance of ClassificationRulesClient.
-     */
-    @Generated
-    public ClassificationRulesClient buildClassificationRulesClient() {
-        return new ClassificationRulesClient(buildInnerClient().getClassificationRules());
-    }
-
-    /**
-     * Builds an instance of DataSourcesClient sync client.
-     *
-     * @return an instance of DataSourcesClient.
-     */
-    @Generated
-    public DataSourcesClient buildDataSourcesClient() {
-        return new DataSourcesClient(buildInnerClient().getDataSources());
-    }
-
-    /**
-     * Builds an instance of FiltersClient sync client.
-     *
-     * @return an instance of FiltersClient.
-     */
-    @Generated
-    public FiltersClient buildFiltersClient() {
-        return new FiltersClient(buildInnerClient().getFilters());
-    }
-
-    /**
-     * Builds an instance of ScansClient sync client.
-     *
-     * @return an instance of ScansClient.
-     */
-    @Generated
-    public ScansClient buildScansClient() {
-        return new ScansClient(buildInnerClient().getScans());
     }
 
     /**
@@ -453,37 +304,7 @@ public final class PurviewScanningClientBuilder {
      * @return an instance of ScanResultClient.
      */
     @Generated
-    public ScanResultClient buildScanResultClient() {
+    public ScanResultClient buildClient() {
         return new ScanResultClient(buildInnerClient().getScanResults());
-    }
-
-    /**
-     * Builds an instance of ScanRulesetsClient sync client.
-     *
-     * @return an instance of ScanRulesetsClient.
-     */
-    @Generated
-    public ScanRulesetsClient buildScanRulesetsClient() {
-        return new ScanRulesetsClient(buildInnerClient().getScanRulesets());
-    }
-
-    /**
-     * Builds an instance of SystemScanRulesetsClient sync client.
-     *
-     * @return an instance of SystemScanRulesetsClient.
-     */
-    @Generated
-    public SystemScanRulesetsClient buildSystemScanRulesetsClient() {
-        return new SystemScanRulesetsClient(buildInnerClient().getSystemScanRulesets());
-    }
-
-    /**
-     * Builds an instance of TriggersClient sync client.
-     *
-     * @return an instance of TriggersClient.
-     */
-    @Generated
-    public TriggersClient buildTriggersClient() {
-        return new TriggersClient(buildInnerClient().getTriggers());
     }
 }

@@ -4,8 +4,8 @@
 
 package com.azure.analytics.purview.scanning.generated;
 
-import com.azure.analytics.purview.scanning.PurviewScanningClientBuilder;
 import com.azure.analytics.purview.scanning.SystemScanRulesetsClient;
+import com.azure.analytics.purview.scanning.SystemScanRulesetsClientBuilder;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -14,10 +14,10 @@ import com.azure.identity.DefaultAzureCredentialBuilder;
 public class SystemScanRulesetsGetLatest {
     public static void main(String[] args) {
         SystemScanRulesetsClient client =
-                new PurviewScanningClientBuilder()
+                new SystemScanRulesetsClientBuilder()
                         .credential(new DefaultAzureCredentialBuilder().build())
                         .endpoint("{Endpoint}")
-                        .buildSystemScanRulesetsClient();
+                        .buildClient();
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("dataSourceType", "AzureStorage");
         Response<BinaryData> response = client.getLatestWithResponse(requestOptions);

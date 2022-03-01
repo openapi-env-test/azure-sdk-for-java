@@ -15,11 +15,11 @@ import com.azure.core.util.serializer.SerializerAdapter;
 
 /** Initializes a new instance of the PurviewScanningClient type. */
 public final class PurviewScanningClientImpl {
-    /** The scanning endpoint of your purview account. Example: https://{accountName}.scan.purview.azure.com. */
+    /** The scanning endpoint of your purview account. Example: https://{accountName}.purview.azure.com. */
     private final String endpoint;
 
     /**
-     * Gets The scanning endpoint of your purview account. Example: https://{accountName}.scan.purview.azure.com.
+     * Gets The scanning endpoint of your purview account. Example: https://{accountName}.purview.azure.com.
      *
      * @return the endpoint value.
      */
@@ -174,8 +174,7 @@ public final class PurviewScanningClientImpl {
     /**
      * Initializes an instance of PurviewScanningClient client.
      *
-     * @param endpoint The scanning endpoint of your purview account. Example:
-     *     https://{accountName}.scan.purview.azure.com.
+     * @param endpoint The scanning endpoint of your purview account. Example: https://{accountName}.purview.azure.com.
      * @param serviceVersion Service version.
      */
     public PurviewScanningClientImpl(String endpoint, PurviewScanningServiceVersion serviceVersion) {
@@ -192,8 +191,7 @@ public final class PurviewScanningClientImpl {
      * Initializes an instance of PurviewScanningClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint The scanning endpoint of your purview account. Example:
-     *     https://{accountName}.scan.purview.azure.com.
+     * @param endpoint The scanning endpoint of your purview account. Example: https://{accountName}.purview.azure.com.
      * @param serviceVersion Service version.
      */
     public PurviewScanningClientImpl(
@@ -206,8 +204,7 @@ public final class PurviewScanningClientImpl {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint The scanning endpoint of your purview account. Example:
-     *     https://{accountName}.scan.purview.azure.com.
+     * @param endpoint The scanning endpoint of your purview account. Example: https://{accountName}.purview.azure.com.
      * @param serviceVersion Service version.
      */
     public PurviewScanningClientImpl(

@@ -5,7 +5,7 @@
 package com.azure.analytics.purview.scanning.generated;
 
 import com.azure.analytics.purview.scanning.DataSourcesClient;
-import com.azure.analytics.purview.scanning.PurviewScanningClientBuilder;
+import com.azure.analytics.purview.scanning.DataSourcesClientBuilder;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
@@ -14,10 +14,10 @@ import com.azure.identity.DefaultAzureCredentialBuilder;
 public class DataSourcesListAll {
     public static void main(String[] args) {
         DataSourcesClient client =
-                new PurviewScanningClientBuilder()
+                new DataSourcesClientBuilder()
                         .credential(new DefaultAzureCredentialBuilder().build())
                         .endpoint("{Endpoint}")
-                        .buildDataSourcesClient();
+                        .buildClient();
         RequestOptions requestOptions = new RequestOptions();
         PagedIterable<BinaryData> response = client.listAll(requestOptions);
     }

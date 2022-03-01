@@ -16,7 +16,7 @@ import com.azure.core.util.BinaryData;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous PurviewScanningClient type. */
-@ServiceClient(builder = PurviewScanningClientBuilder.class, isAsync = true)
+@ServiceClient(builder = FiltersClientBuilder.class, isAsync = true)
 public final class FiltersAsyncClient {
     @Generated private final FiltersImpl serviceClient;
 
@@ -38,7 +38,7 @@ public final class FiltersAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -79,7 +79,7 @@ public final class FiltersAsyncClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
