@@ -137,7 +137,7 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -149,8 +149,8 @@ public final class CollectionsImpl {
      *     friendlyName: String
      *     name: String
      *     parentCollection: {
-     *         referenceName: String
      *         type: String
+     *         referenceName: String
      *     }
      *     systemData: {
      *         createdAt: String
@@ -189,7 +189,7 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -201,8 +201,8 @@ public final class CollectionsImpl {
      *     friendlyName: String
      *     name: String
      *     parentCollection: {
-     *         referenceName: String
      *         type: String
+     *         referenceName: String
      *     }
      *     systemData: {
      *         createdAt: String
@@ -240,7 +240,7 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -252,8 +252,8 @@ public final class CollectionsImpl {
      *     friendlyName: String
      *     name: String
      *     parentCollection: {
-     *         referenceName: String
      *         type: String
+     *         referenceName: String
      *     }
      *     systemData: {
      *         createdAt: String
@@ -284,7 +284,7 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -296,8 +296,8 @@ public final class CollectionsImpl {
      *     friendlyName: String
      *     name: String
      *     parentCollection: {
-     *         referenceName: String
      *         type: String
+     *         referenceName: String
      *     }
      *     systemData: {
      *         createdAt: String
@@ -319,8 +319,8 @@ public final class CollectionsImpl {
      *     friendlyName: String
      *     name: String
      *     parentCollection: {
-     *         referenceName: String
      *         type: String
+     *         referenceName: String
      *     }
      *     systemData: {
      *         createdAt: String
@@ -361,7 +361,7 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -373,8 +373,8 @@ public final class CollectionsImpl {
      *     friendlyName: String
      *     name: String
      *     parentCollection: {
-     *         referenceName: String
      *         type: String
+     *         referenceName: String
      *     }
      *     systemData: {
      *         createdAt: String
@@ -396,8 +396,8 @@ public final class CollectionsImpl {
      *     friendlyName: String
      *     name: String
      *     parentCollection: {
-     *         referenceName: String
      *         type: String
+     *         referenceName: String
      *     }
      *     systemData: {
      *         createdAt: String
@@ -437,7 +437,7 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -449,8 +449,8 @@ public final class CollectionsImpl {
      *     friendlyName: String
      *     name: String
      *     parentCollection: {
-     *         referenceName: String
      *         type: String
+     *         referenceName: String
      *     }
      *     systemData: {
      *         createdAt: String
@@ -472,8 +472,8 @@ public final class CollectionsImpl {
      *     friendlyName: String
      *     name: String
      *     parentCollection: {
-     *         referenceName: String
      *         type: String
+     *         referenceName: String
      *     }
      *     systemData: {
      *         createdAt: String
@@ -506,7 +506,7 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * @param collectionName The collectionName parameter.
@@ -535,7 +535,7 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * @param collectionName The collectionName parameter.
@@ -563,7 +563,7 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * @param collectionName The collectionName parameter.
@@ -584,8 +584,8 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     *     <tr><td>skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -601,8 +601,8 @@ public final class CollectionsImpl {
      *             friendlyName: String
      *             name: String
      *             parentCollection: {
-     *                 referenceName: String
      *                 type: String
+     *                 referenceName: String
      *             }
      *             systemData: {
      *                 createdAt: String
@@ -649,8 +649,8 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     *     <tr><td>skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -666,8 +666,8 @@ public final class CollectionsImpl {
      *             friendlyName: String
      *             name: String
      *             parentCollection: {
-     *                 referenceName: String
      *                 type: String
+     *                 referenceName: String
      *             }
      *             systemData: {
      *                 createdAt: String
@@ -714,8 +714,8 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     *     <tr><td>skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -731,8 +731,8 @@ public final class CollectionsImpl {
      *             friendlyName: String
      *             name: String
      *             parentCollection: {
-     *                 referenceName: String
      *                 type: String
+     *                 referenceName: String
      *             }
      *             systemData: {
      *                 createdAt: String
@@ -749,7 +749,7 @@ public final class CollectionsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return paged list of collections.
+     * @return paged list of collections as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listCollectionsAsync(RequestOptions requestOptions) {
@@ -766,8 +766,8 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     *     <tr><td>skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -783,8 +783,8 @@ public final class CollectionsImpl {
      *             friendlyName: String
      *             name: String
      *             parentCollection: {
-     *                 referenceName: String
      *                 type: String
+     *                 referenceName: String
      *             }
      *             systemData: {
      *                 createdAt: String
@@ -802,7 +802,7 @@ public final class CollectionsImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return paged list of collections.
+     * @return paged list of collections as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listCollectionsAsync(RequestOptions requestOptions, Context context) {
@@ -819,8 +819,8 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     *     <tr><td>skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -836,8 +836,8 @@ public final class CollectionsImpl {
      *             friendlyName: String
      *             name: String
      *             parentCollection: {
-     *                 referenceName: String
      *                 type: String
+     *                 referenceName: String
      *             }
      *             systemData: {
      *                 createdAt: String
@@ -854,7 +854,7 @@ public final class CollectionsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return paged list of collections.
+     * @return paged list of collections as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listCollections(RequestOptions requestOptions) {
@@ -869,8 +869,8 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     *     <tr><td>skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -923,8 +923,8 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     *     <tr><td>skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -976,8 +976,8 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     *     <tr><td>skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -998,7 +998,7 @@ public final class CollectionsImpl {
      * @param collectionName The collectionName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return paged list of collections.
+     * @return paged list of collections as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listChildCollectionNamesAsync(String collectionName, RequestOptions requestOptions) {
@@ -1015,8 +1015,8 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     *     <tr><td>skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1038,7 +1038,7 @@ public final class CollectionsImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return paged list of collections.
+     * @return paged list of collections as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listChildCollectionNamesAsync(
@@ -1056,8 +1056,8 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     *     <tr><td>skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1078,7 +1078,7 @@ public final class CollectionsImpl {
      * @param collectionName The collectionName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return paged list of collections.
+     * @return paged list of collections as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listChildCollectionNames(String collectionName, RequestOptions requestOptions) {
@@ -1093,7 +1093,7 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1136,7 +1136,7 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1178,7 +1178,7 @@ public final class CollectionsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1221,8 +1221,8 @@ public final class CollectionsImpl {
      *             friendlyName: String
      *             name: String
      *             parentCollection: {
-     *                 referenceName: String
      *                 type: String
+     *                 referenceName: String
      *             }
      *             systemData: {
      *                 createdAt: String
@@ -1276,8 +1276,8 @@ public final class CollectionsImpl {
      *             friendlyName: String
      *             name: String
      *             parentCollection: {
-     *                 referenceName: String
      *                 type: String
+     *                 referenceName: String
      *             }
      *             systemData: {
      *                 createdAt: String

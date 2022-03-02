@@ -38,7 +38,7 @@ public final class CollectionsClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -50,8 +50,8 @@ public final class CollectionsClient {
      *     friendlyName: String
      *     name: String
      *     parentCollection: {
-     *         referenceName: String
      *         type: String
+     *         referenceName: String
      *     }
      *     systemData: {
      *         createdAt: String
@@ -83,7 +83,7 @@ public final class CollectionsClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -95,8 +95,8 @@ public final class CollectionsClient {
      *     friendlyName: String
      *     name: String
      *     parentCollection: {
-     *         referenceName: String
      *         type: String
+     *         referenceName: String
      *     }
      *     systemData: {
      *         createdAt: String
@@ -118,8 +118,8 @@ public final class CollectionsClient {
      *     friendlyName: String
      *     name: String
      *     parentCollection: {
-     *         referenceName: String
      *         type: String
+     *         referenceName: String
      *     }
      *     systemData: {
      *         createdAt: String
@@ -153,7 +153,7 @@ public final class CollectionsClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * @param collectionName The collectionName parameter.
@@ -175,8 +175,8 @@ public final class CollectionsClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     *     <tr><td>skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -192,8 +192,8 @@ public final class CollectionsClient {
      *             friendlyName: String
      *             name: String
      *             parentCollection: {
-     *                 referenceName: String
      *                 type: String
+     *                 referenceName: String
      *             }
      *             systemData: {
      *                 createdAt: String
@@ -210,7 +210,7 @@ public final class CollectionsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return paged list of collections.
+     * @return paged list of collections as paginated response with {@link PagedIterable}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -226,8 +226,8 @@ public final class CollectionsClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     *     <tr><td>skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$skipToken</td><td>String</td><td>No</td><td>The skipToken parameter</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -248,7 +248,7 @@ public final class CollectionsClient {
      * @param collectionName The collectionName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return paged list of collections.
+     * @return paged list of collections as paginated response with {@link PagedIterable}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -264,7 +264,7 @@ public final class CollectionsClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
