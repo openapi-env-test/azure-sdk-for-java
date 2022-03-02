@@ -27,7 +27,6 @@ import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.JacksonAdapter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -55,9 +54,11 @@ public final class PurviewCatalogClientBuilder {
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated static final String[] DEFAULT_SCOPES = new String[] {"https://purview.azure.net/.default"};
+    @Generated private static final String[] DEFAULT_SCOPES = new String[] {"https://purview.azure.net/.default"};
 
-    @Generated private final Map<String, String> properties = new HashMap<>();
+    @Generated
+    private final Map<String, String> properties =
+            CoreUtils.getProperties("azure-analytics-purview-catalog.properties");
 
     /** Create an instance of the PurviewCatalogClientBuilder. */
     @Generated
