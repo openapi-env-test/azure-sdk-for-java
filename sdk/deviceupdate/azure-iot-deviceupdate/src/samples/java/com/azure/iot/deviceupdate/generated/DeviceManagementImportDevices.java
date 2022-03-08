@@ -4,14 +4,14 @@
 
 package com.azure.iot.deviceupdate.generated;
 
-import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.polling.SyncPoller;
 import com.azure.identity.DefaultAzureCredentialBuilder;
 import com.azure.iot.deviceupdate.DeviceManagementClient;
 import com.azure.iot.deviceupdate.DeviceUpdateClientBuilder;
 
-public class DeviceManagementListBestUpdatesForGroup {
+public class DeviceManagementImportDevices {
     public static void main(String[] args) {
         DeviceManagementClient client =
                 new DeviceUpdateClientBuilder()
@@ -19,7 +19,9 @@ public class DeviceManagementListBestUpdatesForGroup {
                         .endpoint("contoso.api.adu.microsoft.com")
                         .instanceId("blue")
                         .buildDeviceManagementClient();
+        BinaryData importType = BinaryData.fromString("\"All\"");
         RequestOptions requestOptions = new RequestOptions();
-        PagedIterable<BinaryData> response = client.listBestUpdatesForGroup("group1", requestOptions);
+        requestOptions.addQueryParam("action", "import");
+        SyncPoller<BinaryData, BinaryData> response = client.beginImportDevices(importType, requestOptions);
     }
 }
