@@ -12,13 +12,15 @@ import com.azure.iot.deviceupdate.DeviceUpdateClientBuilder;
 
 public class DeviceManagementDeleteGroup {
     public static void main(String[] args) {
-        DeviceManagementClient client =
+        // BEGIN: com.azure.iot.deviceupdate.generated.devicemanagementdeletegroup.devicemanagementdeletegroup
+        DeviceManagementClient deviceManagementClient =
                 new DeviceUpdateClientBuilder()
                         .credential(new DefaultAzureCredentialBuilder().build())
                         .endpoint("contoso.api.adu.microsoft.com")
                         .instanceId("blue")
                         .buildDeviceManagementClient();
         RequestOptions requestOptions = new RequestOptions();
-        Response<Void> response = client.deleteGroupWithResponse("group1", requestOptions);
+        Response<Void> response = deviceManagementClient.deleteGroupWithResponse("group1", requestOptions);
+        // END: com.azure.iot.deviceupdate.generated.devicemanagementdeletegroup.devicemanagementdeletegroup
     }
 }

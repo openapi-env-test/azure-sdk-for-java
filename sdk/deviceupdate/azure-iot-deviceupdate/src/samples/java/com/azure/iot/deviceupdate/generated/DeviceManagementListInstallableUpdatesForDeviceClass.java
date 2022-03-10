@@ -13,7 +13,9 @@ import com.azure.iot.deviceupdate.DeviceUpdateClientBuilder;
 
 public class DeviceManagementListInstallableUpdatesForDeviceClass {
     public static void main(String[] args) {
-        DeviceManagementClient client =
+        // BEGIN:
+        // com.azure.iot.deviceupdate.generated.devicemanagementlistinstallableupdatesfordeviceclass.devicemanagementlistinstallableupdatesfordeviceclass
+        DeviceManagementClient deviceManagementClient =
                 new DeviceUpdateClientBuilder()
                         .credential(new DefaultAzureCredentialBuilder().build())
                         .endpoint("contoso.api.adu.microsoft.com")
@@ -21,6 +23,8 @@ public class DeviceManagementListInstallableUpdatesForDeviceClass {
                         .buildDeviceManagementClient();
         RequestOptions requestOptions = new RequestOptions();
         PagedIterable<BinaryData> response =
-                client.listInstallableUpdatesForDeviceClass("deviceClassId", requestOptions);
+                deviceManagementClient.listInstallableUpdatesForDeviceClass("deviceClassId", requestOptions);
+        // END:
+        // com.azure.iot.deviceupdate.generated.devicemanagementlistinstallableupdatesfordeviceclass.devicemanagementlistinstallableupdatesfordeviceclass
     }
 }
