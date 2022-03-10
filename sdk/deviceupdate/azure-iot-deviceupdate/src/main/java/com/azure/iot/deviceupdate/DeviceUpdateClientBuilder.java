@@ -44,7 +44,7 @@ public final class DeviceUpdateClientBuilder {
 
     @Generated private static final String SDK_VERSION = "version";
 
-    @Generated static final String[] DEFAULT_SCOPES = new String[] {"https://api.adu.microsoft.com/.default"};
+    @Generated private static final String[] DEFAULT_SCOPES = new String[] {"https://api.adu.microsoft.com/.default"};
 
     @Generated
     private final Map<String, String> properties = CoreUtils.getProperties("azure-iot-deviceupdate.properties");
