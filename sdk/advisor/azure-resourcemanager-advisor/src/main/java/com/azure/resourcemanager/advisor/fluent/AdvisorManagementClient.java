@@ -45,27 +45,6 @@ public interface AdvisorManagementClient {
     Duration getDefaultPollInterval();
 
     /**
-     * Gets the RecommendationMetadatasClient object to access its operations.
-     *
-     * @return the RecommendationMetadatasClient object.
-     */
-    RecommendationMetadatasClient getRecommendationMetadatas();
-
-    /**
-     * Gets the ConfigurationsClient object to access its operations.
-     *
-     * @return the ConfigurationsClient object.
-     */
-    ConfigurationsClient getConfigurations();
-
-    /**
-     * Gets the RecommendationsClient object to access its operations.
-     *
-     * @return the RecommendationsClient object.
-     */
-    RecommendationsClient getRecommendations();
-
-    /**
      * Gets the OperationsClient object to access its operations.
      *
      * @return the OperationsClient object.
@@ -73,9 +52,9 @@ public interface AdvisorManagementClient {
     OperationsClient getOperations();
 
     /**
-     * Gets the SuppressionsClient object to access its operations.
+     * Gets the AdvisorScoresClient object to access its operations.
      *
-     * @return the SuppressionsClient object.
+     * @return the AdvisorScoresClient object.
      */
-    SuppressionsClient getSuppressions();
+    AdvisorScoresClient getAdvisorScores();
 }

@@ -8,8 +8,8 @@ import com.azure.core.credential.TokenCredential;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
-import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
@@ -17,38 +17,28 @@ import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
+import com.azure.core.management.http.policy.ArmChallengeAuthenticationPolicy;
 import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.advisor.fluent.AdvisorManagementClient;
 import com.azure.resourcemanager.advisor.implementation.AdvisorManagementClientBuilder;
-import com.azure.resourcemanager.advisor.implementation.ConfigurationsImpl;
+import com.azure.resourcemanager.advisor.implementation.AdvisorScoresImpl;
 import com.azure.resourcemanager.advisor.implementation.OperationsImpl;
-import com.azure.resourcemanager.advisor.implementation.RecommendationMetadatasImpl;
-import com.azure.resourcemanager.advisor.implementation.RecommendationsImpl;
-import com.azure.resourcemanager.advisor.implementation.SuppressionsImpl;
-import com.azure.resourcemanager.advisor.models.Configurations;
+import com.azure.resourcemanager.advisor.models.AdvisorScores;
 import com.azure.resourcemanager.advisor.models.Operations;
-import com.azure.resourcemanager.advisor.models.RecommendationMetadatas;
-import com.azure.resourcemanager.advisor.models.Recommendations;
-import com.azure.resourcemanager.advisor.models.Suppressions;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /** Entry point to AdvisorManager. REST APIs for Azure Advisor. */
 public final class AdvisorManager {
-    private RecommendationMetadatas recommendationMetadatas;
-
-    private Configurations configurations;
-
-    private Recommendations recommendations;
-
     private Operations operations;
 
-    private Suppressions suppressions;
+    private AdvisorScores advisorScores;
 
     private final AdvisorManagementClient clientObject;
 
@@ -88,11 +78,12 @@ public final class AdvisorManager {
 
     /** The Configurable allowing configurations to be set. */
     public static final class Configurable {
-        private final ClientLogger logger = new ClientLogger(Configurable.class);
+        private static final ClientLogger LOGGER = new ClientLogger(Configurable.class);
 
         private HttpClient httpClient;
         private HttpLogOptions httpLogOptions;
         private final List<HttpPipelinePolicy> policies = new ArrayList<>();
+        private final List<String> scopes = new ArrayList<>();
         private RetryPolicy retryPolicy;
         private Duration defaultPollInterval;
 
@@ -133,6 +124,17 @@ public final class AdvisorManager {
         }
 
         /**
+         * Adds the scope to permission sets.
+         *
+         * @param scope the scope.
+         * @return the configurable object itself.
+         */
+        public Configurable withScope(String scope) {
+            this.scopes.add(Objects.requireNonNull(scope, "'scope' cannot be null."));
+            return this;
+        }
+
+        /**
          * Sets the retry policy to the HTTP pipeline.
          *
          * @param retryPolicy the HTTP pipeline retry policy.
@@ -150,9 +152,11 @@ public final class AdvisorManager {
          * @return the configurable object itself.
          */
         public Configurable withDefaultPollInterval(Duration defaultPollInterval) {
-            this.defaultPollInterval = Objects.requireNonNull(defaultPollInterval, "'retryPolicy' cannot be null.");
+            this.defaultPollInterval =
+                Objects.requireNonNull(defaultPollInterval, "'defaultPollInterval' cannot be null.");
             if (this.defaultPollInterval.isNegative()) {
-                throw logger.logExceptionAsError(new IllegalArgumentException("'httpPipeline' cannot be negative"));
+                throw LOGGER
+                    .logExceptionAsError(new IllegalArgumentException("'defaultPollInterval' cannot be negative"));
             }
             return this;
         }
@@ -188,20 +192,33 @@ public final class AdvisorManager {
                 userAgentBuilder.append(" (auto-generated)");
             }
 
+            if (scopes.isEmpty()) {
+                scopes.add(profile.getEnvironment().getManagementEndpoint() + "/.default");
+            }
             if (retryPolicy == null) {
                 retryPolicy = new RetryPolicy("Retry-After", ChronoUnit.SECONDS);
             }
             List<HttpPipelinePolicy> policies = new ArrayList<>();
             policies.add(new UserAgentPolicy(userAgentBuilder.toString()));
             policies.add(new RequestIdPolicy());
+            policies
+                .addAll(
+                    this
+                        .policies
+                        .stream()
+                        .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
+                        .collect(Collectors.toList()));
             HttpPolicyProviders.addBeforeRetryPolicies(policies);
             policies.add(retryPolicy);
             policies.add(new AddDatePolicy());
+            policies.add(new ArmChallengeAuthenticationPolicy(credential, scopes.toArray(new String[0])));
             policies
-                .add(
-                    new BearerTokenAuthenticationPolicy(
-                        credential, profile.getEnvironment().getManagementEndpoint() + "/.default"));
-            policies.addAll(this.policies);
+                .addAll(
+                    this
+                        .policies
+                        .stream()
+                        .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
+                        .collect(Collectors.toList()));
             HttpPolicyProviders.addAfterRetryPolicies(policies);
             policies.add(new HttpLoggingPolicy(httpLogOptions));
             HttpPipeline httpPipeline =
@@ -213,31 +230,6 @@ public final class AdvisorManager {
         }
     }
 
-    /** @return Resource collection API of RecommendationMetadatas. */
-    public RecommendationMetadatas recommendationMetadatas() {
-        if (this.recommendationMetadatas == null) {
-            this.recommendationMetadatas =
-                new RecommendationMetadatasImpl(clientObject.getRecommendationMetadatas(), this);
-        }
-        return recommendationMetadatas;
-    }
-
-    /** @return Resource collection API of Configurations. */
-    public Configurations configurations() {
-        if (this.configurations == null) {
-            this.configurations = new ConfigurationsImpl(clientObject.getConfigurations(), this);
-        }
-        return configurations;
-    }
-
-    /** @return Resource collection API of Recommendations. */
-    public Recommendations recommendations() {
-        if (this.recommendations == null) {
-            this.recommendations = new RecommendationsImpl(clientObject.getRecommendations(), this);
-        }
-        return recommendations;
-    }
-
     /** @return Resource collection API of Operations. */
     public Operations operations() {
         if (this.operations == null) {
@@ -246,12 +238,12 @@ public final class AdvisorManager {
         return operations;
     }
 
-    /** @return Resource collection API of Suppressions. */
-    public Suppressions suppressions() {
-        if (this.suppressions == null) {
-            this.suppressions = new SuppressionsImpl(clientObject.getSuppressions(), this);
+    /** @return Resource collection API of AdvisorScores. */
+    public AdvisorScores advisorScores() {
+        if (this.advisorScores == null) {
+            this.advisorScores = new AdvisorScoresImpl(clientObject.getAdvisorScores(), this);
         }
-        return suppressions;
+        return advisorScores;
     }
 
     /**

@@ -22,11 +22,8 @@ import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.resourcemanager.advisor.fluent.AdvisorManagementClient;
-import com.azure.resourcemanager.advisor.fluent.ConfigurationsClient;
+import com.azure.resourcemanager.advisor.fluent.AdvisorScoresClient;
 import com.azure.resourcemanager.advisor.fluent.OperationsClient;
-import com.azure.resourcemanager.advisor.fluent.RecommendationMetadatasClient;
-import com.azure.resourcemanager.advisor.fluent.RecommendationsClient;
-import com.azure.resourcemanager.advisor.fluent.SuppressionsClient;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.ByteBuffer;
@@ -40,8 +37,6 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the AdvisorManagementClientImpl type. */
 @ServiceClient(builder = AdvisorManagementClientBuilder.class)
 public final class AdvisorManagementClientImpl implements AdvisorManagementClient {
-    private final ClientLogger logger = new ClientLogger(AdvisorManagementClientImpl.class);
-
     /** The Azure subscription ID. */
     private final String subscriptionId;
 
@@ -114,42 +109,6 @@ public final class AdvisorManagementClientImpl implements AdvisorManagementClien
         return this.defaultPollInterval;
     }
 
-    /** The RecommendationMetadatasClient object to access its operations. */
-    private final RecommendationMetadatasClient recommendationMetadatas;
-
-    /**
-     * Gets the RecommendationMetadatasClient object to access its operations.
-     *
-     * @return the RecommendationMetadatasClient object.
-     */
-    public RecommendationMetadatasClient getRecommendationMetadatas() {
-        return this.recommendationMetadatas;
-    }
-
-    /** The ConfigurationsClient object to access its operations. */
-    private final ConfigurationsClient configurations;
-
-    /**
-     * Gets the ConfigurationsClient object to access its operations.
-     *
-     * @return the ConfigurationsClient object.
-     */
-    public ConfigurationsClient getConfigurations() {
-        return this.configurations;
-    }
-
-    /** The RecommendationsClient object to access its operations. */
-    private final RecommendationsClient recommendations;
-
-    /**
-     * Gets the RecommendationsClient object to access its operations.
-     *
-     * @return the RecommendationsClient object.
-     */
-    public RecommendationsClient getRecommendations() {
-        return this.recommendations;
-    }
-
     /** The OperationsClient object to access its operations. */
     private final OperationsClient operations;
 
@@ -162,16 +121,16 @@ public final class AdvisorManagementClientImpl implements AdvisorManagementClien
         return this.operations;
     }
 
-    /** The SuppressionsClient object to access its operations. */
-    private final SuppressionsClient suppressions;
+    /** The AdvisorScoresClient object to access its operations. */
+    private final AdvisorScoresClient advisorScores;
 
     /**
-     * Gets the SuppressionsClient object to access its operations.
+     * Gets the AdvisorScoresClient object to access its operations.
      *
-     * @return the SuppressionsClient object.
+     * @return the AdvisorScoresClient object.
      */
-    public SuppressionsClient getSuppressions() {
-        return this.suppressions;
+    public AdvisorScoresClient getAdvisorScores() {
+        return this.advisorScores;
     }
 
     /**
@@ -196,12 +155,9 @@ public final class AdvisorManagementClientImpl implements AdvisorManagementClien
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
-        this.apiVersion = "2020-01-01";
-        this.recommendationMetadatas = new RecommendationMetadatasClientImpl(this);
-        this.configurations = new ConfigurationsClientImpl(this);
-        this.recommendations = new RecommendationsClientImpl(this);
+        this.apiVersion = "2022-07-01";
         this.operations = new OperationsClientImpl(this);
-        this.suppressions = new SuppressionsClientImpl(this);
+        this.advisorScores = new AdvisorScoresClientImpl(this);
     }
 
     /**
@@ -287,7 +243,7 @@ public final class AdvisorManagementClientImpl implements AdvisorManagementClien
                             managementError = null;
                         }
                     } catch (IOException | RuntimeException ioe) {
-                        logger.logThrowableAsWarning(ioe);
+                        LOGGER.logThrowableAsWarning(ioe);
                     }
                 }
             } else {
@@ -346,4 +302,6 @@ public final class AdvisorManagementClientImpl implements AdvisorManagementClien
             return Mono.just(new String(responseBody, charset));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(AdvisorManagementClientImpl.class);
 }
