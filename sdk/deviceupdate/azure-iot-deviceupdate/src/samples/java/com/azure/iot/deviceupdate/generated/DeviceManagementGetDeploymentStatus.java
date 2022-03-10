@@ -13,7 +13,9 @@ import com.azure.iot.deviceupdate.DeviceUpdateClientBuilder;
 
 public class DeviceManagementGetDeploymentStatus {
     public static void main(String[] args) {
-        DeviceManagementClient client =
+        // BEGIN:
+        // com.azure.iot.deviceupdate.generated.devicemanagementgetdeploymentstatus.devicemanagementgetdeploymentstatus
+        DeviceManagementClient deviceManagementClient =
                 new DeviceUpdateClientBuilder()
                         .credential(new DefaultAzureCredentialBuilder().build())
                         .endpoint("contoso.api.adu.microsoft.com")
@@ -21,6 +23,8 @@ public class DeviceManagementGetDeploymentStatus {
                         .buildDeviceManagementClient();
         RequestOptions requestOptions = new RequestOptions();
         Response<BinaryData> response =
-                client.getDeploymentStatusWithResponse("TestGroup", "deploymentId", requestOptions);
+                deviceManagementClient.getDeploymentStatusWithResponse("TestGroup", "deploymentId", requestOptions);
+        // END:
+        // com.azure.iot.deviceupdate.generated.devicemanagementgetdeploymentstatus.devicemanagementgetdeploymentstatus
     }
 }
