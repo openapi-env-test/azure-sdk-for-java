@@ -212,16 +212,6 @@ public final class DeviceManagementsImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/deviceupdate/{instanceId}/management/groups/{groupId}/bestUpdates")
-        @ExpectedResponses({200})
-        Mono<Response<BinaryData>> listBestUpdatesForGroup(
-                @HostParam("endpoint") String endpoint,
-                @PathParam(value = "instanceId", encoded = true) String instanceId,
-                @PathParam("groupId") String groupId,
-                @QueryParam("api-version") String apiVersion,
-                RequestOptions requestOptions,
-                Context context);
-
         @Get("/deviceupdate/{instanceId}/management/groups/{groupId}/deployments")
         @ExpectedResponses({200})
         Mono<Response<BinaryData>> listDeploymentsForGroup(
@@ -411,14 +401,6 @@ public final class DeviceManagementsImpl {
 
         @Get("{nextLink}")
         @ExpectedResponses({200})
-        Mono<Response<BinaryData>> listBestUpdatesForGroupNext(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HostParam("endpoint") String endpoint,
-                RequestOptions requestOptions,
-                Context context);
-
-        @Get("{nextLink}")
-        @ExpectedResponses({200})
         Mono<Response<BinaryData>> listDeploymentsForGroupNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink,
                 @HostParam("endpoint") String endpoint,
@@ -459,7 +441,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -519,7 +501,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -579,7 +561,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -606,7 +588,7 @@ public final class DeviceManagementsImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @return a list of all device classes (unique combinations of device manufacturer and model) for all devices
-     *     connected to Device Update for IoT Hub.
+     *     connected to Device Update for IoT Hub as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listDeviceClassesAsync(RequestOptions requestOptions) {
@@ -624,7 +606,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -652,7 +634,7 @@ public final class DeviceManagementsImpl {
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @return a list of all device classes (unique combinations of device manufacturer and model) for all devices
-     *     connected to Device Update for IoT Hub.
+     *     connected to Device Update for IoT Hub as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listDeviceClassesAsync(RequestOptions requestOptions, Context context) {
@@ -670,7 +652,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -697,7 +679,7 @@ public final class DeviceManagementsImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @return a list of all device classes (unique combinations of device manufacturer and model) for all devices
-     *     connected to Device Update for IoT Hub.
+     *     connected to Device Update for IoT Hub as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listDeviceClasses(RequestOptions requestOptions) {
@@ -712,7 +694,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -758,7 +740,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -803,7 +785,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -840,7 +822,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -895,7 +877,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -949,7 +931,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -970,7 +952,7 @@ public final class DeviceManagementsImpl {
      * @param deviceClassId Device class identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of installable updates for a device class.
+     * @return a list of installable updates for a device class as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listInstallableUpdatesForDeviceClassAsync(
@@ -988,7 +970,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1010,7 +992,7 @@ public final class DeviceManagementsImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of installable updates for a device class.
+     * @return a list of installable updates for a device class as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listInstallableUpdatesForDeviceClassAsync(
@@ -1028,7 +1010,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1049,7 +1031,7 @@ public final class DeviceManagementsImpl {
      * @param deviceClassId Device class identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of installable updates for a device class.
+     * @return a list of installable updates for a device class as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listInstallableUpdatesForDeviceClass(
@@ -1065,8 +1047,8 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of devices returned. You can filter on device GroupId or DeviceClassId.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of devices returned. You can filter on device GroupId or DeviceClassId.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1144,8 +1126,8 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of devices returned. You can filter on device GroupId or DeviceClassId.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of devices returned. You can filter on device GroupId or DeviceClassId.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1222,8 +1204,8 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of devices returned. You can filter on device GroupId or DeviceClassId.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of devices returned. You can filter on device GroupId or DeviceClassId.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1269,7 +1251,7 @@ public final class DeviceManagementsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of devices connected to Device Update for IoT Hub.
+     * @return a list of devices connected to Device Update for IoT Hub as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listDevicesAsync(RequestOptions requestOptions) {
@@ -1286,8 +1268,8 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of devices returned. You can filter on device GroupId or DeviceClassId.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of devices returned. You can filter on device GroupId or DeviceClassId.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1334,7 +1316,7 @@ public final class DeviceManagementsImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of devices connected to Device Update for IoT Hub.
+     * @return a list of devices connected to Device Update for IoT Hub as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listDevicesAsync(RequestOptions requestOptions, Context context) {
@@ -1351,8 +1333,8 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of devices returned. You can filter on device GroupId or DeviceClassId.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of devices returned. You can filter on device GroupId or DeviceClassId.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1398,7 +1380,8 @@ public final class DeviceManagementsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of devices connected to Device Update for IoT Hub.
+     * @return a list of devices connected to Device Update for IoT Hub as paginated response with {@link
+     *     PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listDevices(RequestOptions requestOptions) {
@@ -1413,7 +1396,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      *     <tr><td>action</td><td>String</td><td>Yes</td><td>Devices action.</td></tr>
      * </table>
      *
@@ -1449,7 +1432,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      *     <tr><td>action</td><td>String</td><td>Yes</td><td>Devices action.</td></tr>
      * </table>
      *
@@ -1485,7 +1468,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      *     <tr><td>action</td><td>String</td><td>Yes</td><td>Devices action.</td></tr>
      * </table>
      *
@@ -1498,7 +1481,7 @@ public final class DeviceManagementsImpl {
      * @param importType The types of devices to import.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginImportDevicesAsync(
@@ -1519,7 +1502,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      *     <tr><td>action</td><td>String</td><td>Yes</td><td>Devices action.</td></tr>
      * </table>
      *
@@ -1533,7 +1516,7 @@ public final class DeviceManagementsImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginImportDevicesAsync(
@@ -1554,7 +1537,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      *     <tr><td>action</td><td>String</td><td>Yes</td><td>Devices action.</td></tr>
      * </table>
      *
@@ -1567,7 +1550,7 @@ public final class DeviceManagementsImpl {
      * @param importType The types of devices to import.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginImportDevices(BinaryData importType, RequestOptions requestOptions) {
@@ -1582,7 +1565,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1648,7 +1631,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1714,7 +1697,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1773,7 +1756,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1843,7 +1826,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1912,7 +1895,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -1973,7 +1956,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2013,7 +1996,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2053,7 +2036,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2085,7 +2068,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2136,7 +2119,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2187,7 +2170,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2206,7 +2189,8 @@ public final class DeviceManagementsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of available group device tags for all devices connected to Device Update for IoT Hub.
+     * @return a list of available group device tags for all devices connected to Device Update for IoT Hub as paginated
+     *     response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listDeviceTagsAsync(RequestOptions requestOptions) {
@@ -2223,7 +2207,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2243,7 +2227,8 @@ public final class DeviceManagementsImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of available group device tags for all devices connected to Device Update for IoT Hub.
+     * @return a list of available group device tags for all devices connected to Device Update for IoT Hub as paginated
+     *     response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listDeviceTagsAsync(RequestOptions requestOptions, Context context) {
@@ -2260,7 +2245,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2279,7 +2264,8 @@ public final class DeviceManagementsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of available group device tags for all devices connected to Device Update for IoT Hub.
+     * @return a list of available group device tags for all devices connected to Device Update for IoT Hub as paginated
+     *     response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listDeviceTags(RequestOptions requestOptions) {
@@ -2294,7 +2280,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2333,7 +2319,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2372,7 +2358,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2402,7 +2388,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2459,7 +2445,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2515,7 +2501,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2541,7 +2527,7 @@ public final class DeviceManagementsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of all device groups.
+     * @return a list of all device groups as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listGroupsAsync(RequestOptions requestOptions) {
@@ -2558,7 +2544,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2585,7 +2571,7 @@ public final class DeviceManagementsImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of all device groups.
+     * @return a list of all device groups as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listGroupsAsync(RequestOptions requestOptions, Context context) {
@@ -2602,7 +2588,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2628,7 +2614,7 @@ public final class DeviceManagementsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of all device groups.
+     * @return a list of all device groups as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listGroups(RequestOptions requestOptions) {
@@ -2643,7 +2629,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2688,7 +2674,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2733,7 +2719,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -2770,7 +2756,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -2834,7 +2820,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -2897,7 +2883,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -2952,7 +2938,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * @param groupId Group identity.
@@ -2981,7 +2967,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * @param groupId Group identity.
@@ -3010,7 +2996,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * @param groupId Group identity.
@@ -3032,7 +3018,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -3076,7 +3062,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -3119,7 +3105,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -3145,249 +3131,6 @@ public final class DeviceManagementsImpl {
     }
 
     /**
-     * Get the best available updates for a group and a count of how many devices need each update.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of bestUpdates returned. You can filter on update Provider, Name and Version property.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     * </table>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: [
-     *         {
-     *             updateId: {
-     *                 provider: String
-     *                 name: String
-     *                 version: String
-     *             }
-     *             deviceCount: int
-     *         }
-     *     ]
-     *     nextLink: String
-     * }
-     * }</pre>
-     *
-     * @param groupId Group identity.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the best available updates for a group and a count of how many devices need each update along with {@link
-     *     PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> listBestUpdatesForGroupSinglePageAsync(
-            String groupId, RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-                        context ->
-                                service.listBestUpdatesForGroup(
-                                        this.client.getEndpoint(),
-                                        this.client.getInstanceId(),
-                                        groupId,
-                                        this.client.getServiceVersion().getVersion(),
-                                        requestOptions,
-                                        context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "value"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
-    }
-
-    /**
-     * Get the best available updates for a group and a count of how many devices need each update.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of bestUpdates returned. You can filter on update Provider, Name and Version property.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     * </table>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: [
-     *         {
-     *             updateId: {
-     *                 provider: String
-     *                 name: String
-     *                 version: String
-     *             }
-     *             deviceCount: int
-     *         }
-     *     ]
-     *     nextLink: String
-     * }
-     * }</pre>
-     *
-     * @param groupId Group identity.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the best available updates for a group and a count of how many devices need each update along with {@link
-     *     PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> listBestUpdatesForGroupSinglePageAsync(
-            String groupId, RequestOptions requestOptions, Context context) {
-        return service.listBestUpdatesForGroup(
-                        this.client.getEndpoint(),
-                        this.client.getInstanceId(),
-                        groupId,
-                        this.client.getServiceVersion().getVersion(),
-                        requestOptions,
-                        context)
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "value"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
-    }
-
-    /**
-     * Get the best available updates for a group and a count of how many devices need each update.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of bestUpdates returned. You can filter on update Provider, Name and Version property.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     * </table>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: [
-     *         {
-     *             updateId: {
-     *                 provider: String
-     *                 name: String
-     *                 version: String
-     *             }
-     *             deviceCount: int
-     *         }
-     *     ]
-     *     nextLink: String
-     * }
-     * }</pre>
-     *
-     * @param groupId Group identity.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the best available updates for a group and a count of how many devices need each update.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> listBestUpdatesForGroupAsync(String groupId, RequestOptions requestOptions) {
-        return new PagedFlux<>(
-                () -> listBestUpdatesForGroupSinglePageAsync(groupId, requestOptions),
-                nextLink -> listBestUpdatesForGroupNextSinglePageAsync(nextLink, null));
-    }
-
-    /**
-     * Get the best available updates for a group and a count of how many devices need each update.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of bestUpdates returned. You can filter on update Provider, Name and Version property.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     * </table>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: [
-     *         {
-     *             updateId: {
-     *                 provider: String
-     *                 name: String
-     *                 version: String
-     *             }
-     *             deviceCount: int
-     *         }
-     *     ]
-     *     nextLink: String
-     * }
-     * }</pre>
-     *
-     * @param groupId Group identity.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the best available updates for a group and a count of how many devices need each update.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> listBestUpdatesForGroupAsync(
-            String groupId, RequestOptions requestOptions, Context context) {
-        return new PagedFlux<>(
-                () -> listBestUpdatesForGroupSinglePageAsync(groupId, requestOptions, context),
-                nextLink -> listBestUpdatesForGroupNextSinglePageAsync(nextLink, null, context));
-    }
-
-    /**
-     * Get the best available updates for a group and a count of how many devices need each update.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
-     * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of bestUpdates returned. You can filter on update Provider, Name and Version property.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
-     * </table>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: [
-     *         {
-     *             updateId: {
-     *                 provider: String
-     *                 name: String
-     *                 version: String
-     *             }
-     *             deviceCount: int
-     *         }
-     *     ]
-     *     nextLink: String
-     * }
-     * }</pre>
-     *
-     * @param groupId Group identity.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the best available updates for a group and a count of how many devices need each update.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> listBestUpdatesForGroup(String groupId, RequestOptions requestOptions) {
-        return new PagedIterable<>(listBestUpdatesForGroupAsync(groupId, requestOptions));
-    }
-
-    /**
      * Gets a list of deployments for a group.
      *
      * <p><strong>Query Parameters</strong>
@@ -3395,8 +3138,8 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of deployments returned. You can filter on update Provider, Name and Version property.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of deployments returned. You can filter on update Provider, Name and Version property.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -3458,8 +3201,8 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of deployments returned. You can filter on update Provider, Name and Version property.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of deployments returned. You can filter on update Provider, Name and Version property.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -3520,8 +3263,8 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of deployments returned. You can filter on update Provider, Name and Version property.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of deployments returned. You can filter on update Provider, Name and Version property.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -3549,7 +3292,7 @@ public final class DeviceManagementsImpl {
      * @param groupId Group identity.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of deployments for a group.
+     * @return a list of deployments for a group as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listDeploymentsForGroupAsync(String groupId, RequestOptions requestOptions) {
@@ -3566,8 +3309,8 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of deployments returned. You can filter on update Provider, Name and Version property.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of deployments returned. You can filter on update Provider, Name and Version property.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -3596,7 +3339,7 @@ public final class DeviceManagementsImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of deployments for a group.
+     * @return a list of deployments for a group as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listDeploymentsForGroupAsync(
@@ -3614,8 +3357,8 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of deployments returned. You can filter on update Provider, Name and Version property.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of deployments returned. You can filter on update Provider, Name and Version property.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -3643,7 +3386,7 @@ public final class DeviceManagementsImpl {
      * @param groupId Group identity.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of deployments for a group.
+     * @return a list of deployments for a group as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listDeploymentsForGroup(String groupId, RequestOptions requestOptions) {
@@ -3658,7 +3401,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -3707,7 +3450,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -3755,7 +3498,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -3795,7 +3538,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -3863,7 +3606,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -3934,7 +3677,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -3992,7 +3735,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * @param groupId Group identity.
@@ -4024,7 +3767,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * @param groupId Group identity.
@@ -4055,7 +3798,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * @param groupId Group identity.
@@ -4079,7 +3822,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4126,7 +3869,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4172,7 +3915,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4209,8 +3952,8 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of deployment device states returned. You can filter on deviceId and moduleId and/or deviceState.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of deployment device states returned. You can filter on deviceId and moduleId and/or deviceState.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4269,8 +4012,8 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of deployment device states returned. You can filter on deviceId and moduleId and/or deviceState.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of deployment device states returned. You can filter on deviceId and moduleId and/or deviceState.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4328,8 +4071,8 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of deployment device states returned. You can filter on deviceId and moduleId and/or deviceState.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of deployment device states returned. You can filter on deviceId and moduleId and/or deviceState.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4353,7 +4096,7 @@ public final class DeviceManagementsImpl {
      * @param deploymentId Deployment identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of devices in a deployment along with their state.
+     * @return a list of devices in a deployment along with their state as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listDeploymentDevicesAsync(
@@ -4371,8 +4114,8 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of deployment device states returned. You can filter on deviceId and moduleId and/or deviceState.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of deployment device states returned. You can filter on deviceId and moduleId and/or deviceState.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4397,7 +4140,7 @@ public final class DeviceManagementsImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of devices in a deployment along with their state.
+     * @return a list of devices in a deployment along with their state as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listDeploymentDevicesAsync(
@@ -4415,8 +4158,8 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of deployment device states returned. You can filter on deviceId and moduleId and/or deviceState.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of deployment device states returned. You can filter on deviceId and moduleId and/or deviceState.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4440,7 +4183,8 @@ public final class DeviceManagementsImpl {
      * @param deploymentId Deployment identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of devices in a deployment along with their state.
+     * @return a list of devices in a deployment along with their state as paginated response with {@link
+     *     PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listDeploymentDevices(
@@ -4456,7 +4200,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Header Parameters</strong>
@@ -4464,7 +4208,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>ifNoneMatch</td><td>String</td><td>No</td><td>Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.</td></tr>
+     *     <tr><td>If-None-Match</td><td>String</td><td>No</td><td>Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4521,7 +4265,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Header Parameters</strong>
@@ -4529,7 +4273,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>ifNoneMatch</td><td>String</td><td>No</td><td>Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.</td></tr>
+     *     <tr><td>If-None-Match</td><td>String</td><td>No</td><td>Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4586,7 +4330,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Header Parameters</strong>
@@ -4594,7 +4338,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Header Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>ifNoneMatch</td><td>String</td><td>No</td><td>Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.</td></tr>
+     *     <tr><td>If-None-Match</td><td>String</td><td>No</td><td>Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4643,9 +4387,9 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of operations returned. Only one specific filter is supported: "status eq 'NotStarted' or status eq 'Running'"</td></tr>
-     *     <tr><td>top</td><td>String</td><td>No</td><td>Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of operations returned. Only one specific filter is supported: "status eq 'NotStarted' or status eq 'Running'"</td></tr>
+     *     <tr><td>$top</td><td>String</td><td>No</td><td>Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4715,9 +4459,9 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of operations returned. Only one specific filter is supported: "status eq 'NotStarted' or status eq 'Running'"</td></tr>
-     *     <tr><td>top</td><td>String</td><td>No</td><td>Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of operations returned. Only one specific filter is supported: "status eq 'NotStarted' or status eq 'Running'"</td></tr>
+     *     <tr><td>$top</td><td>String</td><td>No</td><td>Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4787,9 +4531,9 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of operations returned. Only one specific filter is supported: "status eq 'NotStarted' or status eq 'Running'"</td></tr>
-     *     <tr><td>top</td><td>String</td><td>No</td><td>Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of operations returned. Only one specific filter is supported: "status eq 'NotStarted' or status eq 'Running'"</td></tr>
+     *     <tr><td>$top</td><td>String</td><td>No</td><td>Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4827,7 +4571,7 @@ public final class DeviceManagementsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of all device import operations.
+     * @return a list of all device import operations as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listOperationsAsync(RequestOptions requestOptions) {
@@ -4844,9 +4588,9 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of operations returned. Only one specific filter is supported: "status eq 'NotStarted' or status eq 'Running'"</td></tr>
-     *     <tr><td>top</td><td>String</td><td>No</td><td>Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of operations returned. Only one specific filter is supported: "status eq 'NotStarted' or status eq 'Running'"</td></tr>
+     *     <tr><td>$top</td><td>String</td><td>No</td><td>Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4885,7 +4629,7 @@ public final class DeviceManagementsImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of all device import operations.
+     * @return a list of all device import operations as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listOperationsAsync(RequestOptions requestOptions, Context context) {
@@ -4902,9 +4646,9 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Restricts the set of operations returned. Only one specific filter is supported: "status eq 'NotStarted' or status eq 'Running'"</td></tr>
-     *     <tr><td>top</td><td>String</td><td>No</td><td>Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>$filter</td><td>String</td><td>No</td><td>Restricts the set of operations returned. Only one specific filter is supported: "status eq 'NotStarted' or status eq 'Running'"</td></tr>
+     *     <tr><td>$top</td><td>String</td><td>No</td><td>Specifies a non-negative integer n that limits the number of items returned from a collection. The service returns the number of available items up to but not greater than the specified value n.</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -4942,7 +4686,7 @@ public final class DeviceManagementsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return a list of all device import operations.
+     * @return a list of all device import operations as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listOperations(RequestOptions requestOptions) {
@@ -4957,7 +4701,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -5025,7 +4769,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -5092,7 +4836,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -5151,7 +4895,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5200,7 +4944,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5248,7 +4992,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5288,7 +5032,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5348,7 +5092,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5408,7 +5152,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5436,7 +5180,7 @@ public final class DeviceManagementsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return all device diagnostics log collection operations.
+     * @return all device diagnostics log collection operations as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listLogCollectionOperationsAsync(RequestOptions requestOptions) {
@@ -5453,7 +5197,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5482,7 +5226,7 @@ public final class DeviceManagementsImpl {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return all device diagnostics log collection operations.
+     * @return all device diagnostics log collection operations as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> listLogCollectionOperationsAsync(RequestOptions requestOptions, Context context) {
@@ -5499,7 +5243,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5527,7 +5271,7 @@ public final class DeviceManagementsImpl {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return all device diagnostics log collection operations.
+     * @return all device diagnostics log collection operations as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listLogCollectionOperations(RequestOptions requestOptions) {
@@ -5542,7 +5286,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5595,7 +5339,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5647,7 +5391,7 @@ public final class DeviceManagementsImpl {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5692,7 +5436,7 @@ public final class DeviceManagementsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>action</td><td>String</td><td>Yes</td><td>Cancel deployment action.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5742,7 +5486,7 @@ public final class DeviceManagementsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>action</td><td>String</td><td>Yes</td><td>Cancel deployment action.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5791,7 +5535,7 @@ public final class DeviceManagementsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>action</td><td>String</td><td>Yes</td><td>Cancel deployment action.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5832,7 +5576,7 @@ public final class DeviceManagementsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>action</td><td>String</td><td>Yes</td><td>Retry deployment action.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5882,7 +5626,7 @@ public final class DeviceManagementsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>action</td><td>String</td><td>Yes</td><td>Retry deployment action.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -5931,7 +5675,7 @@ public final class DeviceManagementsImpl {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>action</td><td>String</td><td>Yes</td><td>Retry deployment action.</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -6424,92 +6168,6 @@ public final class DeviceManagementsImpl {
     public Mono<PagedResponse<BinaryData>> listGroupsNextSinglePageAsync(
             String nextLink, RequestOptions requestOptions, Context context) {
         return service.listGroupsNext(nextLink, this.client.getEndpoint(), requestOptions, context)
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "value"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: [
-     *         {
-     *             updateId: {
-     *                 provider: String
-     *                 name: String
-     *                 version: String
-     *             }
-     *             deviceCount: int
-     *         }
-     *     ]
-     *     nextLink: String
-     * }
-     * }</pre>
-     *
-     * @param nextLink The nextLink parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the list of updatable devices along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> listBestUpdatesForGroupNextSinglePageAsync(
-            String nextLink, RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-                        context ->
-                                service.listBestUpdatesForGroupNext(
-                                        nextLink, this.client.getEndpoint(), requestOptions, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "value"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     value: [
-     *         {
-     *             updateId: {
-     *                 provider: String
-     *                 name: String
-     *                 version: String
-     *             }
-     *             deviceCount: int
-     *         }
-     *     ]
-     *     nextLink: String
-     * }
-     * }</pre>
-     *
-     * @param nextLink The nextLink parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param context The context to associate with this operation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the list of updatable devices along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> listBestUpdatesForGroupNextSinglePageAsync(
-            String nextLink, RequestOptions requestOptions, Context context) {
-        return service.listBestUpdatesForGroupNext(nextLink, this.client.getEndpoint(), requestOptions, context)
                 .map(
                         res ->
                                 new PagedResponseBase<>(
