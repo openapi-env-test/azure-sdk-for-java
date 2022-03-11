@@ -1327,9 +1327,9 @@ public final class DeviceManagementAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> stopDeploymentWithResponse(
+    public Mono<Response<BinaryData>> stopDeploymentAaaWithResponse(
             String groupId, String deploymentId, RequestOptions requestOptions) {
-        return this.serviceClient.stopDeploymentWithResponseAsync(groupId, deploymentId, requestOptions);
+        return this.serviceClient.stopDeploymentAaaWithResponseAsync(groupId, deploymentId, requestOptions);
     }
 
     /**

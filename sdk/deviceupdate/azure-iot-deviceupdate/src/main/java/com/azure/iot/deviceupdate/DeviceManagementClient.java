@@ -1294,9 +1294,9 @@ public final class DeviceManagementClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> stopDeploymentWithResponse(
+    public Response<BinaryData> stopDeploymentAaaWithResponse(
             String groupId, String deploymentId, RequestOptions requestOptions) {
-        return this.serviceClient.stopDeploymentWithResponse(groupId, deploymentId, requestOptions);
+        return this.serviceClient.stopDeploymentAaaWithResponse(groupId, deploymentId, requestOptions);
     }
 
     /**
