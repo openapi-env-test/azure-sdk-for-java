@@ -69,7 +69,7 @@ public final class DeviceUpdatesImpl {
                 @HostParam("endpoint") String endpoint,
                 @PathParam(value = "instanceId", encoded = true) String instanceId,
                 @QueryParam("api-version") String apiVersion,
-                @BodyParam("application/json") BinaryData updateToImport,
+                @BodyParam("application/json") BinaryData updateToImportRequest,
                 RequestOptions requestOptions,
                 Context context);
 
@@ -308,21 +308,21 @@ public final class DeviceUpdatesImpl {
      * }
      * }</pre>
      *
-     * @param updateToImport The update to be imported.
+     * @param updateToImportRequest The update to be imported.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @return update metadata along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> importUpdateWithResponseAsync(
-            BinaryData updateToImport, RequestOptions requestOptions) {
+            BinaryData updateToImportRequest, RequestOptions requestOptions) {
         return FluxUtil.withContext(
                 context ->
                         service.importUpdate(
                                 this.client.getEndpoint(),
                                 this.client.getInstanceId(),
                                 this.client.getServiceVersion().getVersion(),
-                                updateToImport,
+                                updateToImportRequest,
                                 requestOptions,
                                 context));
     }
@@ -406,7 +406,7 @@ public final class DeviceUpdatesImpl {
      * }
      * }</pre>
      *
-     * @param updateToImport The update to be imported.
+     * @param updateToImportRequest The update to be imported.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -414,12 +414,12 @@ public final class DeviceUpdatesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> importUpdateWithResponseAsync(
-            BinaryData updateToImport, RequestOptions requestOptions, Context context) {
+            BinaryData updateToImportRequest, RequestOptions requestOptions, Context context) {
         return service.importUpdate(
                 this.client.getEndpoint(),
                 this.client.getInstanceId(),
                 this.client.getServiceVersion().getVersion(),
-                updateToImport,
+                updateToImportRequest,
                 requestOptions,
                 context);
     }
@@ -503,17 +503,17 @@ public final class DeviceUpdatesImpl {
      * }
      * }</pre>
      *
-     * @param updateToImport The update to be imported.
+     * @param updateToImportRequest The update to be imported.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the {@link PollerFlux} for polling of update metadata.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginImportUpdateAsync(
-            BinaryData updateToImport, RequestOptions requestOptions) {
+            BinaryData updateToImportRequest, RequestOptions requestOptions) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
-                () -> this.importUpdateWithResponseAsync(updateToImport, requestOptions),
+                () -> this.importUpdateWithResponseAsync(updateToImportRequest, requestOptions),
                 new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -598,7 +598,7 @@ public final class DeviceUpdatesImpl {
      * }
      * }</pre>
      *
-     * @param updateToImport The update to be imported.
+     * @param updateToImportRequest The update to be imported.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -606,10 +606,10 @@ public final class DeviceUpdatesImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginImportUpdateAsync(
-            BinaryData updateToImport, RequestOptions requestOptions, Context context) {
+            BinaryData updateToImportRequest, RequestOptions requestOptions, Context context) {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
-                () -> this.importUpdateWithResponseAsync(updateToImport, requestOptions, context),
+                () -> this.importUpdateWithResponseAsync(updateToImportRequest, requestOptions, context),
                 new DefaultPollingStrategy<>(this.client.getHttpPipeline()),
                 new TypeReferenceBinaryData(),
                 new TypeReferenceBinaryData());
@@ -694,15 +694,15 @@ public final class DeviceUpdatesImpl {
      * }
      * }</pre>
      *
-     * @param updateToImport The update to be imported.
+     * @param updateToImportRequest The update to be imported.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the {@link SyncPoller} for polling of update metadata.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginImportUpdate(
-            BinaryData updateToImport, RequestOptions requestOptions) {
-        return this.beginImportUpdateAsync(updateToImport, requestOptions).getSyncPoller();
+            BinaryData updateToImportRequest, RequestOptions requestOptions) {
+        return this.beginImportUpdateAsync(updateToImportRequest, requestOptions).getSyncPoller();
     }
 
     /**

@@ -111,7 +111,7 @@ public final class DeviceUpdateAsyncClient {
      * }
      * }</pre>
      *
-     * @param updateToImport The update to be imported.
+     * @param updateToImportRequest The update to be imported.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @return update metadata along with {@link Response} on successful completion of {@link Mono}.
@@ -119,8 +119,8 @@ public final class DeviceUpdateAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> importUpdateWithResponse(
-            BinaryData updateToImport, RequestOptions requestOptions) {
-        return this.serviceClient.importUpdateWithResponseAsync(updateToImport, requestOptions);
+            BinaryData updateToImportRequest, RequestOptions requestOptions) {
+        return this.serviceClient.importUpdateWithResponseAsync(updateToImportRequest, requestOptions);
     }
 
     /**
@@ -202,7 +202,7 @@ public final class DeviceUpdateAsyncClient {
      * }
      * }</pre>
      *
-     * @param updateToImport The update to be imported.
+     * @param updateToImportRequest The update to be imported.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the {@link PollerFlux} for polling of update metadata.
@@ -210,8 +210,8 @@ public final class DeviceUpdateAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginImportUpdate(
-            BinaryData updateToImport, RequestOptions requestOptions) {
-        return this.serviceClient.beginImportUpdateAsync(updateToImport, requestOptions);
+            BinaryData updateToImportRequest, RequestOptions requestOptions) {
+        return this.serviceClient.beginImportUpdateAsync(updateToImportRequest, requestOptions);
     }
 
     /**

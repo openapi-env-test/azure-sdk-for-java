@@ -110,7 +110,7 @@ public final class DeviceUpdateClient {
      * }
      * }</pre>
      *
-     * @param updateToImport The update to be imported.
+     * @param updateToImportRequest The update to be imported.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @return the {@link SyncPoller} for polling of update metadata.
@@ -118,8 +118,8 @@ public final class DeviceUpdateClient {
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginImportUpdate(
-            BinaryData updateToImport, RequestOptions requestOptions) {
-        return this.serviceClient.beginImportUpdate(updateToImport, requestOptions);
+            BinaryData updateToImportRequest, RequestOptions requestOptions) {
+        return this.serviceClient.beginImportUpdate(updateToImportRequest, requestOptions);
     }
 
     /**
