@@ -14,7 +14,7 @@ import com.azure.iot.deviceupdate.DeviceUpdateClientBuilder;
 public class DeviceManagementCancelOrRetryDeployment {
     public static void main(String[] args) {
         // BEGIN:
-        // com.azure.iot.deviceupdate.generated.devicemanagementstopdeployment.devicemanagementcancelorretrydeployment
+        // com.azure.iot.deviceupdate.generated.devicemanagementstopdeploymentaaa.devicemanagementcancelorretrydeployment
         DeviceManagementClient deviceManagementClient =
                 new DeviceUpdateClientBuilder()
                         .credential(new DefaultAzureCredentialBuilder().build())
@@ -24,8 +24,8 @@ public class DeviceManagementCancelOrRetryDeployment {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.addQueryParam("action", "cancel");
         Response<BinaryData> response =
-                deviceManagementClient.stopDeploymentWithResponse("TestGroup", "deploymentId", requestOptions);
+                deviceManagementClient.stopDeploymentAaaWithResponse("TestGroup", "deploymentId", requestOptions);
         // END:
-        // com.azure.iot.deviceupdate.generated.devicemanagementstopdeployment.devicemanagementcancelorretrydeployment
+        // com.azure.iot.deviceupdate.generated.devicemanagementstopdeploymentaaa.devicemanagementcancelorretrydeployment
     }
 }
