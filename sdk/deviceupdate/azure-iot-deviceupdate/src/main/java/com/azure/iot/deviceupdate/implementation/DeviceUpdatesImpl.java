@@ -148,7 +148,8 @@ public final class DeviceUpdatesImpl {
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/deviceupdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files/{fileId}")
+        @Get(
+                "/deviceupdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files/{fileIdAAA}")
         @ExpectedResponses({200, 304})
         Mono<Response<BinaryData>> getFile(
                 @HostParam("endpoint") String endpoint,
@@ -156,7 +157,7 @@ public final class DeviceUpdatesImpl {
                 @PathParam("provider") String provider,
                 @PathParam("name") String name,
                 @PathParam("version") String version,
-                @PathParam("fileId") String fileId,
+                @PathParam("fileIdAAA") String fileIdAaa,
                 @QueryParam("api-version") String apiVersion,
                 RequestOptions requestOptions,
                 Context context);
@@ -2378,7 +2379,7 @@ public final class DeviceUpdatesImpl {
      * @param provider Update provider.
      * @param name Update name.
      * @param version Update version.
-     * @param fileId File identifier.
+     * @param fileIdAaa File identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @return a specific update file from the version along with {@link Response} on successful completion of {@link
@@ -2386,7 +2387,7 @@ public final class DeviceUpdatesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getFileWithResponseAsync(
-            String provider, String name, String version, String fileId, RequestOptions requestOptions) {
+            String provider, String name, String version, String fileIdAaa, RequestOptions requestOptions) {
         return FluxUtil.withContext(
                 context ->
                         service.getFile(
@@ -2395,7 +2396,7 @@ public final class DeviceUpdatesImpl {
                                 provider,
                                 name,
                                 version,
-                                fileId,
+                                fileIdAaa,
                                 this.client.getServiceVersion().getVersion(),
                                 requestOptions,
                                 context));
@@ -2440,7 +2441,7 @@ public final class DeviceUpdatesImpl {
      * @param provider Update provider.
      * @param name Update name.
      * @param version Update version.
-     * @param fileId File identifier.
+     * @param fileIdAaa File identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param context The context to associate with this operation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2452,7 +2453,7 @@ public final class DeviceUpdatesImpl {
             String provider,
             String name,
             String version,
-            String fileId,
+            String fileIdAaa,
             RequestOptions requestOptions,
             Context context) {
         return service.getFile(
@@ -2461,7 +2462,7 @@ public final class DeviceUpdatesImpl {
                 provider,
                 name,
                 version,
-                fileId,
+                fileIdAaa,
                 this.client.getServiceVersion().getVersion(),
                 requestOptions,
                 context);
@@ -2506,15 +2507,15 @@ public final class DeviceUpdatesImpl {
      * @param provider Update provider.
      * @param name Update name.
      * @param version Update version.
-     * @param fileId File identifier.
+     * @param fileIdAaa File identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @return a specific update file from the version along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getFileWithResponse(
-            String provider, String name, String version, String fileId, RequestOptions requestOptions) {
-        return getFileWithResponseAsync(provider, name, version, fileId, requestOptions).block();
+            String provider, String name, String version, String fileIdAaa, RequestOptions requestOptions) {
+        return getFileWithResponseAsync(provider, name, version, fileIdAaa, requestOptions).block();
     }
 
     /**

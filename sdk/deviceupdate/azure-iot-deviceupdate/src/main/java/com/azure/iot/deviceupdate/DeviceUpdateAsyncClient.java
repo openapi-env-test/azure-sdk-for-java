@@ -593,7 +593,7 @@ public final class DeviceUpdateAsyncClient {
      * @param provider Update provider.
      * @param name Update name.
      * @param version Update version.
-     * @param fileId File identifier.
+     * @param fileIdAaa File identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @return a specific update file from the version along with {@link Response} on successful completion of {@link
@@ -602,8 +602,8 @@ public final class DeviceUpdateAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getFileWithResponse(
-            String provider, String name, String version, String fileId, RequestOptions requestOptions) {
-        return this.serviceClient.getFileWithResponseAsync(provider, name, version, fileId, requestOptions);
+            String provider, String name, String version, String fileIdAaa, RequestOptions requestOptions) {
+        return this.serviceClient.getFileWithResponseAsync(provider, name, version, fileIdAaa, requestOptions);
     }
 
     /**

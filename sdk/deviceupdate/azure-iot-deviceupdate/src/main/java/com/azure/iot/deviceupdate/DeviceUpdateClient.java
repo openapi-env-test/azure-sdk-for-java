@@ -476,7 +476,7 @@ public final class DeviceUpdateClient {
      * @param provider Update provider.
      * @param name Update name.
      * @param version Update version.
-     * @param fileId File identifier.
+     * @param fileIdAaa File identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @return a specific update file from the version along with {@link Response}.
@@ -484,8 +484,8 @@ public final class DeviceUpdateClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getFileWithResponse(
-            String provider, String name, String version, String fileId, RequestOptions requestOptions) {
-        return this.serviceClient.getFileWithResponse(provider, name, version, fileId, requestOptions);
+            String provider, String name, String version, String fileIdAaa, RequestOptions requestOptions) {
+        return this.serviceClient.getFileWithResponse(provider, name, version, fileIdAaa, requestOptions);
     }
 
     /**

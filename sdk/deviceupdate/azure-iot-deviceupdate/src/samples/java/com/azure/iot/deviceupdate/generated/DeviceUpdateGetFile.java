@@ -22,7 +22,7 @@ public class DeviceUpdateGetFile {
                         .buildDeviceUpdateClient();
         RequestOptions requestOptions = new RequestOptions();
         Response<BinaryData> response =
-                deviceUpdateClient.getFileWithResponse("microsoft", "adu", "1.0.0.0", "abc123", requestOptions);
+                deviceUpdateClient.getFileWithResponse("microsoft", "adu", "1.0.0.0", null, requestOptions);
         // END: com.azure.iot.deviceupdate.generated.deviceupdategetfile.deviceupdategetfile
     }
 }
