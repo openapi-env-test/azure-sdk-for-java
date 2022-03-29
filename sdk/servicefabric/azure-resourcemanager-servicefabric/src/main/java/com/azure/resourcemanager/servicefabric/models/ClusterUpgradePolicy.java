@@ -6,14 +6,11 @@ package com.azure.resourcemanager.servicefabric.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Describes the policy used when upgrading the cluster. */
 @Fluent
 public final class ClusterUpgradePolicy {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(ClusterUpgradePolicy.class);
-
     /*
      * If true, then processes are forcefully restarted during upgrade even
      * when the code version has not changed (the upgrade only changes
@@ -294,43 +291,43 @@ public final class ClusterUpgradePolicy {
      */
     public void validate() {
         if (upgradeReplicaSetCheckTimeout() == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property upgradeReplicaSetCheckTimeout in model ClusterUpgradePolicy"));
         }
         if (healthCheckWaitDuration() == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property healthCheckWaitDuration in model ClusterUpgradePolicy"));
         }
         if (healthCheckStableDuration() == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property healthCheckStableDuration in model ClusterUpgradePolicy"));
         }
         if (healthCheckRetryTimeout() == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property healthCheckRetryTimeout in model ClusterUpgradePolicy"));
         }
         if (upgradeTimeout() == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property upgradeTimeout in model ClusterUpgradePolicy"));
         }
         if (upgradeDomainTimeout() == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property upgradeDomainTimeout in model ClusterUpgradePolicy"));
         }
         if (healthPolicy() == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property healthPolicy in model ClusterUpgradePolicy"));
@@ -341,4 +338,6 @@ public final class ClusterUpgradePolicy {
             deltaHealthPolicy().validate();
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(ClusterUpgradePolicy.class);
 }

@@ -6,7 +6,6 @@ package com.azure.resourcemanager.servicefabric.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
@@ -14,8 +13,6 @@ import java.util.Map;
 /** Describes a node type in the cluster, each node type represents sub set of nodes in the cluster. */
 @Fluent
 public final class NodeTypeDescription {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(NodeTypeDescription.class);
-
     /*
      * The name of the node type.
      */
@@ -411,7 +408,7 @@ public final class NodeTypeDescription {
      */
     public void validate() {
         if (name() == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException("Missing required property name in model NodeTypeDescription"));
         }
@@ -422,4 +419,6 @@ public final class NodeTypeDescription {
             ephemeralPorts().validate();
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(NodeTypeDescription.class);
 }

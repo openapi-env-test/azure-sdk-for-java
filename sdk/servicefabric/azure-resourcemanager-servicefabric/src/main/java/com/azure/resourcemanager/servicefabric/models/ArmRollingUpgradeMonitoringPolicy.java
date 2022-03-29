@@ -5,15 +5,11 @@
 package com.azure.resourcemanager.servicefabric.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The policy used for monitoring the application upgrade. */
 @Fluent
 public final class ArmRollingUpgradeMonitoringPolicy {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(ArmRollingUpgradeMonitoringPolicy.class);
-
     /*
      * The activation Mode of the service package
      */

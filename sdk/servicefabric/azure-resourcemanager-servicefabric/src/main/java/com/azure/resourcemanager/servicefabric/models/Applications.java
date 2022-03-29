@@ -36,7 +36,7 @@ public interface Applications {
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a Service Fabric application resource created or in the process of being created in the Service Fabric
-     *     cluster resource.
+     *     cluster resource along with {@link Response}.
      */
     Response<ApplicationResource> getWithResponse(
         String resourceGroupName, String clusterName, String applicationName, Context context);
@@ -89,7 +89,7 @@ public interface Applications {
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return all application resources created or in the process of being created in the Service Fabric cluster
-     *     resource.
+     *     resource along with {@link Response}.
      */
     Response<ApplicationResourceList> listWithResponse(String resourceGroupName, String clusterName, Context context);
 
@@ -102,7 +102,7 @@ public interface Applications {
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a Service Fabric application resource created or in the process of being created in the Service Fabric
-     *     cluster resource.
+     *     cluster resource along with {@link Response}.
      */
     ApplicationResource getById(String id);
 
@@ -116,7 +116,7 @@ public interface Applications {
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a Service Fabric application resource created or in the process of being created in the Service Fabric
-     *     cluster resource.
+     *     cluster resource along with {@link Response}.
      */
     Response<ApplicationResource> getByIdWithResponse(String id, Context context);
 

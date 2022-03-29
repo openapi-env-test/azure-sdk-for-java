@@ -36,7 +36,7 @@ public interface ApplicationTypes {
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a Service Fabric application type name resource created or in the process of being created in the Service
-     *     Fabric cluster resource.
+     *     Fabric cluster resource along with {@link Response}.
      */
     Response<ApplicationTypeResource> getWithResponse(
         String resourceGroupName, String clusterName, String applicationTypeName, Context context);
@@ -91,7 +91,7 @@ public interface ApplicationTypes {
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return all application type name resources created or in the process of being created in the Service Fabric
-     *     cluster resource.
+     *     cluster resource along with {@link Response}.
      */
     Response<ApplicationTypeResourceList> listWithResponse(
         String resourceGroupName, String clusterName, Context context);
@@ -105,7 +105,7 @@ public interface ApplicationTypes {
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a Service Fabric application type name resource created or in the process of being created in the Service
-     *     Fabric cluster resource.
+     *     Fabric cluster resource along with {@link Response}.
      */
     ApplicationTypeResource getById(String id);
 
@@ -119,7 +119,7 @@ public interface ApplicationTypes {
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a Service Fabric application type name resource created or in the process of being created in the Service
-     *     Fabric cluster resource.
+     *     Fabric cluster resource along with {@link Response}.
      */
     Response<ApplicationTypeResource> getByIdWithResponse(String id, Context context);
 

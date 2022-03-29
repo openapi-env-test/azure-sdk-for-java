@@ -5,16 +5,12 @@
 package com.azure.resourcemanager.servicefabric.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The common service resource properties. */
 @Fluent
 public class ServiceResourcePropertiesBase {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(ServiceResourcePropertiesBase.class);
-
     /*
      * The placement constraints as a string. Placement constraints are boolean
      * expressions on node properties and allow for restricting a service to

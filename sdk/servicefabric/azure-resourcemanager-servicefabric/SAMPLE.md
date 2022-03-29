@@ -36,9 +36,12 @@
 - [Delete](#clusters_delete)
 - [GetByResourceGroup](#clusters_getbyresourcegroup)
 - [List](#clusters_list)
-- [ListByResourceGroup](#clusters_listbyresourcegroup)
 - [ListUpgradableVersions](#clusters_listupgradableversions)
 - [Update](#clusters_update)
+
+## Operations
+
+- [List](#operations_list)
 
 ## Services
 
@@ -56,9 +59,7 @@ import java.util.Map;
 /** Samples for ApplicationTypeVersions CreateOrUpdate. */
 public final class ApplicationTypeVersionsCreateOrUpdateSamples {
     /*
-     * operationId: ApplicationTypeVersions_CreateOrUpdate
-     * api-version: 2021-06-01
-     * x-ms-examples: Put an application type version
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ApplicationTypeVersionPutOperation_example.json
      */
     /**
      * Sample code: Put an application type version.
@@ -97,9 +98,7 @@ import com.azure.core.util.Context;
 /** Samples for ApplicationTypeVersions Delete. */
 public final class ApplicationTypeVersionsDeleteSamples {
     /*
-     * operationId: ApplicationTypeVersions_Delete
-     * api-version: 2021-06-01
-     * x-ms-examples: Delete an application type version
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ApplicationTypeVersionDeleteOperation_example.json
      */
     /**
      * Sample code: Delete an application type version.
@@ -121,9 +120,7 @@ import com.azure.core.util.Context;
 /** Samples for ApplicationTypeVersions Get. */
 public final class ApplicationTypeVersionsGetSamples {
     /*
-     * operationId: ApplicationTypeVersions_Get
-     * api-version: 2021-06-01
-     * x-ms-examples: Get an application type version
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ApplicationTypeVersionGetOperation_example.json
      */
     /**
      * Sample code: Get an application type version.
@@ -145,9 +142,7 @@ import com.azure.core.util.Context;
 /** Samples for ApplicationTypeVersions List. */
 public final class ApplicationTypeVersionsListSamples {
     /*
-     * operationId: ApplicationTypeVersions_List
-     * api-version: 2021-06-01
-     * x-ms-examples: Get a list of application type version resources
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ApplicationTypeVersionListOperation_example.json
      */
     /**
      * Sample code: Get a list of application type version resources.
@@ -170,9 +165,7 @@ import java.util.Map;
 /** Samples for ApplicationTypes CreateOrUpdate. */
 public final class ApplicationTypesCreateOrUpdateSamples {
     /*
-     * operationId: ApplicationTypes_CreateOrUpdate
-     * api-version: 2021-06-01
-     * x-ms-examples: Put an application type
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ApplicationTypeNamePutOperation_example.json
      */
     /**
      * Sample code: Put an application type.
@@ -209,9 +202,7 @@ import com.azure.core.util.Context;
 /** Samples for ApplicationTypes Delete. */
 public final class ApplicationTypesDeleteSamples {
     /*
-     * operationId: ApplicationTypes_Delete
-     * api-version: 2021-06-01
-     * x-ms-examples: Delete an application type
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ApplicationTypeNameDeleteOperation_example.json
      */
     /**
      * Sample code: Delete an application type.
@@ -232,9 +223,7 @@ import com.azure.core.util.Context;
 /** Samples for ApplicationTypes Get. */
 public final class ApplicationTypesGetSamples {
     /*
-     * operationId: ApplicationTypes_Get
-     * api-version: 2021-06-01
-     * x-ms-examples: Get an application type
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ApplicationTypeNameGetOperation_example.json
      */
     /**
      * Sample code: Get an application type.
@@ -255,9 +244,7 @@ import com.azure.core.util.Context;
 /** Samples for ApplicationTypes List. */
 public final class ApplicationTypesListSamples {
     /*
-     * operationId: ApplicationTypes_List
-     * api-version: 2021-06-01
-     * x-ms-examples: Get a list of application type name resources
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ApplicationTypeNameListOperation_example.json
      */
     /**
      * Sample code: Get a list of application type name resources.
@@ -288,9 +275,7 @@ import java.util.Map;
 /** Samples for Applications CreateOrUpdate. */
 public final class ApplicationsCreateOrUpdateSamples {
     /*
-     * operationId: Applications_CreateOrUpdate
-     * api-version: 2021-06-01
-     * x-ms-examples: Put an application with maximum parameters
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ApplicationPutOperation_example_max.json
      */
     /**
      * Sample code: Put an application with maximum parameters.
@@ -344,9 +329,7 @@ public final class ApplicationsCreateOrUpdateSamples {
     }
 
     /*
-     * operationId: Applications_CreateOrUpdate
-     * api-version: 2021-06-01
-     * x-ms-examples: Put an application with minimum parameters
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ApplicationPutOperation_example_min.json
      */
     /**
      * Sample code: Put an application with minimum parameters.
@@ -368,9 +351,7 @@ public final class ApplicationsCreateOrUpdateSamples {
     }
 
     /*
-     * operationId: Applications_CreateOrUpdate
-     * api-version: 2021-06-01
-     * x-ms-examples: Put an application with recreate option
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ApplicationPutOperation_recreate_example.json
      */
     /**
      * Sample code: Put an application with recreate option.
@@ -412,9 +393,7 @@ import com.azure.core.util.Context;
 /** Samples for Applications Delete. */
 public final class ApplicationsDeleteSamples {
     /*
-     * operationId: Applications_Delete
-     * api-version: 2021-06-01
-     * x-ms-examples: Delete an application
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ApplicationDeleteOperation_example.json
      */
     /**
      * Sample code: Delete an application.
@@ -435,9 +414,7 @@ import com.azure.core.util.Context;
 /** Samples for Applications Get. */
 public final class ApplicationsGetSamples {
     /*
-     * operationId: Applications_Get
-     * api-version: 2021-06-01
-     * x-ms-examples: Get an application
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ApplicationGetOperation_example.json
      */
     /**
      * Sample code: Get an application.
@@ -458,9 +435,7 @@ import com.azure.core.util.Context;
 /** Samples for Applications List. */
 public final class ApplicationsListSamples {
     /*
-     * operationId: Applications_List
-     * api-version: 2021-06-01
-     * x-ms-examples: Get a list of application resources
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ApplicationListOperation_example.json
      */
     /**
      * Sample code: Get a list of application resources.
@@ -485,9 +460,7 @@ import java.util.Arrays;
 /** Samples for Applications Update. */
 public final class ApplicationsUpdateSamples {
     /*
-     * operationId: Applications_Update
-     * api-version: 2021-06-01
-     * x-ms-examples: Patch an application
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ApplicationPatchOperation_example.json
      */
     /**
      * Sample code: Patch an application.
@@ -522,9 +495,7 @@ import com.azure.core.util.Context;
 /** Samples for ClusterVersions Get. */
 public final class ClusterVersionsGetSamples {
     /*
-     * operationId: ClusterVersions_Get
-     * api-version: 2021-06-01
-     * x-ms-examples: Get cluster version
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ClusterVersionsGet_example.json
      */
     /**
      * Sample code: Get cluster version.
@@ -546,9 +517,7 @@ import com.azure.resourcemanager.servicefabric.models.ClusterVersionsEnvironment
 /** Samples for ClusterVersions GetByEnvironment. */
 public final class ClusterVersionsGetByEnvironmentSamples {
     /*
-     * operationId: ClusterVersions_GetByEnvironment
-     * api-version: 2021-06-01
-     * x-ms-examples: Get cluster version by environment
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ClusterVersionsGetByEnvironment_example.json
      */
     /**
      * Sample code: Get cluster version by environment.
@@ -572,9 +541,7 @@ import com.azure.core.util.Context;
 /** Samples for ClusterVersions List. */
 public final class ClusterVersionsListSamples {
     /*
-     * operationId: ClusterVersions_List
-     * api-version: 2021-06-01
-     * x-ms-examples: List cluster versions
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ClusterVersionsList_example.json
      */
     /**
      * Sample code: List cluster versions.
@@ -596,9 +563,7 @@ import com.azure.resourcemanager.servicefabric.models.ClusterVersionsEnvironment
 /** Samples for ClusterVersions ListByEnvironment. */
 public final class ClusterVersionsListByEnvironmentSamples {
     /*
-     * operationId: ClusterVersions_ListByEnvironment
-     * api-version: 2021-06-01
-     * x-ms-examples: List cluster versions by environment
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ClusterVersionsListByEnvironment.json
      */
     /**
      * Sample code: List cluster versions by environment.
@@ -656,9 +621,7 @@ import java.util.Map;
 /** Samples for Clusters CreateOrUpdate. */
 public final class ClustersCreateOrUpdateSamples {
     /*
-     * operationId: Clusters_CreateOrUpdate
-     * api-version: 2021-06-01
-     * x-ms-examples: Put a cluster with maximum parameters
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ClusterPutOperation_example_max.json
      */
     /**
      * Sample code: Put a cluster with maximum parameters.
@@ -835,9 +798,7 @@ public final class ClustersCreateOrUpdateSamples {
     }
 
     /*
-     * operationId: Clusters_CreateOrUpdate
-     * api-version: 2021-06-01
-     * x-ms-examples: Put a cluster with minimum parameters
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ClusterPutOperation_example_min.json
      */
     /**
      * Sample code: Put a cluster with minimum parameters.
@@ -910,9 +871,7 @@ import com.azure.core.util.Context;
 /** Samples for Clusters Delete. */
 public final class ClustersDeleteSamples {
     /*
-     * operationId: Clusters_Delete
-     * api-version: 2021-06-01
-     * x-ms-examples: Delete a cluster
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ClusterDeleteOperation_example.json
      */
     /**
      * Sample code: Delete a cluster.
@@ -933,9 +892,7 @@ import com.azure.core.util.Context;
 /** Samples for Clusters GetByResourceGroup. */
 public final class ClustersGetByResourceGroupSamples {
     /*
-     * operationId: Clusters_Get
-     * api-version: 2021-06-01
-     * x-ms-examples: Get a cluster
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ClusterGetOperation_example.json
      */
     /**
      * Sample code: Get a cluster.
@@ -956,9 +913,7 @@ import com.azure.core.util.Context;
 /** Samples for Clusters List. */
 public final class ClustersListSamples {
     /*
-     * operationId: Clusters_List
-     * api-version: 2021-06-01
-     * x-ms-examples: List clusters
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ClusterListOperation_example.json
      */
     /**
      * Sample code: List clusters.
@@ -967,30 +922,6 @@ public final class ClustersListSamples {
      */
     public static void listClusters(com.azure.resourcemanager.servicefabric.ServiceFabricManager manager) {
         manager.clusters().listWithResponse(Context.NONE);
-    }
-}
-```
-
-### Clusters_ListByResourceGroup
-
-```java
-import com.azure.core.util.Context;
-
-/** Samples for Clusters ListByResourceGroup. */
-public final class ClustersListByResourceGroupSamples {
-    /*
-     * operationId: Clusters_ListByResourceGroup
-     * api-version: 2021-06-01
-     * x-ms-examples: List cluster by resource group
-     */
-    /**
-     * Sample code: List cluster by resource group.
-     *
-     * @param manager Entry point to ServiceFabricManager.
-     */
-    public static void listClusterByResourceGroup(
-        com.azure.resourcemanager.servicefabric.ServiceFabricManager manager) {
-        manager.clusters().listByResourceGroupWithResponse("resRg", Context.NONE);
     }
 }
 ```
@@ -1004,9 +935,7 @@ import com.azure.resourcemanager.servicefabric.models.UpgradableVersionsDescript
 /** Samples for Clusters ListUpgradableVersions. */
 public final class ClustersListUpgradableVersionsSamples {
     /*
-     * operationId: Clusters_ListUpgradableVersions
-     * api-version: 2021-06-01
-     * x-ms-examples: Get minimum and maximum code versions
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ListUpgradableVersionsMinMax_example.json
      */
     /**
      * Sample code: Get minimum and maximum code versions.
@@ -1019,9 +948,7 @@ public final class ClustersListUpgradableVersionsSamples {
     }
 
     /*
-     * operationId: Clusters_ListUpgradableVersions
-     * api-version: 2021-06-01
-     * x-ms-examples: Get upgrade path
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ListUpgradableVersionsPath_example.json
      */
     /**
      * Sample code: Get upgrade path.
@@ -1059,9 +986,7 @@ import java.util.Map;
 /** Samples for Clusters Update. */
 public final class ClustersUpdateSamples {
     /*
-     * operationId: Clusters_Update
-     * api-version: 2021-06-01
-     * x-ms-examples: Patch a cluster
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ClusterPatchOperation_example.json
      */
     /**
      * Sample code: Patch a cluster.
@@ -1118,6 +1043,27 @@ public final class ClustersUpdateSamples {
 }
 ```
 
+### Operations_List
+
+```java
+import com.azure.core.util.Context;
+
+/** Samples for Operations List. */
+public final class OperationsListSamples {
+    /*
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ListOperations.json
+     */
+    /**
+     * Sample code: ListOperations.
+     *
+     * @param manager Entry point to ServiceFabricManager.
+     */
+    public static void listOperations(com.azure.resourcemanager.servicefabric.ServiceFabricManager manager) {
+        manager.operations().list(Context.NONE);
+    }
+}
+```
+
 ### Services_CreateOrUpdate
 
 ```java
@@ -1135,9 +1081,7 @@ import java.util.Map;
 /** Samples for Services CreateOrUpdate. */
 public final class ServicesCreateOrUpdateSamples {
     /*
-     * operationId: Services_CreateOrUpdate
-     * api-version: 2021-06-01
-     * x-ms-examples: Put a service with minimum parameters
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ServicePutOperation_example_min.json
      */
     /**
      * Sample code: Put a service with minimum parameters.
@@ -1157,9 +1101,7 @@ public final class ServicesCreateOrUpdateSamples {
     }
 
     /*
-     * operationId: Services_CreateOrUpdate
-     * api-version: 2021-06-01
-     * x-ms-examples: Put a service with maximum parameters
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ServicePutOperation_example_max.json
      */
     /**
      * Sample code: Put a service with maximum parameters.
@@ -1214,9 +1156,7 @@ import com.azure.core.util.Context;
 /** Samples for Services Delete. */
 public final class ServicesDeleteSamples {
     /*
-     * operationId: Services_Delete
-     * api-version: 2021-06-01
-     * x-ms-examples: Delete a service
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ServiceDeleteOperation_example.json
      */
     /**
      * Sample code: Delete a service.
@@ -1237,9 +1177,7 @@ import com.azure.core.util.Context;
 /** Samples for Services Get. */
 public final class ServicesGetSamples {
     /*
-     * operationId: Services_Get
-     * api-version: 2021-06-01
-     * x-ms-examples: Get a service
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ServiceGetOperation_example.json
      */
     /**
      * Sample code: Get a service.
@@ -1260,9 +1198,7 @@ import com.azure.core.util.Context;
 /** Samples for Services List. */
 public final class ServicesListSamples {
     /*
-     * operationId: Services_List
-     * api-version: 2021-06-01
-     * x-ms-examples: Get a list of service resources
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ServiceListOperation_example.json
      */
     /**
      * Sample code: Get a list of service resources.
@@ -1285,9 +1221,7 @@ import com.azure.resourcemanager.servicefabric.models.ServiceResource;
 /** Samples for Services Update. */
 public final class ServicesUpdateSamples {
     /*
-     * operationId: Services_Update
-     * api-version: 2021-06-01
-     * x-ms-examples: Patch a service
+     * x-ms-original-file: specification/servicefabric/resource-manager/Microsoft.ServiceFabric/stable/2021-06-01/examples/ServicePatchOperation_example.json
      */
     /**
      * Sample code: Patch a service.

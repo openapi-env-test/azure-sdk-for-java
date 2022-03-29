@@ -25,7 +25,6 @@ import com.azure.resourcemanager.servicefabric.models.SettingsSectionDescription
 import com.azure.resourcemanager.servicefabric.models.SfZonalUpgradeMode;
 import com.azure.resourcemanager.servicefabric.models.UpgradeMode;
 import com.azure.resourcemanager.servicefabric.models.VmssZonalUpgradeMode;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -33,8 +32,6 @@ import java.util.List;
 /** Describes the cluster resource properties. */
 @Fluent
 public final class ClusterProperties {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(ClusterProperties.class);
-
     /*
      * The list of add-on features to enable in the cluster.
      */
@@ -976,13 +973,13 @@ public final class ClusterProperties {
             fabricSettings().forEach(e -> e.validate());
         }
         if (managementEndpoint() == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property managementEndpoint in model ClusterProperties"));
         }
         if (nodeTypes() == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException("Missing required property nodeTypes in model ClusterProperties"));
         } else {
@@ -1004,4 +1001,6 @@ public final class ClusterProperties {
             notifications().forEach(e -> e.validate());
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(ClusterProperties.class);
 }

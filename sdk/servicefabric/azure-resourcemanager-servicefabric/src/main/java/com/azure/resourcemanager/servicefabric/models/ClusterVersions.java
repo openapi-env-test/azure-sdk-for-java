@@ -30,7 +30,7 @@ public interface ClusterVersions {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return information about an available Service Fabric cluster code version.
+     * @return information about an available Service Fabric cluster code version along with {@link Response}.
      */
     Response<ClusterCodeVersionsListResult> getWithResponse(String location, String clusterVersion, Context context);
 
@@ -58,7 +58,8 @@ public interface ClusterVersions {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return information about an available Service Fabric cluster code version by environment.
+     * @return information about an available Service Fabric cluster code version by environment along with {@link
+     *     Response}.
      */
     Response<ClusterCodeVersionsListResult> getByEnvironmentWithResponse(
         String location, ClusterVersionsEnvironment environment, String clusterVersion, Context context);
@@ -82,7 +83,7 @@ public interface ClusterVersions {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return all available code versions for Service Fabric cluster resources by location.
+     * @return all available code versions for Service Fabric cluster resources by location along with {@link Response}.
      */
     Response<ClusterCodeVersionsListResult> listWithResponse(String location, Context context);
 
@@ -107,7 +108,8 @@ public interface ClusterVersions {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return all available code versions for Service Fabric cluster resources by environment.
+     * @return all available code versions for Service Fabric cluster resources by environment along with {@link
+     *     Response}.
      */
     Response<ClusterCodeVersionsListResult> listByEnvironmentWithResponse(
         String location, ClusterVersionsEnvironment environment, Context context);

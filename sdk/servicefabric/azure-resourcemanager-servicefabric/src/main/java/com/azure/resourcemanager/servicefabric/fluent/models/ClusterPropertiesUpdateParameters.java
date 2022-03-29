@@ -5,7 +5,6 @@
 package com.azure.resourcemanager.servicefabric.fluent.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.servicefabric.models.AddOnFeatures;
 import com.azure.resourcemanager.servicefabric.models.ApplicationTypeVersionsCleanupPolicy;
 import com.azure.resourcemanager.servicefabric.models.CertificateDescription;
@@ -21,7 +20,6 @@ import com.azure.resourcemanager.servicefabric.models.SettingsSectionDescription
 import com.azure.resourcemanager.servicefabric.models.SfZonalUpgradeMode;
 import com.azure.resourcemanager.servicefabric.models.UpgradeMode;
 import com.azure.resourcemanager.servicefabric.models.VmssZonalUpgradeMode;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -29,8 +27,6 @@ import java.util.List;
 /** Describes the cluster resource properties that can be updated during PATCH operation. */
 @Fluent
 public final class ClusterPropertiesUpdateParameters {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(ClusterPropertiesUpdateParameters.class);
-
     /*
      * The list of add-on features to enable in the cluster.
      */

@@ -42,8 +42,6 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the ServiceFabricManagementClientImpl type. */
 @ServiceClient(builder = ServiceFabricManagementClientBuilder.class)
 public final class ServiceFabricManagementClientImpl implements ServiceFabricManagementClient {
-    private final ClientLogger logger = new ClientLogger(ServiceFabricManagementClientImpl.class);
-
     /** The customer subscription identifier. */
     private final String subscriptionId;
 
@@ -315,7 +313,7 @@ public final class ServiceFabricManagementClientImpl implements ServiceFabricMan
                             managementError = null;
                         }
                     } catch (IOException | RuntimeException ioe) {
-                        logger.logThrowableAsWarning(ioe);
+                        LOGGER.logThrowableAsWarning(ioe);
                     }
                 }
             } else {
@@ -374,4 +372,6 @@ public final class ServiceFabricManagementClientImpl implements ServiceFabricMan
             return Mono.just(new String(responseBody, charset));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(ServiceFabricManagementClientImpl.class);
 }
