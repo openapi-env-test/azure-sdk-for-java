@@ -21,15 +21,12 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.azurestack.fluent.CloudManifestFilesClient;
 import com.azure.resourcemanager.azurestack.fluent.models.CloudManifestFileResponseInner;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in CloudManifestFilesClient. */
 public final class CloudManifestFilesClientImpl implements CloudManifestFilesClient {
-    private final ClientLogger logger = new ClientLogger(CloudManifestFilesClientImpl.class);
-
     /** The proxy service used to perform REST calls. */
     private final CloudManifestFilesService service;
 
@@ -82,7 +79,8 @@ public final class CloudManifestFilesClientImpl implements CloudManifestFilesCli
      *
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return cloud specific manifest GET response.
+     * @return cloud specific manifest GET response along with {@link Response} on successful completion of {@link
+     *     Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<CloudManifestFileResponseInner>> listWithResponseAsync() {
@@ -106,7 +104,8 @@ public final class CloudManifestFilesClientImpl implements CloudManifestFilesCli
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return cloud specific manifest GET response.
+     * @return cloud specific manifest GET response along with {@link Response} on successful completion of {@link
+     *     Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<CloudManifestFileResponseInner>> listWithResponseAsync(Context context) {
@@ -126,7 +125,7 @@ public final class CloudManifestFilesClientImpl implements CloudManifestFilesCli
      *
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return cloud specific manifest GET response.
+     * @return cloud specific manifest GET response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<CloudManifestFileResponseInner> listAsync() {
@@ -160,7 +159,7 @@ public final class CloudManifestFilesClientImpl implements CloudManifestFilesCli
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return cloud specific manifest GET response.
+     * @return cloud specific manifest GET response along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<CloudManifestFileResponseInner> listWithResponse(Context context) {
@@ -175,7 +174,8 @@ public final class CloudManifestFilesClientImpl implements CloudManifestFilesCli
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return cloud specific manifest GET response.
+     * @return cloud specific manifest GET response along with {@link Response} on successful completion of {@link
+     *     Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<CloudManifestFileResponseInner>> getWithResponseAsync(
@@ -214,7 +214,8 @@ public final class CloudManifestFilesClientImpl implements CloudManifestFilesCli
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return cloud specific manifest GET response.
+     * @return cloud specific manifest GET response along with {@link Response} on successful completion of {@link
+     *     Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<CloudManifestFileResponseInner>> getWithResponseAsync(
@@ -249,7 +250,7 @@ public final class CloudManifestFilesClientImpl implements CloudManifestFilesCli
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return cloud specific manifest GET response.
+     * @return cloud specific manifest GET response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<CloudManifestFileResponseInner> getAsync(String verificationVersion, String versionCreationDate) {
@@ -271,7 +272,7 @@ public final class CloudManifestFilesClientImpl implements CloudManifestFilesCli
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return cloud specific manifest GET response.
+     * @return cloud specific manifest GET response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<CloudManifestFileResponseInner> getAsync(String verificationVersion) {
@@ -311,7 +312,7 @@ public final class CloudManifestFilesClientImpl implements CloudManifestFilesCli
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return cloud specific manifest GET response.
+     * @return cloud specific manifest GET response along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<CloudManifestFileResponseInner> getWithResponse(

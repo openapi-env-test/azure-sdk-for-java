@@ -29,7 +29,6 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.azurestack.fluent.LinkedSubscriptionsClient;
 import com.azure.resourcemanager.azurestack.fluent.models.LinkedSubscriptionInner;
 import com.azure.resourcemanager.azurestack.models.LinkedSubscriptionParameter;
@@ -38,8 +37,6 @@ import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in LinkedSubscriptionsClient. */
 public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsClient {
-    private final ClientLogger logger = new ClientLogger(LinkedSubscriptionsClientImpl.class);
-
     /** The proxy service used to perform REST calls. */
     private final LinkedSubscriptionsService service;
 
@@ -179,7 +176,8 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of linked subscriptions with paging support.
+     * @return list of linked subscriptions with paging support along with {@link PagedResponse} on successful
+     *     completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<LinkedSubscriptionInner>> listByResourceGroupSinglePageAsync(String resourceGroup) {
@@ -230,7 +228,8 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of linked subscriptions with paging support.
+     * @return list of linked subscriptions with paging support along with {@link PagedResponse} on successful
+     *     completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<LinkedSubscriptionInner>> listByResourceGroupSinglePageAsync(
@@ -278,7 +277,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of linked subscriptions with paging support.
+     * @return list of linked subscriptions with paging support as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<LinkedSubscriptionInner> listByResourceGroupAsync(String resourceGroup) {
@@ -295,7 +294,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of linked subscriptions with paging support.
+     * @return list of linked subscriptions with paging support as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<LinkedSubscriptionInner> listByResourceGroupAsync(String resourceGroup, Context context) {
@@ -311,7 +310,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of linked subscriptions with paging support.
+     * @return list of linked subscriptions with paging support as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<LinkedSubscriptionInner> listByResourceGroup(String resourceGroup) {
@@ -326,7 +325,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of linked subscriptions with paging support.
+     * @return list of linked subscriptions with paging support as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<LinkedSubscriptionInner> listByResourceGroup(String resourceGroup, Context context) {
@@ -338,7 +337,8 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      *
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of linked subscriptions with paging support.
+     * @return list of linked subscriptions with paging support along with {@link PagedResponse} on successful
+     *     completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<LinkedSubscriptionInner>> listSinglePageAsync() {
@@ -384,7 +384,8 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of linked subscriptions with paging support.
+     * @return list of linked subscriptions with paging support along with {@link PagedResponse} on successful
+     *     completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<LinkedSubscriptionInner>> listSinglePageAsync(Context context) {
@@ -425,7 +426,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      *
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of linked subscriptions with paging support.
+     * @return list of linked subscriptions with paging support as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<LinkedSubscriptionInner> listAsync() {
@@ -440,7 +441,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of linked subscriptions with paging support.
+     * @return list of linked subscriptions with paging support as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<LinkedSubscriptionInner> listAsync(Context context) {
@@ -453,7 +454,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      *
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of linked subscriptions with paging support.
+     * @return list of linked subscriptions with paging support as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<LinkedSubscriptionInner> list() {
@@ -467,7 +468,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of linked subscriptions with paging support.
+     * @return list of linked subscriptions with paging support as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<LinkedSubscriptionInner> list(Context context) {
@@ -482,7 +483,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return linked Subscription information.
+     * @return linked Subscription information along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<LinkedSubscriptionInner>> getByResourceGroupWithResponseAsync(
@@ -532,7 +533,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return linked Subscription information.
+     * @return linked Subscription information along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<LinkedSubscriptionInner>> getByResourceGroupWithResponseAsync(
@@ -578,7 +579,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return linked Subscription information.
+     * @return linked Subscription information on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<LinkedSubscriptionInner> getByResourceGroupAsync(String resourceGroup, String linkedSubscriptionName) {
@@ -617,7 +618,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return linked Subscription information.
+     * @return linked Subscription information along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<LinkedSubscriptionInner> getByResourceGroupWithResponse(
@@ -633,7 +634,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Void>> deleteWithResponseAsync(String resourceGroup, String linkedSubscriptionName) {
@@ -682,7 +683,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Void>> deleteWithResponseAsync(
@@ -728,7 +729,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * @return A {@link Mono} that completes when a successful response is received.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> deleteAsync(String resourceGroup, String linkedSubscriptionName) {
@@ -759,7 +760,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteWithResponse(String resourceGroup, String linkedSubscriptionName, Context context) {
@@ -775,7 +776,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return linked Subscription information.
+     * @return linked Subscription information along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<LinkedSubscriptionInner>> createOrUpdateWithResponseAsync(
@@ -832,7 +833,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return linked Subscription information.
+     * @return linked Subscription information along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<LinkedSubscriptionInner>> createOrUpdateWithResponseAsync(
@@ -885,7 +886,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return linked Subscription information.
+     * @return linked Subscription information on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<LinkedSubscriptionInner> createOrUpdateAsync(
@@ -928,7 +929,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return linked Subscription information.
+     * @return linked Subscription information along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<LinkedSubscriptionInner> createOrUpdateWithResponse(
@@ -945,7 +946,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return linked Subscription information.
+     * @return linked Subscription information along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<LinkedSubscriptionInner>> updateWithResponseAsync(
@@ -1002,7 +1003,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return linked Subscription information.
+     * @return linked Subscription information along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<LinkedSubscriptionInner>> updateWithResponseAsync(
@@ -1055,7 +1056,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return linked Subscription information.
+     * @return linked Subscription information on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<LinkedSubscriptionInner> updateAsync(
@@ -1098,7 +1099,7 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return linked Subscription information.
+     * @return linked Subscription information along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<LinkedSubscriptionInner> updateWithResponse(
@@ -1113,7 +1114,8 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of linked subscriptions with paging support.
+     * @return list of linked subscriptions with paging support along with {@link PagedResponse} on successful
+     *     completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<LinkedSubscriptionInner>> listByResourceGroupNextSinglePageAsync(String nextLink) {
@@ -1150,7 +1152,8 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of linked subscriptions with paging support.
+     * @return list of linked subscriptions with paging support along with {@link PagedResponse} on successful
+     *     completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<LinkedSubscriptionInner>> listByResourceGroupNextSinglePageAsync(
@@ -1186,7 +1189,8 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of linked subscriptions with paging support.
+     * @return list of linked subscriptions with paging support along with {@link PagedResponse} on successful
+     *     completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<LinkedSubscriptionInner>> listBySubscriptionNextSinglePageAsync(String nextLink) {
@@ -1223,7 +1227,8 @@ public final class LinkedSubscriptionsClientImpl implements LinkedSubscriptionsC
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of linked subscriptions with paging support.
+     * @return list of linked subscriptions with paging support along with {@link PagedResponse} on successful
+     *     completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<LinkedSubscriptionInner>> listBySubscriptionNextSinglePageAsync(
