@@ -39,8 +39,6 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the AzureArcDataManagementClientImpl type. */
 @ServiceClient(builder = AzureArcDataManagementClientBuilder.class)
 public final class AzureArcDataManagementClientImpl implements AzureArcDataManagementClient {
-    private final ClientLogger logger = new ClientLogger(AzureArcDataManagementClientImpl.class);
-
     /** The ID of the Azure subscription. */
     private final String subscriptionId;
 
@@ -183,7 +181,7 @@ public final class AzureArcDataManagementClientImpl implements AzureArcDataManag
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
-        this.apiVersion = "2021-08-01";
+        this.apiVersion = "2021-11-01";
         this.operations = new OperationsClientImpl(this);
         this.sqlManagedInstances = new SqlManagedInstancesClientImpl(this);
         this.sqlServerInstances = new SqlServerInstancesClientImpl(this);
@@ -273,7 +271,7 @@ public final class AzureArcDataManagementClientImpl implements AzureArcDataManag
                             managementError = null;
                         }
                     } catch (IOException | RuntimeException ioe) {
-                        logger.logThrowableAsWarning(ioe);
+                        LOGGER.logThrowableAsWarning(ioe);
                     }
                 }
             } else {
@@ -332,4 +330,6 @@ public final class AzureArcDataManagementClientImpl implements AzureArcDataManag
             return Mono.just(new String(responseBody, charset));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(AzureArcDataManagementClientImpl.class);
 }
