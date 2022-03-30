@@ -15,7 +15,7 @@ import java.util.Map;
 @Fluent
 public final class WorkbookUpdateParameters {
     /*
-     * The kind of workbook. Only valid value is shared.
+     * The kind of workbook. Choices are user and shared.
      */
     @JsonProperty(value = "kind")
     private SharedTypeKind kind;
@@ -34,7 +34,7 @@ public final class WorkbookUpdateParameters {
     private WorkbookPropertiesUpdateParameters innerProperties;
 
     /**
-     * Get the kind property: The kind of workbook. Only valid value is shared.
+     * Get the kind property: The kind of workbook. Choices are user and shared.
      *
      * @return the kind value.
      */
@@ -43,7 +43,7 @@ public final class WorkbookUpdateParameters {
     }
 
     /**
-     * Set the kind property: The kind of workbook. Only valid value is shared.
+     * Set the kind property: The kind of workbook. Choices are user and shared.
      *
      * @param kind the kind value to set.
      * @return the WorkbookUpdateParameters object itself.

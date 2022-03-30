@@ -19,7 +19,7 @@ public class WorkbookResource extends Resource {
     private WorkbookResourceIdentity identity;
 
     /*
-     * The kind of workbook. Only valid value is shared.
+     * The kind of workbook. Choices are user and shared.
      */
     @JsonProperty(value = "kind")
     private Kind kind;
@@ -51,7 +51,7 @@ public class WorkbookResource extends Resource {
     }
 
     /**
-     * Get the kind property: The kind of workbook. Only valid value is shared.
+     * Get the kind property: The kind of workbook. Choices are user and shared.
      *
      * @return the kind value.
      */
@@ -60,7 +60,7 @@ public class WorkbookResource extends Resource {
     }
 
     /**
-     * Set the kind property: The kind of workbook. Only valid value is shared.
+     * Set the kind property: The kind of workbook. Choices are user and shared.
      *
      * @param kind the kind value to set.
      * @return the WorkbookResource object itself.
