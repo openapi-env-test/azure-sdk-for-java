@@ -7,9 +7,9 @@ package com.azure.resourcemanager.batch.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The BatchAccountsCreateHeaders model. */
+/** The BatchAccountsCreateAbcHeaders model. */
 @Fluent
-public final class BatchAccountsCreateHeaders {
+public final class BatchAccountsCreateAbcHeaders {
     /*
      * The Retry-After property.
      */
@@ -35,9 +35,9 @@ public final class BatchAccountsCreateHeaders {
      * Set the retryAfter property: The Retry-After property.
      *
      * @param retryAfter the retryAfter value to set.
-     * @return the BatchAccountsCreateHeaders object itself.
+     * @return the BatchAccountsCreateAbcHeaders object itself.
      */
-    public BatchAccountsCreateHeaders withRetryAfter(Integer retryAfter) {
+    public BatchAccountsCreateAbcHeaders withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
         return this;
     }
@@ -55,9 +55,9 @@ public final class BatchAccountsCreateHeaders {
      * Set the location property: The Location property.
      *
      * @param location the location value to set.
-     * @return the BatchAccountsCreateHeaders object itself.
+     * @return the BatchAccountsCreateAbcHeaders object itself.
      */
-    public BatchAccountsCreateHeaders withLocation(String location) {
+    public BatchAccountsCreateAbcHeaders withLocation(String location) {
         this.location = location;
         return this;
     }

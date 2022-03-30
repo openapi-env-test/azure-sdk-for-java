@@ -36,13 +36,11 @@ import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.batch.fluent.BatchAccountsClient;
 import com.azure.resourcemanager.batch.fluent.models.BatchAccountInner;
 import com.azure.resourcemanager.batch.fluent.models.BatchAccountKeysInner;
-import com.azure.resourcemanager.batch.fluent.models.DetectorResponseInner;
 import com.azure.resourcemanager.batch.fluent.models.OutboundEnvironmentEndpointInner;
 import com.azure.resourcemanager.batch.models.BatchAccountCreateParameters;
 import com.azure.resourcemanager.batch.models.BatchAccountListResult;
 import com.azure.resourcemanager.batch.models.BatchAccountRegenerateKeyParameters;
 import com.azure.resourcemanager.batch.models.BatchAccountUpdateParameters;
-import com.azure.resourcemanager.batch.models.DetectorListResult;
 import com.azure.resourcemanager.batch.models.OutboundEnvironmentEndpointCollection;
 import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;
@@ -80,7 +78,7 @@ public final class BatchAccountsClientImpl implements BatchAccountsClient {
                 + "/{accountName}")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<Flux<ByteBuffer>>> create(
+        Mono<Response<Flux<ByteBuffer>>> createAbc(
             @HostParam("$host") String endpoint,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("accountName") String accountName,
@@ -210,37 +208,6 @@ public final class BatchAccountsClientImpl implements BatchAccountsClient {
         @Headers({"Content-Type: application/json"})
         @Get(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts"
-                + "/{accountName}/detectors")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<DetectorListResult>> listDetectors(
-            @HostParam("$host") String endpoint,
-            @PathParam("resourceGroupName") String resourceGroupName,
-            @QueryParam("api-version") String apiVersion,
-            @PathParam("subscriptionId") String subscriptionId,
-            @PathParam("accountName") String accountName,
-            @HeaderParam("Accept") String accept,
-            Context context);
-
-        @Headers({"Content-Type: application/json"})
-        @Get(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts"
-                + "/{accountName}/detectors/{detectorId}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<DetectorResponseInner>> getDetector(
-            @HostParam("$host") String endpoint,
-            @PathParam("resourceGroupName") String resourceGroupName,
-            @QueryParam("api-version") String apiVersion,
-            @PathParam("subscriptionId") String subscriptionId,
-            @PathParam("accountName") String accountName,
-            @PathParam("detectorId") String detectorId,
-            @HeaderParam("Accept") String accept,
-            Context context);
-
-        @Headers({"Content-Type: application/json"})
-        @Get(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts"
                 + "/{accountName}/outboundNetworkDependenciesEndpoints")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -277,16 +244,6 @@ public final class BatchAccountsClientImpl implements BatchAccountsClient {
         @Get("{nextLink}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<DetectorListResult>> listDetectorsNext(
-            @PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HostParam("$host") String endpoint,
-            @HeaderParam("Accept") String accept,
-            Context context);
-
-        @Headers({"Content-Type: application/json"})
-        @Get("{nextLink}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<OutboundEnvironmentEndpointCollection>> listOutboundNetworkDependenciesEndpointsNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink,
             @HostParam("$host") String endpoint,
@@ -311,7 +268,7 @@ public final class BatchAccountsClientImpl implements BatchAccountsClient {
      *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Flux<ByteBuffer>>> createWithResponseAsync(
+    private Mono<Response<Flux<ByteBuffer>>> createAbcWithResponseAsync(
         String resourceGroupName, String accountName, BatchAccountCreateParameters parameters) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -342,7 +299,7 @@ public final class BatchAccountsClientImpl implements BatchAccountsClient {
             .withContext(
                 context ->
                     service
-                        .create(
+                        .createAbc(
                             this.client.getEndpoint(),
                             resourceGroupName,
                             accountName,
@@ -372,7 +329,7 @@ public final class BatchAccountsClientImpl implements BatchAccountsClient {
      *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Flux<ByteBuffer>>> createWithResponseAsync(
+    private Mono<Response<Flux<ByteBuffer>>> createAbcWithResponseAsync(
         String resourceGroupName, String accountName, BatchAccountCreateParameters parameters, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -401,7 +358,7 @@ public final class BatchAccountsClientImpl implements BatchAccountsClient {
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .create(
+            .createAbc(
                 this.client.getEndpoint(),
                 resourceGroupName,
                 accountName,
@@ -428,9 +385,9 @@ public final class BatchAccountsClientImpl implements BatchAccountsClient {
      * @return the {@link PollerFlux} for polling of contains information about an Azure Batch account.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    private PollerFlux<PollResult<BatchAccountInner>, BatchAccountInner> beginCreateAsync(
+    private PollerFlux<PollResult<BatchAccountInner>, BatchAccountInner> beginCreateAbcAsync(
         String resourceGroupName, String accountName, BatchAccountCreateParameters parameters) {
-        Mono<Response<Flux<ByteBuffer>>> mono = createWithResponseAsync(resourceGroupName, accountName, parameters);
+        Mono<Response<Flux<ByteBuffer>>> mono = createAbcWithResponseAsync(resourceGroupName, accountName, parameters);
         return this
             .client
             .<BatchAccountInner, BatchAccountInner>getLroResult(
@@ -458,11 +415,11 @@ public final class BatchAccountsClientImpl implements BatchAccountsClient {
      * @return the {@link PollerFlux} for polling of contains information about an Azure Batch account.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    private PollerFlux<PollResult<BatchAccountInner>, BatchAccountInner> beginCreateAsync(
+    private PollerFlux<PollResult<BatchAccountInner>, BatchAccountInner> beginCreateAbcAsync(
         String resourceGroupName, String accountName, BatchAccountCreateParameters parameters, Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono =
-            createWithResponseAsync(resourceGroupName, accountName, parameters, context);
+            createAbcWithResponseAsync(resourceGroupName, accountName, parameters, context);
         return this
             .client
             .<BatchAccountInner, BatchAccountInner>getLroResult(
@@ -485,9 +442,9 @@ public final class BatchAccountsClientImpl implements BatchAccountsClient {
      * @return the {@link SyncPoller} for polling of contains information about an Azure Batch account.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<BatchAccountInner>, BatchAccountInner> beginCreate(
+    public SyncPoller<PollResult<BatchAccountInner>, BatchAccountInner> beginCreateAbc(
         String resourceGroupName, String accountName, BatchAccountCreateParameters parameters) {
-        return beginCreateAsync(resourceGroupName, accountName, parameters).getSyncPoller();
+        return beginCreateAbcAsync(resourceGroupName, accountName, parameters).getSyncPoller();
     }
 
     /**
@@ -507,9 +464,9 @@ public final class BatchAccountsClientImpl implements BatchAccountsClient {
      * @return the {@link SyncPoller} for polling of contains information about an Azure Batch account.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<BatchAccountInner>, BatchAccountInner> beginCreate(
+    public SyncPoller<PollResult<BatchAccountInner>, BatchAccountInner> beginCreateAbc(
         String resourceGroupName, String accountName, BatchAccountCreateParameters parameters, Context context) {
-        return beginCreateAsync(resourceGroupName, accountName, parameters, context).getSyncPoller();
+        return beginCreateAbcAsync(resourceGroupName, accountName, parameters, context).getSyncPoller();
     }
 
     /**
@@ -528,9 +485,9 @@ public final class BatchAccountsClientImpl implements BatchAccountsClient {
      * @return contains information about an Azure Batch account on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<BatchAccountInner> createAsync(
+    private Mono<BatchAccountInner> createAbcAsync(
         String resourceGroupName, String accountName, BatchAccountCreateParameters parameters) {
-        return beginCreateAsync(resourceGroupName, accountName, parameters)
+        return beginCreateAbcAsync(resourceGroupName, accountName, parameters)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
     }
@@ -552,9 +509,9 @@ public final class BatchAccountsClientImpl implements BatchAccountsClient {
      * @return contains information about an Azure Batch account on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<BatchAccountInner> createAsync(
+    private Mono<BatchAccountInner> createAbcAsync(
         String resourceGroupName, String accountName, BatchAccountCreateParameters parameters, Context context) {
-        return beginCreateAsync(resourceGroupName, accountName, parameters, context)
+        return beginCreateAbcAsync(resourceGroupName, accountName, parameters, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
     }
@@ -575,9 +532,9 @@ public final class BatchAccountsClientImpl implements BatchAccountsClient {
      * @return contains information about an Azure Batch account.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BatchAccountInner create(
+    public BatchAccountInner createAbc(
         String resourceGroupName, String accountName, BatchAccountCreateParameters parameters) {
-        return createAsync(resourceGroupName, accountName, parameters).block();
+        return createAbcAsync(resourceGroupName, accountName, parameters).block();
     }
 
     /**
@@ -597,9 +554,9 @@ public final class BatchAccountsClientImpl implements BatchAccountsClient {
      * @return contains information about an Azure Batch account.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BatchAccountInner create(
+    public BatchAccountInner createAbc(
         String resourceGroupName, String accountName, BatchAccountCreateParameters parameters, Context context) {
-        return createAsync(resourceGroupName, accountName, parameters, context).block();
+        return createAbcAsync(resourceGroupName, accountName, parameters, context).block();
     }
 
     /**
@@ -1954,357 +1911,6 @@ public final class BatchAccountsClientImpl implements BatchAccountsClient {
     }
 
     /**
-     * Gets information about the detectors available for a given Batch account.
-     *
-     * @param resourceGroupName The name of the resource group that contains the Batch account.
-     * @param accountName The name of the Batch account.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return information about the detectors available for a given Batch account along with {@link PagedResponse} on
-     *     successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<DetectorResponseInner>> listDetectorsSinglePageAsync(
-        String resourceGroupName, String accountName) {
-        if (this.client.getEndpoint() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-        }
-        if (this.client.getSubscriptionId() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
-        }
-        if (accountName == null) {
-            return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(
-                context ->
-                    service
-                        .listDetectors(
-                            this.client.getEndpoint(),
-                            resourceGroupName,
-                            this.client.getApiVersion(),
-                            this.client.getSubscriptionId(),
-                            accountName,
-                            accept,
-                            context))
-            .<PagedResponse<DetectorResponseInner>>map(
-                res ->
-                    new PagedResponseBase<>(
-                        res.getRequest(),
-                        res.getStatusCode(),
-                        res.getHeaders(),
-                        res.getValue().value(),
-                        res.getValue().nextLink(),
-                        null))
-            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
-    }
-
-    /**
-     * Gets information about the detectors available for a given Batch account.
-     *
-     * @param resourceGroupName The name of the resource group that contains the Batch account.
-     * @param accountName The name of the Batch account.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return information about the detectors available for a given Batch account along with {@link PagedResponse} on
-     *     successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<DetectorResponseInner>> listDetectorsSinglePageAsync(
-        String resourceGroupName, String accountName, Context context) {
-        if (this.client.getEndpoint() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-        }
-        if (this.client.getSubscriptionId() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
-        }
-        if (accountName == null) {
-            return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        context = this.client.mergeContext(context);
-        return service
-            .listDetectors(
-                this.client.getEndpoint(),
-                resourceGroupName,
-                this.client.getApiVersion(),
-                this.client.getSubscriptionId(),
-                accountName,
-                accept,
-                context)
-            .map(
-                res ->
-                    new PagedResponseBase<>(
-                        res.getRequest(),
-                        res.getStatusCode(),
-                        res.getHeaders(),
-                        res.getValue().value(),
-                        res.getValue().nextLink(),
-                        null));
-    }
-
-    /**
-     * Gets information about the detectors available for a given Batch account.
-     *
-     * @param resourceGroupName The name of the resource group that contains the Batch account.
-     * @param accountName The name of the Batch account.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return information about the detectors available for a given Batch account as paginated response with {@link
-     *     PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<DetectorResponseInner> listDetectorsAsync(String resourceGroupName, String accountName) {
-        return new PagedFlux<>(
-            () -> listDetectorsSinglePageAsync(resourceGroupName, accountName),
-            nextLink -> listDetectorsNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * Gets information about the detectors available for a given Batch account.
-     *
-     * @param resourceGroupName The name of the resource group that contains the Batch account.
-     * @param accountName The name of the Batch account.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return information about the detectors available for a given Batch account as paginated response with {@link
-     *     PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<DetectorResponseInner> listDetectorsAsync(
-        String resourceGroupName, String accountName, Context context) {
-        return new PagedFlux<>(
-            () -> listDetectorsSinglePageAsync(resourceGroupName, accountName, context),
-            nextLink -> listDetectorsNextSinglePageAsync(nextLink, context));
-    }
-
-    /**
-     * Gets information about the detectors available for a given Batch account.
-     *
-     * @param resourceGroupName The name of the resource group that contains the Batch account.
-     * @param accountName The name of the Batch account.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return information about the detectors available for a given Batch account as paginated response with {@link
-     *     PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<DetectorResponseInner> listDetectors(String resourceGroupName, String accountName) {
-        return new PagedIterable<>(listDetectorsAsync(resourceGroupName, accountName));
-    }
-
-    /**
-     * Gets information about the detectors available for a given Batch account.
-     *
-     * @param resourceGroupName The name of the resource group that contains the Batch account.
-     * @param accountName The name of the Batch account.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return information about the detectors available for a given Batch account as paginated response with {@link
-     *     PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<DetectorResponseInner> listDetectors(
-        String resourceGroupName, String accountName, Context context) {
-        return new PagedIterable<>(listDetectorsAsync(resourceGroupName, accountName, context));
-    }
-
-    /**
-     * Gets information about the given detector for a given Batch account.
-     *
-     * @param resourceGroupName The name of the resource group that contains the Batch account.
-     * @param accountName The name of the Batch account.
-     * @param detectorId The name of the detector.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return information about the given detector for a given Batch account along with {@link Response} on successful
-     *     completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<DetectorResponseInner>> getDetectorWithResponseAsync(
-        String resourceGroupName, String accountName, String detectorId) {
-        if (this.client.getEndpoint() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-        }
-        if (this.client.getSubscriptionId() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
-        }
-        if (accountName == null) {
-            return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
-        }
-        if (detectorId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter detectorId is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(
-                context ->
-                    service
-                        .getDetector(
-                            this.client.getEndpoint(),
-                            resourceGroupName,
-                            this.client.getApiVersion(),
-                            this.client.getSubscriptionId(),
-                            accountName,
-                            detectorId,
-                            accept,
-                            context))
-            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
-    }
-
-    /**
-     * Gets information about the given detector for a given Batch account.
-     *
-     * @param resourceGroupName The name of the resource group that contains the Batch account.
-     * @param accountName The name of the Batch account.
-     * @param detectorId The name of the detector.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return information about the given detector for a given Batch account along with {@link Response} on successful
-     *     completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<DetectorResponseInner>> getDetectorWithResponseAsync(
-        String resourceGroupName, String accountName, String detectorId, Context context) {
-        if (this.client.getEndpoint() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-        }
-        if (this.client.getSubscriptionId() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
-        }
-        if (accountName == null) {
-            return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
-        }
-        if (detectorId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter detectorId is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        context = this.client.mergeContext(context);
-        return service
-            .getDetector(
-                this.client.getEndpoint(),
-                resourceGroupName,
-                this.client.getApiVersion(),
-                this.client.getSubscriptionId(),
-                accountName,
-                detectorId,
-                accept,
-                context);
-    }
-
-    /**
-     * Gets information about the given detector for a given Batch account.
-     *
-     * @param resourceGroupName The name of the resource group that contains the Batch account.
-     * @param accountName The name of the Batch account.
-     * @param detectorId The name of the detector.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return information about the given detector for a given Batch account on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<DetectorResponseInner> getDetectorAsync(
-        String resourceGroupName, String accountName, String detectorId) {
-        return getDetectorWithResponseAsync(resourceGroupName, accountName, detectorId)
-            .flatMap(
-                (Response<DetectorResponseInner> res) -> {
-                    if (res.getValue() != null) {
-                        return Mono.just(res.getValue());
-                    } else {
-                        return Mono.empty();
-                    }
-                });
-    }
-
-    /**
-     * Gets information about the given detector for a given Batch account.
-     *
-     * @param resourceGroupName The name of the resource group that contains the Batch account.
-     * @param accountName The name of the Batch account.
-     * @param detectorId The name of the detector.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return information about the given detector for a given Batch account.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DetectorResponseInner getDetector(String resourceGroupName, String accountName, String detectorId) {
-        return getDetectorAsync(resourceGroupName, accountName, detectorId).block();
-    }
-
-    /**
-     * Gets information about the given detector for a given Batch account.
-     *
-     * @param resourceGroupName The name of the resource group that contains the Batch account.
-     * @param accountName The name of the Batch account.
-     * @param detectorId The name of the detector.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return information about the given detector for a given Batch account along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<DetectorResponseInner> getDetectorWithResponse(
-        String resourceGroupName, String accountName, String detectorId, Context context) {
-        return getDetectorWithResponseAsync(resourceGroupName, accountName, detectorId, context).block();
-    }
-
-    /**
      * Lists the endpoints that a Batch Compute Node under this Batch Account may call as part of Batch service
      * administration. If you are deploying a Pool inside of a virtual network that you specify, you must make sure your
      * network allows outbound access to these endpoints. Failure to allow access to these endpoints may cause Batch to
@@ -2651,80 +2257,6 @@ public final class BatchAccountsClientImpl implements BatchAccountsClient {
         context = this.client.mergeContext(context);
         return service
             .listByResourceGroupNext(nextLink, this.client.getEndpoint(), accept, context)
-            .map(
-                res ->
-                    new PagedResponseBase<>(
-                        res.getRequest(),
-                        res.getStatusCode(),
-                        res.getHeaders(),
-                        res.getValue().value(),
-                        res.getValue().nextLink(),
-                        null));
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The nextLink parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return values returned by the List operation along with {@link PagedResponse} on successful completion of {@link
-     *     Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<DetectorResponseInner>> listDetectorsNextSinglePageAsync(String nextLink) {
-        if (nextLink == null) {
-            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
-        }
-        if (this.client.getEndpoint() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.listDetectorsNext(nextLink, this.client.getEndpoint(), accept, context))
-            .<PagedResponse<DetectorResponseInner>>map(
-                res ->
-                    new PagedResponseBase<>(
-                        res.getRequest(),
-                        res.getStatusCode(),
-                        res.getHeaders(),
-                        res.getValue().value(),
-                        res.getValue().nextLink(),
-                        null))
-            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The nextLink parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return values returned by the List operation along with {@link PagedResponse} on successful completion of {@link
-     *     Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<DetectorResponseInner>> listDetectorsNextSinglePageAsync(
-        String nextLink, Context context) {
-        if (nextLink == null) {
-            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
-        }
-        if (this.client.getEndpoint() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        context = this.client.mergeContext(context);
-        return service
-            .listDetectorsNext(nextLink, this.client.getEndpoint(), accept, context)
             .map(
                 res ->
                     new PagedResponseBase<>(

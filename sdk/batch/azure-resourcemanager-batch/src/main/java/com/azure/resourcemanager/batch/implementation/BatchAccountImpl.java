@@ -178,7 +178,7 @@ public final class BatchAccountImpl implements BatchAccount, BatchAccount.Defini
             serviceManager
                 .serviceClient()
                 .getBatchAccounts()
-                .create(resourceGroupName, accountName, createParameters, Context.NONE);
+                .createAbc(resourceGroupName, accountName, createParameters, Context.NONE);
         return this;
     }
 
@@ -187,7 +187,7 @@ public final class BatchAccountImpl implements BatchAccount, BatchAccount.Defini
             serviceManager
                 .serviceClient()
                 .getBatchAccounts()
-                .create(resourceGroupName, accountName, createParameters, context);
+                .createAbc(resourceGroupName, accountName, createParameters, context);
         return this;
     }
 

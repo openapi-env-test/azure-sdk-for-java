@@ -164,7 +164,7 @@ public final class BatchAccountInner extends Resource {
     }
 
     /**
-     * Get the lowPriorityCoreQuota property: The Spot/low-priority core quota for the Batch account. For accounts with
+     * Get the lowPriorityCoreQuota property: The low-priority core quota for the Batch account. For accounts with
      * PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.
      *
      * @return the lowPriorityCoreQuota value.

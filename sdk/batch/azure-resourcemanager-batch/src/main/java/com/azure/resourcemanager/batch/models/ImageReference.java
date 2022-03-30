@@ -29,7 +29,7 @@ public final class ImageReference {
 
     /*
      * The SKU of the Azure Virtual Machines Marketplace image. For example,
-     * 18.04-LTS or 2022-datacenter.
+     * 18.04-LTS or 2019-Datacenter.
      */
     @JsonProperty(value = "sku")
     private String sku;
@@ -102,7 +102,7 @@ public final class ImageReference {
 
     /**
      * Get the sku property: The SKU of the Azure Virtual Machines Marketplace image. For example, 18.04-LTS or
-     * 2022-datacenter.
+     * 2019-Datacenter.
      *
      * @return the sku value.
      */
@@ -112,7 +112,7 @@ public final class ImageReference {
 
     /**
      * Set the sku property: The SKU of the Azure Virtual Machines Marketplace image. For example, 18.04-LTS or
-     * 2022-datacenter.
+     * 2019-Datacenter.
      *
      * @param sku the sku value to set.
      * @return the ImageReference object itself.

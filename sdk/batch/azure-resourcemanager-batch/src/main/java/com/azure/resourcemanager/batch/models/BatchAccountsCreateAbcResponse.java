@@ -9,23 +9,24 @@ import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.ResponseBase;
 import com.azure.resourcemanager.batch.fluent.models.BatchAccountInner;
 
-/** Contains all response data for the create operation. */
-public final class BatchAccountsCreateResponse extends ResponseBase<BatchAccountsCreateHeaders, BatchAccountInner> {
+/** Contains all response data for the createAbc operation. */
+public final class BatchAccountsCreateAbcResponse
+    extends ResponseBase<BatchAccountsCreateAbcHeaders, BatchAccountInner> {
     /**
-     * Creates an instance of BatchAccountsCreateResponse.
+     * Creates an instance of BatchAccountsCreateAbcResponse.
      *
-     * @param request the request which resulted in this BatchAccountsCreateResponse.
+     * @param request the request which resulted in this BatchAccountsCreateAbcResponse.
      * @param statusCode the status code of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param value the deserialized value of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      */
-    public BatchAccountsCreateResponse(
+    public BatchAccountsCreateAbcResponse(
         HttpRequest request,
         int statusCode,
         HttpHeaders rawHeaders,
         BatchAccountInner value,
-        BatchAccountsCreateHeaders headers) {
+        BatchAccountsCreateAbcHeaders headers) {
         super(request, statusCode, rawHeaders, value, headers);
     }
 

@@ -79,8 +79,8 @@ public final class BatchAccountProperties {
     private Integer dedicatedCoreQuota;
 
     /*
-     * The Spot/low-priority core quota for the Batch account. For accounts
-     * with PoolAllocationMode set to UserSubscription, quota is managed on the
+     * The low-priority core quota for the Batch account. For accounts with
+     * PoolAllocationMode set to UserSubscription, quota is managed on the
      * subscription so this value is not returned.
      */
     @JsonProperty(value = "lowPriorityCoreQuota", access = JsonProperty.Access.WRITE_ONLY)
@@ -216,7 +216,7 @@ public final class BatchAccountProperties {
     }
 
     /**
-     * Get the lowPriorityCoreQuota property: The Spot/low-priority core quota for the Batch account. For accounts with
+     * Get the lowPriorityCoreQuota property: The low-priority core quota for the Batch account. For accounts with
      * PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.
      *
      * @return the lowPriorityCoreQuota value.

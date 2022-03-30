@@ -41,12 +41,6 @@ public final class NetworkConfiguration {
     private String subnetId;
 
     /*
-     * The scope of dynamic vnet assignment.
-     */
-    @JsonProperty(value = "dynamicVNetAssignmentScope")
-    private DynamicVNetAssignmentScope dynamicVNetAssignmentScope;
-
-    /*
      * The endpoint configuration for a pool. Pool endpoint configuration is
      * only supported on pools with the virtualMachineConfiguration property.
      */
@@ -109,26 +103,6 @@ public final class NetworkConfiguration {
      */
     public NetworkConfiguration withSubnetId(String subnetId) {
         this.subnetId = subnetId;
-        return this;
-    }
-
-    /**
-     * Get the dynamicVNetAssignmentScope property: The scope of dynamic vnet assignment.
-     *
-     * @return the dynamicVNetAssignmentScope value.
-     */
-    public DynamicVNetAssignmentScope dynamicVNetAssignmentScope() {
-        return this.dynamicVNetAssignmentScope;
-    }
-
-    /**
-     * Set the dynamicVNetAssignmentScope property: The scope of dynamic vnet assignment.
-     *
-     * @param dynamicVNetAssignmentScope the dynamicVNetAssignmentScope value to set.
-     * @return the NetworkConfiguration object itself.
-     */
-    public NetworkConfiguration withDynamicVNetAssignmentScope(DynamicVNetAssignmentScope dynamicVNetAssignmentScope) {
-        this.dynamicVNetAssignmentScope = dynamicVNetAssignmentScope;
         return this;
     }
 
