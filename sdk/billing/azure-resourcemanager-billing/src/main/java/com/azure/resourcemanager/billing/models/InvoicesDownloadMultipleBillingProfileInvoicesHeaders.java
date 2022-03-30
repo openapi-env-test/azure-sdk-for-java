@@ -5,16 +5,11 @@
 package com.azure.resourcemanager.billing.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The InvoicesDownloadMultipleBillingProfileInvoicesHeaders model. */
 @Fluent
 public final class InvoicesDownloadMultipleBillingProfileInvoicesHeaders {
-    @JsonIgnore
-    private final ClientLogger logger = new ClientLogger(InvoicesDownloadMultipleBillingProfileInvoicesHeaders.class);
-
     /*
      * The Retry-After property.
      */

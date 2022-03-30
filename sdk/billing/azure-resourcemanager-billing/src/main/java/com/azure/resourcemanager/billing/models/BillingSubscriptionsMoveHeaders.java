@@ -5,15 +5,11 @@
 package com.azure.resourcemanager.billing.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The BillingSubscriptionsMoveHeaders model. */
 @Fluent
 public final class BillingSubscriptionsMoveHeaders {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(BillingSubscriptionsMoveHeaders.class);
-
     /*
      * The Retry-After property.
      */
