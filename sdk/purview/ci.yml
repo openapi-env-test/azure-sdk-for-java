@@ -50,3 +50,6 @@ extends:
       - name: azure-resourcemanager-purview
         groupId: com.azure.resourcemanager
         safeName: azureresourcemanagerpurview
+      - name: azure-purview-purviewcatalog
+        groupId: com.azure
+        safeName: azurepurviewpurviewcatalog
