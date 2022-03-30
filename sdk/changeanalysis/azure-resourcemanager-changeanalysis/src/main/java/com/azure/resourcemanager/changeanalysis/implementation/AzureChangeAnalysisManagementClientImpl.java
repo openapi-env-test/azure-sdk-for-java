@@ -38,8 +38,6 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the AzureChangeAnalysisManagementClientImpl type. */
 @ServiceClient(builder = AzureChangeAnalysisManagementClientBuilder.class)
 public final class AzureChangeAnalysisManagementClientImpl implements AzureChangeAnalysisManagementClient {
-    private final ClientLogger logger = new ClientLogger(AzureChangeAnalysisManagementClientImpl.class);
-
     /** The ID of the target subscription. */
     private final String subscriptionId;
 
@@ -259,7 +257,7 @@ public final class AzureChangeAnalysisManagementClientImpl implements AzureChang
                             managementError = null;
                         }
                     } catch (IOException | RuntimeException ioe) {
-                        logger.logThrowableAsWarning(ioe);
+                        LOGGER.logThrowableAsWarning(ioe);
                     }
                 }
             } else {
@@ -318,4 +316,6 @@ public final class AzureChangeAnalysisManagementClientImpl implements AzureChang
             return Mono.just(new String(responseBody, charset));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(AzureChangeAnalysisManagementClientImpl.class);
 }
