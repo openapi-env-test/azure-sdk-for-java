@@ -5,7 +5,7 @@
 package com.azure.analytics.purview.scanning.generated;
 
 import com.azure.analytics.purview.scanning.DataSourcesClient;
-import com.azure.analytics.purview.scanning.PurviewScanningClientBuilder;
+import com.azure.analytics.purview.scanning.DataSourcesClientBuilder;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -13,15 +13,18 @@ import com.azure.identity.DefaultAzureCredentialBuilder;
 
 public class DataSourcesCreateOrUpdate {
     public static void main(String[] args) {
-        DataSourcesClient client =
-                new PurviewScanningClientBuilder()
+        DataSourcesClient dataSourcesClient =
+                new DataSourcesClientBuilder()
                         .credential(new DefaultAzureCredentialBuilder().build())
                         .endpoint("{Endpoint}")
-                        .buildDataSourcesClient();
+                        .buildClient();
+        // BEGIN:com.azure.analytics.purview.scanning.generated.datasourcescreateorupdate.datasourcescreateorupdate
         RequestOptions requestOptions = new RequestOptions();
+        requestOptions.addQueryParam("api-version", "2018-12-01-preview");
         requestOptions.setBody(
                 BinaryData.fromString(
                         "{\"kind\":\"AzureStorage\",\"properties\":{\"collection\":{\"type\":\"CollectionReference\",\"referenceName\":\"Collection-rZX\"},\"endpoint\":\"https://azurestorage.core.windows.net/\"}}"));
-        Response<BinaryData> response = client.createOrUpdateWithResponse("myDataSource", requestOptions);
+        Response<BinaryData> response = dataSourcesClient.createOrUpdateWithResponse("myDataSource", requestOptions);
+        // END:com.azure.analytics.purview.scanning.generated.datasourcescreateorupdate.datasourcescreateorupdate
     }
 }

@@ -4,8 +4,8 @@
 
 package com.azure.analytics.purview.scanning.generated;
 
-import com.azure.analytics.purview.scanning.PurviewScanningClientBuilder;
 import com.azure.analytics.purview.scanning.ScanRulesetsClient;
+import com.azure.analytics.purview.scanning.ScanRulesetsClientBuilder;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
@@ -13,12 +13,15 @@ import com.azure.identity.DefaultAzureCredentialBuilder;
 
 public class ScanRulesetsListAll {
     public static void main(String[] args) {
-        ScanRulesetsClient client =
-                new PurviewScanningClientBuilder()
+        ScanRulesetsClient scanRulesetsClient =
+                new ScanRulesetsClientBuilder()
                         .credential(new DefaultAzureCredentialBuilder().build())
                         .endpoint("{Endpoint}")
-                        .buildScanRulesetsClient();
+                        .buildClient();
+        // BEGIN:com.azure.analytics.purview.scanning.generated.scanrulesetslistall.scanrulesetslistall
         RequestOptions requestOptions = new RequestOptions();
-        PagedIterable<BinaryData> response = client.listAll(requestOptions);
+        requestOptions.addQueryParam("api-version", "2018-12-01-preview");
+        PagedIterable<BinaryData> response = scanRulesetsClient.listAll(requestOptions);
+        // END:com.azure.analytics.purview.scanning.generated.scanrulesetslistall.scanrulesetslistall
     }
 }

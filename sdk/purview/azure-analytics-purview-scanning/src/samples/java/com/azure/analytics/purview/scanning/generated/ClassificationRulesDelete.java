@@ -5,7 +5,7 @@
 package com.azure.analytics.purview.scanning.generated;
 
 import com.azure.analytics.purview.scanning.ClassificationRulesClient;
-import com.azure.analytics.purview.scanning.PurviewScanningClientBuilder;
+import com.azure.analytics.purview.scanning.ClassificationRulesClientBuilder;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -13,12 +13,16 @@ import com.azure.identity.DefaultAzureCredentialBuilder;
 
 public class ClassificationRulesDelete {
     public static void main(String[] args) {
-        ClassificationRulesClient client =
-                new PurviewScanningClientBuilder()
+        ClassificationRulesClient classificationRulesClient =
+                new ClassificationRulesClientBuilder()
                         .credential(new DefaultAzureCredentialBuilder().build())
                         .endpoint("{Endpoint}")
-                        .buildClassificationRulesClient();
+                        .buildClient();
+        // BEGIN:com.azure.analytics.purview.scanning.generated.classificationrulesdelete.classificationrulesdelete
         RequestOptions requestOptions = new RequestOptions();
-        Response<BinaryData> response = client.deleteWithResponse("ClassificationRule1", requestOptions);
+        requestOptions.addQueryParam("api-version", "2018-12-01-preview");
+        Response<BinaryData> response =
+                classificationRulesClient.deleteWithResponse("ClassificationRule1", requestOptions);
+        // END:com.azure.analytics.purview.scanning.generated.classificationrulesdelete.classificationrulesdelete
     }
 }

@@ -5,7 +5,7 @@
 package com.azure.analytics.purview.scanning.generated;
 
 import com.azure.analytics.purview.scanning.DataSourcesClient;
-import com.azure.analytics.purview.scanning.PurviewScanningClientBuilder;
+import com.azure.analytics.purview.scanning.DataSourcesClientBuilder;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -13,12 +13,15 @@ import com.azure.identity.DefaultAzureCredentialBuilder;
 
 public class DataSourcesDelete {
     public static void main(String[] args) {
-        DataSourcesClient client =
-                new PurviewScanningClientBuilder()
+        DataSourcesClient dataSourcesClient =
+                new DataSourcesClientBuilder()
                         .credential(new DefaultAzureCredentialBuilder().build())
                         .endpoint("{Endpoint}")
-                        .buildDataSourcesClient();
+                        .buildClient();
+        // BEGIN:com.azure.analytics.purview.scanning.generated.datasourcesdelete.datasourcesdelete
         RequestOptions requestOptions = new RequestOptions();
-        Response<BinaryData> response = client.deleteWithResponse("myDataSource", requestOptions);
+        requestOptions.addQueryParam("api-version", "2018-12-01-preview");
+        Response<BinaryData> response = dataSourcesClient.deleteWithResponse("myDataSource", requestOptions);
+        // END:com.azure.analytics.purview.scanning.generated.datasourcesdelete.datasourcesdelete
     }
 }

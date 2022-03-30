@@ -4,30 +4,32 @@
 
 package com.azure.analytics.purview.scanning;
 
-import com.azure.analytics.purview.scanning.implementation.ClassificationRulesImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.exception.ResourceModifiedException;
+import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 
-/** Initializes a new instance of the synchronous PurviewScanningClient type. */
-@ServiceClient(builder = PurviewScanningClientBuilder.class)
+/** Initializes a new instance of the synchronous PurviewMetadataPolicyClient type. */
+@ServiceClient(builder = ClassificationRulesClientBuilder.class)
 public final class ClassificationRulesClient {
-    @Generated private final ClassificationRulesImpl serviceClient;
+    @Generated private final ClassificationRulesAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of ClassificationRules client.
+     * Initializes an instance of ClassificationRulesClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    ClassificationRulesClient(ClassificationRulesImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    ClassificationRulesClient(ClassificationRulesAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -38,7 +40,7 @@ public final class ClassificationRulesClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -53,12 +55,15 @@ public final class ClassificationRulesClient {
      * @param classificationRuleName The classificationRuleName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a classification rule along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(String classificationRuleName, RequestOptions requestOptions) {
-        return this.serviceClient.getWithResponse(classificationRuleName, requestOptions);
+        return this.asyncClient.getWithResponse(classificationRuleName, requestOptions).block();
     }
 
     /**
@@ -69,7 +74,7 @@ public final class ClassificationRulesClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -93,13 +98,16 @@ public final class ClassificationRulesClient {
      * @param classificationRuleName The classificationRuleName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateWithResponse(
             String classificationRuleName, RequestOptions requestOptions) {
-        return this.serviceClient.createOrUpdateWithResponse(classificationRuleName, requestOptions);
+        return this.asyncClient.createOrUpdateWithResponse(classificationRuleName, requestOptions).block();
     }
 
     /**
@@ -110,7 +118,7 @@ public final class ClassificationRulesClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -125,12 +133,15 @@ public final class ClassificationRulesClient {
      * @param classificationRuleName The classificationRuleName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> deleteWithResponse(String classificationRuleName, RequestOptions requestOptions) {
-        return this.serviceClient.deleteWithResponse(classificationRuleName, requestOptions);
+        return this.asyncClient.deleteWithResponse(classificationRuleName, requestOptions).block();
     }
 
     /**
@@ -141,7 +152,7 @@ public final class ClassificationRulesClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -161,12 +172,15 @@ public final class ClassificationRulesClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the paginated response with {@link PagedIterable}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listAll(RequestOptions requestOptions) {
-        return this.serviceClient.listAll(requestOptions);
+        return new PagedIterable<>(this.asyncClient.listAll(requestOptions));
     }
 
     /**
@@ -177,7 +191,7 @@ public final class ClassificationRulesClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -198,13 +212,17 @@ public final class ClassificationRulesClient {
      * @param classificationRuleName The classificationRuleName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the paginated response with {@link PagedIterable}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listVersionsByClassificationRuleName(
             String classificationRuleName, RequestOptions requestOptions) {
-        return this.serviceClient.listVersionsByClassificationRuleName(classificationRuleName, requestOptions);
+        return new PagedIterable<>(
+                this.asyncClient.listVersionsByClassificationRuleName(classificationRuleName, requestOptions));
     }
 
     /**
@@ -216,7 +234,7 @@ public final class ClassificationRulesClient {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>action</td><td>String</td><td>Yes</td><td>The action parameter</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -249,13 +267,17 @@ public final class ClassificationRulesClient {
      * @param classificationRuleVersion The classificationRuleVersion parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> tagClassificationVersionWithResponse(
             String classificationRuleName, int classificationRuleVersion, RequestOptions requestOptions) {
-        return this.serviceClient.tagClassificationVersionWithResponse(
-                classificationRuleName, classificationRuleVersion, requestOptions);
+        return this.asyncClient
+                .tagClassificationVersionWithResponse(classificationRuleName, classificationRuleVersion, requestOptions)
+                .block();
     }
 }

@@ -4,7 +4,6 @@
 
 package com.azure.analytics.purview.scanning.implementation;
 
-import com.azure.analytics.purview.scanning.PurviewScanningServiceVersion;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
@@ -13,8 +12,8 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
-/** Initializes a new instance of the PurviewScanningClient type. */
-public final class PurviewScanningClientImpl {
+/** Initializes a new instance of the PurviewMetadataPolicyClient type. */
+public final class PurviewMetadataPolicyClientImpl {
     /** The scanning endpoint of your purview account. Example: https://{accountName}.scan.purview.azure.com. */
     private final String endpoint;
 
@@ -25,18 +24,6 @@ public final class PurviewScanningClientImpl {
      */
     public String getEndpoint() {
         return this.endpoint;
-    }
-
-    /** Service version. */
-    private final PurviewScanningServiceVersion serviceVersion;
-
-    /**
-     * Gets Service version.
-     *
-     * @return the serviceVersion value.
-     */
-    public PurviewScanningServiceVersion getServiceVersion() {
-        return this.serviceVersion;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -171,54 +158,69 @@ public final class PurviewScanningClientImpl {
         return this.triggers;
     }
 
+    /** The MetadataRolesImpl object to access its operations. */
+    private final MetadataRolesImpl metadataRoles;
+
     /**
-     * Initializes an instance of PurviewScanningClient client.
+     * Gets the MetadataRolesImpl object to access its operations.
+     *
+     * @return the MetadataRolesImpl object.
+     */
+    public MetadataRolesImpl getMetadataRoles() {
+        return this.metadataRoles;
+    }
+
+    /** The MetadataPoliciesImpl object to access its operations. */
+    private final MetadataPoliciesImpl metadataPolicies;
+
+    /**
+     * Gets the MetadataPoliciesImpl object to access its operations.
+     *
+     * @return the MetadataPoliciesImpl object.
+     */
+    public MetadataPoliciesImpl getMetadataPolicies() {
+        return this.metadataPolicies;
+    }
+
+    /**
+     * Initializes an instance of PurviewMetadataPolicyClient client.
      *
      * @param endpoint The scanning endpoint of your purview account. Example:
      *     https://{accountName}.scan.purview.azure.com.
-     * @param serviceVersion Service version.
      */
-    public PurviewScanningClientImpl(String endpoint, PurviewScanningServiceVersion serviceVersion) {
+    public PurviewMetadataPolicyClientImpl(String endpoint) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
-                endpoint,
-                serviceVersion);
+                endpoint);
     }
 
     /**
-     * Initializes an instance of PurviewScanningClient client.
+     * Initializes an instance of PurviewMetadataPolicyClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint The scanning endpoint of your purview account. Example:
      *     https://{accountName}.scan.purview.azure.com.
-     * @param serviceVersion Service version.
      */
-    public PurviewScanningClientImpl(
-            HttpPipeline httpPipeline, String endpoint, PurviewScanningServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
+    public PurviewMetadataPolicyClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
-     * Initializes an instance of PurviewScanningClient client.
+     * Initializes an instance of PurviewMetadataPolicyClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint The scanning endpoint of your purview account. Example:
      *     https://{accountName}.scan.purview.azure.com.
-     * @param serviceVersion Service version.
      */
-    public PurviewScanningClientImpl(
-            HttpPipeline httpPipeline,
-            SerializerAdapter serializerAdapter,
-            String endpoint,
-            PurviewScanningServiceVersion serviceVersion) {
+    public PurviewMetadataPolicyClientImpl(
+            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
-        this.serviceVersion = serviceVersion;
         this.keyVaultConnections = new KeyVaultConnectionsImpl(this);
         this.classificationRules = new ClassificationRulesImpl(this);
         this.dataSources = new DataSourcesImpl(this);
@@ -228,5 +230,7 @@ public final class PurviewScanningClientImpl {
         this.scanRulesets = new ScanRulesetsImpl(this);
         this.systemScanRulesets = new SystemScanRulesetsImpl(this);
         this.triggers = new TriggersImpl(this);
+        this.metadataRoles = new MetadataRolesImpl(this);
+        this.metadataPolicies = new MetadataPoliciesImpl(this);
     }
 }

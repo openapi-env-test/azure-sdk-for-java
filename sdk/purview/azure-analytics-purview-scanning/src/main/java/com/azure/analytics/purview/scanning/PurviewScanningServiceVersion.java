@@ -8,8 +8,8 @@ import com.azure.core.util.ServiceVersion;
 
 /** Service version of PurviewScanning. */
 public enum PurviewScanningServiceVersion implements ServiceVersion {
-    /** Enum value 2018-12-01-preview. */
-    V2018_12_01_PREVIEW("2018-12-01-preview");
+    /** Enum value 2021-10-01-preview. */
+    V2021_10_01_PREVIEW("2021-10-01-preview");
 
     private final String version;
 
@@ -28,6 +28,6 @@ public enum PurviewScanningServiceVersion implements ServiceVersion {
      * @return The latest {@link PurviewScanningServiceVersion}.
      */
     public static PurviewScanningServiceVersion getLatest() {
-        return V2018_12_01_PREVIEW;
+        return V2021_10_01_PREVIEW;
     }
 }

@@ -4,8 +4,8 @@
 
 package com.azure.analytics.purview.scanning.generated;
 
-import com.azure.analytics.purview.scanning.PurviewScanningClientBuilder;
 import com.azure.analytics.purview.scanning.ScanResultClient;
+import com.azure.analytics.purview.scanning.ScanResultClientBuilder;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -13,15 +13,18 @@ import com.azure.identity.DefaultAzureCredentialBuilder;
 
 public class ScanResultRunScan {
     public static void main(String[] args) {
-        ScanResultClient client =
-                new PurviewScanningClientBuilder()
+        ScanResultClient scanResultClient =
+                new ScanResultClientBuilder()
                         .credential(new DefaultAzureCredentialBuilder().build())
                         .endpoint("{Endpoint}")
-                        .buildScanResultClient();
+                        .buildClient();
+        // BEGIN:com.azure.analytics.purview.scanning.generated.scanresultrunscan.scanresultrunscan
         RequestOptions requestOptions = new RequestOptions();
+        requestOptions.addQueryParam("api-version", "2018-12-01-preview");
         requestOptions.addQueryParam("scanLevel", "Full");
         Response<BinaryData> response =
-                client.runScanWithResponse(
+                scanResultClient.runScanWithResponse(
                         "testDataSourceName", "scan1", "138301e4-f4f9-4ab5-b734-bac446b236e7", requestOptions);
+        // END:com.azure.analytics.purview.scanning.generated.scanresultrunscan.scanresultrunscan
     }
 }

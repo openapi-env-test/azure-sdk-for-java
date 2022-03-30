@@ -4,8 +4,8 @@
 
 package com.azure.analytics.purview.scanning.generated;
 
-import com.azure.analytics.purview.scanning.PurviewScanningClientBuilder;
 import com.azure.analytics.purview.scanning.ScansClient;
+import com.azure.analytics.purview.scanning.ScansClientBuilder;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
@@ -13,12 +13,15 @@ import com.azure.identity.DefaultAzureCredentialBuilder;
 
 public class ScansListByDataSource {
     public static void main(String[] args) {
-        ScansClient client =
-                new PurviewScanningClientBuilder()
+        ScansClient scansClient =
+                new ScansClientBuilder()
                         .credential(new DefaultAzureCredentialBuilder().build())
                         .endpoint("{Endpoint}")
-                        .buildScansClient();
+                        .buildClient();
+        // BEGIN:com.azure.analytics.purview.scanning.generated.scanslistbydatasource.scanslistbydatasource
         RequestOptions requestOptions = new RequestOptions();
-        PagedIterable<BinaryData> response = client.listByDataSource("myDataSource", requestOptions);
+        requestOptions.addQueryParam("api-version", "2018-12-01-preview");
+        PagedIterable<BinaryData> response = scansClient.listByDataSource("myDataSource", requestOptions);
+        // END:com.azure.analytics.purview.scanning.generated.scanslistbydatasource.scanslistbydatasource
     }
 }

@@ -5,7 +5,7 @@
 package com.azure.analytics.purview.scanning.generated;
 
 import com.azure.analytics.purview.scanning.FiltersClient;
-import com.azure.analytics.purview.scanning.PurviewScanningClientBuilder;
+import com.azure.analytics.purview.scanning.FiltersClientBuilder;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -13,12 +13,15 @@ import com.azure.identity.DefaultAzureCredentialBuilder;
 
 public class FiltersGet {
     public static void main(String[] args) {
-        FiltersClient client =
-                new PurviewScanningClientBuilder()
+        FiltersClient filtersClient =
+                new FiltersClientBuilder()
                         .credential(new DefaultAzureCredentialBuilder().build())
                         .endpoint("{Endpoint}")
-                        .buildFiltersClient();
+                        .buildClient();
+        // BEGIN:com.azure.analytics.purview.scanning.generated.filtersget.filtersget
         RequestOptions requestOptions = new RequestOptions();
-        Response<BinaryData> response = client.getWithResponse("myDataSource", "myScanName", requestOptions);
+        requestOptions.addQueryParam("api-version", "2018-12-01-preview");
+        Response<BinaryData> response = filtersClient.getWithResponse("myDataSource", "myScanName", requestOptions);
+        // END:com.azure.analytics.purview.scanning.generated.filtersget.filtersget
     }
 }

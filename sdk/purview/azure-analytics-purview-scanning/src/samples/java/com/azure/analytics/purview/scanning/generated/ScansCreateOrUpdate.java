@@ -4,8 +4,8 @@
 
 package com.azure.analytics.purview.scanning.generated;
 
-import com.azure.analytics.purview.scanning.PurviewScanningClientBuilder;
 import com.azure.analytics.purview.scanning.ScansClient;
+import com.azure.analytics.purview.scanning.ScansClientBuilder;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -13,16 +13,19 @@ import com.azure.identity.DefaultAzureCredentialBuilder;
 
 public class ScansCreateOrUpdate {
     public static void main(String[] args) {
-        ScansClient client =
-                new PurviewScanningClientBuilder()
+        ScansClient scansClient =
+                new ScansClientBuilder()
                         .credential(new DefaultAzureCredentialBuilder().build())
                         .endpoint("{Endpoint}")
-                        .buildScansClient();
+                        .buildClient();
+        // BEGIN:com.azure.analytics.purview.scanning.generated.scanscreateorupdate.scanscreateorupdate
         BinaryData body =
                 BinaryData.fromString(
                         "{\"kind\":\"AzureStorageCredential\",\"properties\":{\"collection\":{\"type\":\"CollectionReference\",\"referenceName\":\"Collection-rZX\"},\"connectedVia\":null,\"credential\":{\"credentialType\":\"AccountKey\",\"referenceName\":\"CredentialAKV\"},\"scanRulesetName\":\"AzureStorage\",\"scanRulesetType\":\"System\"}}");
         RequestOptions requestOptions = new RequestOptions();
+        requestOptions.addQueryParam("api-version", "2018-12-01-preview");
         Response<BinaryData> response =
-                client.createOrUpdateWithResponse("myDataSource", "myScanName", body, requestOptions);
+                scansClient.createOrUpdateWithResponse("myDataSource", "myScanName", body, requestOptions);
+        // END:com.azure.analytics.purview.scanning.generated.scanscreateorupdate.scanscreateorupdate
     }
 }

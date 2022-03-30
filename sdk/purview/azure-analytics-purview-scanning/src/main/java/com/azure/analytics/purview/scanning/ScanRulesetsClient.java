@@ -4,30 +4,32 @@
 
 package com.azure.analytics.purview.scanning;
 
-import com.azure.analytics.purview.scanning.implementation.ScanRulesetsImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.exception.ResourceModifiedException;
+import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 
-/** Initializes a new instance of the synchronous PurviewScanningClient type. */
-@ServiceClient(builder = PurviewScanningClientBuilder.class)
+/** Initializes a new instance of the synchronous PurviewMetadataPolicyClient type. */
+@ServiceClient(builder = ScanRulesetsClientBuilder.class)
 public final class ScanRulesetsClient {
-    @Generated private final ScanRulesetsImpl serviceClient;
+    @Generated private final ScanRulesetsAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of ScanRulesets client.
+     * Initializes an instance of ScanRulesetsClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    ScanRulesetsClient(ScanRulesetsImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    ScanRulesetsClient(ScanRulesetsAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -38,7 +40,7 @@ public final class ScanRulesetsClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -56,12 +58,15 @@ public final class ScanRulesetsClient {
      * @param scanRulesetName The scanRulesetName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a scan ruleset along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(String scanRulesetName, RequestOptions requestOptions) {
-        return this.serviceClient.getWithResponse(scanRulesetName, requestOptions);
+        return this.asyncClient.getWithResponse(scanRulesetName, requestOptions).block();
     }
 
     /**
@@ -72,7 +77,7 @@ public final class ScanRulesetsClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Request Body Schema</strong>
@@ -102,12 +107,15 @@ public final class ScanRulesetsClient {
      * @param scanRulesetName The scanRulesetName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateWithResponse(String scanRulesetName, RequestOptions requestOptions) {
-        return this.serviceClient.createOrUpdateWithResponse(scanRulesetName, requestOptions);
+        return this.asyncClient.createOrUpdateWithResponse(scanRulesetName, requestOptions).block();
     }
 
     /**
@@ -118,7 +126,7 @@ public final class ScanRulesetsClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -136,12 +144,15 @@ public final class ScanRulesetsClient {
      * @param scanRulesetName The scanRulesetName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> deleteWithResponse(String scanRulesetName, RequestOptions requestOptions) {
-        return this.serviceClient.deleteWithResponse(scanRulesetName, requestOptions);
+        return this.asyncClient.deleteWithResponse(scanRulesetName, requestOptions).block();
     }
 
     /**
@@ -152,7 +163,7 @@ public final class ScanRulesetsClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -175,11 +186,14 @@ public final class ScanRulesetsClient {
      *
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the paginated response with {@link PagedIterable}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listAll(RequestOptions requestOptions) {
-        return this.serviceClient.listAll(requestOptions);
+        return new PagedIterable<>(this.asyncClient.listAll(requestOptions));
     }
 }

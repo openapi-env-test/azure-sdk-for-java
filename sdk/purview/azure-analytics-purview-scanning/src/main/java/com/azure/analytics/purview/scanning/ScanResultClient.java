@@ -4,30 +4,32 @@
 
 package com.azure.analytics.purview.scanning;
 
-import com.azure.analytics.purview.scanning.implementation.ScanResultsImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
+import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.exception.ResourceModifiedException;
+import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 
-/** Initializes a new instance of the synchronous PurviewScanningClient type. */
-@ServiceClient(builder = PurviewScanningClientBuilder.class)
+/** Initializes a new instance of the synchronous PurviewMetadataPolicyClient type. */
+@ServiceClient(builder = ScanResultClientBuilder.class)
 public final class ScanResultClient {
-    @Generated private final ScanResultsImpl serviceClient;
+    @Generated private final ScanResultAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of ScanResults client.
+     * Initializes an instance of ScanResultClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    ScanResultClient(ScanResultsImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    ScanResultClient(ScanResultAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -39,7 +41,7 @@ public final class ScanResultClient {
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      *     <tr><td>scanLevel</td><td>String</td><td>No</td><td>The scanLevel parameter</td></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -73,13 +75,16 @@ public final class ScanResultClient {
      * @param runId The runId parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> runScanWithResponse(
             String dataSourceName, String scanName, String runId, RequestOptions requestOptions) {
-        return this.serviceClient.runScanWithResponse(dataSourceName, scanName, runId, requestOptions);
+        return this.asyncClient.runScanWithResponse(dataSourceName, scanName, runId, requestOptions).block();
     }
 
     /**
@@ -90,7 +95,7 @@ public final class ScanResultClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -124,13 +129,16 @@ public final class ScanResultClient {
      * @param runId The runId parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> cancelScanWithResponse(
             String dataSourceName, String scanName, String runId, RequestOptions requestOptions) {
-        return this.serviceClient.cancelScanWithResponse(dataSourceName, scanName, runId, requestOptions);
+        return this.asyncClient.cancelScanWithResponse(dataSourceName, scanName, runId, requestOptions).block();
     }
 
     /**
@@ -141,7 +149,7 @@ public final class ScanResultClient {
      * <table border="1">
      *     <caption>Query Parameters</caption>
      *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>apiVersion</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
+     *     <tr><td>api-version</td><td>String</td><td>Yes</td><td>Api Version</td></tr>
      * </table>
      *
      * <p><strong>Response Body Schema</strong>
@@ -203,12 +211,15 @@ public final class ScanResultClient {
      * @param scanName The scanName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
-     * @return the response.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the paginated response with {@link PagedIterable}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listScanHistory(
             String dataSourceName, String scanName, RequestOptions requestOptions) {
-        return this.serviceClient.listScanHistory(dataSourceName, scanName, requestOptions);
+        return new PagedIterable<>(this.asyncClient.listScanHistory(dataSourceName, scanName, requestOptions));
     }
 }
