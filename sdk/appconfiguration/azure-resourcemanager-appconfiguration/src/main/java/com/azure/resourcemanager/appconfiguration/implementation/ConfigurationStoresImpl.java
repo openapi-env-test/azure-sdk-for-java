@@ -18,10 +18,9 @@ import com.azure.resourcemanager.appconfiguration.models.ConfigurationStore;
 import com.azure.resourcemanager.appconfiguration.models.ConfigurationStores;
 import com.azure.resourcemanager.appconfiguration.models.DeletedConfigurationStore;
 import com.azure.resourcemanager.appconfiguration.models.RegenerateKeyParameters;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public final class ConfigurationStoresImpl implements ConfigurationStores {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(ConfigurationStoresImpl.class);
+    private static final ClientLogger LOGGER = new ClientLogger(ConfigurationStoresImpl.class);
 
     private final ConfigurationStoresClient innerClient;
 
@@ -41,18 +40,6 @@ public final class ConfigurationStoresImpl implements ConfigurationStores {
 
     public PagedIterable<ConfigurationStore> list(String skipToken, Context context) {
         PagedIterable<ConfigurationStoreInner> inner = this.serviceClient().list(skipToken, context);
-        return Utils.mapPage(inner, inner1 -> new ConfigurationStoreImpl(inner1, this.manager()));
-    }
-
-    public PagedIterable<ConfigurationStore> listByResourceGroup(String resourceGroupName) {
-        PagedIterable<ConfigurationStoreInner> inner = this.serviceClient().listByResourceGroup(resourceGroupName);
-        return Utils.mapPage(inner, inner1 -> new ConfigurationStoreImpl(inner1, this.manager()));
-    }
-
-    public PagedIterable<ConfigurationStore> listByResourceGroup(
-        String resourceGroupName, String skipToken, Context context) {
-        PagedIterable<ConfigurationStoreInner> inner =
-            this.serviceClient().listByResourceGroup(resourceGroupName, skipToken, context);
         return Utils.mapPage(inner, inner1 -> new ConfigurationStoreImpl(inner1, this.manager()));
     }
 
@@ -176,7 +163,7 @@ public final class ConfigurationStoresImpl implements ConfigurationStores {
     public ConfigurationStore getById(String id) {
         String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
@@ -184,7 +171,7 @@ public final class ConfigurationStoresImpl implements ConfigurationStores {
         }
         String configStoreName = Utils.getValueFromIdByName(id, "configurationStores");
         if (configStoreName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
@@ -197,7 +184,7 @@ public final class ConfigurationStoresImpl implements ConfigurationStores {
     public Response<ConfigurationStore> getByIdWithResponse(String id, Context context) {
         String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
@@ -205,7 +192,7 @@ public final class ConfigurationStoresImpl implements ConfigurationStores {
         }
         String configStoreName = Utils.getValueFromIdByName(id, "configurationStores");
         if (configStoreName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
@@ -218,7 +205,7 @@ public final class ConfigurationStoresImpl implements ConfigurationStores {
     public void deleteById(String id) {
         String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
@@ -226,7 +213,7 @@ public final class ConfigurationStoresImpl implements ConfigurationStores {
         }
         String configStoreName = Utils.getValueFromIdByName(id, "configurationStores");
         if (configStoreName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
@@ -239,7 +226,7 @@ public final class ConfigurationStoresImpl implements ConfigurationStores {
     public void deleteByIdWithResponse(String id, Context context) {
         String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
@@ -247,7 +234,7 @@ public final class ConfigurationStoresImpl implements ConfigurationStores {
         }
         String configStoreName = Utils.getValueFromIdByName(id, "configurationStores");
         if (configStoreName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
