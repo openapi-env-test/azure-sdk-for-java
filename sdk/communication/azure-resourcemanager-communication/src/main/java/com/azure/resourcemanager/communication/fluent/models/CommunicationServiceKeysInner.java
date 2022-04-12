@@ -5,20 +5,22 @@
 package com.azure.resourcemanager.communication.fluent.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** A class representing the access keys of a CommunicationService. */
 @Fluent
 public final class CommunicationServiceKeysInner {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(CommunicationServiceKeysInner.class);
-
     /*
      * The primary access key.
      */
     @JsonProperty(value = "primaryKey")
     private String primaryKey;
+
+    /*
+     * The test access key.
+     */
+    @JsonProperty(value = "testKey")
+    private String testKey;
 
     /*
      * The secondary access key.
@@ -55,6 +57,26 @@ public final class CommunicationServiceKeysInner {
      */
     public CommunicationServiceKeysInner withPrimaryKey(String primaryKey) {
         this.primaryKey = primaryKey;
+        return this;
+    }
+
+    /**
+     * Get the testKey property: The test access key.
+     *
+     * @return the testKey value.
+     */
+    public String testKey() {
+        return this.testKey;
+    }
+
+    /**
+     * Set the testKey property: The test access key.
+     *
+     * @param testKey the testKey value to set.
+     * @return the CommunicationServiceKeysInner object itself.
+     */
+    public CommunicationServiceKeysInner withTestKey(String testKey) {
+        this.testKey = testKey;
         return this;
     }
 

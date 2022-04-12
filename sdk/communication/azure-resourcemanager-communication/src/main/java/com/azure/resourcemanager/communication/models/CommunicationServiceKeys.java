@@ -16,6 +16,13 @@ public interface CommunicationServiceKeys {
     String primaryKey();
 
     /**
+     * Gets the testKey property: The test access key.
+     *
+     * @return the testKey value.
+     */
+    String testKey();
+
+    /**
      * Gets the secondaryKey property: The secondary access key.
      *
      * @return the secondaryKey value.

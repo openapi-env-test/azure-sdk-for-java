@@ -23,6 +23,10 @@ public final class CommunicationServiceKeysImpl implements CommunicationServiceK
         return this.innerModel().primaryKey();
     }
 
+    public String testKey() {
+        return this.innerModel().testKey();
+    }
+
     public String secondaryKey() {
         return this.innerModel().secondaryKey();
     }
