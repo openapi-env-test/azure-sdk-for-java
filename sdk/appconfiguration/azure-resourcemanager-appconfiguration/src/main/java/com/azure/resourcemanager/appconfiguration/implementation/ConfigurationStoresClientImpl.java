@@ -31,7 +31,6 @@ import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.polling.PollResult;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.appconfiguration.fluent.ConfigurationStoresClient;
@@ -49,8 +48,6 @@ import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in ConfigurationStoresClient. */
 public final class ConfigurationStoresClientImpl implements ConfigurationStoresClient {
-    private final ClientLogger logger = new ClientLogger(ConfigurationStoresClientImpl.class);
-
     /** The proxy service used to perform REST calls. */
     private final ConfigurationStoresService service;
 
@@ -99,21 +96,6 @@ public final class ConfigurationStoresClientImpl implements ConfigurationStoresC
             @PathParam("resourceGroupName") String resourceGroupName,
             @QueryParam("api-version") String apiVersion,
             @QueryParam("$skipToken") String skipToken,
-            @HeaderParam("Accept") String accept,
-            Context context);
-
-        @Headers({"Content-Type: application/json"})
-        @Get(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration"
-                + "/configurationStores/{configStoreName}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<ConfigurationStoreInner>> getByResourceGroup(
-            @HostParam("$host") String endpoint,
-            @PathParam("subscriptionId") String subscriptionId,
-            @PathParam("resourceGroupName") String resourceGroupName,
-            @PathParam("configStoreName") String configStoreName,
-            @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept,
             Context context);
 
@@ -654,159 +636,6 @@ public final class ConfigurationStoresClientImpl implements ConfigurationStoresC
     public PagedIterable<ConfigurationStoreInner> listByResourceGroup(
         String resourceGroupName, String skipToken, Context context) {
         return new PagedIterable<>(listByResourceGroupAsync(resourceGroupName, skipToken, context));
-    }
-
-    /**
-     * Gets the properties of the specified configuration store.
-     *
-     * @param resourceGroupName The name of the resource group to which the container registry belongs.
-     * @param configStoreName The name of the configuration store.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the properties of the specified configuration store along with {@link Response} on successful completion
-     *     of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<ConfigurationStoreInner>> getByResourceGroupWithResponseAsync(
-        String resourceGroupName, String configStoreName) {
-        if (this.client.getEndpoint() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
-        if (this.client.getSubscriptionId() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
-        }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-        }
-        if (configStoreName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter configStoreName is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(
-                context ->
-                    service
-                        .getByResourceGroup(
-                            this.client.getEndpoint(),
-                            this.client.getSubscriptionId(),
-                            resourceGroupName,
-                            configStoreName,
-                            this.client.getApiVersion(),
-                            accept,
-                            context))
-            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
-    }
-
-    /**
-     * Gets the properties of the specified configuration store.
-     *
-     * @param resourceGroupName The name of the resource group to which the container registry belongs.
-     * @param configStoreName The name of the configuration store.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the properties of the specified configuration store along with {@link Response} on successful completion
-     *     of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<ConfigurationStoreInner>> getByResourceGroupWithResponseAsync(
-        String resourceGroupName, String configStoreName, Context context) {
-        if (this.client.getEndpoint() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
-        if (this.client.getSubscriptionId() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
-        }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-        }
-        if (configStoreName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter configStoreName is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        context = this.client.mergeContext(context);
-        return service
-            .getByResourceGroup(
-                this.client.getEndpoint(),
-                this.client.getSubscriptionId(),
-                resourceGroupName,
-                configStoreName,
-                this.client.getApiVersion(),
-                accept,
-                context);
-    }
-
-    /**
-     * Gets the properties of the specified configuration store.
-     *
-     * @param resourceGroupName The name of the resource group to which the container registry belongs.
-     * @param configStoreName The name of the configuration store.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the properties of the specified configuration store on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<ConfigurationStoreInner> getByResourceGroupAsync(String resourceGroupName, String configStoreName) {
-        return getByResourceGroupWithResponseAsync(resourceGroupName, configStoreName)
-            .flatMap(
-                (Response<ConfigurationStoreInner> res) -> {
-                    if (res.getValue() != null) {
-                        return Mono.just(res.getValue());
-                    } else {
-                        return Mono.empty();
-                    }
-                });
-    }
-
-    /**
-     * Gets the properties of the specified configuration store.
-     *
-     * @param resourceGroupName The name of the resource group to which the container registry belongs.
-     * @param configStoreName The name of the configuration store.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the properties of the specified configuration store.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ConfigurationStoreInner getByResourceGroup(String resourceGroupName, String configStoreName) {
-        return getByResourceGroupAsync(resourceGroupName, configStoreName).block();
-    }
-
-    /**
-     * Gets the properties of the specified configuration store.
-     *
-     * @param resourceGroupName The name of the resource group to which the container registry belongs.
-     * @param configStoreName The name of the configuration store.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the properties of the specified configuration store along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<ConfigurationStoreInner> getByResourceGroupWithResponse(
-        String resourceGroupName, String configStoreName, Context context) {
-        return getByResourceGroupWithResponseAsync(resourceGroupName, configStoreName, context).block();
     }
 
     /**

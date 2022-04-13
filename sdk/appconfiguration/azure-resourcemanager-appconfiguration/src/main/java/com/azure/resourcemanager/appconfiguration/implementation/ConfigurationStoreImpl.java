@@ -198,26 +198,6 @@ public final class ConfigurationStoreImpl
         this.configStoreName = Utils.getValueFromIdByName(innerObject.id(), "configurationStores");
     }
 
-    public ConfigurationStore refresh() {
-        this.innerObject =
-            serviceManager
-                .serviceClient()
-                .getConfigurationStores()
-                .getByResourceGroupWithResponse(resourceGroupName, configStoreName, Context.NONE)
-                .getValue();
-        return this;
-    }
-
-    public ConfigurationStore refresh(Context context) {
-        this.innerObject =
-            serviceManager
-                .serviceClient()
-                .getConfigurationStores()
-                .getByResourceGroupWithResponse(resourceGroupName, configStoreName, context)
-                .getValue();
-        return this;
-    }
-
     public PagedIterable<ApiKey> listKeys() {
         return serviceManager.configurationStores().listKeys(resourceGroupName, configStoreName);
     }
