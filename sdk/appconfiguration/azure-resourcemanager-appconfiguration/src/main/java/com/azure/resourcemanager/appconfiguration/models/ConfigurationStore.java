@@ -444,21 +444,6 @@ public interface ConfigurationStore {
         }
     }
     /**
-     * Refreshes the resource to sync with Azure.
-     *
-     * @return the refreshed resource.
-     */
-    ConfigurationStore refresh();
-
-    /**
-     * Refreshes the resource to sync with Azure.
-     *
-     * @param context The context to associate with this operation.
-     * @return the refreshed resource.
-     */
-    ConfigurationStore refresh(Context context);
-
-    /**
      * Lists the access key for the specified configuration store.
      *
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
