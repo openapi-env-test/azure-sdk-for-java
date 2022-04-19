@@ -74,34 +74,6 @@ public interface ConfigurationStoresClient {
         String resourceGroupName, String skipToken, Context context);
 
     /**
-     * Gets the properties of the specified configuration store.
-     *
-     * @param resourceGroupName The name of the resource group to which the container registry belongs.
-     * @param configStoreName The name of the configuration store.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the properties of the specified configuration store.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ConfigurationStoreInner getByResourceGroup(String resourceGroupName, String configStoreName);
-
-    /**
-     * Gets the properties of the specified configuration store.
-     *
-     * @param resourceGroupName The name of the resource group to which the container registry belongs.
-     * @param configStoreName The name of the configuration store.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the properties of the specified configuration store along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<ConfigurationStoreInner> getByResourceGroupWithResponse(
-        String resourceGroupName, String configStoreName, Context context);
-
-    /**
      * Creates a configuration store with the specified parameters.
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.

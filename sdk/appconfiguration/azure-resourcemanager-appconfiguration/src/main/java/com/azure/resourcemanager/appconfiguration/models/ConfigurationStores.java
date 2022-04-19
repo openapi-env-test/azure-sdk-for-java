@@ -60,32 +60,6 @@ public interface ConfigurationStores {
     PagedIterable<ConfigurationStore> listByResourceGroup(String resourceGroupName, String skipToken, Context context);
 
     /**
-     * Gets the properties of the specified configuration store.
-     *
-     * @param resourceGroupName The name of the resource group to which the container registry belongs.
-     * @param configStoreName The name of the configuration store.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the properties of the specified configuration store.
-     */
-    ConfigurationStore getByResourceGroup(String resourceGroupName, String configStoreName);
-
-    /**
-     * Gets the properties of the specified configuration store.
-     *
-     * @param resourceGroupName The name of the resource group to which the container registry belongs.
-     * @param configStoreName The name of the configuration store.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the properties of the specified configuration store along with {@link Response}.
-     */
-    Response<ConfigurationStore> getByResourceGroupWithResponse(
-        String resourceGroupName, String configStoreName, Context context);
-
-    /**
      * Deletes a configuration store.
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
@@ -238,29 +212,6 @@ public interface ConfigurationStores {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void purgeDeleted(String location, String configStoreName, Context context);
-
-    /**
-     * Gets the properties of the specified configuration store.
-     *
-     * @param id the resource ID.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the properties of the specified configuration store along with {@link Response}.
-     */
-    ConfigurationStore getById(String id);
-
-    /**
-     * Gets the properties of the specified configuration store.
-     *
-     * @param id the resource ID.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the properties of the specified configuration store along with {@link Response}.
-     */
-    Response<ConfigurationStore> getByIdWithResponse(String id, Context context);
 
     /**
      * Deletes a configuration store.
