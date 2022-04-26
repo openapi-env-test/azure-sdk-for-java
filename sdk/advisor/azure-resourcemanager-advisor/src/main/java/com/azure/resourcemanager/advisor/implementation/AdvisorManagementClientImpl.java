@@ -26,6 +26,7 @@ import com.azure.resourcemanager.advisor.fluent.ConfigurationsClient;
 import com.azure.resourcemanager.advisor.fluent.OperationsClient;
 import com.azure.resourcemanager.advisor.fluent.RecommendationMetadatasClient;
 import com.azure.resourcemanager.advisor.fluent.RecommendationsClient;
+import com.azure.resourcemanager.advisor.fluent.RecommendationsOperationsClient;
 import com.azure.resourcemanager.advisor.fluent.SuppressionsClient;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -40,8 +41,6 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the AdvisorManagementClientImpl type. */
 @ServiceClient(builder = AdvisorManagementClientBuilder.class)
 public final class AdvisorManagementClientImpl implements AdvisorManagementClient {
-    private final ClientLogger logger = new ClientLogger(AdvisorManagementClientImpl.class);
-
     /** The Azure subscription ID. */
     private final String subscriptionId;
 
@@ -114,6 +113,18 @@ public final class AdvisorManagementClientImpl implements AdvisorManagementClien
         return this.defaultPollInterval;
     }
 
+    /** The RecommendationsClient object to access its operations. */
+    private final RecommendationsClient recommendations;
+
+    /**
+     * Gets the RecommendationsClient object to access its operations.
+     *
+     * @return the RecommendationsClient object.
+     */
+    public RecommendationsClient getRecommendations() {
+        return this.recommendations;
+    }
+
     /** The RecommendationMetadatasClient object to access its operations. */
     private final RecommendationMetadatasClient recommendationMetadatas;
 
@@ -138,16 +149,16 @@ public final class AdvisorManagementClientImpl implements AdvisorManagementClien
         return this.configurations;
     }
 
-    /** The RecommendationsClient object to access its operations. */
-    private final RecommendationsClient recommendations;
+    /** The RecommendationsOperationsClient object to access its operations. */
+    private final RecommendationsOperationsClient recommendationsOperations;
 
     /**
-     * Gets the RecommendationsClient object to access its operations.
+     * Gets the RecommendationsOperationsClient object to access its operations.
      *
-     * @return the RecommendationsClient object.
+     * @return the RecommendationsOperationsClient object.
      */
-    public RecommendationsClient getRecommendations() {
-        return this.recommendations;
+    public RecommendationsOperationsClient getRecommendationsOperations() {
+        return this.recommendationsOperations;
     }
 
     /** The OperationsClient object to access its operations. */
@@ -197,9 +208,10 @@ public final class AdvisorManagementClientImpl implements AdvisorManagementClien
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
         this.apiVersion = "2020-01-01";
+        this.recommendations = new RecommendationsClientImpl(this);
         this.recommendationMetadatas = new RecommendationMetadatasClientImpl(this);
         this.configurations = new ConfigurationsClientImpl(this);
-        this.recommendations = new RecommendationsClientImpl(this);
+        this.recommendationsOperations = new RecommendationsOperationsClientImpl(this);
         this.operations = new OperationsClientImpl(this);
         this.suppressions = new SuppressionsClientImpl(this);
     }
@@ -287,7 +299,7 @@ public final class AdvisorManagementClientImpl implements AdvisorManagementClien
                             managementError = null;
                         }
                     } catch (IOException | RuntimeException ioe) {
-                        logger.logThrowableAsWarning(ioe);
+                        LOGGER.logThrowableAsWarning(ioe);
                     }
                 }
             } else {
@@ -346,4 +358,6 @@ public final class AdvisorManagementClientImpl implements AdvisorManagementClien
             return Mono.just(new String(responseBody, charset));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(AdvisorManagementClientImpl.class);
 }

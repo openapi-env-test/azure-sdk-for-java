@@ -5,15 +5,11 @@
 package com.azure.resourcemanager.advisor.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The RecommendationsGenerateHeaders model. */
+/** The RecommendationsOperationsGenerateHeaders model. */
 @Fluent
-public final class RecommendationsGenerateHeaders {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(RecommendationsGenerateHeaders.class);
-
+public final class RecommendationsOperationsGenerateHeaders {
     /*
      * The Retry-After property.
      */
@@ -39,9 +35,9 @@ public final class RecommendationsGenerateHeaders {
      * Set the retryAfter property: The Retry-After property.
      *
      * @param retryAfter the retryAfter value to set.
-     * @return the RecommendationsGenerateHeaders object itself.
+     * @return the RecommendationsOperationsGenerateHeaders object itself.
      */
-    public RecommendationsGenerateHeaders withRetryAfter(String retryAfter) {
+    public RecommendationsOperationsGenerateHeaders withRetryAfter(String retryAfter) {
         this.retryAfter = retryAfter;
         return this;
     }
@@ -59,9 +55,9 @@ public final class RecommendationsGenerateHeaders {
      * Set the location property: The Location property.
      *
      * @param location the location value to set.
-     * @return the RecommendationsGenerateHeaders object itself.
+     * @return the RecommendationsOperationsGenerateHeaders object itself.
      */
-    public RecommendationsGenerateHeaders withLocation(String location) {
+    public RecommendationsOperationsGenerateHeaders withLocation(String location) {
         this.location = location;
         return this;
     }

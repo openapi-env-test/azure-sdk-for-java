@@ -9,22 +9,23 @@ import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.ResponseBase;
 
 /** Contains all response data for the generate operation. */
-public final class RecommendationsGenerateResponse extends ResponseBase<RecommendationsGenerateHeaders, Void> {
+public final class RecommendationsOperationsGenerateResponse
+    extends ResponseBase<RecommendationsOperationsGenerateHeaders, Void> {
     /**
-     * Creates an instance of RecommendationsGenerateResponse.
+     * Creates an instance of RecommendationsOperationsGenerateResponse.
      *
-     * @param request the request which resulted in this RecommendationsGenerateResponse.
+     * @param request the request which resulted in this RecommendationsOperationsGenerateResponse.
      * @param statusCode the status code of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param value the deserialized value of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      */
-    public RecommendationsGenerateResponse(
+    public RecommendationsOperationsGenerateResponse(
         HttpRequest request,
         int statusCode,
         HttpHeaders rawHeaders,
         Void value,
-        RecommendationsGenerateHeaders headers) {
+        RecommendationsOperationsGenerateHeaders headers) {
         super(request, statusCode, rawHeaders, value, headers);
     }
 }
