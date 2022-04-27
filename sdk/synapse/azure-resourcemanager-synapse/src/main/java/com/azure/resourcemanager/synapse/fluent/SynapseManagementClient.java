@@ -354,6 +354,14 @@ public interface SynapseManagementClient {
     WorkspaceManagedSqlServerRecoverableSqlPoolsClient getWorkspaceManagedSqlServerRecoverableSqlPools();
 
     /**
+     * Gets the WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsClient object to access its operations.
+     *
+     * @return the WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsClient object.
+     */
+    WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsClient
+        getWorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings();
+
+    /**
      * Gets the WorkspacesClient object to access its operations.
      *
      * @return the WorkspacesClient object.

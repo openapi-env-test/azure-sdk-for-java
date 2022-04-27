@@ -387,6 +387,12 @@
 - [Get](#workspacemanagedsqlserverblobauditingpolicies_get)
 - [ListByWorkspace](#workspacemanagedsqlserverblobauditingpolicies_listbyworkspace)
 
+## WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings
+
+- [Get](#workspacemanagedsqlserverdedicatedsqlminimaltlssettings_get)
+- [List](#workspacemanagedsqlserverdedicatedsqlminimaltlssettings_list)
+- [Update](#workspacemanagedsqlserverdedicatedsqlminimaltlssettings_update)
+
 ## WorkspaceManagedSqlServerEncryptionProtector
 
 - [CreateOrUpdate](#workspacemanagedsqlserverencryptionprotector_createorupdate)
@@ -5982,6 +5988,85 @@ public final class WorkspaceManagedSqlServerBlobAuditingPoliciesListByWorkspaceS
         manager
             .workspaceManagedSqlServerBlobAuditingPolicies()
             .listByWorkspace("wsg-7398", "testWorkspace", Context.NONE);
+    }
+}
+```
+
+### WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings_Get
+
+```java
+import com.azure.core.util.Context;
+
+/** Samples for WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings Get. */
+public final class WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsGetSamples {
+    /*
+     * x-ms-original-file: specification/synapse/resource-manager/Microsoft.Synapse/stable/2021-06-01/examples/GetWorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings.json
+     */
+    /**
+     * Sample code: Get workspace managed sql server dedicated sql minimal tls settings.
+     *
+     * @param manager Entry point to SynapseManager.
+     */
+    public static void getWorkspaceManagedSqlServerDedicatedSqlMinimalTlsSettings(
+        com.azure.resourcemanager.synapse.SynapseManager manager) {
+        manager
+            .workspaceManagedSqlServerDedicatedSQLminimalTlsSettings()
+            .getWithResponse("workspace-6852", "workspace-2080", "default", Context.NONE);
+    }
+}
+```
+
+### WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings_List
+
+```java
+import com.azure.core.util.Context;
+
+/** Samples for WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings List. */
+public final class WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsListSamples {
+    /*
+     * x-ms-original-file: specification/synapse/resource-manager/Microsoft.Synapse/stable/2021-06-01/examples/ListWorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings.json
+     */
+    /**
+     * Sample code: List dedicated sql minimal tls settings of the workspace managed sql server.
+     *
+     * @param manager Entry point to SynapseManager.
+     */
+    public static void listDedicatedSqlMinimalTlsSettingsOfTheWorkspaceManagedSqlServer(
+        com.azure.resourcemanager.synapse.SynapseManager manager) {
+        manager
+            .workspaceManagedSqlServerDedicatedSQLminimalTlsSettings()
+            .list("workspace-6852", "workspace-2080", Context.NONE);
+    }
+}
+```
+
+### WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings_Update
+
+```java
+import com.azure.core.util.Context;
+import com.azure.resourcemanager.synapse.fluent.models.DedicatedSQLminimalTlsSettingsInner;
+import com.azure.resourcemanager.synapse.models.DedicatedSqlMinimalTlsSettingsName;
+
+/** Samples for WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings Update. */
+public final class WorkspaceManagedSqlServerDedicatedSQLminimalTlsSettingsUpdateSamples {
+    /*
+     * x-ms-original-file: specification/synapse/resource-manager/Microsoft.Synapse/stable/2021-06-01/examples/UpdateWorkspaceManagedSqlServerDedicatedSQLminimalTlsSettings.json
+     */
+    /**
+     * Sample code: Update tls version of the workspace managed sql server.
+     *
+     * @param manager Entry point to SynapseManager.
+     */
+    public static void updateTlsVersionOfTheWorkspaceManagedSqlServer(
+        com.azure.resourcemanager.synapse.SynapseManager manager) {
+        manager
+            .workspaceManagedSqlServerDedicatedSQLminimalTlsSettings()
+            .update(
+                "workspace-6852",
+                "workspace-2080",
+                DedicatedSqlMinimalTlsSettingsName.DEFAULT,
+                new DedicatedSQLminimalTlsSettingsInner().withMinimalTlsVersion("1.1"),
+                Context.NONE);
     }
 }
 ```
