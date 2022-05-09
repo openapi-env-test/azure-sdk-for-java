@@ -6,7 +6,6 @@ package com.azure.resourcemanager.cognitiveservices.implementation;
 
 import com.azure.core.http.rest.Response;
 import com.azure.core.management.Region;
-import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.cognitiveservices.fluent.models.AccountInner;
 import com.azure.resourcemanager.cognitiveservices.models.Account;
@@ -49,10 +48,6 @@ public final class AccountImpl implements Account, Account.Definition, Account.U
 
     public Identity identity() {
         return this.innerModel().identity();
-    }
-
-    public SystemData systemData() {
-        return this.innerModel().systemData();
     }
 
     public Map<String, String> tags() {

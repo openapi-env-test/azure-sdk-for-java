@@ -5,13 +5,10 @@
 package com.azure.resourcemanager.cognitiveservices.fluent.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.management.SystemData;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.cognitiveservices.models.AccountProperties;
 import com.azure.resourcemanager.cognitiveservices.models.AzureEntityResource;
 import com.azure.resourcemanager.cognitiveservices.models.Identity;
 import com.azure.resourcemanager.cognitiveservices.models.Sku;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
@@ -21,8 +18,6 @@ import java.util.Map;
  */
 @Fluent
 public final class AccountInner extends AzureEntityResource {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(AccountInner.class);
-
     /*
      * The Kind of the resource.
      */
@@ -40,12 +35,6 @@ public final class AccountInner extends AzureEntityResource {
      */
     @JsonProperty(value = "identity")
     private Identity identity;
-
-    /*
-     * Metadata pertaining to creation and last modification of the resource.
-     */
-    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
-    private SystemData systemData;
 
     /*
      * Resource tags.
@@ -124,15 +113,6 @@ public final class AccountInner extends AzureEntityResource {
     public AccountInner withIdentity(Identity identity) {
         this.identity = identity;
         return this;
-    }
-
-    /**
-     * Get the systemData property: Metadata pertaining to creation and last modification of the resource.
-     *
-     * @return the systemData value.
-     */
-    public SystemData systemData() {
-        return this.systemData;
     }
 
     /**

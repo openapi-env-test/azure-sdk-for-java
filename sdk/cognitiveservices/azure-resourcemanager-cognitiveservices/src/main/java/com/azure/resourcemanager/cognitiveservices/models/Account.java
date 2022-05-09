@@ -6,7 +6,6 @@ package com.azure.resourcemanager.cognitiveservices.models;
 
 import com.azure.core.http.rest.Response;
 import com.azure.core.management.Region;
-import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.cognitiveservices.fluent.models.AccountInner;
 import java.util.Map;
@@ -61,13 +60,6 @@ public interface Account {
      * @return the identity value.
      */
     Identity identity();
-
-    /**
-     * Gets the systemData property: Metadata pertaining to creation and last modification of the resource.
-     *
-     * @return the systemData value.
-     */
-    SystemData systemData();
 
     /**
      * Gets the tags property: Resource tags.
@@ -338,7 +330,7 @@ public interface Account {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the access keys for the cognitive services account.
+     * @return the access keys for the cognitive services account along with {@link Response}.
      */
     Response<ApiKeys> listKeysWithResponse(Context context);
 
@@ -361,7 +353,7 @@ public interface Account {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the access keys for the cognitive services account.
+     * @return the access keys for the cognitive services account along with {@link Response}.
      */
     Response<ApiKeys> regenerateKeyWithResponse(RegenerateKeyParameters parameters, Context context);
 }
