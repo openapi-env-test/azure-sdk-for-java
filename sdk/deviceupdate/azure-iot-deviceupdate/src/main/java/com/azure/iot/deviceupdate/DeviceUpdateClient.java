@@ -17,21 +17,20 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
-import com.azure.iot.deviceupdate.implementation.DeviceUpdatesImpl;
 
 /** Initializes a new instance of the synchronous DeviceUpdateClient type. */
 @ServiceClient(builder = DeviceUpdateClientBuilder.class)
 public final class DeviceUpdateClient {
-    @Generated private final DeviceUpdatesImpl serviceClient;
+    @Generated private final DeviceUpdateAsyncClient asyncClient;
 
     /**
-     * Initializes an instance of DeviceUpdates client.
+     * Initializes an instance of DeviceUpdateClient class.
      *
-     * @param serviceClient the service client implementation.
+     * @param asyncClient the async client.
      */
     @Generated
-    DeviceUpdateClient(DeviceUpdatesImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    DeviceUpdateClient(DeviceUpdateAsyncClient asyncClient) {
+        this.asyncClient = asyncClient;
     }
 
     /**
@@ -125,7 +124,7 @@ public final class DeviceUpdateClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginImportUpdate(
             BinaryData updateToImport, RequestOptions requestOptions) {
-        return this.serviceClient.beginImportUpdate(updateToImport, requestOptions);
+        return this.asyncClient.beginImportUpdate(updateToImport, requestOptions).getSyncPoller();
     }
 
     /**
@@ -201,7 +200,7 @@ public final class DeviceUpdateClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listUpdates(RequestOptions requestOptions) {
-        return this.serviceClient.listUpdates(requestOptions);
+        return new PagedIterable<>(this.asyncClient.listUpdates(requestOptions));
     }
 
     /**
@@ -281,7 +280,7 @@ public final class DeviceUpdateClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getUpdateWithResponse(
             String provider, String name, String version, RequestOptions requestOptions) {
-        return this.serviceClient.getUpdateWithResponse(provider, name, version, requestOptions);
+        return this.asyncClient.getUpdateWithResponse(provider, name, version, requestOptions).block();
     }
 
     /**
@@ -309,7 +308,7 @@ public final class DeviceUpdateClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginDeleteUpdate(
             String provider, String name, String version, RequestOptions requestOptions) {
-        return this.serviceClient.beginDeleteUpdate(provider, name, version, requestOptions);
+        return this.asyncClient.beginDeleteUpdate(provider, name, version, requestOptions).getSyncPoller();
     }
 
     /**
@@ -345,7 +344,7 @@ public final class DeviceUpdateClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listProviders(RequestOptions requestOptions) {
-        return this.serviceClient.listProviders(requestOptions);
+        return new PagedIterable<>(this.asyncClient.listProviders(requestOptions));
     }
 
     /**
@@ -382,7 +381,7 @@ public final class DeviceUpdateClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listNames(String provider, RequestOptions requestOptions) {
-        return this.serviceClient.listNames(provider, requestOptions);
+        return new PagedIterable<>(this.asyncClient.listNames(provider, requestOptions));
     }
 
     /**
@@ -421,7 +420,7 @@ public final class DeviceUpdateClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listVersions(String provider, String name, RequestOptions requestOptions) {
-        return this.serviceClient.listVersions(provider, name, requestOptions);
+        return new PagedIterable<>(this.asyncClient.listVersions(provider, name, requestOptions));
     }
 
     /**
@@ -461,7 +460,7 @@ public final class DeviceUpdateClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listFiles(
             String provider, String name, String version, RequestOptions requestOptions) {
-        return this.serviceClient.listFiles(provider, name, version, requestOptions);
+        return new PagedIterable<>(this.asyncClient.listFiles(provider, name, version, requestOptions));
     }
 
     /**
@@ -515,7 +514,7 @@ public final class DeviceUpdateClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getFileWithResponse(
             String provider, String name, String version, String fileId, RequestOptions requestOptions) {
-        return this.serviceClient.getFileWithResponse(provider, name, version, fileId, requestOptions);
+        return this.asyncClient.getFileWithResponse(provider, name, version, fileId, requestOptions).block();
     }
 
     /**
@@ -581,7 +580,7 @@ public final class DeviceUpdateClient {
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> listOperations(RequestOptions requestOptions) {
-        return this.serviceClient.listOperations(requestOptions);
+        return new PagedIterable<>(this.asyncClient.listOperations(requestOptions));
     }
 
     /**
@@ -648,6 +647,6 @@ public final class DeviceUpdateClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getOperationWithResponse(String operationId, RequestOptions requestOptions) {
-        return this.serviceClient.getOperationWithResponse(operationId, requestOptions);
+        return this.asyncClient.getOperationWithResponse(operationId, requestOptions).block();
     }
 }
