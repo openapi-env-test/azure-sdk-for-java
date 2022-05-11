@@ -643,7 +643,7 @@ public final class DeviceManagementsImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> stopDeployment(
+        Mono<Response<BinaryData>> stopDeploymentAaa(
                 @HostParam("endpoint") String endpoint,
                 @PathParam(value = "instanceId", encoded = true) String instanceId,
                 @PathParam("groupId") String groupId,
@@ -6452,11 +6452,11 @@ public final class DeviceManagementsImpl {
      * @return deployment metadata along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> stopDeploymentWithResponseAsync(
+    public Mono<Response<BinaryData>> stopDeploymentAaaWithResponseAsync(
             String groupId, String deploymentId, RequestOptions requestOptions) {
         return FluxUtil.withContext(
                 context ->
-                        service.stopDeployment(
+                        service.stopDeploymentAaa(
                                 this.client.getEndpoint(),
                                 this.client.getInstanceId(),
                                 groupId,
@@ -6506,9 +6506,9 @@ public final class DeviceManagementsImpl {
      * @return deployment metadata along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> stopDeploymentWithResponseAsync(
+    public Mono<Response<BinaryData>> stopDeploymentAaaWithResponseAsync(
             String groupId, String deploymentId, RequestOptions requestOptions, Context context) {
-        return service.stopDeployment(
+        return service.stopDeploymentAaa(
                 this.client.getEndpoint(),
                 this.client.getInstanceId(),
                 groupId,
@@ -6557,9 +6557,9 @@ public final class DeviceManagementsImpl {
      * @return deployment metadata along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> stopDeploymentWithResponse(
+    public Response<BinaryData> stopDeploymentAaaWithResponse(
             String groupId, String deploymentId, RequestOptions requestOptions) {
-        return stopDeploymentWithResponseAsync(groupId, deploymentId, requestOptions).block();
+        return stopDeploymentAaaWithResponseAsync(groupId, deploymentId, requestOptions).block();
     }
 
     /**
