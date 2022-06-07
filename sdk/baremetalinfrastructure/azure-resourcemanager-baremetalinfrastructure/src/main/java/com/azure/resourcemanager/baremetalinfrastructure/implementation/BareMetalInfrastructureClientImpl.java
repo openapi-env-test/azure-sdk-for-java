@@ -37,8 +37,6 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the BareMetalInfrastructureClientImpl type. */
 @ServiceClient(builder = BareMetalInfrastructureClientBuilder.class)
 public final class BareMetalInfrastructureClientImpl implements BareMetalInfrastructureClient {
-    private final ClientLogger logger = new ClientLogger(BareMetalInfrastructureClientImpl.class);
-
     /** The ID of the target subscription. */
     private final String subscriptionId;
 
@@ -157,7 +155,7 @@ public final class BareMetalInfrastructureClientImpl implements BareMetalInfrast
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
-        this.apiVersion = "2021-08-09";
+        this.apiVersion = "2021-08-10";
         this.azureBareMetalInstances = new AzureBareMetalInstancesClientImpl(this);
         this.operations = new OperationsClientImpl(this);
     }
@@ -245,7 +243,7 @@ public final class BareMetalInfrastructureClientImpl implements BareMetalInfrast
                             managementError = null;
                         }
                     } catch (IOException | RuntimeException ioe) {
-                        logger.logThrowableAsWarning(ioe);
+                        LOGGER.logThrowableAsWarning(ioe);
                     }
                 }
             } else {
@@ -304,4 +302,6 @@ public final class BareMetalInfrastructureClientImpl implements BareMetalInfrast
             return Mono.just(new String(responseBody, charset));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(BareMetalInfrastructureClientImpl.class);
 }

@@ -14,10 +14,9 @@ import com.azure.resourcemanager.baremetalinfrastructure.fluent.models.AzureBare
 import com.azure.resourcemanager.baremetalinfrastructure.models.AzureBareMetalInstance;
 import com.azure.resourcemanager.baremetalinfrastructure.models.AzureBareMetalInstances;
 import com.azure.resourcemanager.baremetalinfrastructure.models.Tags;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public final class AzureBareMetalInstancesImpl implements AzureBareMetalInstances {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(AzureBareMetalInstancesImpl.class);
+    private static final ClientLogger LOGGER = new ClientLogger(AzureBareMetalInstancesImpl.class);
 
     private final AzureBareMetalInstancesClient innerClient;
 
@@ -87,18 +86,12 @@ public final class AzureBareMetalInstancesImpl implements AzureBareMetalInstance
         }
     }
 
-    public Response<AzureBareMetalInstance> updateWithResponse(
+    public AzureBareMetalInstance update(
         String resourceGroupName, String azureBareMetalInstanceName, Tags tagsParameter, Context context) {
-        Response<AzureBareMetalInstanceInner> inner =
-            this
-                .serviceClient()
-                .updateWithResponse(resourceGroupName, azureBareMetalInstanceName, tagsParameter, context);
+        AzureBareMetalInstanceInner inner =
+            this.serviceClient().update(resourceGroupName, azureBareMetalInstanceName, tagsParameter, context);
         if (inner != null) {
-            return new SimpleResponse<>(
-                inner.getRequest(),
-                inner.getStatusCode(),
-                inner.getHeaders(),
-                new AzureBareMetalInstanceImpl(inner.getValue(), this.manager()));
+            return new AzureBareMetalInstanceImpl(inner, this.manager());
         } else {
             return null;
         }
