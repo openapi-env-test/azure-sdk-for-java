@@ -25,7 +25,6 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.netapp.fluent.NetAppResourceQuotaLimitsClient;
 import com.azure.resourcemanager.netapp.fluent.models.SubscriptionQuotaItemInner;
 import com.azure.resourcemanager.netapp.models.SubscriptionQuotaItemList;
@@ -33,8 +32,6 @@ import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in NetAppResourceQuotaLimitsClient. */
 public final class NetAppResourceQuotaLimitsClientImpl implements NetAppResourceQuotaLimitsClient {
-    private final ClientLogger logger = new ClientLogger(NetAppResourceQuotaLimitsClientImpl.class);
-
     /** The proxy service used to perform REST calls. */
     private final NetAppResourceQuotaLimitsService service;
 
