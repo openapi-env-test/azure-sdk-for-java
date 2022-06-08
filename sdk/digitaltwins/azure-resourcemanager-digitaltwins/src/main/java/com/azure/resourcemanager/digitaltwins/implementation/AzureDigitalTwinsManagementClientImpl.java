@@ -41,8 +41,6 @@ import reactor.core.publisher.Mono;
 /** Initializes a new instance of the AzureDigitalTwinsManagementClientImpl type. */
 @ServiceClient(builder = AzureDigitalTwinsManagementClientBuilder.class)
 public final class AzureDigitalTwinsManagementClientImpl implements AzureDigitalTwinsManagementClient {
-    private final ClientLogger logger = new ClientLogger(AzureDigitalTwinsManagementClientImpl.class);
-
     /** The subscription identifier. */
     private final String subscriptionId;
 
@@ -209,7 +207,7 @@ public final class AzureDigitalTwinsManagementClientImpl implements AzureDigital
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
-        this.apiVersion = "2021-06-30-preview";
+        this.apiVersion = "2022-05-31";
         this.digitalTwins = new DigitalTwinsClientImpl(this);
         this.digitalTwinsEndpoints = new DigitalTwinsEndpointsClientImpl(this);
         this.operations = new OperationsClientImpl(this);
@@ -301,7 +299,7 @@ public final class AzureDigitalTwinsManagementClientImpl implements AzureDigital
                             managementError = null;
                         }
                     } catch (IOException | RuntimeException ioe) {
-                        logger.logThrowableAsWarning(ioe);
+                        LOGGER.logThrowableAsWarning(ioe);
                     }
                 }
             } else {
@@ -360,4 +358,6 @@ public final class AzureDigitalTwinsManagementClientImpl implements AzureDigital
             return Mono.just(new String(responseBody, charset));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(AzureDigitalTwinsManagementClientImpl.class);
 }
