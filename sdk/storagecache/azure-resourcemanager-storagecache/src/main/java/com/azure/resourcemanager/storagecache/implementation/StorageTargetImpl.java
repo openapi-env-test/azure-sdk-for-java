@@ -82,6 +82,10 @@ public final class StorageTargetImpl implements StorageTarget, StorageTarget.Def
         return this.innerModel().blobNfs();
     }
 
+    public Integer allocationPercentage() {
+        return this.innerModel().allocationPercentage();
+    }
+
     public Region region() {
         return Region.fromName(this.regionName());
     }

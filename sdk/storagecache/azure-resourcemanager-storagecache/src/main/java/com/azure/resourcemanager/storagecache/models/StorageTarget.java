@@ -105,6 +105,13 @@ public interface StorageTarget {
     BlobNfsTarget blobNfs();
 
     /**
+     * Gets the allocationPercentage property: The percentage of cache space allocated for this storage target.
+     *
+     * @return the allocationPercentage value.
+     */
+    Integer allocationPercentage();
+
+    /**
      * Gets the region of the resource.
      *
      * @return the region of the resource.
