@@ -9,7 +9,7 @@ import glob
 import subprocess
 import yaml
 import requests
-from typing import List, Set, Tuple, Optional
+from typing import List, Tuple, Optional
 
 from parameters import *
 from utils import set_or_default_version
@@ -55,14 +55,12 @@ def sdk_automation(config: dict) -> List[dict]:
     logging.info('[RESOLVE] README from specification %s', readme_file_path)
 
     # find all swagger/readme.md in sdk repo
-    swagger_readmes = (glob.glob(os.path.join(sdk_root, 'sdk/*/*/swagger/readme.md'))
-                       + glob.glob(os.path.join(sdk_root, 'sdk/*/*/swagger/README.md')))
-    swagger_readmes = set(swagger_readmes)
+    swagger_readmes = glob.glob(os.path.join(sdk_root, 'sdk/*/*/swagger/README.md'))
     sdk_readme_abspath = find_sdk_readme(readme_file_path, swagger_readmes)
 
     if not sdk_readme_abspath:
         if autorest_config:
-            # find 'output-folder', and
+            # find 'output-folder', and write swagger/README.md
             autorest_config = autorest_config.replace(r'\r\n', r'\n')
             yaml_blocks = re.findall(YAML_BLOCK_REGEX, autorest_config, re.DOTALL)
             for yaml_str in yaml_blocks:
@@ -84,7 +82,7 @@ def sdk_automation(config: dict) -> List[dict]:
     return packages
 
 
-def find_sdk_readme(spec_readme: str, swagger_readmes: Set[str]) -> Optional[str]:
+def find_sdk_readme(spec_readme: str, swagger_readmes: List[str]) -> Optional[str]:
     segments = spec_readme.split('/')
     if 'data-plane' in segments:
         index = segments.index('data-plane')
@@ -97,6 +95,7 @@ def find_sdk_readme(spec_readme: str, swagger_readmes: Set[str]) -> Optional[str
             if spec_reference:
                 spec_reference_map[sdk_readme_path] = spec_reference
 
+        print(spec_reference_map.values())
         search_target = service + '/data-plane/' + namespace
         for sdk_readme_path, spec_reference in spec_reference_map.items():
             if search_target in spec_reference:
@@ -123,13 +122,13 @@ def find_sdk_spec_reference(sdk_readme_path: str) -> Optional[str]:
                         require = yaml_json['require']
                         if isinstance(require, List):
                             require = require[0]
-                            return require
+                        return require
                     # take 'input-file', if 'require' not found
                     if 'input-file' in yaml_json:
                         input_file = yaml_json['input-file']
                         if isinstance(input_file, List):
                             input_file = input_file[0]
-                            return input_file
+                        return input_file
             except yaml.YAMLError:
                 continue
     return None
