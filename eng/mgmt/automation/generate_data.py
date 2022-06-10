@@ -94,7 +94,7 @@ def find_sdk_readme(spec_readme: str, swagger_readmes: Set[str]) -> Optional[str
 
         for sdk_readme_path in swagger_readmes:
             spec_reference = find_sdk_spec_reference(sdk_readme_path)
-            if search_target in spec_reference:
+            if spec_reference and search_target in spec_reference:
                 return sdk_readme_path
     return None
 
