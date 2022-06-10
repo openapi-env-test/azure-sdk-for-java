@@ -88,8 +88,9 @@ def find_sdk_readme(spec_readme: str, swagger_readmes: Set[str]) -> Optional[str
     segments = spec_readme.split('/')
     if 'data-plane' in segments:
         index = segments.index('data-plane')
+        service = segments[index - 1]
         namespace = segments[index + 1]
-        search_target = 'data-plane/' + namespace
+        search_target = service + '/data-plane/' + namespace
 
         for sdk_readme_path in swagger_readmes:
             spec_reference = find_sdk_spec_reference(sdk_readme_path)
