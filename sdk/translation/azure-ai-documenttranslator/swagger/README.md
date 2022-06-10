@@ -1,6 +1,5 @@
 ## Generate autorest code
 ``` yaml
-input-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cognitiveservices/data-plane/TranslatorText/preview/v1.0-preview.1/TranslatorBatch.json
 java: true
 output-folder: ../
 namespace: com.azure.ai.documenttranslator
@@ -9,4 +8,5 @@ sync-methods: none
 license-header: MICROSOFT_MIT_SMALL
 data-plane: true
 credential-types: azurekeycredential
+require: /mnt/vss/_work/1/s/azure-rest-api-specs/specification/cognitiveservices/data-plane/ComputerVision/readme.md
 ```
