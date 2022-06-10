@@ -69,6 +69,7 @@ def sdk_automation(config: dict) -> List[dict]:
                     output_folder: str = yaml_json['output-folder']
                     if output_folder.startswith('sdk/'):
                         sdk_readme_abspath = os.path.join(sdk_root, output_folder, 'swagger', 'README.md')
+                        os.makedirs(os.path.dirname(sdk_readme_abspath), exist_ok=True)
                         with open(sdk_readme_abspath, 'w', encoding='utf-8') as f_out:
                             f_out.write(autorest_config)
                         logging.info('[RESOLVE] Create README from autorestConfig')
