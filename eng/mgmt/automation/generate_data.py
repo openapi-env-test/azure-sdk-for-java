@@ -33,7 +33,7 @@ def sdk_automation(config: dict) -> List[dict]:
 
     packages = []
 
-    autorest_config: str = config['autorestConfig']
+    autorest_config: str = config['autorestConfig'] if 'autorestConfig' in config else None
 
     readme_file_paths = []
     for file_path in config['relatedReadmeMdFiles']:
@@ -437,6 +437,8 @@ def main():
     else:
         if not args['input_file'] and not args['spec_readme']:
             raise ValueError('Either "readme", or "spec-readme", or "input-file" argument is required')
+        if not args['service'] or not args['module']:
+            raise ValueError('"service" and "module" argument is required')
 
     succeeded = generate(sdk_root, **args)
     if succeeded:
