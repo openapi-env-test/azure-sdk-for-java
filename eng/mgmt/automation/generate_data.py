@@ -90,11 +90,21 @@ def find_sdk_readme(spec_readme: str, swagger_readmes: Set[str]) -> Optional[str
         index = segments.index('data-plane')
         service = segments[index - 1]
         namespace = segments[index + 1]
-        search_target = service + '/data-plane/' + namespace
 
+        spec_reference_map = {}
         for sdk_readme_path in swagger_readmes:
             spec_reference = find_sdk_spec_reference(sdk_readme_path)
-            if spec_reference and search_target in spec_reference:
+            if spec_reference:
+                spec_reference_map[sdk_readme_path] = spec_reference
+
+        search_target = service + '/data-plane/' + namespace
+        for sdk_readme_path, spec_reference in spec_reference_map.items():
+            if search_target in spec_reference:
+                return sdk_readme_path
+        # fallback
+        search_target = service + '/data-plane/'
+        for sdk_readme_path, spec_reference in spec_reference_map.items():
+            if search_target in spec_reference:
                 return sdk_readme_path
     return None
 
@@ -105,20 +115,23 @@ def find_sdk_spec_reference(sdk_readme_path: str) -> Optional[str]:
     if content:
         yaml_blocks = re.findall(YAML_BLOCK_REGEX, content, re.DOTALL)
         for yaml_str in yaml_blocks:
-            yaml_json = yaml.safe_load(yaml_str)
-            if 'data-plane' in yaml_json and yaml_json['data-plane']:
-                # take 'require'
-                if 'require' in yaml_json:
-                    require = yaml_json['require']
-                    if isinstance(require, List):
-                        require = require[0]
-                        return require
-                # take 'input-file', if 'require' not found
-                if 'input-file' in yaml_json:
-                    input_file = yaml_json['input-file']
-                    if isinstance(input_file, List):
-                        input_file = input_file[0]
-                        return input_file
+            try:
+                yaml_json = yaml.safe_load(yaml_str)
+                if 'data-plane' in yaml_json and yaml_json['data-plane']:
+                    # take 'require'
+                    if 'require' in yaml_json:
+                        require = yaml_json['require']
+                        if isinstance(require, List):
+                            require = require[0]
+                            return require
+                    # take 'input-file', if 'require' not found
+                    if 'input-file' in yaml_json:
+                        input_file = yaml_json['input-file']
+                        if isinstance(input_file, List):
+                            input_file = input_file[0]
+                            return input_file
+            except yaml.YAMLError:
+                continue
     return None
 
 
