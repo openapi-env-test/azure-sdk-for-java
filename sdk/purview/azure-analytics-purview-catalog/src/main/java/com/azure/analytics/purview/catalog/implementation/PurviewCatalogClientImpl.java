@@ -4,7 +4,6 @@
 
 package com.azure.analytics.purview.catalog.implementation;
 
-import com.azure.analytics.purview.catalog.PurviewCatalogServiceVersion;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.CookiePolicy;
@@ -15,11 +14,11 @@ import com.azure.core.util.serializer.SerializerAdapter;
 
 /** Initializes a new instance of the PurviewCatalogClient type. */
 public final class PurviewCatalogClientImpl {
-    /** The catalog endpoint of your Purview account. Example: https://{accountName}.purview.azure.com. */
+    /** The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. */
     private final String endpoint;
 
     /**
-     * Gets The catalog endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.
+     * Gets The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/.
      *
      * @return the endpoint value.
      */
@@ -27,16 +26,16 @@ public final class PurviewCatalogClientImpl {
         return this.endpoint;
     }
 
-    /** Service version. */
-    private final PurviewCatalogServiceVersion serviceVersion;
+    /** The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com. */
+    private final String endpoint;
 
     /**
-     * Gets Service version.
+     * Gets The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.
      *
-     * @return the serviceVersion value.
+     * @return the endpoint value.
      */
-    public PurviewCatalogServiceVersion getServiceVersion() {
-        return this.serviceVersion;
+    public String getEndpoint() {
+        return this.endpoint;
     }
 
     /** The HTTP pipeline to send requests through. */
@@ -63,76 +62,16 @@ public final class PurviewCatalogClientImpl {
         return this.serializerAdapter;
     }
 
-    /** The EntitiesImpl object to access its operations. */
-    private final EntitiesImpl entities;
+    /** The AccountsImpl object to access its operations. */
+    private final AccountsImpl accounts;
 
     /**
-     * Gets the EntitiesImpl object to access its operations.
+     * Gets the AccountsImpl object to access its operations.
      *
-     * @return the EntitiesImpl object.
+     * @return the AccountsImpl object.
      */
-    public EntitiesImpl getEntities() {
-        return this.entities;
-    }
-
-    /** The GlossariesImpl object to access its operations. */
-    private final GlossariesImpl glossaries;
-
-    /**
-     * Gets the GlossariesImpl object to access its operations.
-     *
-     * @return the GlossariesImpl object.
-     */
-    public GlossariesImpl getGlossaries() {
-        return this.glossaries;
-    }
-
-    /** The DiscoveriesImpl object to access its operations. */
-    private final DiscoveriesImpl discoveries;
-
-    /**
-     * Gets the DiscoveriesImpl object to access its operations.
-     *
-     * @return the DiscoveriesImpl object.
-     */
-    public DiscoveriesImpl getDiscoveries() {
-        return this.discoveries;
-    }
-
-    /** The LineagesImpl object to access its operations. */
-    private final LineagesImpl lineages;
-
-    /**
-     * Gets the LineagesImpl object to access its operations.
-     *
-     * @return the LineagesImpl object.
-     */
-    public LineagesImpl getLineages() {
-        return this.lineages;
-    }
-
-    /** The RelationshipsImpl object to access its operations. */
-    private final RelationshipsImpl relationships;
-
-    /**
-     * Gets the RelationshipsImpl object to access its operations.
-     *
-     * @return the RelationshipsImpl object.
-     */
-    public RelationshipsImpl getRelationships() {
-        return this.relationships;
-    }
-
-    /** The TypesImpl object to access its operations. */
-    private final TypesImpl types;
-
-    /**
-     * Gets the TypesImpl object to access its operations.
-     *
-     * @return the TypesImpl object.
-     */
-    public TypesImpl getTypes() {
-        return this.types;
+    public AccountsImpl getAccounts() {
+        return this.accounts;
     }
 
     /** The CollectionsImpl object to access its operations. */
@@ -147,32 +86,69 @@ public final class PurviewCatalogClientImpl {
         return this.collections;
     }
 
+    /** The ResourceSetRulesImpl object to access its operations. */
+    private final ResourceSetRulesImpl resourceSetRules;
+
+    /**
+     * Gets the ResourceSetRulesImpl object to access its operations.
+     *
+     * @return the ResourceSetRulesImpl object.
+     */
+    public ResourceSetRulesImpl getResourceSetRules() {
+        return this.resourceSetRules;
+    }
+
+    /** The MetadataRolesImpl object to access its operations. */
+    private final MetadataRolesImpl metadataRoles;
+
+    /**
+     * Gets the MetadataRolesImpl object to access its operations.
+     *
+     * @return the MetadataRolesImpl object.
+     */
+    public MetadataRolesImpl getMetadataRoles() {
+        return this.metadataRoles;
+    }
+
+    /** The MetadataPoliciesImpl object to access its operations. */
+    private final MetadataPoliciesImpl metadataPolicies;
+
+    /**
+     * Gets the MetadataPoliciesImpl object to access its operations.
+     *
+     * @return the MetadataPoliciesImpl object.
+     */
+    public MetadataPoliciesImpl getMetadataPolicies() {
+        return this.metadataPolicies;
+    }
+
     /**
      * Initializes an instance of PurviewCatalogClient client.
      *
-     * @param endpoint The catalog endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.
-     * @param serviceVersion Service version.
+     * @param endpoint The account endpoint of your Purview account. Example:
+     *     https://{accountName}.purview.azure.com/account/.
+     * @param endpoint The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.
      */
-    public PurviewCatalogClientImpl(String endpoint, PurviewCatalogServiceVersion serviceVersion) {
+    public PurviewCatalogClientImpl(String endpoint, String endpoint) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
                         .build(),
                 JacksonAdapter.createDefaultSerializerAdapter(),
                 endpoint,
-                serviceVersion);
+                endpoint);
     }
 
     /**
      * Initializes an instance of PurviewCatalogClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint The catalog endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.
-     * @param serviceVersion Service version.
+     * @param endpoint The account endpoint of your Purview account. Example:
+     *     https://{accountName}.purview.azure.com/account/.
+     * @param endpoint The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.
      */
-    public PurviewCatalogClientImpl(
-            HttpPipeline httpPipeline, String endpoint, PurviewCatalogServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
+    public PurviewCatalogClientImpl(HttpPipeline httpPipeline, String endpoint, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, endpoint);
     }
 
     /**
@@ -180,24 +156,20 @@ public final class PurviewCatalogClientImpl {
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint The catalog endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.
-     * @param serviceVersion Service version.
+     * @param endpoint The account endpoint of your Purview account. Example:
+     *     https://{accountName}.purview.azure.com/account/.
+     * @param endpoint The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.
      */
     public PurviewCatalogClientImpl(
-            HttpPipeline httpPipeline,
-            SerializerAdapter serializerAdapter,
-            String endpoint,
-            PurviewCatalogServiceVersion serviceVersion) {
+            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
-        this.serviceVersion = serviceVersion;
-        this.entities = new EntitiesImpl(this);
-        this.glossaries = new GlossariesImpl(this);
-        this.discoveries = new DiscoveriesImpl(this);
-        this.lineages = new LineagesImpl(this);
-        this.relationships = new RelationshipsImpl(this);
-        this.types = new TypesImpl(this);
+        this.endpoint = endpoint;
+        this.accounts = new AccountsImpl(this);
         this.collections = new CollectionsImpl(this);
+        this.resourceSetRules = new ResourceSetRulesImpl(this);
+        this.metadataRoles = new MetadataRolesImpl(this);
+        this.metadataPolicies = new MetadataPoliciesImpl(this);
     }
 }

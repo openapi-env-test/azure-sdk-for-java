@@ -1,6 +1,5 @@
 ## Generate autorest code
 ```yaml
-input-file: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/purview/data-plane/Azure.Analytics.Purview.Catalog/preview/2021-05-01-preview/purviewcatalog.json
 java: true
 output-folder: ../
 namespace: com.azure.analytics.purview.catalog
@@ -22,4 +21,5 @@ context-client-method-parameter: true
 generate-sync-async-clients: true
 generate-samples: true
 polling: {}
+require: /mnt/vss/_work/1/s/azure-rest-api-specs/specification/purview/data-plane/readme.md
 ```
