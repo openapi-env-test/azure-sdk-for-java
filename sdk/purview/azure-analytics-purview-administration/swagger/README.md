@@ -4,6 +4,7 @@
 batch:
   - package-metadata: true
   - package-account: true
+require: /mnt/vss/_work/1/s/azure-rest-api-specs/specification/purview/data-plane/readme.md
 ```
 
 ``` yaml $(package-metadata)
