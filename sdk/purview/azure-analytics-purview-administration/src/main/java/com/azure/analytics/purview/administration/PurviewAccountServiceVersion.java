@@ -6,7 +6,7 @@ package com.azure.analytics.purview.administration;
 
 import com.azure.core.util.ServiceVersion;
 
-/** Service version of PurviewAccount. */
+/** Service version of PurviewAccountClient. */
 public enum PurviewAccountServiceVersion implements ServiceVersion {
     /** Enum value 2019-11-01-preview. */
     V2019_11_01_PREVIEW("2019-11-01-preview");

@@ -53,7 +53,7 @@ public final class AccountsImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "PurviewAccountClient")
-    public interface AccountsService {
+    private interface AccountsService {
         @Get("/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

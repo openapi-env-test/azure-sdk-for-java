@@ -61,7 +61,7 @@ public final class MetadataPoliciesImpl {
      */
     @Host("{Endpoint}/policyStore")
     @ServiceInterface(name = "PurviewMetadataClien")
-    public interface MetadataPoliciesService {
+    private interface MetadataPoliciesService {
         @Get("/metadataPolicies")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

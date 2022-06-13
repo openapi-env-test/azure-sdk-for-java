@@ -1,49 +1,12 @@
-## Generate autorest code
+# azure-sdk-for-java
 
 ``` yaml
+tag: false
+output-folder: sdk/purview/azure-analytics-purview-administration
 batch:
-  - package-metadata: true
-  - package-account: true
-```
-
-``` yaml $(package-metadata)
-input-file:
-  - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/purview/data-plane/Azure.Analytics.Purview.MetadataPolicies/preview/2021-07-01-preview/purviewMetadataPolicy.json
-
-java: true
-output-folder: ../
+  - purview-metadata: true
+  - purview-account: true
 namespace: com.azure.analytics.purview.administration
-license-header: MICROSOFT_MIT_SMALL
-service-interface-as-public: true
 data-plane: true
-credential-types: tokencredential
-credential-scopes: https://purview.azure.net/.default
-generate-samples: true
-generate-tests: true
-title: PurviewMetadataClient
-service-name: PurviewMetadata
-artifact-id: azure-analytics-purview-administration
-service-versions:
-  - 2021-07-01-preview
-```
-
-``` yaml $(package-account)
-input-file:
-  - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/purview/data-plane/Azure.Analytics.Purview.Account/preview/2019-11-01-preview/account.json
-
-java: true
-output-folder: ../
-namespace: com.azure.analytics.purview.administration
-license-header: MICROSOFT_MIT_SMALL
-service-interface-as-public: true
-data-plane: true
-credential-types: tokencredential
-credential-scopes: https://purview.azure.net/.default
-generate-samples: true
-generate-tests: true
-title: PurviewAccountClient
-artifact-id: azure-analytics-purview-administration
-service-name: PurviewAccount
-service-versions:
-  - 2019-11-01-preview
+require: /mnt/vss/_work/1/s/azure-rest-api-specs/specification/purview/data-plane/readme.md
 ```

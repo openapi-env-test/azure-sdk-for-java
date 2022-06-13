@@ -63,7 +63,7 @@ public final class ResourceSetRulesImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "PurviewAccountClient")
-    public interface ResourceSetRulesService {
+    private interface ResourceSetRulesService {
         @Get("/resourceSetRuleConfigs/defaultResourceSetRuleConfig")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

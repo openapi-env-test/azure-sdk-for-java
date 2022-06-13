@@ -59,7 +59,7 @@ public final class MetadataRolesImpl {
      */
     @Host("{Endpoint}/policyStore")
     @ServiceInterface(name = "PurviewMetadataClien")
-    public interface MetadataRolesService {
+    private interface MetadataRolesService {
         @Get("/metadataRoles")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(

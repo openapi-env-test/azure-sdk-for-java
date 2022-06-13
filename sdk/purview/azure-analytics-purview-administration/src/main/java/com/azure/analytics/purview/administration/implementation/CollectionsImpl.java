@@ -62,7 +62,7 @@ public final class CollectionsImpl {
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "PurviewAccountClient")
-    public interface CollectionsService {
+    private interface CollectionsService {
         @Get("/collections/{collectionName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
