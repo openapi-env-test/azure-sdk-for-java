@@ -4,31 +4,44 @@
 
 package com.azure.resourcemanager.billing.models;
 
-import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /** Defines values for AddressValidationStatus. */
-public final class AddressValidationStatus extends ExpandableStringEnum<AddressValidationStatus> {
-    /** Static value Valid for AddressValidationStatus. */
-    public static final AddressValidationStatus VALID = fromString("Valid");
+public enum AddressValidationStatus {
+    /** Enum value Valid. */
+    VALID("Valid"),
 
-    /** Static value Invalid for AddressValidationStatus. */
-    public static final AddressValidationStatus INVALID = fromString("Invalid");
+    /** Enum value Invalid. */
+    INVALID("Invalid");
 
-    /**
-     * Creates or finds a AddressValidationStatus from its string representation.
-     *
-     * @param name a name to look for.
-     * @return the corresponding AddressValidationStatus.
-     */
-    @JsonCreator
-    public static AddressValidationStatus fromString(String name) {
-        return fromString(name, AddressValidationStatus.class);
+    /** The actual serialized value for a AddressValidationStatus instance. */
+    private final String value;
+
+    AddressValidationStatus(String value) {
+        this.value = value;
     }
 
-    /** @return known AddressValidationStatus values. */
-    public static Collection<AddressValidationStatus> values() {
-        return values(AddressValidationStatus.class);
+    /**
+     * Parses a serialized value to a AddressValidationStatus instance.
+     *
+     * @param value the serialized value to parse.
+     * @return the parsed AddressValidationStatus object, or null if unable to parse.
+     */
+    @JsonCreator
+    public static AddressValidationStatus fromString(String value) {
+        AddressValidationStatus[] items = AddressValidationStatus.values();
+        for (AddressValidationStatus item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    @JsonValue
+    @Override
+    public String toString() {
+        return this.value;
     }
 }
