@@ -7,7 +7,6 @@ package com.azure.resourcemanager.appconfiguration.models;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.management.Region;
-import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.appconfiguration.fluent.models.ConfigurationStoreInner;
 import java.time.OffsetDateTime;
@@ -66,13 +65,6 @@ public interface ConfigurationStore {
     Sku sku();
 
     /**
-     * Gets the systemData property: Resource system metadata.
-     *
-     * @return the systemData value.
-     */
-    SystemData systemData();
-
-    /**
      * Gets the provisioningState property: The provisioning state of the configuration store.
      *
      * @return the provisioningState value.
@@ -115,36 +107,6 @@ public interface ConfigurationStore {
      * @return the publicNetworkAccess value.
      */
     PublicNetworkAccess publicNetworkAccess();
-
-    /**
-     * Gets the disableLocalAuth property: Disables all authentication methods other than AAD authentication.
-     *
-     * @return the disableLocalAuth value.
-     */
-    Boolean disableLocalAuth();
-
-    /**
-     * Gets the softDeleteRetentionInDays property: The amount of time in days that the configuration store will be
-     * retained when it is soft deleted.
-     *
-     * @return the softDeleteRetentionInDays value.
-     */
-    Integer softDeleteRetentionInDays();
-
-    /**
-     * Gets the enablePurgeProtection property: Property specifying whether protection against purge is enabled for this
-     * configuration store.
-     *
-     * @return the enablePurgeProtection value.
-     */
-    Boolean enablePurgeProtection();
-
-    /**
-     * Gets the createMode property: Indicates whether the configuration store need to be recovered.
-     *
-     * @return the createMode value.
-     */
-    CreateMode createMode();
 
     /**
      * Gets the region of the resource.
@@ -233,11 +195,7 @@ public interface ConfigurationStore {
             extends DefinitionStages.WithTags,
                 DefinitionStages.WithIdentity,
                 DefinitionStages.WithEncryption,
-                DefinitionStages.WithPublicNetworkAccess,
-                DefinitionStages.WithDisableLocalAuth,
-                DefinitionStages.WithSoftDeleteRetentionInDays,
-                DefinitionStages.WithEnablePurgeProtection,
-                DefinitionStages.WithCreateMode {
+                DefinitionStages.WithPublicNetworkAccess {
             /**
              * Executes the create request.
              *
@@ -295,51 +253,6 @@ public interface ConfigurationStore {
              */
             WithCreate withPublicNetworkAccess(PublicNetworkAccess publicNetworkAccess);
         }
-        /** The stage of the ConfigurationStore definition allowing to specify disableLocalAuth. */
-        interface WithDisableLocalAuth {
-            /**
-             * Specifies the disableLocalAuth property: Disables all authentication methods other than AAD
-             * authentication..
-             *
-             * @param disableLocalAuth Disables all authentication methods other than AAD authentication.
-             * @return the next definition stage.
-             */
-            WithCreate withDisableLocalAuth(Boolean disableLocalAuth);
-        }
-        /** The stage of the ConfigurationStore definition allowing to specify softDeleteRetentionInDays. */
-        interface WithSoftDeleteRetentionInDays {
-            /**
-             * Specifies the softDeleteRetentionInDays property: The amount of time in days that the configuration store
-             * will be retained when it is soft deleted..
-             *
-             * @param softDeleteRetentionInDays The amount of time in days that the configuration store will be retained
-             *     when it is soft deleted.
-             * @return the next definition stage.
-             */
-            WithCreate withSoftDeleteRetentionInDays(Integer softDeleteRetentionInDays);
-        }
-        /** The stage of the ConfigurationStore definition allowing to specify enablePurgeProtection. */
-        interface WithEnablePurgeProtection {
-            /**
-             * Specifies the enablePurgeProtection property: Property specifying whether protection against purge is
-             * enabled for this configuration store..
-             *
-             * @param enablePurgeProtection Property specifying whether protection against purge is enabled for this
-             *     configuration store.
-             * @return the next definition stage.
-             */
-            WithCreate withEnablePurgeProtection(Boolean enablePurgeProtection);
-        }
-        /** The stage of the ConfigurationStore definition allowing to specify createMode. */
-        interface WithCreateMode {
-            /**
-             * Specifies the createMode property: Indicates whether the configuration store need to be recovered..
-             *
-             * @param createMode Indicates whether the configuration store need to be recovered.
-             * @return the next definition stage.
-             */
-            WithCreate withCreateMode(CreateMode createMode);
-        }
     }
     /**
      * Begins update for the ConfigurationStore resource.
@@ -354,9 +267,7 @@ public interface ConfigurationStore {
             UpdateStages.WithIdentity,
             UpdateStages.WithSku,
             UpdateStages.WithEncryption,
-            UpdateStages.WithDisableLocalAuth,
-            UpdateStages.WithPublicNetworkAccess,
-            UpdateStages.WithEnablePurgeProtection {
+            UpdateStages.WithPublicNetworkAccess {
         /**
          * Executes the update request.
          *
@@ -414,17 +325,6 @@ public interface ConfigurationStore {
              */
             Update withEncryption(EncryptionProperties encryption);
         }
-        /** The stage of the ConfigurationStore update allowing to specify disableLocalAuth. */
-        interface WithDisableLocalAuth {
-            /**
-             * Specifies the disableLocalAuth property: Disables all authentication methods other than AAD
-             * authentication..
-             *
-             * @param disableLocalAuth Disables all authentication methods other than AAD authentication.
-             * @return the next definition stage.
-             */
-            Update withDisableLocalAuth(Boolean disableLocalAuth);
-        }
         /** The stage of the ConfigurationStore update allowing to specify publicNetworkAccess. */
         interface WithPublicNetworkAccess {
             /**
@@ -436,18 +336,6 @@ public interface ConfigurationStore {
              * @return the next definition stage.
              */
             Update withPublicNetworkAccess(PublicNetworkAccess publicNetworkAccess);
-        }
-        /** The stage of the ConfigurationStore update allowing to specify enablePurgeProtection. */
-        interface WithEnablePurgeProtection {
-            /**
-             * Specifies the enablePurgeProtection property: Property specifying whether protection against purge is
-             * enabled for this configuration store..
-             *
-             * @param enablePurgeProtection Property specifying whether protection against purge is enabled for this
-             *     configuration store.
-             * @return the next definition stage.
-             */
-            Update withEnablePurgeProtection(Boolean enablePurgeProtection);
         }
     }
     /**
@@ -510,4 +398,28 @@ public interface ConfigurationStore {
      * @return an API key used for authenticating with a configuration store endpoint along with {@link Response}.
      */
     Response<ApiKey> regenerateKeyWithResponse(RegenerateKeyParameters regenerateKeyParameters, Context context);
+
+    /**
+     * Lists a configuration store key-value.
+     *
+     * @param listKeyValueParameters The parameters for retrieving a key-value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the result of a request to retrieve a key-value from the specified configuration store.
+     */
+    KeyValue listKeyValue(ListKeyValueParameters listKeyValueParameters);
+
+    /**
+     * Lists a configuration store key-value.
+     *
+     * @param listKeyValueParameters The parameters for retrieving a key-value.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the result of a request to retrieve a key-value from the specified configuration store along with {@link
+     *     Response}.
+     */
+    Response<KeyValue> listKeyValueWithResponse(ListKeyValueParameters listKeyValueParameters, Context context);
 }

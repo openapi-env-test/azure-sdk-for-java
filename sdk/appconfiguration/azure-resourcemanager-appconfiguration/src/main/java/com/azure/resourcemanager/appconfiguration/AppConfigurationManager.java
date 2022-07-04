@@ -26,12 +26,10 @@ import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.appconfiguration.fluent.AppConfigurationManagementClient;
 import com.azure.resourcemanager.appconfiguration.implementation.AppConfigurationManagementClientBuilder;
 import com.azure.resourcemanager.appconfiguration.implementation.ConfigurationStoresImpl;
-import com.azure.resourcemanager.appconfiguration.implementation.KeyValuesImpl;
 import com.azure.resourcemanager.appconfiguration.implementation.OperationsImpl;
 import com.azure.resourcemanager.appconfiguration.implementation.PrivateEndpointConnectionsImpl;
 import com.azure.resourcemanager.appconfiguration.implementation.PrivateLinkResourcesImpl;
 import com.azure.resourcemanager.appconfiguration.models.ConfigurationStores;
-import com.azure.resourcemanager.appconfiguration.models.KeyValues;
 import com.azure.resourcemanager.appconfiguration.models.Operations;
 import com.azure.resourcemanager.appconfiguration.models.PrivateEndpointConnections;
 import com.azure.resourcemanager.appconfiguration.models.PrivateLinkResources;
@@ -51,8 +49,6 @@ public final class AppConfigurationManager {
     private PrivateEndpointConnections privateEndpointConnections;
 
     private PrivateLinkResources privateLinkResources;
-
-    private KeyValues keyValues;
 
     private final AppConfigurationManagementClient clientObject;
 
@@ -219,7 +215,7 @@ public final class AppConfigurationManager {
                 .append("-")
                 .append("com.azure.resourcemanager.appconfiguration")
                 .append("/")
-                .append("1.0.0-beta.6");
+                .append("1.0.0-beta.1");
             if (!Configuration.getGlobalConfiguration().get("AZURE_TELEMETRY_DISABLED", false)) {
                 userAgentBuilder
                     .append(" (")
@@ -323,18 +319,6 @@ public final class AppConfigurationManager {
             this.privateLinkResources = new PrivateLinkResourcesImpl(clientObject.getPrivateLinkResources(), this);
         }
         return privateLinkResources;
-    }
-
-    /**
-     * Gets the resource collection API of KeyValues. It manages KeyValue.
-     *
-     * @return Resource collection API of KeyValues.
-     */
-    public KeyValues keyValues() {
-        if (this.keyValues == null) {
-            this.keyValues = new KeyValuesImpl(clientObject.getKeyValues(), this);
-        }
-        return keyValues;
     }
 
     /**
