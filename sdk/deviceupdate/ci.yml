@@ -38,3 +38,13 @@ extends:
       - name: azure-resourcemanager-deviceupdate
         groupId: com.azure.resourcemanager
         safeName: azureresourcemanagerdeviceupdate
+      - name: azure-iot-deviceupdate-demo
+        groupId: com.azure
+        safeName: azureiotdeviceupdatedemo
+        releaseInBatch: ${{ parameters.release_azureiotdeviceupdatedemo }}
+
+parameters:
+  - name: release_azureiotdeviceupdatedemo
+    displayName: azure-iot-deviceupdate-demo
+    type: boolean
+    default: true
