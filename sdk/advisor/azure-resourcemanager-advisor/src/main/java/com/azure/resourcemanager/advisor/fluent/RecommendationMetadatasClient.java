@@ -14,26 +14,26 @@ import com.azure.resourcemanager.advisor.fluent.models.MetadataEntityInner;
 /** An instance of this class provides access to all the operations defined in RecommendationMetadatasClient. */
 public interface RecommendationMetadatasClient {
     /**
-     * Gets the metadata entity.
+     * Gets the entity.
      *
      * @param name Name of metadata entity.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the metadata entity.
+     * @return the entity.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     MetadataEntityInner get(String name);
 
     /**
-     * Gets the metadata entity.
+     * Gets the entity.
      *
      * @param name Name of metadata entity.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the metadata entity.
+     * @return the entity along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<MetadataEntityInner> getWithResponse(String name, Context context);
@@ -43,7 +43,7 @@ public interface RecommendationMetadatasClient {
      *
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of metadata entities.
+     * @return the list of metadata entities as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<MetadataEntityInner> list();
@@ -55,7 +55,7 @@ public interface RecommendationMetadatasClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of metadata entities.
+     * @return the list of metadata entities as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<MetadataEntityInner> list(Context context);
