@@ -1,0 +1,47 @@
+# NOTE: Please refer to https://aka.ms/azsdk/engsys/ci-yaml before editing this file.
+
+trigger:
+  branches:
+    include:
+      - main
+      - hotfix/*
+      - release/*
+  paths:
+    include:
+      - sdk/demoservice/ci.yml
+      - sdk/demoservice/azure-newservice-demo/
+    exclude:
+      - sdk/demoservice/pom.xml
+      - sdk/demoservice/azure-newservice-demo/pom.xml
+
+pr:
+  branches:
+    include:
+      - main
+      - feature/*
+      - hotfix/*
+      - release/*
+  paths:
+    include:
+      - sdk/demoservice/ci.yml
+      - sdk/demoservice/azure-newservice-demo/
+    exclude:
+      - sdk/demoservice/pom.xml
+      - sdk/demoservice/azure-newservice-demo/pom.xml
+
+parameters:
+  - name: release_azurenewservicedemo
+    displayName: azure-newservice-demo
+    type: boolean
+    default: true
+
+extends:
+  template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
+  parameters:
+    ServiceDirectory: demoservice
+    EnableBatchRelease: true
+    Artifacts:
+      - name: azure-newservice-demo
+        groupId: com.azure
+        safeName: azurenewservicedemo
+        releaseInBatch: ${{ parameters.release_azurenewservicedemo }}
