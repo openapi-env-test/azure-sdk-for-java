@@ -888,6 +888,7 @@
         <module>sdk/datamigration</module>
         <module>sdk/dataprotection</module>
         <module>sdk/delegatednetwork</module>
+        <module>sdk/demoservice</module>
         <module>sdk/deploymentmanager</module>
         <module>sdk/desktopvirtualization</module>
         <module>sdk/deviceprovisioningservices</module>
