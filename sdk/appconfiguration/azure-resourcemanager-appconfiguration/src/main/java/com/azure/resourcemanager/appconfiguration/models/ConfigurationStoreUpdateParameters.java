@@ -131,29 +131,6 @@ public final class ConfigurationStoreUpdateParameters {
     }
 
     /**
-     * Get the disableLocalAuth property: Disables all authentication methods other than AAD authentication.
-     *
-     * @return the disableLocalAuth value.
-     */
-    public Boolean disableLocalAuth() {
-        return this.innerProperties() == null ? null : this.innerProperties().disableLocalAuth();
-    }
-
-    /**
-     * Set the disableLocalAuth property: Disables all authentication methods other than AAD authentication.
-     *
-     * @param disableLocalAuth the disableLocalAuth value to set.
-     * @return the ConfigurationStoreUpdateParameters object itself.
-     */
-    public ConfigurationStoreUpdateParameters withDisableLocalAuth(Boolean disableLocalAuth) {
-        if (this.innerProperties() == null) {
-            this.innerProperties = new ConfigurationStorePropertiesUpdateParameters();
-        }
-        this.innerProperties().withDisableLocalAuth(disableLocalAuth);
-        return this;
-    }
-
-    /**
      * Get the publicNetworkAccess property: Control permission for data plane traffic coming from public networks while
      * private endpoint is enabled.
      *
@@ -175,31 +152,6 @@ public final class ConfigurationStoreUpdateParameters {
             this.innerProperties = new ConfigurationStorePropertiesUpdateParameters();
         }
         this.innerProperties().withPublicNetworkAccess(publicNetworkAccess);
-        return this;
-    }
-
-    /**
-     * Get the enablePurgeProtection property: Property specifying whether protection against purge is enabled for this
-     * configuration store.
-     *
-     * @return the enablePurgeProtection value.
-     */
-    public Boolean enablePurgeProtection() {
-        return this.innerProperties() == null ? null : this.innerProperties().enablePurgeProtection();
-    }
-
-    /**
-     * Set the enablePurgeProtection property: Property specifying whether protection against purge is enabled for this
-     * configuration store.
-     *
-     * @param enablePurgeProtection the enablePurgeProtection value to set.
-     * @return the ConfigurationStoreUpdateParameters object itself.
-     */
-    public ConfigurationStoreUpdateParameters withEnablePurgeProtection(Boolean enablePurgeProtection) {
-        if (this.innerProperties() == null) {
-            this.innerProperties = new ConfigurationStorePropertiesUpdateParameters();
-        }
-        this.innerProperties().withEnablePurgeProtection(enablePurgeProtection);
         return this;
     }
 

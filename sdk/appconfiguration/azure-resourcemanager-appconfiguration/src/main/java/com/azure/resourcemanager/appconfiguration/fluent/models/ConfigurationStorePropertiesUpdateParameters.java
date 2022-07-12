@@ -19,24 +19,11 @@ public final class ConfigurationStorePropertiesUpdateParameters {
     private EncryptionProperties encryption;
 
     /*
-     * Disables all authentication methods other than AAD authentication.
-     */
-    @JsonProperty(value = "disableLocalAuth")
-    private Boolean disableLocalAuth;
-
-    /*
      * Control permission for data plane traffic coming from public networks
      * while private endpoint is enabled.
      */
     @JsonProperty(value = "publicNetworkAccess")
     private PublicNetworkAccess publicNetworkAccess;
-
-    /*
-     * Property specifying whether protection against purge is enabled for this
-     * configuration store.
-     */
-    @JsonProperty(value = "enablePurgeProtection")
-    private Boolean enablePurgeProtection;
 
     /**
      * Get the encryption property: The encryption settings of the configuration store.
@@ -55,26 +42,6 @@ public final class ConfigurationStorePropertiesUpdateParameters {
      */
     public ConfigurationStorePropertiesUpdateParameters withEncryption(EncryptionProperties encryption) {
         this.encryption = encryption;
-        return this;
-    }
-
-    /**
-     * Get the disableLocalAuth property: Disables all authentication methods other than AAD authentication.
-     *
-     * @return the disableLocalAuth value.
-     */
-    public Boolean disableLocalAuth() {
-        return this.disableLocalAuth;
-    }
-
-    /**
-     * Set the disableLocalAuth property: Disables all authentication methods other than AAD authentication.
-     *
-     * @param disableLocalAuth the disableLocalAuth value to set.
-     * @return the ConfigurationStorePropertiesUpdateParameters object itself.
-     */
-    public ConfigurationStorePropertiesUpdateParameters withDisableLocalAuth(Boolean disableLocalAuth) {
-        this.disableLocalAuth = disableLocalAuth;
         return this;
     }
 
@@ -98,28 +65,6 @@ public final class ConfigurationStorePropertiesUpdateParameters {
     public ConfigurationStorePropertiesUpdateParameters withPublicNetworkAccess(
         PublicNetworkAccess publicNetworkAccess) {
         this.publicNetworkAccess = publicNetworkAccess;
-        return this;
-    }
-
-    /**
-     * Get the enablePurgeProtection property: Property specifying whether protection against purge is enabled for this
-     * configuration store.
-     *
-     * @return the enablePurgeProtection value.
-     */
-    public Boolean enablePurgeProtection() {
-        return this.enablePurgeProtection;
-    }
-
-    /**
-     * Set the enablePurgeProtection property: Property specifying whether protection against purge is enabled for this
-     * configuration store.
-     *
-     * @param enablePurgeProtection the enablePurgeProtection value to set.
-     * @return the ConfigurationStorePropertiesUpdateParameters object itself.
-     */
-    public ConfigurationStorePropertiesUpdateParameters withEnablePurgeProtection(Boolean enablePurgeProtection) {
-        this.enablePurgeProtection = enablePurgeProtection;
         return this;
     }
 
