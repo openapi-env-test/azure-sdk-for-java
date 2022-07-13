@@ -32,7 +32,6 @@ import com.azure.resourcemanager.appcontainers.fluent.ContainerAppsSourceControl
 import com.azure.resourcemanager.appcontainers.fluent.DaprComponentsClient;
 import com.azure.resourcemanager.appcontainers.fluent.ManagedEnvironmentsClient;
 import com.azure.resourcemanager.appcontainers.fluent.ManagedEnvironmentsStoragesClient;
-import com.azure.resourcemanager.appcontainers.fluent.NamespacesClient;
 import com.azure.resourcemanager.appcontainers.fluent.OperationsClient;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -214,18 +213,6 @@ public final class ContainerAppsApiClientImpl implements ContainerAppsApiClient 
         return this.certificates;
     }
 
-    /** The NamespacesClient object to access its operations. */
-    private final NamespacesClient namespaces;
-
-    /**
-     * Gets the NamespacesClient object to access its operations.
-     *
-     * @return the NamespacesClient object.
-     */
-    public NamespacesClient getNamespaces() {
-        return this.namespaces;
-    }
-
     /** The ManagedEnvironmentsStoragesClient object to access its operations. */
     private final ManagedEnvironmentsStoragesClient managedEnvironmentsStorages;
 
@@ -272,7 +259,7 @@ public final class ContainerAppsApiClientImpl implements ContainerAppsApiClient 
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
-        this.apiVersion = "2022-03-01";
+        this.apiVersion = "2022-06-01";
         this.containerAppsAuthConfigs = new ContainerAppsAuthConfigsClientImpl(this);
         this.containerApps = new ContainerAppsClientImpl(this);
         this.containerAppsRevisions = new ContainerAppsRevisionsClientImpl(this);
@@ -281,7 +268,6 @@ public final class ContainerAppsApiClientImpl implements ContainerAppsApiClient 
         this.operations = new OperationsClientImpl(this);
         this.managedEnvironments = new ManagedEnvironmentsClientImpl(this);
         this.certificates = new CertificatesClientImpl(this);
-        this.namespaces = new NamespacesClientImpl(this);
         this.managedEnvironmentsStorages = new ManagedEnvironmentsStoragesClientImpl(this);
         this.containerAppsSourceControls = new ContainerAppsSourceControlsClientImpl(this);
     }

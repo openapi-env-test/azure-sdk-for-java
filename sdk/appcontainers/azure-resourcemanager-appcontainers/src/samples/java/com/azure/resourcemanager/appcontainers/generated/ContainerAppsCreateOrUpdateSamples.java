@@ -18,7 +18,6 @@ import com.azure.resourcemanager.appcontainers.models.Ingress;
 import com.azure.resourcemanager.appcontainers.models.Scale;
 import com.azure.resourcemanager.appcontainers.models.ScaleRule;
 import com.azure.resourcemanager.appcontainers.models.Template;
-import com.azure.resourcemanager.appcontainers.models.TrafficWeight;
 import com.azure.resourcemanager.appcontainers.models.Type;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,7 +26,7 @@ import java.util.Map;
 /** Samples for ContainerApps CreateOrUpdate. */
 public final class ContainerAppsCreateOrUpdateSamples {
     /*
-     * x-ms-original-file: specification/app/resource-manager/Microsoft.App/stable/2022-03-01/examples/ContainerApps_CreateOrUpdate.json
+     * x-ms-original-file: specification/app/resource-manager/Microsoft.App/preview/2022-06-01/examples/ContainerApps_CreateOrUpdate.json
      */
     /**
      * Sample code: Create or Update Container App.
@@ -49,13 +48,6 @@ public final class ContainerAppsCreateOrUpdateSamples {
                         new Ingress()
                             .withExternal(true)
                             .withTargetPort(3000)
-                            .withTraffic(
-                                Arrays
-                                    .asList(
-                                        new TrafficWeight()
-                                            .withRevisionName("testcontainerApp0-ab1234")
-                                            .withWeight(100)
-                                            .withLabel("production")))
                             .withCustomDomains(
                                 Arrays
                                     .asList(

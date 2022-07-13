@@ -28,7 +28,6 @@ public interface ContainerAppsRevisions {
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param containerAppName Name of the Container App for which Revisions are needed.
-     * @param filter The filter to apply on the operation.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.resourcemanager.appcontainers.models.DefaultErrorResponseErrorException thrown if the request
@@ -36,29 +35,28 @@ public interface ContainerAppsRevisions {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Revisions for a given Container App as paginated response with {@link PagedIterable}.
      */
-    PagedIterable<Revision> listRevisions(
-        String resourceGroupName, String containerAppName, String filter, Context context);
+    PagedIterable<Revision> listRevisions(String resourceGroupName, String containerAppName, Context context);
 
     /**
      * Get a revision of a Container App.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param containerAppName Name of the Container App.
-     * @param revisionName Name of the Container App Revision.
+     * @param name Name of the Container App Revision.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.resourcemanager.appcontainers.models.DefaultErrorResponseErrorException thrown if the request
      *     is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a revision of a Container App.
      */
-    Revision getRevision(String resourceGroupName, String containerAppName, String revisionName);
+    Revision getRevision(String resourceGroupName, String containerAppName, String name);
 
     /**
      * Get a revision of a Container App.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param containerAppName Name of the Container App.
-     * @param revisionName Name of the Container App Revision.
+     * @param name Name of the Container App Revision.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.resourcemanager.appcontainers.models.DefaultErrorResponseErrorException thrown if the request
@@ -67,27 +65,27 @@ public interface ContainerAppsRevisions {
      * @return a revision of a Container App along with {@link Response}.
      */
     Response<Revision> getRevisionWithResponse(
-        String resourceGroupName, String containerAppName, String revisionName, Context context);
+        String resourceGroupName, String containerAppName, String name, Context context);
 
     /**
      * Activates a revision for a Container App.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param containerAppName Name of the Container App.
-     * @param revisionName Name of the Container App Revision.
+     * @param name Name of the Container App Revision.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.resourcemanager.appcontainers.models.DefaultErrorResponseErrorException thrown if the request
      *     is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void activateRevision(String resourceGroupName, String containerAppName, String revisionName);
+    void activateRevision(String resourceGroupName, String containerAppName, String name);
 
     /**
      * Activates a revision for a Container App.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param containerAppName Name of the Container App.
-     * @param revisionName Name of the Container App Revision.
+     * @param name Name of the Container App Revision.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.resourcemanager.appcontainers.models.DefaultErrorResponseErrorException thrown if the request
@@ -96,27 +94,27 @@ public interface ContainerAppsRevisions {
      * @return the {@link Response}.
      */
     Response<Void> activateRevisionWithResponse(
-        String resourceGroupName, String containerAppName, String revisionName, Context context);
+        String resourceGroupName, String containerAppName, String name, Context context);
 
     /**
      * Deactivates a revision for a Container App.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param containerAppName Name of the Container App.
-     * @param revisionName Name of the Container App Revision.
+     * @param name Name of the Container App Revision.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.resourcemanager.appcontainers.models.DefaultErrorResponseErrorException thrown if the request
      *     is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void deactivateRevision(String resourceGroupName, String containerAppName, String revisionName);
+    void deactivateRevision(String resourceGroupName, String containerAppName, String name);
 
     /**
      * Deactivates a revision for a Container App.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param containerAppName Name of the Container App.
-     * @param revisionName Name of the Container App Revision.
+     * @param name Name of the Container App Revision.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.resourcemanager.appcontainers.models.DefaultErrorResponseErrorException thrown if the request
@@ -125,27 +123,27 @@ public interface ContainerAppsRevisions {
      * @return the {@link Response}.
      */
     Response<Void> deactivateRevisionWithResponse(
-        String resourceGroupName, String containerAppName, String revisionName, Context context);
+        String resourceGroupName, String containerAppName, String name, Context context);
 
     /**
      * Restarts a revision for a Container App.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param containerAppName Name of the Container App.
-     * @param revisionName Name of the Container App Revision.
+     * @param name Name of the Container App Revision.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.resourcemanager.appcontainers.models.DefaultErrorResponseErrorException thrown if the request
      *     is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void restartRevision(String resourceGroupName, String containerAppName, String revisionName);
+    void restartRevision(String resourceGroupName, String containerAppName, String name);
 
     /**
      * Restarts a revision for a Container App.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param containerAppName Name of the Container App.
-     * @param revisionName Name of the Container App Revision.
+     * @param name Name of the Container App Revision.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.resourcemanager.appcontainers.models.DefaultErrorResponseErrorException thrown if the request
@@ -154,5 +152,5 @@ public interface ContainerAppsRevisions {
      * @return the {@link Response}.
      */
     Response<Void> restartRevisionWithResponse(
-        String resourceGroupName, String containerAppName, String revisionName, Context context);
+        String resourceGroupName, String containerAppName, String name, Context context);
 }

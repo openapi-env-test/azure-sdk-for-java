@@ -122,13 +122,13 @@ public interface Certificate {
         /** The stage of the Certificate definition allowing to specify parent resource. */
         interface WithParentResource {
             /**
-             * Specifies resourceGroupName, environmentName.
+             * Specifies resourceGroupName, managedEnvironmentName.
              *
              * @param resourceGroupName The name of the resource group. The name is case insensitive.
-             * @param environmentName Name of the Managed Environment.
+             * @param managedEnvironmentName Name of the Managed Environment.
              * @return the next definition stage.
              */
-            WithCreate withExistingManagedEnvironment(String resourceGroupName, String environmentName);
+            WithCreate withExistingManagedEnvironment(String resourceGroupName, String managedEnvironmentName);
         }
         /**
          * The stage of the Certificate definition which contains all the minimum required properties for the resource

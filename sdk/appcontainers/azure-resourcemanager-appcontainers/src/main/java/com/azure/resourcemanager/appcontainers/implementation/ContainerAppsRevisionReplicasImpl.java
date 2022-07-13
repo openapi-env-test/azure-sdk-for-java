@@ -29,10 +29,8 @@ public final class ContainerAppsRevisionReplicasImpl implements ContainerAppsRev
         this.serviceManager = serviceManager;
     }
 
-    public Replica getReplica(
-        String resourceGroupName, String containerAppName, String revisionName, String replicaName) {
-        ReplicaInner inner =
-            this.serviceClient().getReplica(resourceGroupName, containerAppName, revisionName, replicaName);
+    public Replica getReplica(String resourceGroupName, String containerAppName, String revisionName, String name) {
+        ReplicaInner inner = this.serviceClient().getReplica(resourceGroupName, containerAppName, revisionName, name);
         if (inner != null) {
             return new ReplicaImpl(inner, this.manager());
         } else {
@@ -41,11 +39,11 @@ public final class ContainerAppsRevisionReplicasImpl implements ContainerAppsRev
     }
 
     public Response<Replica> getReplicaWithResponse(
-        String resourceGroupName, String containerAppName, String revisionName, String replicaName, Context context) {
+        String resourceGroupName, String containerAppName, String revisionName, String name, Context context) {
         Response<ReplicaInner> inner =
             this
                 .serviceClient()
-                .getReplicaWithResponse(resourceGroupName, containerAppName, revisionName, replicaName, context);
+                .getReplicaWithResponse(resourceGroupName, containerAppName, revisionName, name, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),

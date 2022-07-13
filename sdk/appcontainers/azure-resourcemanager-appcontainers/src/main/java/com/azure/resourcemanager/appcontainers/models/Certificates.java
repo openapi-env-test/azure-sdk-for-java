@@ -14,20 +14,20 @@ public interface Certificates {
      * Get the Certificates in a given managed environment.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param environmentName Name of the Managed Environment.
+     * @param managedEnvironmentName Name of the Managed Environment.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.resourcemanager.appcontainers.models.DefaultErrorResponseErrorException thrown if the request
      *     is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Certificates in a given managed environment as paginated response with {@link PagedIterable}.
      */
-    PagedIterable<Certificate> list(String resourceGroupName, String environmentName);
+    PagedIterable<Certificate> list(String resourceGroupName, String managedEnvironmentName);
 
     /**
      * Get the Certificates in a given managed environment.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param environmentName Name of the Managed Environment.
+     * @param managedEnvironmentName Name of the Managed Environment.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.resourcemanager.appcontainers.models.DefaultErrorResponseErrorException thrown if the request
@@ -35,28 +35,28 @@ public interface Certificates {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the Certificates in a given managed environment as paginated response with {@link PagedIterable}.
      */
-    PagedIterable<Certificate> list(String resourceGroupName, String environmentName, Context context);
+    PagedIterable<Certificate> list(String resourceGroupName, String managedEnvironmentName, Context context);
 
     /**
      * Get the specified Certificate.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param environmentName Name of the Managed Environment.
-     * @param certificateName Name of the Certificate.
+     * @param managedEnvironmentName Name of the Managed Environment.
+     * @param name Name of the Certificate.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.resourcemanager.appcontainers.models.DefaultErrorResponseErrorException thrown if the request
      *     is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the specified Certificate.
      */
-    Certificate get(String resourceGroupName, String environmentName, String certificateName);
+    Certificate get(String resourceGroupName, String managedEnvironmentName, String name);
 
     /**
      * Get the specified Certificate.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param environmentName Name of the Managed Environment.
-     * @param certificateName Name of the Certificate.
+     * @param managedEnvironmentName Name of the Managed Environment.
+     * @param name Name of the Certificate.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.resourcemanager.appcontainers.models.DefaultErrorResponseErrorException thrown if the request
@@ -65,27 +65,27 @@ public interface Certificates {
      * @return the specified Certificate along with {@link Response}.
      */
     Response<Certificate> getWithResponse(
-        String resourceGroupName, String environmentName, String certificateName, Context context);
+        String resourceGroupName, String managedEnvironmentName, String name, Context context);
 
     /**
      * Deletes the specified Certificate.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param environmentName Name of the Managed Environment.
-     * @param certificateName Name of the Certificate.
+     * @param managedEnvironmentName Name of the Managed Environment.
+     * @param name Name of the Certificate.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.resourcemanager.appcontainers.models.DefaultErrorResponseErrorException thrown if the request
      *     is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void delete(String resourceGroupName, String environmentName, String certificateName);
+    void delete(String resourceGroupName, String managedEnvironmentName, String name);
 
     /**
      * Deletes the specified Certificate.
      *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param environmentName Name of the Managed Environment.
-     * @param certificateName Name of the Certificate.
+     * @param managedEnvironmentName Name of the Managed Environment.
+     * @param name Name of the Certificate.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.resourcemanager.appcontainers.models.DefaultErrorResponseErrorException thrown if the request
@@ -94,7 +94,7 @@ public interface Certificates {
      * @return the {@link Response}.
      */
     Response<Void> deleteWithResponse(
-        String resourceGroupName, String environmentName, String certificateName, Context context);
+        String resourceGroupName, String managedEnvironmentName, String name, Context context);
 
     /**
      * Get the specified Certificate.

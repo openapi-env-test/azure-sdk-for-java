@@ -50,14 +50,13 @@ public final class ManagedEnvironmentStorageImpl
 
     private String resourceGroupName;
 
-    private String environmentName;
+    private String envName;
 
-    private String storageName;
+    private String name;
 
-    public ManagedEnvironmentStorageImpl withExistingManagedEnvironment(
-        String resourceGroupName, String environmentName) {
+    public ManagedEnvironmentStorageImpl withExistingManagedEnvironment(String resourceGroupName, String envName) {
         this.resourceGroupName = resourceGroupName;
-        this.environmentName = environmentName;
+        this.envName = envName;
         return this;
     }
 
@@ -66,8 +65,7 @@ public final class ManagedEnvironmentStorageImpl
             serviceManager
                 .serviceClient()
                 .getManagedEnvironmentsStorages()
-                .createOrUpdateWithResponse(
-                    resourceGroupName, environmentName, storageName, this.innerModel(), Context.NONE)
+                .createOrUpdateWithResponse(resourceGroupName, envName, name, this.innerModel(), Context.NONE)
                 .getValue();
         return this;
     }
@@ -77,7 +75,7 @@ public final class ManagedEnvironmentStorageImpl
             serviceManager
                 .serviceClient()
                 .getManagedEnvironmentsStorages()
-                .createOrUpdateWithResponse(resourceGroupName, environmentName, storageName, this.innerModel(), context)
+                .createOrUpdateWithResponse(resourceGroupName, envName, name, this.innerModel(), context)
                 .getValue();
         return this;
     }
@@ -86,7 +84,7 @@ public final class ManagedEnvironmentStorageImpl
         String name, com.azure.resourcemanager.appcontainers.ContainerAppsApiManager serviceManager) {
         this.innerObject = new ManagedEnvironmentStorageInner();
         this.serviceManager = serviceManager;
-        this.storageName = name;
+        this.name = name;
     }
 
     public ManagedEnvironmentStorageImpl update() {
@@ -98,8 +96,7 @@ public final class ManagedEnvironmentStorageImpl
             serviceManager
                 .serviceClient()
                 .getManagedEnvironmentsStorages()
-                .createOrUpdateWithResponse(
-                    resourceGroupName, environmentName, storageName, this.innerModel(), Context.NONE)
+                .createOrUpdateWithResponse(resourceGroupName, envName, name, this.innerModel(), Context.NONE)
                 .getValue();
         return this;
     }
@@ -109,7 +106,7 @@ public final class ManagedEnvironmentStorageImpl
             serviceManager
                 .serviceClient()
                 .getManagedEnvironmentsStorages()
-                .createOrUpdateWithResponse(resourceGroupName, environmentName, storageName, this.innerModel(), context)
+                .createOrUpdateWithResponse(resourceGroupName, envName, name, this.innerModel(), context)
                 .getValue();
         return this;
     }
@@ -120,8 +117,8 @@ public final class ManagedEnvironmentStorageImpl
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
         this.resourceGroupName = Utils.getValueFromIdByName(innerObject.id(), "resourceGroups");
-        this.environmentName = Utils.getValueFromIdByName(innerObject.id(), "managedEnvironments");
-        this.storageName = Utils.getValueFromIdByName(innerObject.id(), "storages");
+        this.envName = Utils.getValueFromIdByName(innerObject.id(), "managedEnvironments");
+        this.name = Utils.getValueFromIdByName(innerObject.id(), "storages");
     }
 
     public ManagedEnvironmentStorage refresh() {
@@ -129,7 +126,7 @@ public final class ManagedEnvironmentStorageImpl
             serviceManager
                 .serviceClient()
                 .getManagedEnvironmentsStorages()
-                .getWithResponse(resourceGroupName, environmentName, storageName, Context.NONE)
+                .getWithResponse(resourceGroupName, envName, name, Context.NONE)
                 .getValue();
         return this;
     }
@@ -139,7 +136,7 @@ public final class ManagedEnvironmentStorageImpl
             serviceManager
                 .serviceClient()
                 .getManagedEnvironmentsStorages()
-                .getWithResponse(resourceGroupName, environmentName, storageName, context)
+                .getWithResponse(resourceGroupName, envName, name, context)
                 .getValue();
         return this;
     }

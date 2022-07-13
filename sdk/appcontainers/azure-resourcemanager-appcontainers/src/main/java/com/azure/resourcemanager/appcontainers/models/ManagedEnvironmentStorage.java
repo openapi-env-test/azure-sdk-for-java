@@ -71,13 +71,13 @@ public interface ManagedEnvironmentStorage {
         /** The stage of the ManagedEnvironmentStorage definition allowing to specify parent resource. */
         interface WithParentResource {
             /**
-             * Specifies resourceGroupName, environmentName.
+             * Specifies resourceGroupName, envName.
              *
              * @param resourceGroupName The name of the resource group. The name is case insensitive.
-             * @param environmentName Name of the Environment.
+             * @param envName Name of the Environment.
              * @return the next definition stage.
              */
-            WithCreate withExistingManagedEnvironment(String resourceGroupName, String environmentName);
+            WithCreate withExistingManagedEnvironment(String resourceGroupName, String envName);
         }
         /**
          * The stage of the ManagedEnvironmentStorage definition which contains all the minimum required properties for

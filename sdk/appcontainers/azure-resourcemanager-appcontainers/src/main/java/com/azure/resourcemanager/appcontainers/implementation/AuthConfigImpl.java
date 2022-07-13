@@ -66,7 +66,7 @@ public final class AuthConfigImpl implements AuthConfig, AuthConfig.Definition, 
 
     private String containerAppName;
 
-    private String authConfigName;
+    private String name;
 
     public AuthConfigImpl withExistingContainerApp(String resourceGroupName, String containerAppName) {
         this.resourceGroupName = resourceGroupName;
@@ -79,8 +79,7 @@ public final class AuthConfigImpl implements AuthConfig, AuthConfig.Definition, 
             serviceManager
                 .serviceClient()
                 .getContainerAppsAuthConfigs()
-                .createOrUpdateWithResponse(
-                    resourceGroupName, containerAppName, authConfigName, this.innerModel(), Context.NONE)
+                .createOrUpdateWithResponse(resourceGroupName, containerAppName, name, this.innerModel(), Context.NONE)
                 .getValue();
         return this;
     }
@@ -90,8 +89,7 @@ public final class AuthConfigImpl implements AuthConfig, AuthConfig.Definition, 
             serviceManager
                 .serviceClient()
                 .getContainerAppsAuthConfigs()
-                .createOrUpdateWithResponse(
-                    resourceGroupName, containerAppName, authConfigName, this.innerModel(), context)
+                .createOrUpdateWithResponse(resourceGroupName, containerAppName, name, this.innerModel(), context)
                 .getValue();
         return this;
     }
@@ -99,7 +97,7 @@ public final class AuthConfigImpl implements AuthConfig, AuthConfig.Definition, 
     AuthConfigImpl(String name, com.azure.resourcemanager.appcontainers.ContainerAppsApiManager serviceManager) {
         this.innerObject = new AuthConfigInner();
         this.serviceManager = serviceManager;
-        this.authConfigName = name;
+        this.name = name;
     }
 
     public AuthConfigImpl update() {
@@ -111,8 +109,7 @@ public final class AuthConfigImpl implements AuthConfig, AuthConfig.Definition, 
             serviceManager
                 .serviceClient()
                 .getContainerAppsAuthConfigs()
-                .createOrUpdateWithResponse(
-                    resourceGroupName, containerAppName, authConfigName, this.innerModel(), Context.NONE)
+                .createOrUpdateWithResponse(resourceGroupName, containerAppName, name, this.innerModel(), Context.NONE)
                 .getValue();
         return this;
     }
@@ -122,8 +119,7 @@ public final class AuthConfigImpl implements AuthConfig, AuthConfig.Definition, 
             serviceManager
                 .serviceClient()
                 .getContainerAppsAuthConfigs()
-                .createOrUpdateWithResponse(
-                    resourceGroupName, containerAppName, authConfigName, this.innerModel(), context)
+                .createOrUpdateWithResponse(resourceGroupName, containerAppName, name, this.innerModel(), context)
                 .getValue();
         return this;
     }
@@ -134,7 +130,7 @@ public final class AuthConfigImpl implements AuthConfig, AuthConfig.Definition, 
         this.serviceManager = serviceManager;
         this.resourceGroupName = Utils.getValueFromIdByName(innerObject.id(), "resourceGroups");
         this.containerAppName = Utils.getValueFromIdByName(innerObject.id(), "containerApps");
-        this.authConfigName = Utils.getValueFromIdByName(innerObject.id(), "authConfigs");
+        this.name = Utils.getValueFromIdByName(innerObject.id(), "authConfigs");
     }
 
     public AuthConfig refresh() {
@@ -142,7 +138,7 @@ public final class AuthConfigImpl implements AuthConfig, AuthConfig.Definition, 
             serviceManager
                 .serviceClient()
                 .getContainerAppsAuthConfigs()
-                .getWithResponse(resourceGroupName, containerAppName, authConfigName, Context.NONE)
+                .getWithResponse(resourceGroupName, containerAppName, name, Context.NONE)
                 .getValue();
         return this;
     }
@@ -152,7 +148,7 @@ public final class AuthConfigImpl implements AuthConfig, AuthConfig.Definition, 
             serviceManager
                 .serviceClient()
                 .getContainerAppsAuthConfigs()
-                .getWithResponse(resourceGroupName, containerAppName, authConfigName, context)
+                .getWithResponse(resourceGroupName, containerAppName, name, context)
                 .getValue();
         return this;
     }

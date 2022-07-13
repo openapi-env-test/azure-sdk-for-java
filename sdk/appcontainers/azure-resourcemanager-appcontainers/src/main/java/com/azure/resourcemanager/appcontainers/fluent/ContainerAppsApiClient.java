@@ -101,13 +101,6 @@ public interface ContainerAppsApiClient {
     CertificatesClient getCertificates();
 
     /**
-     * Gets the NamespacesClient object to access its operations.
-     *
-     * @return the NamespacesClient object.
-     */
-    NamespacesClient getNamespaces();
-
-    /**
      * Gets the ManagedEnvironmentsStoragesClient object to access its operations.
      *
      * @return the ManagedEnvironmentsStoragesClient object.

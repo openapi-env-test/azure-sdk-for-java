@@ -64,7 +64,7 @@ public final class SourceControlImpl implements SourceControl, SourceControl.Def
 
     private String containerAppName;
 
-    private String sourceControlName;
+    private String name;
 
     public SourceControlImpl withExistingContainerApp(String resourceGroupName, String containerAppName) {
         this.resourceGroupName = resourceGroupName;
@@ -77,8 +77,7 @@ public final class SourceControlImpl implements SourceControl, SourceControl.Def
             serviceManager
                 .serviceClient()
                 .getContainerAppsSourceControls()
-                .createOrUpdate(
-                    resourceGroupName, containerAppName, sourceControlName, this.innerModel(), Context.NONE);
+                .createOrUpdate(resourceGroupName, containerAppName, name, this.innerModel(), Context.NONE);
         return this;
     }
 
@@ -87,14 +86,14 @@ public final class SourceControlImpl implements SourceControl, SourceControl.Def
             serviceManager
                 .serviceClient()
                 .getContainerAppsSourceControls()
-                .createOrUpdate(resourceGroupName, containerAppName, sourceControlName, this.innerModel(), context);
+                .createOrUpdate(resourceGroupName, containerAppName, name, this.innerModel(), context);
         return this;
     }
 
     SourceControlImpl(String name, com.azure.resourcemanager.appcontainers.ContainerAppsApiManager serviceManager) {
         this.innerObject = new SourceControlInner();
         this.serviceManager = serviceManager;
-        this.sourceControlName = name;
+        this.name = name;
     }
 
     public SourceControlImpl update() {
@@ -106,8 +105,7 @@ public final class SourceControlImpl implements SourceControl, SourceControl.Def
             serviceManager
                 .serviceClient()
                 .getContainerAppsSourceControls()
-                .createOrUpdate(
-                    resourceGroupName, containerAppName, sourceControlName, this.innerModel(), Context.NONE);
+                .createOrUpdate(resourceGroupName, containerAppName, name, this.innerModel(), Context.NONE);
         return this;
     }
 
@@ -116,7 +114,7 @@ public final class SourceControlImpl implements SourceControl, SourceControl.Def
             serviceManager
                 .serviceClient()
                 .getContainerAppsSourceControls()
-                .createOrUpdate(resourceGroupName, containerAppName, sourceControlName, this.innerModel(), context);
+                .createOrUpdate(resourceGroupName, containerAppName, name, this.innerModel(), context);
         return this;
     }
 
@@ -127,7 +125,7 @@ public final class SourceControlImpl implements SourceControl, SourceControl.Def
         this.serviceManager = serviceManager;
         this.resourceGroupName = Utils.getValueFromIdByName(innerObject.id(), "resourceGroups");
         this.containerAppName = Utils.getValueFromIdByName(innerObject.id(), "containerApps");
-        this.sourceControlName = Utils.getValueFromIdByName(innerObject.id(), "sourcecontrols");
+        this.name = Utils.getValueFromIdByName(innerObject.id(), "sourcecontrols");
     }
 
     public SourceControl refresh() {
@@ -135,7 +133,7 @@ public final class SourceControlImpl implements SourceControl, SourceControl.Def
             serviceManager
                 .serviceClient()
                 .getContainerAppsSourceControls()
-                .getWithResponse(resourceGroupName, containerAppName, sourceControlName, Context.NONE)
+                .getWithResponse(resourceGroupName, containerAppName, name, Context.NONE)
                 .getValue();
         return this;
     }
@@ -145,7 +143,7 @@ public final class SourceControlImpl implements SourceControl, SourceControl.Def
             serviceManager
                 .serviceClient()
                 .getContainerAppsSourceControls()
-                .getWithResponse(resourceGroupName, containerAppName, sourceControlName, context)
+                .getWithResponse(resourceGroupName, containerAppName, name, context)
                 .getValue();
         return this;
     }

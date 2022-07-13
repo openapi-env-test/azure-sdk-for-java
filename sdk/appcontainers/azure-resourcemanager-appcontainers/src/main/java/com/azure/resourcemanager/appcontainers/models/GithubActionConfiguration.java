@@ -23,16 +23,10 @@ public final class GithubActionConfiguration {
     private AzureCredentials azureCredentials;
 
     /*
-     * Context path
+     * Docker file path
      */
-    @JsonProperty(value = "contextPath")
-    private String contextPath;
-
-    /*
-     * Image name
-     */
-    @JsonProperty(value = "image")
-    private String image;
+    @JsonProperty(value = "dockerfilePath")
+    private String dockerfilePath;
 
     /*
      * Code or Image
@@ -53,7 +47,7 @@ public final class GithubActionConfiguration {
     private String runtimeStack;
 
     /*
-     * Runtime version
+     * Runtime Version
      */
     @JsonProperty(value = "runtimeVersion")
     private String runtimeVersion;
@@ -99,42 +93,22 @@ public final class GithubActionConfiguration {
     }
 
     /**
-     * Get the contextPath property: Context path.
+     * Get the dockerfilePath property: Docker file path.
      *
-     * @return the contextPath value.
+     * @return the dockerfilePath value.
      */
-    public String contextPath() {
-        return this.contextPath;
+    public String dockerfilePath() {
+        return this.dockerfilePath;
     }
 
     /**
-     * Set the contextPath property: Context path.
+     * Set the dockerfilePath property: Docker file path.
      *
-     * @param contextPath the contextPath value to set.
+     * @param dockerfilePath the dockerfilePath value to set.
      * @return the GithubActionConfiguration object itself.
      */
-    public GithubActionConfiguration withContextPath(String contextPath) {
-        this.contextPath = contextPath;
-        return this;
-    }
-
-    /**
-     * Get the image property: Image name.
-     *
-     * @return the image value.
-     */
-    public String image() {
-        return this.image;
-    }
-
-    /**
-     * Set the image property: Image name.
-     *
-     * @param image the image value to set.
-     * @return the GithubActionConfiguration object itself.
-     */
-    public GithubActionConfiguration withImage(String image) {
-        this.image = image;
+    public GithubActionConfiguration withDockerfilePath(String dockerfilePath) {
+        this.dockerfilePath = dockerfilePath;
         return this;
     }
 
@@ -199,7 +173,7 @@ public final class GithubActionConfiguration {
     }
 
     /**
-     * Get the runtimeVersion property: Runtime version.
+     * Get the runtimeVersion property: Runtime Version.
      *
      * @return the runtimeVersion value.
      */
@@ -208,7 +182,7 @@ public final class GithubActionConfiguration {
     }
 
     /**
-     * Set the runtimeVersion property: Runtime version.
+     * Set the runtimeVersion property: Runtime Version.
      *
      * @param runtimeVersion the runtimeVersion value to set.
      * @return the GithubActionConfiguration object itself.

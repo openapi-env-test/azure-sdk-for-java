@@ -266,11 +266,7 @@ public interface ContainerApp {
     ContainerApp.Update update();
 
     /** The template for ContainerApp update. */
-    interface Update
-        extends UpdateStages.WithTags,
-            UpdateStages.WithIdentity,
-            UpdateStages.WithConfiguration,
-            UpdateStages.WithTemplate {
+    interface Update extends UpdateStages.WithTags {
         /**
          * Executes the update request.
          *
@@ -291,44 +287,12 @@ public interface ContainerApp {
         /** The stage of the ContainerApp update allowing to specify tags. */
         interface WithTags {
             /**
-             * Specifies the tags property: Resource tags..
+             * Specifies the tags property: Application-specific metadata in the form of key-value pairs..
              *
-             * @param tags Resource tags.
+             * @param tags Application-specific metadata in the form of key-value pairs.
              * @return the next definition stage.
              */
             Update withTags(Map<String, String> tags);
-        }
-        /** The stage of the ContainerApp update allowing to specify identity. */
-        interface WithIdentity {
-            /**
-             * Specifies the identity property: managed identities for the Container App to interact with other Azure
-             * services without maintaining any secrets or credentials in code..
-             *
-             * @param identity managed identities for the Container App to interact with other Azure services without
-             *     maintaining any secrets or credentials in code.
-             * @return the next definition stage.
-             */
-            Update withIdentity(ManagedServiceIdentity identity);
-        }
-        /** The stage of the ContainerApp update allowing to specify configuration. */
-        interface WithConfiguration {
-            /**
-             * Specifies the configuration property: Non versioned Container App configuration properties..
-             *
-             * @param configuration Non versioned Container App configuration properties.
-             * @return the next definition stage.
-             */
-            Update withConfiguration(Configuration configuration);
-        }
-        /** The stage of the ContainerApp update allowing to specify template. */
-        interface WithTemplate {
-            /**
-             * Specifies the template property: Container App versioned application definition..
-             *
-             * @param template Container App versioned application definition.
-             * @return the next definition stage.
-             */
-            Update withTemplate(Template template);
         }
     }
     /**
@@ -345,30 +309,6 @@ public interface ContainerApp {
      * @return the refreshed resource.
      */
     ContainerApp refresh(Context context);
-
-    /**
-     * Analyzes a custom hostname for a Container App.
-     *
-     * @throws com.azure.resourcemanager.appcontainers.models.DefaultErrorResponseErrorException thrown if the request
-     *     is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return custom domain analysis.
-     */
-    CustomHostnameAnalysisResult listCustomHostnameAnalysis();
-
-    /**
-     * Analyzes a custom hostname for a Container App.
-     *
-     * @param customHostname Custom hostname.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.resourcemanager.appcontainers.models.DefaultErrorResponseErrorException thrown if the request
-     *     is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return custom domain analysis along with {@link Response}.
-     */
-    Response<CustomHostnameAnalysisResult> listCustomHostnameAnalysisWithResponse(
-        String customHostname, Context context);
 
     /**
      * List secrets for a container app.

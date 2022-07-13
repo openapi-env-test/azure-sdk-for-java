@@ -34,7 +34,6 @@ import com.azure.resourcemanager.appcontainers.implementation.ContainerAppsSourc
 import com.azure.resourcemanager.appcontainers.implementation.DaprComponentsImpl;
 import com.azure.resourcemanager.appcontainers.implementation.ManagedEnvironmentsImpl;
 import com.azure.resourcemanager.appcontainers.implementation.ManagedEnvironmentsStoragesImpl;
-import com.azure.resourcemanager.appcontainers.implementation.NamespacesImpl;
 import com.azure.resourcemanager.appcontainers.implementation.OperationsImpl;
 import com.azure.resourcemanager.appcontainers.models.Certificates;
 import com.azure.resourcemanager.appcontainers.models.ContainerApps;
@@ -45,7 +44,6 @@ import com.azure.resourcemanager.appcontainers.models.ContainerAppsSourceControl
 import com.azure.resourcemanager.appcontainers.models.DaprComponents;
 import com.azure.resourcemanager.appcontainers.models.ManagedEnvironments;
 import com.azure.resourcemanager.appcontainers.models.ManagedEnvironmentsStorages;
-import com.azure.resourcemanager.appcontainers.models.Namespaces;
 import com.azure.resourcemanager.appcontainers.models.Operations;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -71,8 +69,6 @@ public final class ContainerAppsApiManager {
     private ManagedEnvironments managedEnvironments;
 
     private Certificates certificates;
-
-    private Namespaces namespaces;
 
     private ManagedEnvironmentsStorages managedEnvironmentsStorages;
 
@@ -243,7 +239,7 @@ public final class ContainerAppsApiManager {
                 .append("-")
                 .append("com.azure.resourcemanager.appcontainers")
                 .append("/")
-                .append("1.0.0-beta.3");
+                .append("1.0.0-beta.1");
             if (!Configuration.getGlobalConfiguration().get("AZURE_TELEMETRY_DISABLED", false)) {
                 userAgentBuilder
                     .append(" (")
@@ -397,18 +393,6 @@ public final class ContainerAppsApiManager {
             this.certificates = new CertificatesImpl(clientObject.getCertificates(), this);
         }
         return certificates;
-    }
-
-    /**
-     * Gets the resource collection API of Namespaces.
-     *
-     * @return Resource collection API of Namespaces.
-     */
-    public Namespaces namespaces() {
-        if (this.namespaces == null) {
-            this.namespaces = new NamespacesImpl(clientObject.getNamespaces(), this);
-        }
-        return namespaces;
     }
 
     /**

@@ -11,10 +11,8 @@ import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.appcontainers.fluent.DaprComponentsClient;
 import com.azure.resourcemanager.appcontainers.fluent.models.DaprComponentInner;
-import com.azure.resourcemanager.appcontainers.fluent.models.DaprSecretsCollectionInner;
 import com.azure.resourcemanager.appcontainers.models.DaprComponent;
 import com.azure.resourcemanager.appcontainers.models.DaprComponents;
-import com.azure.resourcemanager.appcontainers.models.DaprSecretsCollection;
 
 public final class DaprComponentsImpl implements DaprComponents {
     private static final ClientLogger LOGGER = new ClientLogger(DaprComponentsImpl.class);
@@ -41,8 +39,8 @@ public final class DaprComponentsImpl implements DaprComponents {
         return Utils.mapPage(inner, inner1 -> new DaprComponentImpl(inner1, this.manager()));
     }
 
-    public DaprComponent get(String resourceGroupName, String environmentName, String componentName) {
-        DaprComponentInner inner = this.serviceClient().get(resourceGroupName, environmentName, componentName);
+    public DaprComponent get(String resourceGroupName, String environmentName, String name) {
+        DaprComponentInner inner = this.serviceClient().get(resourceGroupName, environmentName, name);
         if (inner != null) {
             return new DaprComponentImpl(inner, this.manager());
         } else {
@@ -51,9 +49,9 @@ public final class DaprComponentsImpl implements DaprComponents {
     }
 
     public Response<DaprComponent> getWithResponse(
-        String resourceGroupName, String environmentName, String componentName, Context context) {
+        String resourceGroupName, String environmentName, String name, Context context) {
         Response<DaprComponentInner> inner =
-            this.serviceClient().getWithResponse(resourceGroupName, environmentName, componentName, context);
+            this.serviceClient().getWithResponse(resourceGroupName, environmentName, name, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),
@@ -65,38 +63,13 @@ public final class DaprComponentsImpl implements DaprComponents {
         }
     }
 
-    public void delete(String resourceGroupName, String environmentName, String componentName) {
-        this.serviceClient().delete(resourceGroupName, environmentName, componentName);
+    public void delete(String resourceGroupName, String environmentName, String name) {
+        this.serviceClient().delete(resourceGroupName, environmentName, name);
     }
 
     public Response<Void> deleteWithResponse(
-        String resourceGroupName, String environmentName, String componentName, Context context) {
-        return this.serviceClient().deleteWithResponse(resourceGroupName, environmentName, componentName, context);
-    }
-
-    public DaprSecretsCollection listSecrets(String resourceGroupName, String environmentName, String componentName) {
-        DaprSecretsCollectionInner inner =
-            this.serviceClient().listSecrets(resourceGroupName, environmentName, componentName);
-        if (inner != null) {
-            return new DaprSecretsCollectionImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public Response<DaprSecretsCollection> listSecretsWithResponse(
-        String resourceGroupName, String environmentName, String componentName, Context context) {
-        Response<DaprSecretsCollectionInner> inner =
-            this.serviceClient().listSecretsWithResponse(resourceGroupName, environmentName, componentName, context);
-        if (inner != null) {
-            return new SimpleResponse<>(
-                inner.getRequest(),
-                inner.getStatusCode(),
-                inner.getHeaders(),
-                new DaprSecretsCollectionImpl(inner.getValue(), this.manager()));
-        } else {
-            return null;
-        }
+        String resourceGroupName, String environmentName, String name, Context context) {
+        return this.serviceClient().deleteWithResponse(resourceGroupName, environmentName, name, context);
     }
 
     public DaprComponent getById(String id) {
@@ -117,15 +90,15 @@ public final class DaprComponentsImpl implements DaprComponents {
                             .format(
                                 "The resource ID '%s' is not valid. Missing path segment 'managedEnvironments'.", id)));
         }
-        String componentName = Utils.getValueFromIdByName(id, "daprComponents");
-        if (componentName == null) {
+        String name = Utils.getValueFromIdByName(id, "daprComponents");
+        if (name == null) {
             throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
                             .format("The resource ID '%s' is not valid. Missing path segment 'daprComponents'.", id)));
         }
-        return this.getWithResponse(resourceGroupName, environmentName, componentName, Context.NONE).getValue();
+        return this.getWithResponse(resourceGroupName, environmentName, name, Context.NONE).getValue();
     }
 
     public Response<DaprComponent> getByIdWithResponse(String id, Context context) {
@@ -146,15 +119,15 @@ public final class DaprComponentsImpl implements DaprComponents {
                             .format(
                                 "The resource ID '%s' is not valid. Missing path segment 'managedEnvironments'.", id)));
         }
-        String componentName = Utils.getValueFromIdByName(id, "daprComponents");
-        if (componentName == null) {
+        String name = Utils.getValueFromIdByName(id, "daprComponents");
+        if (name == null) {
             throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
                             .format("The resource ID '%s' is not valid. Missing path segment 'daprComponents'.", id)));
         }
-        return this.getWithResponse(resourceGroupName, environmentName, componentName, context);
+        return this.getWithResponse(resourceGroupName, environmentName, name, context);
     }
 
     public void deleteById(String id) {
@@ -175,15 +148,15 @@ public final class DaprComponentsImpl implements DaprComponents {
                             .format(
                                 "The resource ID '%s' is not valid. Missing path segment 'managedEnvironments'.", id)));
         }
-        String componentName = Utils.getValueFromIdByName(id, "daprComponents");
-        if (componentName == null) {
+        String name = Utils.getValueFromIdByName(id, "daprComponents");
+        if (name == null) {
             throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
                             .format("The resource ID '%s' is not valid. Missing path segment 'daprComponents'.", id)));
         }
-        this.deleteWithResponse(resourceGroupName, environmentName, componentName, Context.NONE);
+        this.deleteWithResponse(resourceGroupName, environmentName, name, Context.NONE);
     }
 
     public Response<Void> deleteByIdWithResponse(String id, Context context) {
@@ -204,15 +177,15 @@ public final class DaprComponentsImpl implements DaprComponents {
                             .format(
                                 "The resource ID '%s' is not valid. Missing path segment 'managedEnvironments'.", id)));
         }
-        String componentName = Utils.getValueFromIdByName(id, "daprComponents");
-        if (componentName == null) {
+        String name = Utils.getValueFromIdByName(id, "daprComponents");
+        if (name == null) {
             throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
                             .format("The resource ID '%s' is not valid. Missing path segment 'daprComponents'.", id)));
         }
-        return this.deleteWithResponse(resourceGroupName, environmentName, componentName, context);
+        return this.deleteWithResponse(resourceGroupName, environmentName, name, context);
     }
 
     private DaprComponentsClient serviceClient() {
