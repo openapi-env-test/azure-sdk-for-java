@@ -4,10 +4,12 @@
 
 package com.azure.resourcemanager.advisor.implementation;
 
+import com.azure.core.management.Region;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.advisor.fluent.models.SuppressionContractInner;
 import com.azure.resourcemanager.advisor.models.SuppressionContract;
-import java.time.OffsetDateTime;
+import java.util.Collections;
+import java.util.Map;
 
 public final class SuppressionContractImpl implements SuppressionContract, SuppressionContract.Definition {
     private SuppressionContractInner innerObject;
@@ -32,6 +34,19 @@ public final class SuppressionContractImpl implements SuppressionContract, Suppr
         return this.innerModel().type();
     }
 
+    public String location() {
+        return this.innerModel().location();
+    }
+
+    public Map<String, String> tags() {
+        Map<String, String> inner = this.innerModel().tags();
+        if (inner != null) {
+            return Collections.unmodifiableMap(inner);
+        } else {
+            return Collections.emptyMap();
+        }
+    }
+
     public String suppressionId() {
         return this.innerModel().suppressionId();
     }
@@ -40,8 +55,12 @@ public final class SuppressionContractImpl implements SuppressionContract, Suppr
         return this.innerModel().ttl();
     }
 
-    public OffsetDateTime expirationTimestamp() {
-        return this.innerModel().expirationTimestamp();
+    public Region region() {
+        return Region.fromName(this.regionName());
+    }
+
+    public String regionName() {
+        return this.location();
     }
 
     public SuppressionContractInner innerModel() {
@@ -107,6 +126,21 @@ public final class SuppressionContractImpl implements SuppressionContract, Suppr
                 .getSuppressions()
                 .getWithResponse(resourceUri, recommendationId, name, context)
                 .getValue();
+        return this;
+    }
+
+    public SuppressionContractImpl withRegion(Region location) {
+        this.innerModel().withLocation(location.toString());
+        return this;
+    }
+
+    public SuppressionContractImpl withRegion(String location) {
+        this.innerModel().withLocation(location);
+        return this;
+    }
+
+    public SuppressionContractImpl withTags(Map<String, String> tags) {
+        this.innerModel().withTags(tags);
         return this;
     }
 

@@ -13,21 +13,29 @@ import java.util.UUID;
 /** An immutable client-side representation of ResourceRecommendationBase. */
 public interface ResourceRecommendationBase {
     /**
-     * Gets the id property: Fully qualified resource Id for the resource.
+     * Gets the id property: The fully qualified recommendation ID, for example
+     * /subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.ClassicCompute/virtualMachines/vm1/providers/Microsoft.Advisor/recommendations/recommendationGUID.
      *
      * @return the id value.
      */
     String id();
 
     /**
-     * Gets the name property: The name of the resource.
+     * Gets the name property: The name of recommendation.
      *
      * @return the name value.
      */
     String name();
 
     /**
-     * Gets the type property: The type of the resource.
+     * Gets the suppressionIds property: The list of snoozed and dismissed rules for the recommendation.
+     *
+     * @return the suppressionIds value.
+     */
+    List<UUID> suppressionIds();
+
+    /**
+     * Gets the type property: The recommendation type: Microsoft.Advisor/recommendations.
      *
      * @return the type value.
      */
@@ -95,77 +103,6 @@ public interface ResourceRecommendationBase {
      * @return the shortDescription value.
      */
     ShortDescription shortDescription();
-
-    /**
-     * Gets the suppressionIds property: The list of snoozed and dismissed rules for the recommendation.
-     *
-     * @return the suppressionIds value.
-     */
-    List<UUID> suppressionIds();
-
-    /**
-     * Gets the extendedProperties property: Extended properties.
-     *
-     * @return the extendedProperties value.
-     */
-    Map<String, String> extendedProperties();
-
-    /**
-     * Gets the resourceMetadata property: Metadata of resource that was assessed.
-     *
-     * @return the resourceMetadata value.
-     */
-    ResourceMetadata resourceMetadata();
-
-    /**
-     * Gets the description property: The detailed description of recommendation.
-     *
-     * @return the description value.
-     */
-    String description();
-
-    /**
-     * Gets the label property: The label of recommendation.
-     *
-     * @return the label value.
-     */
-    String label();
-
-    /**
-     * Gets the learnMoreLink property: The link to learn more about recommendation and generation logic.
-     *
-     * @return the learnMoreLink value.
-     */
-    String learnMoreLink();
-
-    /**
-     * Gets the potentialBenefits property: The potential benefit of implementing recommendation.
-     *
-     * @return the potentialBenefits value.
-     */
-    String potentialBenefits();
-
-    /**
-     * Gets the actions property: The list of recommended actions to implement recommendation.
-     *
-     * @return the actions value.
-     */
-    List<Map<String, Object>> actions();
-
-    /**
-     * Gets the remediation property: The automated way to apply recommendation.
-     *
-     * @return the remediation value.
-     */
-    Map<String, Object> remediation();
-
-    /**
-     * Gets the exposedMetadataProperties property: The recommendation metadata properties exposed to customer to
-     * provide additional information.
-     *
-     * @return the exposedMetadataProperties value.
-     */
-    Map<String, Object> exposedMetadataProperties();
 
     /**
      * Gets the inner com.azure.resourcemanager.advisor.fluent.models.ResourceRecommendationBaseInner object.

@@ -22,9 +22,6 @@ public final class Category extends ExpandableStringEnum<Category> {
     /** Static value Cost for Category. */
     public static final Category COST = fromString("Cost");
 
-    /** Static value OperationalExcellence for Category. */
-    public static final Category OPERATIONAL_EXCELLENCE = fromString("OperationalExcellence");
-
     /**
      * Creates or finds a Category from its string representation.
      *
@@ -36,7 +33,11 @@ public final class Category extends ExpandableStringEnum<Category> {
         return fromString(name, Category.class);
     }
 
-    /** @return known Category values. */
+    /**
+     * Gets known Category values.
+     *
+     * @return known Category values.
+     */
     public static Collection<Category> values() {
         return values(Category.class);
     }

@@ -15,6 +15,7 @@ import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.polling.PollResult;
 import com.azure.core.management.polling.PollerFactory;
 import com.azure.core.util.Context;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.polling.AsyncPollResponse;
 import com.azure.core.util.polling.LongRunningOperationStatus;
@@ -22,9 +23,7 @@ import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.resourcemanager.advisor.fluent.AdvisorManagementClient;
-import com.azure.resourcemanager.advisor.fluent.ConfigurationsClient;
 import com.azure.resourcemanager.advisor.fluent.OperationsClient;
-import com.azure.resourcemanager.advisor.fluent.RecommendationMetadatasClient;
 import com.azure.resourcemanager.advisor.fluent.RecommendationsClient;
 import com.azure.resourcemanager.advisor.fluent.SuppressionsClient;
 import java.io.IOException;
@@ -33,15 +32,12 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import java.util.Map;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the AdvisorManagementClientImpl type. */
 @ServiceClient(builder = AdvisorManagementClientBuilder.class)
 public final class AdvisorManagementClientImpl implements AdvisorManagementClient {
-    private final ClientLogger logger = new ClientLogger(AdvisorManagementClientImpl.class);
-
     /** The Azure subscription ID. */
     private final String subscriptionId;
 
@@ -114,30 +110,6 @@ public final class AdvisorManagementClientImpl implements AdvisorManagementClien
         return this.defaultPollInterval;
     }
 
-    /** The RecommendationMetadatasClient object to access its operations. */
-    private final RecommendationMetadatasClient recommendationMetadatas;
-
-    /**
-     * Gets the RecommendationMetadatasClient object to access its operations.
-     *
-     * @return the RecommendationMetadatasClient object.
-     */
-    public RecommendationMetadatasClient getRecommendationMetadatas() {
-        return this.recommendationMetadatas;
-    }
-
-    /** The ConfigurationsClient object to access its operations. */
-    private final ConfigurationsClient configurations;
-
-    /**
-     * Gets the ConfigurationsClient object to access its operations.
-     *
-     * @return the ConfigurationsClient object.
-     */
-    public ConfigurationsClient getConfigurations() {
-        return this.configurations;
-    }
-
     /** The RecommendationsClient object to access its operations. */
     private final RecommendationsClient recommendations;
 
@@ -196,9 +168,7 @@ public final class AdvisorManagementClientImpl implements AdvisorManagementClien
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
-        this.apiVersion = "2020-01-01";
-        this.recommendationMetadatas = new RecommendationMetadatasClientImpl(this);
-        this.configurations = new ConfigurationsClientImpl(this);
+        this.apiVersion = "2022-06-01";
         this.recommendations = new RecommendationsClientImpl(this);
         this.operations = new OperationsClientImpl(this);
         this.suppressions = new SuppressionsClientImpl(this);
@@ -220,10 +190,7 @@ public final class AdvisorManagementClientImpl implements AdvisorManagementClien
      * @return the merged context.
      */
     public Context mergeContext(Context context) {
-        for (Map.Entry<Object, Object> entry : this.getContext().getValues().entrySet()) {
-            context = context.addData(entry.getKey(), entry.getValue());
-        }
-        return context;
+        return CoreUtils.mergeContexts(this.getContext(), context);
     }
 
     /**
@@ -287,7 +254,7 @@ public final class AdvisorManagementClientImpl implements AdvisorManagementClien
                             managementError = null;
                         }
                     } catch (IOException | RuntimeException ioe) {
-                        logger.logThrowableAsWarning(ioe);
+                        LOGGER.logThrowableAsWarning(ioe);
                     }
                 }
             } else {
@@ -346,4 +313,6 @@ public final class AdvisorManagementClientImpl implements AdvisorManagementClien
             return Mono.just(new String(responseBody, charset));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(AdvisorManagementClientImpl.class);
 }

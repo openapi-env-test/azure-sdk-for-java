@@ -4,7 +4,6 @@
 
 package com.azure.resourcemanager.advisor.implementation;
 
-import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
@@ -13,10 +12,12 @@ import com.azure.resourcemanager.advisor.fluent.SuppressionsClient;
 import com.azure.resourcemanager.advisor.fluent.models.SuppressionContractInner;
 import com.azure.resourcemanager.advisor.models.SuppressionContract;
 import com.azure.resourcemanager.advisor.models.Suppressions;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public final class SuppressionsImpl implements Suppressions {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(SuppressionsImpl.class);
+    private static final ClientLogger LOGGER = new ClientLogger(SuppressionsImpl.class);
 
     private final SuppressionsClient innerClient;
 
@@ -61,14 +62,35 @@ public final class SuppressionsImpl implements Suppressions {
         return this.serviceClient().deleteWithResponse(resourceUri, recommendationId, name, context);
     }
 
-    public PagedIterable<SuppressionContract> list() {
-        PagedIterable<SuppressionContractInner> inner = this.serviceClient().list();
-        return Utils.mapPage(inner, inner1 -> new SuppressionContractImpl(inner1, this.manager()));
+    public List<SuppressionContract> list() {
+        List<SuppressionContractInner> inner = this.serviceClient().list();
+        if (inner != null) {
+            return Collections
+                .unmodifiableList(
+                    inner
+                        .stream()
+                        .map(inner1 -> new SuppressionContractImpl(inner1, this.manager()))
+                        .collect(Collectors.toList()));
+        } else {
+            return Collections.emptyList();
+        }
     }
 
-    public PagedIterable<SuppressionContract> list(Integer top, String skipToken, Context context) {
-        PagedIterable<SuppressionContractInner> inner = this.serviceClient().list(top, skipToken, context);
-        return Utils.mapPage(inner, inner1 -> new SuppressionContractImpl(inner1, this.manager()));
+    public Response<List<SuppressionContract>> listWithResponse(Context context) {
+        Response<List<SuppressionContractInner>> inner = this.serviceClient().listWithResponse(context);
+        if (inner != null) {
+            return new SimpleResponse<>(
+                inner.getRequest(),
+                inner.getStatusCode(),
+                inner.getHeaders(),
+                inner
+                    .getValue()
+                    .stream()
+                    .map(inner1 -> new SuppressionContractImpl(inner1, this.manager()))
+                    .collect(Collectors.toList()));
+        } else {
+            return null;
+        }
     }
 
     public SuppressionContract getById(String id) {
@@ -79,7 +101,7 @@ public final class SuppressionsImpl implements Suppressions {
                     "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}",
                     "resourceUri");
         if (resourceUri == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String.format("The resource ID '%s' is not valid. Missing path segment 'resourceUri'.", id)));
@@ -91,7 +113,7 @@ public final class SuppressionsImpl implements Suppressions {
                     "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}",
                     "recommendationId");
         if (recommendationId == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
@@ -104,7 +126,7 @@ public final class SuppressionsImpl implements Suppressions {
                     "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}",
                     "name");
         if (name == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String.format("The resource ID '%s' is not valid. Missing path segment 'suppressions'.", id)));
@@ -120,7 +142,7 @@ public final class SuppressionsImpl implements Suppressions {
                     "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}",
                     "resourceUri");
         if (resourceUri == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String.format("The resource ID '%s' is not valid. Missing path segment 'resourceUri'.", id)));
@@ -132,7 +154,7 @@ public final class SuppressionsImpl implements Suppressions {
                     "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}",
                     "recommendationId");
         if (recommendationId == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
@@ -145,7 +167,7 @@ public final class SuppressionsImpl implements Suppressions {
                     "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}",
                     "name");
         if (name == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String.format("The resource ID '%s' is not valid. Missing path segment 'suppressions'.", id)));
@@ -161,7 +183,7 @@ public final class SuppressionsImpl implements Suppressions {
                     "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}",
                     "resourceUri");
         if (resourceUri == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String.format("The resource ID '%s' is not valid. Missing path segment 'resourceUri'.", id)));
@@ -173,7 +195,7 @@ public final class SuppressionsImpl implements Suppressions {
                     "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}",
                     "recommendationId");
         if (recommendationId == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
@@ -186,12 +208,12 @@ public final class SuppressionsImpl implements Suppressions {
                     "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}",
                     "name");
         if (name == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String.format("The resource ID '%s' is not valid. Missing path segment 'suppressions'.", id)));
         }
-        this.deleteWithResponse(resourceUri, recommendationId, name, Context.NONE).getValue();
+        this.deleteWithResponse(resourceUri, recommendationId, name, Context.NONE);
     }
 
     public Response<Void> deleteByIdWithResponse(String id, Context context) {
@@ -202,7 +224,7 @@ public final class SuppressionsImpl implements Suppressions {
                     "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}",
                     "resourceUri");
         if (resourceUri == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String.format("The resource ID '%s' is not valid. Missing path segment 'resourceUri'.", id)));
@@ -214,7 +236,7 @@ public final class SuppressionsImpl implements Suppressions {
                     "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}",
                     "recommendationId");
         if (recommendationId == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
@@ -227,7 +249,7 @@ public final class SuppressionsImpl implements Suppressions {
                     "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}",
                     "name");
         if (name == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String.format("The resource ID '%s' is not valid. Missing path segment 'suppressions'.", id)));

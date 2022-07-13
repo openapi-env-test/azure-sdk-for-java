@@ -49,7 +49,7 @@ public interface RecommendationsClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    void getGenerateStatus(UUID operationId);
+    void getGenerateRecommendationsStatus(UUID operationId);
 
     /**
      * Retrieves the status of the recommendation computation or generation process. Invoke this API after calling the
@@ -61,10 +61,10 @@ public interface RecommendationsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<Void> getGenerateStatusWithResponse(UUID operationId, Context context);
+    Response<Void> getGenerateRecommendationsStatusWithResponse(UUID operationId, Context context);
 
     /**
      * Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking
@@ -72,7 +72,7 @@ public interface RecommendationsClient {
      *
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of Advisor recommendations.
+     * @return the list of Advisor recommendations as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<ResourceRecommendationBaseInner> list();
@@ -81,16 +81,14 @@ public interface RecommendationsClient {
      * Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking
      * generateRecommendations.
      *
-     * @param filter The filter to apply to the recommendations.&lt;br&gt;Filter can be applied to properties
-     *     ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)'] with operators ['eq',
-     *     'and', 'or'].&lt;br&gt;Example:&lt;br&gt;- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'.
+     * @param filter The filter to apply to the recommendations.
      * @param top The number of recommendations per page if a paged version of this API is being used.
      * @param skipToken The page-continuation token to use with a paged version of this API.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of Advisor recommendations.
+     * @return the list of Advisor recommendations as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<ResourceRecommendationBaseInner> list(String filter, Integer top, String skipToken, Context context);
@@ -119,7 +117,7 @@ public interface RecommendationsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return advisor Recommendation.
+     * @return advisor Recommendation along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<ResourceRecommendationBaseInner> getWithResponse(

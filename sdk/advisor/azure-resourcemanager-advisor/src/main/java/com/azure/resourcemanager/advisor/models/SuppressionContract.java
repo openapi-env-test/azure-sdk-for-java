@@ -4,9 +4,10 @@
 
 package com.azure.resourcemanager.advisor.models;
 
+import com.azure.core.management.Region;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.advisor.fluent.models.SuppressionContractInner;
-import java.time.OffsetDateTime;
+import java.util.Map;
 
 /** An immutable client-side representation of SuppressionContract. */
 public interface SuppressionContract {
@@ -32,6 +33,20 @@ public interface SuppressionContract {
     String type();
 
     /**
+     * Gets the location property: The geo-location where the resource lives.
+     *
+     * @return the location value.
+     */
+    String location();
+
+    /**
+     * Gets the tags property: Resource tags.
+     *
+     * @return the tags value.
+     */
+    Map<String, String> tags();
+
+    /**
      * Gets the suppressionId property: The GUID of the suppression.
      *
      * @return the suppressionId value.
@@ -46,11 +61,18 @@ public interface SuppressionContract {
     String ttl();
 
     /**
-     * Gets the expirationTimestamp property: Gets or sets the expiration time stamp.
+     * Gets the region of the resource.
      *
-     * @return the expirationTimestamp value.
+     * @return the region of the resource.
      */
-    OffsetDateTime expirationTimestamp();
+    Region region();
+
+    /**
+     * Gets the name of the resource region.
+     *
+     * @return the name of the resource region.
+     */
+    String regionName();
 
     /**
      * Gets the inner com.azure.resourcemanager.advisor.fluent.models.SuppressionContractInner object.
@@ -61,12 +83,33 @@ public interface SuppressionContract {
 
     /** The entirety of the SuppressionContract definition. */
     interface Definition
-        extends DefinitionStages.Blank, DefinitionStages.WithParentResource, DefinitionStages.WithCreate {
+        extends DefinitionStages.Blank,
+            DefinitionStages.WithLocation,
+            DefinitionStages.WithParentResource,
+            DefinitionStages.WithCreate {
     }
     /** The SuppressionContract definition stages. */
     interface DefinitionStages {
         /** The first stage of the SuppressionContract definition. */
-        interface Blank extends WithParentResource {
+        interface Blank extends WithLocation {
+        }
+        /** The stage of the SuppressionContract definition allowing to specify location. */
+        interface WithLocation {
+            /**
+             * Specifies the region for the resource.
+             *
+             * @param location The geo-location where the resource lives.
+             * @return the next definition stage.
+             */
+            WithParentResource withRegion(Region location);
+
+            /**
+             * Specifies the region for the resource.
+             *
+             * @param location The geo-location where the resource lives.
+             * @return the next definition stage.
+             */
+            WithParentResource withRegion(String location);
         }
         /** The stage of the SuppressionContract definition allowing to specify parent resource. */
         interface WithParentResource {
@@ -84,7 +127,8 @@ public interface SuppressionContract {
          * The stage of the SuppressionContract definition which contains all the minimum required properties for the
          * resource to be created, but also allows for any other optional properties to be specified.
          */
-        interface WithCreate extends DefinitionStages.WithSuppressionId, DefinitionStages.WithTtl {
+        interface WithCreate
+            extends DefinitionStages.WithTags, DefinitionStages.WithSuppressionId, DefinitionStages.WithTtl {
             /**
              * Executes the create request.
              *
@@ -99,6 +143,16 @@ public interface SuppressionContract {
              * @return the created resource.
              */
             SuppressionContract create(Context context);
+        }
+        /** The stage of the SuppressionContract definition allowing to specify tags. */
+        interface WithTags {
+            /**
+             * Specifies the tags property: Resource tags..
+             *
+             * @param tags Resource tags.
+             * @return the next definition stage.
+             */
+            WithCreate withTags(Map<String, String> tags);
         }
         /** The stage of the SuppressionContract definition allowing to specify suppressionId. */
         interface WithSuppressionId {

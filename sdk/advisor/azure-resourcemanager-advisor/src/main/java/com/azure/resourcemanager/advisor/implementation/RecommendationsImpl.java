@@ -14,11 +14,10 @@ import com.azure.resourcemanager.advisor.fluent.models.ResourceRecommendationBas
 import com.azure.resourcemanager.advisor.models.Recommendations;
 import com.azure.resourcemanager.advisor.models.RecommendationsGenerateResponse;
 import com.azure.resourcemanager.advisor.models.ResourceRecommendationBase;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.UUID;
 
 public final class RecommendationsImpl implements Recommendations {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(RecommendationsImpl.class);
+    private static final ClientLogger LOGGER = new ClientLogger(RecommendationsImpl.class);
 
     private final RecommendationsClient innerClient;
 
@@ -38,12 +37,12 @@ public final class RecommendationsImpl implements Recommendations {
         return this.serviceClient().generateWithResponse(context);
     }
 
-    public void getGenerateStatus(UUID operationId) {
-        this.serviceClient().getGenerateStatus(operationId);
+    public void getGenerateRecommendationsStatus(UUID operationId) {
+        this.serviceClient().getGenerateRecommendationsStatus(operationId);
     }
 
-    public Response<Void> getGenerateStatusWithResponse(UUID operationId, Context context) {
-        return this.serviceClient().getGenerateStatusWithResponse(operationId, context);
+    public Response<Void> getGenerateRecommendationsStatusWithResponse(UUID operationId, Context context) {
+        return this.serviceClient().getGenerateRecommendationsStatusWithResponse(operationId, context);
     }
 
     public PagedIterable<ResourceRecommendationBase> list() {

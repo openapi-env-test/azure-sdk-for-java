@@ -7,7 +7,6 @@ package com.azure.resourcemanager.advisor.implementation;
 import com.azure.resourcemanager.advisor.fluent.models.ResourceRecommendationBaseInner;
 import com.azure.resourcemanager.advisor.models.Category;
 import com.azure.resourcemanager.advisor.models.Impact;
-import com.azure.resourcemanager.advisor.models.ResourceMetadata;
 import com.azure.resourcemanager.advisor.models.ResourceRecommendationBase;
 import com.azure.resourcemanager.advisor.models.Risk;
 import com.azure.resourcemanager.advisor.models.ShortDescription;
@@ -34,6 +33,15 @@ public final class ResourceRecommendationBaseImpl implements ResourceRecommendat
 
     public String name() {
         return this.innerModel().name();
+    }
+
+    public List<UUID> suppressionIds() {
+        List<UUID> inner = this.innerModel().suppressionIds();
+        if (inner != null) {
+            return Collections.unmodifiableList(inner);
+        } else {
+            return Collections.emptyList();
+        }
     }
 
     public String type() {
@@ -79,71 +87,6 @@ public final class ResourceRecommendationBaseImpl implements ResourceRecommendat
 
     public ShortDescription shortDescription() {
         return this.innerModel().shortDescription();
-    }
-
-    public List<UUID> suppressionIds() {
-        List<UUID> inner = this.innerModel().suppressionIds();
-        if (inner != null) {
-            return Collections.unmodifiableList(inner);
-        } else {
-            return Collections.emptyList();
-        }
-    }
-
-    public Map<String, String> extendedProperties() {
-        Map<String, String> inner = this.innerModel().extendedProperties();
-        if (inner != null) {
-            return Collections.unmodifiableMap(inner);
-        } else {
-            return Collections.emptyMap();
-        }
-    }
-
-    public ResourceMetadata resourceMetadata() {
-        return this.innerModel().resourceMetadata();
-    }
-
-    public String description() {
-        return this.innerModel().description();
-    }
-
-    public String label() {
-        return this.innerModel().label();
-    }
-
-    public String learnMoreLink() {
-        return this.innerModel().learnMoreLink();
-    }
-
-    public String potentialBenefits() {
-        return this.innerModel().potentialBenefits();
-    }
-
-    public List<Map<String, Object>> actions() {
-        List<Map<String, Object>> inner = this.innerModel().actions();
-        if (inner != null) {
-            return Collections.unmodifiableList(inner);
-        } else {
-            return Collections.emptyList();
-        }
-    }
-
-    public Map<String, Object> remediation() {
-        Map<String, Object> inner = this.innerModel().remediation();
-        if (inner != null) {
-            return Collections.unmodifiableMap(inner);
-        } else {
-            return Collections.emptyMap();
-        }
-    }
-
-    public Map<String, Object> exposedMetadataProperties() {
-        Map<String, Object> inner = this.innerModel().exposedMetadataProperties();
-        if (inner != null) {
-            return Collections.unmodifiableMap(inner);
-        } else {
-            return Collections.emptyMap();
-        }
     }
 
     public ResourceRecommendationBaseInner innerModel() {
