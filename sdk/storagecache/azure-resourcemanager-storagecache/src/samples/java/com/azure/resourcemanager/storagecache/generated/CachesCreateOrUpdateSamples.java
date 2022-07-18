@@ -12,6 +12,7 @@ import com.azure.resourcemanager.storagecache.models.CacheIdentity;
 import com.azure.resourcemanager.storagecache.models.CacheIdentityType;
 import com.azure.resourcemanager.storagecache.models.CacheSecuritySettings;
 import com.azure.resourcemanager.storagecache.models.CacheSku;
+import com.azure.resourcemanager.storagecache.models.CacheUpgradeSettings;
 import com.azure.resourcemanager.storagecache.models.CacheUsernameDownloadSettings;
 import com.azure.resourcemanager.storagecache.models.CacheUsernameDownloadSettingsCredentials;
 import com.azure.resourcemanager.storagecache.models.KeyVaultKeyReference;
@@ -20,8 +21,10 @@ import com.azure.resourcemanager.storagecache.models.NfsAccessPolicy;
 import com.azure.resourcemanager.storagecache.models.NfsAccessRule;
 import com.azure.resourcemanager.storagecache.models.NfsAccessRuleAccess;
 import com.azure.resourcemanager.storagecache.models.NfsAccessRuleScope;
+import com.azure.resourcemanager.storagecache.models.ScalingFactor;
 import com.azure.resourcemanager.storagecache.models.UserAssignedIdentitiesValue;
 import com.azure.resourcemanager.storagecache.models.UsernameSource;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +32,7 @@ import java.util.Map;
 /** Samples for Caches CreateOrUpdate. */
 public final class CachesCreateOrUpdateSamples {
     /*
-     * x-ms-original-file: specification/storagecache/resource-manager/Microsoft.StorageCache/stable/2022-01-01/examples/Caches_CreateOrUpdate_ldap_only.json
+     * x-ms-original-file: specification/storagecache/resource-manager/Microsoft.StorageCache/preview/2022-09-01-preview/examples/Caches_CreateOrUpdate_ldap_only.json
      */
     /**
      * Sample code: Caches_CreateOrUpdate_ldap_only.
@@ -46,8 +49,13 @@ public final class CachesCreateOrUpdateSamples {
             .withTags(mapOf("Dept", "Contoso"))
             .withSku(new CacheSku().withName("Standard_2G"))
             .withCacheSizeGB(3072)
+            .withScalingFactor(ScalingFactor.ONE)
             .withSubnet(
                 "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1")
+            .withUpgradeSettings(
+                new CacheUpgradeSettings()
+                    .withUpgradeScheduleEnabled(true)
+                    .withScheduledTime(OffsetDateTime.parse("2022-04-26T18:25:43.511Z")))
             .withEncryptionSettings(
                 new CacheEncryptionSettings()
                     .withKeyEncryptionKey(
@@ -89,7 +97,7 @@ public final class CachesCreateOrUpdateSamples {
     }
 
     /*
-     * x-ms-original-file: specification/storagecache/resource-manager/Microsoft.StorageCache/stable/2022-01-01/examples/Caches_CreateOrUpdate.json
+     * x-ms-original-file: specification/storagecache/resource-manager/Microsoft.StorageCache/preview/2022-09-01-preview/examples/Caches_CreateOrUpdate.json
      */
     /**
      * Sample code: Caches_CreateOrUpdate.
@@ -112,8 +120,13 @@ public final class CachesCreateOrUpdateSamples {
                             new UserAssignedIdentitiesValue())))
             .withSku(new CacheSku().withName("Standard_2G"))
             .withCacheSizeGB(3072)
+            .withScalingFactor(ScalingFactor.ONE)
             .withSubnet(
                 "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1")
+            .withUpgradeSettings(
+                new CacheUpgradeSettings()
+                    .withUpgradeScheduleEnabled(true)
+                    .withScheduledTime(OffsetDateTime.parse("2022-04-26T18:25:43.511Z")))
             .withEncryptionSettings(
                 new CacheEncryptionSettings()
                     .withKeyEncryptionKey(

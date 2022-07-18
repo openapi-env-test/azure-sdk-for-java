@@ -70,11 +70,20 @@ public interface Cache {
     CacheSku sku();
 
     /**
-     * Gets the cacheSizeGB property: The size of this Cache, in GB.
+     * Gets the cacheSizeGB property: The size of this Cache, in GB, when scalingFactor is 1.0.
      *
      * @return the cacheSizeGB value.
      */
     Integer cacheSizeGB();
+
+    /**
+     * Gets the scalingFactor property: Multiplier that sets the current storage and throughput capacity of the cache.
+     * Values can be 1.0 (the base size, listed in the SKU), 1.33, 2.0, or 4.0. Values above 1.0 increase the cache size
+     * and throughput - for example, the scaling factor 1.33 gives a cache that's 33% larger than its base size.
+     *
+     * @return the scalingFactor value.
+     */
+    ScalingFactor scalingFactor();
 
     /**
      * Gets the health property: Health of the Cache.
@@ -113,6 +122,13 @@ public interface Cache {
     CacheUpgradeStatus upgradeStatus();
 
     /**
+     * Gets the upgradeSettings property: Upgrade settings of the Cache.
+     *
+     * @return the upgradeSettings value.
+     */
+    CacheUpgradeSettings upgradeSettings();
+
+    /**
      * Gets the networkSettings property: Specifies network settings of the cache.
      *
      * @return the networkSettings value.
@@ -149,6 +165,21 @@ public interface Cache {
     List<String> zones();
 
     /**
+     * Gets the primingJobs property: Specifies the priming jobs defined in the cache.
+     *
+     * @return the primingJobs value.
+     */
+    List<PrimingJob> primingJobs();
+
+    /**
+     * Gets the spaceAllocation property: Specifies the space allocation percentage for each storage target in the
+     * cache.
+     *
+     * @return the spaceAllocation value.
+     */
+    List<StorageTargetSpaceAllocation> spaceAllocation();
+
+    /**
      * Gets the region of the resource.
      *
      * @return the region of the resource.
@@ -161,6 +192,13 @@ public interface Cache {
      * @return the name of the resource region.
      */
     String regionName();
+
+    /**
+     * Gets the name of the resource group.
+     *
+     * @return the name of the resource group.
+     */
+    String resourceGroupName();
 
     /**
      * Gets the inner com.azure.resourcemanager.storagecache.fluent.models.CacheInner object.
@@ -218,7 +256,9 @@ public interface Cache {
                 DefinitionStages.WithIdentity,
                 DefinitionStages.WithSku,
                 DefinitionStages.WithCacheSizeGB,
+                DefinitionStages.WithScalingFactor,
                 DefinitionStages.WithSubnet,
+                DefinitionStages.WithUpgradeSettings,
                 DefinitionStages.WithNetworkSettings,
                 DefinitionStages.WithEncryptionSettings,
                 DefinitionStages.WithSecuritySettings,
@@ -272,12 +312,28 @@ public interface Cache {
         /** The stage of the Cache definition allowing to specify cacheSizeGB. */
         interface WithCacheSizeGB {
             /**
-             * Specifies the cacheSizeGB property: The size of this Cache, in GB..
+             * Specifies the cacheSizeGB property: The size of this Cache, in GB, when scalingFactor is 1.0.
              *
-             * @param cacheSizeGB The size of this Cache, in GB.
+             * @param cacheSizeGB The size of this Cache, in GB, when scalingFactor is 1.0.
              * @return the next definition stage.
              */
             WithCreate withCacheSizeGB(Integer cacheSizeGB);
+        }
+        /** The stage of the Cache definition allowing to specify scalingFactor. */
+        interface WithScalingFactor {
+            /**
+             * Specifies the scalingFactor property: Multiplier that sets the current storage and throughput capacity of
+             * the cache. Values can be 1.0 (the base size, listed in the SKU), 1.33, 2.0, or 4.0. Values above 1.0
+             * increase the cache size and throughput - for example, the scaling factor 1.33 gives a cache that's 33%
+             * larger than its base size..
+             *
+             * @param scalingFactor Multiplier that sets the current storage and throughput capacity of the cache.
+             *     Values can be 1.0 (the base size, listed in the SKU), 1.33, 2.0, or 4.0. Values above 1.0 increase
+             *     the cache size and throughput - for example, the scaling factor 1.33 gives a cache that's 33% larger
+             *     than its base size.
+             * @return the next definition stage.
+             */
+            WithCreate withScalingFactor(ScalingFactor scalingFactor);
         }
         /** The stage of the Cache definition allowing to specify subnet. */
         interface WithSubnet {
@@ -288,6 +344,16 @@ public interface Cache {
              * @return the next definition stage.
              */
             WithCreate withSubnet(String subnet);
+        }
+        /** The stage of the Cache definition allowing to specify upgradeSettings. */
+        interface WithUpgradeSettings {
+            /**
+             * Specifies the upgradeSettings property: Upgrade settings of the Cache..
+             *
+             * @param upgradeSettings Upgrade settings of the Cache.
+             * @return the next definition stage.
+             */
+            WithCreate withUpgradeSettings(CacheUpgradeSettings upgradeSettings);
         }
         /** The stage of the Cache definition allowing to specify networkSettings. */
         interface WithNetworkSettings {
@@ -353,6 +419,8 @@ public interface Cache {
     interface Update
         extends UpdateStages.WithTags,
             UpdateStages.WithIdentity,
+            UpdateStages.WithScalingFactor,
+            UpdateStages.WithUpgradeSettings,
             UpdateStages.WithNetworkSettings,
             UpdateStages.WithEncryptionSettings,
             UpdateStages.WithSecuritySettings,
@@ -393,6 +461,32 @@ public interface Cache {
              * @return the next definition stage.
              */
             Update withIdentity(CacheIdentity identity);
+        }
+        /** The stage of the Cache update allowing to specify scalingFactor. */
+        interface WithScalingFactor {
+            /**
+             * Specifies the scalingFactor property: Multiplier that sets the current storage and throughput capacity of
+             * the cache. Values can be 1.0 (the base size, listed in the SKU), 1.33, 2.0, or 4.0. Values above 1.0
+             * increase the cache size and throughput - for example, the scaling factor 1.33 gives a cache that's 33%
+             * larger than its base size..
+             *
+             * @param scalingFactor Multiplier that sets the current storage and throughput capacity of the cache.
+             *     Values can be 1.0 (the base size, listed in the SKU), 1.33, 2.0, or 4.0. Values above 1.0 increase
+             *     the cache size and throughput - for example, the scaling factor 1.33 gives a cache that's 33% larger
+             *     than its base size.
+             * @return the next definition stage.
+             */
+            Update withScalingFactor(ScalingFactor scalingFactor);
+        }
+        /** The stage of the Cache update allowing to specify upgradeSettings. */
+        interface WithUpgradeSettings {
+            /**
+             * Specifies the upgradeSettings property: Upgrade settings of the Cache..
+             *
+             * @param upgradeSettings Upgrade settings of the Cache.
+             * @return the next definition stage.
+             */
+            Update withUpgradeSettings(CacheUpgradeSettings upgradeSettings);
         }
         /** The stage of the Cache update allowing to specify networkSettings. */
         interface WithNetworkSettings {
@@ -523,6 +617,122 @@ public interface Cache {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     void stop(Context context);
+
+    /**
+     * Create a priming job. This operation is only allowed when the cache is healthy.
+     *
+     * @param primingjob Object containing the definition of a priming job.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void startPrimingJob(PrimingJob primingjob);
+
+    /**
+     * Create a priming job. This operation is only allowed when the cache is healthy.
+     *
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void startPrimingJob();
+
+    /**
+     * Create a priming job. This operation is only allowed when the cache is healthy.
+     *
+     * @param primingjob Object containing the definition of a priming job.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void startPrimingJob(PrimingJob primingjob, Context context);
+
+    /**
+     * Schedule a priming job for deletion.
+     *
+     * @param primingJobId Object containing the priming job ID.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void stopPrimingJob(PrimingJobIdParameter primingJobId);
+
+    /**
+     * Schedule a priming job for deletion.
+     *
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void stopPrimingJob();
+
+    /**
+     * Schedule a priming job for deletion.
+     *
+     * @param primingJobId Object containing the priming job ID.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void stopPrimingJob(PrimingJobIdParameter primingJobId, Context context);
+
+    /**
+     * Schedule a priming job to be paused.
+     *
+     * @param primingJobId Object containing the priming job ID.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void pausePrimingJob(PrimingJobIdParameter primingJobId);
+
+    /**
+     * Schedule a priming job to be paused.
+     *
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void pausePrimingJob();
+
+    /**
+     * Schedule a priming job to be paused.
+     *
+     * @param primingJobId Object containing the priming job ID.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void pausePrimingJob(PrimingJobIdParameter primingJobId, Context context);
+
+    /**
+     * Resumes a paused priming job.
+     *
+     * @param primingJobId Object containing the priming job ID.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePrimingJob(PrimingJobIdParameter primingJobId);
+
+    /**
+     * Resumes a paused priming job.
+     *
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePrimingJob();
+
+    /**
+     * Resumes a paused priming job.
+     *
+     * @param primingJobId Object containing the priming job ID.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void resumePrimingJob(PrimingJobIdParameter primingJobId, Context context);
 
     /**
      * Upgrade a Cache's firmware if a new version is available. Otherwise, this operation has no effect.
