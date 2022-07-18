@@ -179,6 +179,7 @@ public final class LiveOutputsClientImpl implements LiveOutputsClient {
         if (liveEventName == null) {
             return Mono.error(new IllegalArgumentException("Parameter liveEventName is required and cannot be null."));
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -190,7 +191,7 @@ public final class LiveOutputsClientImpl implements LiveOutputsClient {
                             resourceGroupName,
                             accountName,
                             liveEventName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             accept,
                             context))
             .<PagedResponse<LiveOutputInner>>map(
@@ -242,6 +243,7 @@ public final class LiveOutputsClientImpl implements LiveOutputsClient {
         if (liveEventName == null) {
             return Mono.error(new IllegalArgumentException("Parameter liveEventName is required and cannot be null."));
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -251,7 +253,7 @@ public final class LiveOutputsClientImpl implements LiveOutputsClient {
                 resourceGroupName,
                 accountName,
                 liveEventName,
-                this.client.getApiVersion(),
+                apiVersion,
                 accept,
                 context)
             .map(
@@ -377,6 +379,7 @@ public final class LiveOutputsClientImpl implements LiveOutputsClient {
         if (liveOutputName == null) {
             return Mono.error(new IllegalArgumentException("Parameter liveOutputName is required and cannot be null."));
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -389,7 +392,7 @@ public final class LiveOutputsClientImpl implements LiveOutputsClient {
                             accountName,
                             liveEventName,
                             liveOutputName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             accept,
                             context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
@@ -436,6 +439,7 @@ public final class LiveOutputsClientImpl implements LiveOutputsClient {
         if (liveOutputName == null) {
             return Mono.error(new IllegalArgumentException("Parameter liveOutputName is required and cannot be null."));
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -446,7 +450,7 @@ public final class LiveOutputsClientImpl implements LiveOutputsClient {
                 accountName,
                 liveEventName,
                 liveOutputName,
-                this.client.getApiVersion(),
+                apiVersion,
                 accept,
                 context);
     }
@@ -557,6 +561,7 @@ public final class LiveOutputsClientImpl implements LiveOutputsClient {
         } else {
             parameters.validate();
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -569,7 +574,7 @@ public final class LiveOutputsClientImpl implements LiveOutputsClient {
                             accountName,
                             liveEventName,
                             liveOutputName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             parameters,
                             accept,
                             context))
@@ -628,6 +633,7 @@ public final class LiveOutputsClientImpl implements LiveOutputsClient {
         } else {
             parameters.validate();
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -638,7 +644,7 @@ public final class LiveOutputsClientImpl implements LiveOutputsClient {
                 accountName,
                 liveEventName,
                 liveOutputName,
-                this.client.getApiVersion(),
+                apiVersion,
                 parameters,
                 accept,
                 context);
@@ -897,6 +903,7 @@ public final class LiveOutputsClientImpl implements LiveOutputsClient {
         if (liveOutputName == null) {
             return Mono.error(new IllegalArgumentException("Parameter liveOutputName is required and cannot be null."));
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -909,7 +916,7 @@ public final class LiveOutputsClientImpl implements LiveOutputsClient {
                             accountName,
                             liveEventName,
                             liveOutputName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             accept,
                             context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
@@ -956,6 +963,7 @@ public final class LiveOutputsClientImpl implements LiveOutputsClient {
         if (liveOutputName == null) {
             return Mono.error(new IllegalArgumentException("Parameter liveOutputName is required and cannot be null."));
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -966,7 +974,7 @@ public final class LiveOutputsClientImpl implements LiveOutputsClient {
                 accountName,
                 liveEventName,
                 liveOutputName,
-                this.client.getApiVersion(),
+                apiVersion,
                 accept,
                 context);
     }

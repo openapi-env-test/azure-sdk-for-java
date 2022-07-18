@@ -24,13 +24,6 @@ public interface AzureMediaServices {
     String getEndpoint();
 
     /**
-     * Gets Api Version.
-     *
-     * @return the apiVersion value.
-     */
-    String getApiVersion();
-
-    /**
      * Gets The HTTP pipeline to send requests through.
      *
      * @return the httpPipeline value.
@@ -87,18 +80,18 @@ public interface AzureMediaServices {
     LocationsClient getLocations();
 
     /**
-     * Gets the MediaServiceOperationStatusesClient object to access its operations.
+     * Gets the MediaServicesOperationStatusesClient object to access its operations.
      *
-     * @return the MediaServiceOperationStatusesClient object.
+     * @return the MediaServicesOperationStatusesClient object.
      */
-    MediaServiceOperationStatusesClient getMediaServiceOperationStatuses();
+    MediaServicesOperationStatusesClient getMediaServicesOperationStatuses();
 
     /**
-     * Gets the MediaServiceOperationResultsClient object to access its operations.
+     * Gets the MediaServicesOperationResultsClient object to access its operations.
      *
-     * @return the MediaServiceOperationResultsClient object.
+     * @return the MediaServicesOperationResultsClient object.
      */
-    MediaServiceOperationResultsClient getMediaServiceOperationResults();
+    MediaServicesOperationResultsClient getMediaServicesOperationResults();
 
     /**
      * Gets the AssetsClient object to access its operations.

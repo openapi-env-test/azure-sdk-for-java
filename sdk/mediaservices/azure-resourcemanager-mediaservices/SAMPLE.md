@@ -69,13 +69,13 @@
 
 - [CheckNameAvailability](#locations_checknameavailability)
 
-## MediaServiceOperationResults
+## MediaServicesOperationResults
 
-- [Get](#mediaserviceoperationresults_get)
+- [Get](#mediaservicesoperationresults_get)
 
-## MediaServiceOperationStatuses
+## MediaServicesOperationStatuses
 
-- [Get](#mediaserviceoperationstatuses_get)
+- [Get](#mediaservicesoperationstatuses_get)
 
 ## Mediaservices
 
@@ -170,7 +170,7 @@ import java.util.Arrays;
 /** Samples for AccountFilters CreateOrUpdate. */
 public final class AccountFiltersCreateOrUpdateSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/accountFilters-create.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/accountFilters-create.json
      */
     /**
      * Sample code: Create an Account Filter.
@@ -235,7 +235,7 @@ import com.azure.core.util.Context;
 /** Samples for AccountFilters Delete. */
 public final class AccountFiltersDeleteSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/accountFilters-delete.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/accountFilters-delete.json
      */
     /**
      * Sample code: Delete an Account Filter.
@@ -258,7 +258,7 @@ import com.azure.core.util.Context;
 /** Samples for AccountFilters Get. */
 public final class AccountFiltersGetSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/accountFilters-get-by-name.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/accountFilters-get-by-name.json
      */
     /**
      * Sample code: Get an Account Filter by name.
@@ -279,7 +279,7 @@ import com.azure.core.util.Context;
 /** Samples for AccountFilters List. */
 public final class AccountFiltersListSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/accountFilters-list-all.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/accountFilters-list-all.json
      */
     /**
      * Sample code: List all Account Filters.
@@ -303,7 +303,7 @@ import com.azure.resourcemanager.mediaservices.models.PresentationTimeRange;
 /** Samples for AccountFilters Update. */
 public final class AccountFiltersUpdateSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/accountFilters-update.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/accountFilters-update.json
      */
     /**
      * Sample code: Update an Account Filter.
@@ -346,7 +346,7 @@ import java.util.Arrays;
 /** Samples for AssetFilters CreateOrUpdate. */
 public final class AssetFiltersCreateOrUpdateSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/assetFilters-create.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/assetFilters-create.json
      */
     /**
      * Sample code: Create an Asset Filter.
@@ -411,7 +411,7 @@ import com.azure.core.util.Context;
 /** Samples for AssetFilters Delete. */
 public final class AssetFiltersDeleteSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/assetFilters-delete.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/assetFilters-delete.json
      */
     /**
      * Sample code: Delete an Asset Filter.
@@ -435,7 +435,7 @@ import com.azure.core.util.Context;
 /** Samples for AssetFilters Get. */
 public final class AssetFiltersGetSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/assetFilters-get-by-name.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/assetFilters-get-by-name.json
      */
     /**
      * Sample code: Get an Asset Filter by name.
@@ -459,7 +459,7 @@ import com.azure.core.util.Context;
 /** Samples for AssetFilters List. */
 public final class AssetFiltersListSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/assetFilters-list-all.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/assetFilters-list-all.json
      */
     /**
      * Sample code: List all Asset Filters.
@@ -483,7 +483,7 @@ import com.azure.resourcemanager.mediaservices.models.PresentationTimeRange;
 /** Samples for AssetFilters Update. */
 public final class AssetFiltersUpdateSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/assetFilters-update.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/assetFilters-update.json
      */
     /**
      * Sample code: Update an Asset Filter.
@@ -519,7 +519,7 @@ public final class AssetFiltersUpdateSamples {
 /** Samples for Assets CreateOrUpdate. */
 public final class AssetsCreateOrUpdateSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/assets-create.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/assets-create.json
      */
     /**
      * Sample code: Create an Asset.
@@ -546,7 +546,7 @@ import com.azure.core.util.Context;
 /** Samples for Assets Delete. */
 public final class AssetsDeleteSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/assets-delete.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/assets-delete.json
      */
     /**
      * Sample code: Delete an Asset.
@@ -567,7 +567,7 @@ import com.azure.core.util.Context;
 /** Samples for Assets Get. */
 public final class AssetsGetSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/assets-get-by-name.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/assets-get-by-name.json
      */
     /**
      * Sample code: Get an Asset by name.
@@ -588,7 +588,7 @@ import com.azure.core.util.Context;
 /** Samples for Assets GetEncryptionKey. */
 public final class AssetsGetEncryptionKeySamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/assets-get-encryption-keys.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/assets-get-encryption-keys.json
      */
     /**
      * Sample code: Get Asset Storage Encryption Keys.
@@ -612,7 +612,7 @@ import com.azure.core.util.Context;
 /** Samples for Assets List. */
 public final class AssetsListSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/assets-list-by-date.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/assets-list-by-date.json
      */
     /**
      * Sample code: List Asset ordered by date.
@@ -624,7 +624,7 @@ public final class AssetsListSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/assets-list-in-date-range.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/assets-list-in-date-range.json
      */
     /**
      * Sample code: List Asset created in a date range.
@@ -645,7 +645,7 @@ public final class AssetsListSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/assets-list-all.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/assets-list-all.json
      */
     /**
      * Sample code: List all Assets.
@@ -669,7 +669,7 @@ import java.time.OffsetDateTime;
 /** Samples for Assets ListContainerSas. */
 public final class AssetsListContainerSasSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/assets-list-sas-urls.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/assets-list-sas-urls.json
      */
     /**
      * Sample code: List Asset SAS URLs.
@@ -699,7 +699,7 @@ import com.azure.core.util.Context;
 /** Samples for Assets ListStreamingLocators. */
 public final class AssetsListStreamingLocatorsSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/assets-list-streaming-locators.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/assets-list-streaming-locators.json
      */
     /**
      * Sample code: List Asset SAS URLs.
@@ -723,7 +723,7 @@ import com.azure.resourcemanager.mediaservices.models.Asset;
 /** Samples for Assets Update. */
 public final class AssetsUpdateSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/assets-update.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/assets-update.json
      */
     /**
      * Sample code: Update an Asset.
@@ -756,13 +756,14 @@ import com.azure.resourcemanager.mediaservices.models.ContentKeyPolicyRsaTokenKe
 import com.azure.resourcemanager.mediaservices.models.ContentKeyPolicySymmetricTokenKey;
 import com.azure.resourcemanager.mediaservices.models.ContentKeyPolicyTokenRestriction;
 import com.azure.resourcemanager.mediaservices.models.ContentKeyPolicyWidevineConfiguration;
+import com.azure.resourcemanager.mediaservices.models.SecurityLevel;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 
 /** Samples for ContentKeyPolicies CreateOrUpdate. */
 public final class ContentKeyPoliciesCreateOrUpdateSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/content-key-policies-create-multiple-options.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/content-key-policies-create-multiple-options.json
      */
     /**
      * Sample code: Creates a Content Key Policy with multiple options.
@@ -801,7 +802,7 @@ public final class ContentKeyPoliciesCreateOrUpdateSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/content-key-policies-create-nodrm-token.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/content-key-policies-create-nodrm-token.json
      */
     /**
      * Sample code: Creates a Content Key Policy with ClearKey option and Token Restriction.
@@ -833,7 +834,7 @@ public final class ContentKeyPoliciesCreateOrUpdateSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/content-key-policies-create-playready-open.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/content-key-policies-create-playready-open.json
      */
     /**
      * Sample code: Creates a Content Key Policy with PlayReady option and Open Restriction.
@@ -859,6 +860,7 @@ public final class ContentKeyPoliciesCreateOrUpdateSamples {
                                             .asList(
                                                 new ContentKeyPolicyPlayReadyLicense()
                                                     .withAllowTestDevices(true)
+                                                    .withSecurityLevel(SecurityLevel.SL150)
                                                     .withBeginDate(OffsetDateTime.parse("2017-10-16T18:22:53.46Z"))
                                                     .withPlayRight(
                                                         new ContentKeyPolicyPlayReadyPlayRight()
@@ -880,7 +882,7 @@ public final class ContentKeyPoliciesCreateOrUpdateSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/content-key-policies-create-widevine-token.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/content-key-policies-create-widevine-token.json
      */
     /**
      * Sample code: Creates a Content Key Policy with Widevine option and Token Restriction.
@@ -930,7 +932,7 @@ import com.azure.core.util.Context;
 /** Samples for ContentKeyPolicies Delete. */
 public final class ContentKeyPoliciesDeleteSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/content-key-policies-delete.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/content-key-policies-delete.json
      */
     /**
      * Sample code: Delete a Key Policy.
@@ -953,7 +955,7 @@ import com.azure.core.util.Context;
 /** Samples for ContentKeyPolicies Get. */
 public final class ContentKeyPoliciesGetSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/content-key-policies-get-by-name.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/content-key-policies-get-by-name.json
      */
     /**
      * Sample code: Get a Content Key Policy by name.
@@ -977,7 +979,7 @@ import com.azure.core.util.Context;
 /** Samples for ContentKeyPolicies GetPolicyPropertiesWithSecrets. */
 public final class ContentKeyPoliciesGetPolicyPropertiesWithSecretsSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/content-key-policies-get-with-secrets.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/content-key-policies-get-with-secrets.json
      */
     /**
      * Sample code: Get an Content Key Policy with secrets.
@@ -1002,7 +1004,7 @@ import com.azure.core.util.Context;
 /** Samples for ContentKeyPolicies List. */
 public final class ContentKeyPoliciesListSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/content-key-policies-list-all.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/content-key-policies-list-all.json
      */
     /**
      * Sample code: Lists all Content Key Policies.
@@ -1015,7 +1017,7 @@ public final class ContentKeyPoliciesListSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/content-key-policies-list-in-date-range.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/content-key-policies-list-in-date-range.json
      */
     /**
      * Sample code: Lists Content Key Policies with created and last modified filters.
@@ -1036,7 +1038,7 @@ public final class ContentKeyPoliciesListSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/content-key-policies-list-by-lastModified.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/content-key-policies-list-by-lastModified.json
      */
     /**
      * Sample code: Lists Content Key Policies ordered by last modified.
@@ -1065,7 +1067,7 @@ import java.util.Arrays;
 /** Samples for ContentKeyPolicies Update. */
 public final class ContentKeyPoliciesUpdateSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/content-key-policies-update.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/content-key-policies-update.json
      */
     /**
      * Sample code: Update a Content Key Policy.
@@ -1814,13 +1816,13 @@ public final class LocationsCheckNameAvailabilitySamples {
 }
 ```
 
-### MediaServiceOperationResults_Get
+### MediaServicesOperationResults_Get
 
 ```java
 import com.azure.core.util.Context;
 
-/** Samples for MediaServiceOperationResults Get. */
-public final class MediaServiceOperationResultsGetSamples {
+/** Samples for MediaServicesOperationResults Get. */
+public final class MediaServicesOperationResultsGetSamples {
     /*
      * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/media-service-operation-result-by-id.json
      */
@@ -1832,19 +1834,19 @@ public final class MediaServiceOperationResultsGetSamples {
     public static void getStatusOfAsynchronousOperation(
         com.azure.resourcemanager.mediaservices.MediaServicesManager manager) {
         manager
-            .mediaServiceOperationResults()
+            .mediaServicesOperationResults()
             .getWithResponse("westus", "6FBA62C4-99B5-4FF8-9826-FC4744A8864F", Context.NONE);
     }
 }
 ```
 
-### MediaServiceOperationStatuses_Get
+### MediaServicesOperationStatuses_Get
 
 ```java
 import com.azure.core.util.Context;
 
-/** Samples for MediaServiceOperationStatuses Get. */
-public final class MediaServiceOperationStatusesGetSamples {
+/** Samples for MediaServicesOperationStatuses Get. */
+public final class MediaServicesOperationStatusesGetSamples {
     /*
      * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/media-service-operation-status-by-id-non-terminal-state-failed.json
      */
@@ -1856,7 +1858,7 @@ public final class MediaServiceOperationStatusesGetSamples {
     public static void getStatusOfAsynchronousOperationWhenItIsCompletedWithError(
         com.azure.resourcemanager.mediaservices.MediaServicesManager manager) {
         manager
-            .mediaServiceOperationStatuses()
+            .mediaServicesOperationStatuses()
             .getWithResponse("westus", "D612C429-2526-49D5-961B-885AE11406FD", Context.NONE);
     }
 
@@ -1871,7 +1873,7 @@ public final class MediaServiceOperationStatusesGetSamples {
     public static void getStatusOfAsynchronousOperationWhenItIsCompleted(
         com.azure.resourcemanager.mediaservices.MediaServicesManager manager) {
         manager
-            .mediaServiceOperationStatuses()
+            .mediaServicesOperationStatuses()
             .getWithResponse("westus", "D612C429-2526-49D5-961B-885AE11406FD", Context.NONE);
     }
 
@@ -1886,7 +1888,7 @@ public final class MediaServiceOperationStatusesGetSamples {
     public static void getStatusOfAsynchronousOperationWhenItIsOngoing(
         com.azure.resourcemanager.mediaservices.MediaServicesManager manager) {
         manager
-            .mediaServiceOperationStatuses()
+            .mediaServicesOperationStatuses()
             .getWithResponse("westus", "D612C429-2526-49D5-961B-885AE11406FD", Context.NONE);
     }
 }
@@ -2166,7 +2168,7 @@ import com.azure.core.util.Context;
 /** Samples for OperationResults Get. */
 public final class OperationResultsGetSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/asset-tracks-operation-result-by-id.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/asset-tracks-operation-result-by-id.json
      */
     /**
      * Sample code: Get result of asynchronous operation.
@@ -2196,7 +2198,7 @@ import com.azure.core.util.Context;
 /** Samples for OperationStatuses Get. */
 public final class OperationStatusesGetSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/asset-tracks-operation-status-by-id-terminal-state-failed.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/asset-tracks-operation-status-by-id-terminal-state-failed.json
      */
     /**
      * Sample code: Get status of asynchronous operation when it is completed with error.
@@ -2217,7 +2219,7 @@ public final class OperationStatusesGetSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/asset-tracks-operation-status-by-id-terminal-state.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/asset-tracks-operation-status-by-id-terminal-state.json
      */
     /**
      * Sample code: Get status of asynchronous operation when it is completed.
@@ -2238,7 +2240,7 @@ public final class OperationStatusesGetSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/asset-tracks-operation-status-by-id-non-terminal-state.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/asset-tracks-operation-status-by-id-non-terminal-state.json
      */
     /**
      * Sample code: Get status of asynchronous operation when it is ongoing.
@@ -2714,7 +2716,7 @@ import java.util.UUID;
 /** Samples for StreamingLocators Create. */
 public final class StreamingLocatorsCreateSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/streaming-locators-create-clear.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-locators-create-clear.json
      */
     /**
      * Sample code: Creates a Streaming Locator with clear streaming.
@@ -2733,7 +2735,7 @@ public final class StreamingLocatorsCreateSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/streaming-locators-create-secure.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-locators-create-secure.json
      */
     /**
      * Sample code: Creates a Streaming Locator with secure streaming.
@@ -2754,7 +2756,7 @@ public final class StreamingLocatorsCreateSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/streaming-locators-create-secure-userDefinedContentKeys.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-locators-create-secure-userDefinedContentKeys.json
      */
     /**
      * Sample code: Creates a Streaming Locator with user defined content keys.
@@ -2798,7 +2800,7 @@ import com.azure.core.util.Context;
 /** Samples for StreamingLocators Delete. */
 public final class StreamingLocatorsDeleteSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/streaming-locators-delete.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-locators-delete.json
      */
     /**
      * Sample code: Delete a Streaming Locator.
@@ -2821,7 +2823,7 @@ import com.azure.core.util.Context;
 /** Samples for StreamingLocators Get. */
 public final class StreamingLocatorsGetSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/streaming-locators-get-by-name.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-locators-get-by-name.json
      */
     /**
      * Sample code: Get a Streaming Locator by name.
@@ -2843,7 +2845,7 @@ import com.azure.core.util.Context;
 /** Samples for StreamingLocators List. */
 public final class StreamingLocatorsListSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/streaming-locators-list.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-locators-list.json
      */
     /**
      * Sample code: Lists Streaming Locators.
@@ -2864,7 +2866,7 @@ import com.azure.core.util.Context;
 /** Samples for StreamingLocators ListContentKeys. */
 public final class StreamingLocatorsListContentKeysSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/streaming-locators-list-content-keys.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-locators-list-content-keys.json
      */
     /**
      * Sample code: List Content Keys.
@@ -2887,7 +2889,7 @@ import com.azure.core.util.Context;
 /** Samples for StreamingLocators ListPaths. */
 public final class StreamingLocatorsListPathsSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/streaming-locators-list-paths-streaming-only.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-locators-list-paths-streaming-only.json
      */
     /**
      * Sample code: List Paths which has streaming paths only.
@@ -2902,7 +2904,7 @@ public final class StreamingLocatorsListPathsSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/streaming-locators-list-paths-streaming-and-download.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-locators-list-paths-streaming-and-download.json
      */
     /**
      * Sample code: List Paths which has streaming paths and download paths.
@@ -2923,6 +2925,7 @@ public final class StreamingLocatorsListPathsSamples {
 ```java
 import com.azure.resourcemanager.mediaservices.models.CbcsDrmConfiguration;
 import com.azure.resourcemanager.mediaservices.models.CencDrmConfiguration;
+import com.azure.resourcemanager.mediaservices.models.ClearKeyEncryptionConfiguration;
 import com.azure.resourcemanager.mediaservices.models.CommonEncryptionCbcs;
 import com.azure.resourcemanager.mediaservices.models.CommonEncryptionCenc;
 import com.azure.resourcemanager.mediaservices.models.DefaultKey;
@@ -2942,7 +2945,7 @@ import java.util.Arrays;
 /** Samples for StreamingPolicies Create. */
 public final class StreamingPoliciesCreateSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/streaming-policies-create-secure-streaming.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-policies-create-secure-streaming.json
      */
     /**
      * Sample code: Creates a Streaming Policy with secure streaming.
@@ -3021,7 +3024,50 @@ public final class StreamingPoliciesCreateSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/streaming-policies-create-commonEncryptionCenc-only.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-policies-create-commonEncryptionCenc-clearKeyEncryption.json
+     */
+    /**
+     * Sample code: Creates a Streaming Policy with ClearKey encryption in commonEncryptionCenc.
+     *
+     * @param manager Entry point to MediaServicesManager.
+     */
+    public static void createsAStreamingPolicyWithClearKeyEncryptionInCommonEncryptionCenc(
+        com.azure.resourcemanager.mediaservices.MediaServicesManager manager) {
+        manager
+            .streamingPolicies()
+            .define("UserCreatedSecureStreamingPolicyWithCommonEncryptionCencOnly")
+            .withExistingMediaService("contoso", "contosomedia")
+            .withDefaultContentKeyPolicyName("PolicyWithPlayReadyOptionAndOpenRestriction")
+            .withCommonEncryptionCenc(
+                new CommonEncryptionCenc()
+                    .withEnabledProtocols(
+                        new EnabledProtocols()
+                            .withDownload(false)
+                            .withDash(true)
+                            .withHls(false)
+                            .withSmoothStreaming(true))
+                    .withClearTracks(
+                        Arrays
+                            .asList(
+                                new TrackSelection()
+                                    .withTrackSelections(
+                                        Arrays
+                                            .asList(
+                                                new TrackPropertyCondition()
+                                                    .withProperty(TrackPropertyType.FOUR_CC)
+                                                    .withOperation(TrackPropertyCompareOperation.EQUAL)
+                                                    .withValue("hev1")))))
+                    .withContentKeys(
+                        new StreamingPolicyContentKeys().withDefaultKey(new DefaultKey().withLabel("cencDefaultKey")))
+                    .withClearKeyEncryptionConfiguration(
+                        new ClearKeyEncryptionConfiguration()
+                            .withCustomKeysAcquisitionUrlTemplate(
+                                "https://contoso.com/{AlternativeMediaId}/clearkey/")))
+            .create();
+    }
+
+    /*
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-policies-create-commonEncryptionCenc-only.json
      */
     /**
      * Sample code: Creates a Streaming Policy with commonEncryptionCenc only.
@@ -3071,7 +3117,7 @@ public final class StreamingPoliciesCreateSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/streaming-policies-create-commonEncryptionCbcs-only.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-policies-create-commonEncryptionCbcs-only.json
      */
     /**
      * Sample code: Creates a Streaming Policy with commonEncryptionCbcs only.
@@ -3106,7 +3152,39 @@ public final class StreamingPoliciesCreateSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/streaming-policies-create-clear.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-policies-create-commonEncryptionCbcs-clearKeyEncryption.json
+     */
+    /**
+     * Sample code: Creates a Streaming Policy with ClearKey encryption in commonEncryptionCbcs.
+     *
+     * @param manager Entry point to MediaServicesManager.
+     */
+    public static void createsAStreamingPolicyWithClearKeyEncryptionInCommonEncryptionCbcs(
+        com.azure.resourcemanager.mediaservices.MediaServicesManager manager) {
+        manager
+            .streamingPolicies()
+            .define("UserCreatedSecureStreamingPolicyWithCommonEncryptionCbcsOnly")
+            .withExistingMediaService("contoso", "contosomedia")
+            .withDefaultContentKeyPolicyName("PolicyWithMultipleOptions")
+            .withCommonEncryptionCbcs(
+                new CommonEncryptionCbcs()
+                    .withEnabledProtocols(
+                        new EnabledProtocols()
+                            .withDownload(false)
+                            .withDash(false)
+                            .withHls(true)
+                            .withSmoothStreaming(false))
+                    .withContentKeys(
+                        new StreamingPolicyContentKeys().withDefaultKey(new DefaultKey().withLabel("cbcsDefaultKey")))
+                    .withClearKeyEncryptionConfiguration(
+                        new ClearKeyEncryptionConfiguration()
+                            .withCustomKeysAcquisitionUrlTemplate(
+                                "https://contoso.com/{AlternativeMediaId}/clearkey/")))
+            .create();
+    }
+
+    /*
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-policies-create-clear.json
      */
     /**
      * Sample code: Creates a Streaming Policy with clear streaming.
@@ -3131,7 +3209,7 @@ public final class StreamingPoliciesCreateSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/streaming-policies-create-envelopeEncryption-only.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-policies-create-envelopeEncryption-only.json
      */
     /**
      * Sample code: Creates a Streaming Policy with envelopeEncryption only.
@@ -3170,7 +3248,7 @@ import com.azure.core.util.Context;
 /** Samples for StreamingPolicies Delete. */
 public final class StreamingPoliciesDeleteSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/streaming-policies-delete.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-policies-delete.json
      */
     /**
      * Sample code: Delete a Streaming Policy.
@@ -3194,7 +3272,7 @@ import com.azure.core.util.Context;
 /** Samples for StreamingPolicies Get. */
 public final class StreamingPoliciesGetSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/streaming-policy-get-by-name.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-policy-get-by-name.json
      */
     /**
      * Sample code: Get a Streaming Policy by name.
@@ -3215,7 +3293,7 @@ import com.azure.core.util.Context;
 /** Samples for StreamingPolicies List. */
 public final class StreamingPoliciesListSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/streaming-policies-list.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-policies-list.json
      */
     /**
      * Sample code: Lists Streaming Policies.
@@ -3237,7 +3315,7 @@ import com.azure.resourcemanager.mediaservices.models.Visibility;
 /** Samples for Tracks CreateOrUpdate. */
 public final class TracksCreateOrUpdateSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/asset-tracks-create.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/asset-tracks-create.json
      */
     /**
      * Sample code: Creates a Track.
@@ -3267,7 +3345,7 @@ import com.azure.core.util.Context;
 /** Samples for Tracks Delete. */
 public final class TracksDeleteSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/asset-tracks-delete.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/asset-tracks-delete.json
      */
     /**
      * Sample code: Delete a Track.
@@ -3288,7 +3366,7 @@ import com.azure.core.util.Context;
 /** Samples for Tracks Get. */
 public final class TracksGetSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/asset-tracks-get-by-name.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/asset-tracks-get-by-name.json
      */
     /**
      * Sample code: Get a Track by name.
@@ -3309,7 +3387,7 @@ import com.azure.core.util.Context;
 /** Samples for Tracks List. */
 public final class TracksListSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/asset-tracks-list-all.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/asset-tracks-list-all.json
      */
     /**
      * Sample code: Lists all Tracks.
@@ -3332,7 +3410,7 @@ import com.azure.resourcemanager.mediaservices.models.TextTrack;
 /** Samples for Tracks Update. */
 public final class TracksUpdateSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/asset-tracks-update.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/asset-tracks-update.json
      */
     /**
      * Sample code: Update a Track.
@@ -3358,7 +3436,7 @@ import com.azure.core.util.Context;
 /** Samples for Tracks UpdateTrackData. */
 public final class TracksUpdateTrackDataSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/asset-tracks-update-data.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/asset-tracks-update-data.json
      */
     /**
      * Sample code: Update the data for a tracks.

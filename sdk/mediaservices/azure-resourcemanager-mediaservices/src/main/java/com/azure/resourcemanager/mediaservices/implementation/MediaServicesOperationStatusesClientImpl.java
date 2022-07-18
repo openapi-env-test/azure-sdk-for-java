@@ -21,44 +21,44 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.resourcemanager.mediaservices.fluent.MediaServiceOperationStatusesClient;
+import com.azure.resourcemanager.mediaservices.fluent.MediaServicesOperationStatusesClient;
 import com.azure.resourcemanager.mediaservices.fluent.models.MediaServiceOperationStatusInner;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in MediaServiceOperationStatusesClient. */
-public final class MediaServiceOperationStatusesClientImpl implements MediaServiceOperationStatusesClient {
+/** An instance of this class provides access to all the operations defined in MediaServicesOperationStatusesClient. */
+public final class MediaServicesOperationStatusesClientImpl implements MediaServicesOperationStatusesClient {
     /** The proxy service used to perform REST calls. */
-    private final MediaServiceOperationStatusesService service;
+    private final MediaServicesOperationStatusesService service;
 
     /** The service client containing this operation class. */
     private final AzureMediaServicesImpl client;
 
     /**
-     * Initializes an instance of MediaServiceOperationStatusesClientImpl.
+     * Initializes an instance of MediaServicesOperationStatusesClientImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    MediaServiceOperationStatusesClientImpl(AzureMediaServicesImpl client) {
+    MediaServicesOperationStatusesClientImpl(AzureMediaServicesImpl client) {
         this.service =
             RestProxy
                 .create(
-                    MediaServiceOperationStatusesService.class,
+                    MediaServicesOperationStatusesService.class,
                     client.getHttpPipeline(),
                     client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for AzureMediaServicesMediaServiceOperationStatuses to be used by the
+     * The interface defining all the services for AzureMediaServicesMediaServicesOperationStatuses to be used by the
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AzureMediaServicesMe")
-    private interface MediaServiceOperationStatusesService {
+    private interface MediaServicesOperationStatusesService {
         @Headers({"Content-Type: application/json"})
         @Get(
             "/subscriptions/{subscriptionId}/providers/Microsoft.Media/locations/{locationName}"
-                + "/mediaServiceOperationStatuses/{operationId}")
+                + "/mediaServicesOperationStatuses/{operationId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<MediaServiceOperationStatusInner>> get(
@@ -102,6 +102,7 @@ public final class MediaServiceOperationStatusesClientImpl implements MediaServi
         if (operationId == null) {
             return Mono.error(new IllegalArgumentException("Parameter operationId is required and cannot be null."));
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -112,7 +113,7 @@ public final class MediaServiceOperationStatusesClientImpl implements MediaServi
                             this.client.getSubscriptionId(),
                             locationName,
                             operationId,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             accept,
                             context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
@@ -150,6 +151,7 @@ public final class MediaServiceOperationStatusesClientImpl implements MediaServi
         if (operationId == null) {
             return Mono.error(new IllegalArgumentException("Parameter operationId is required and cannot be null."));
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -158,7 +160,7 @@ public final class MediaServiceOperationStatusesClientImpl implements MediaServi
                 this.client.getSubscriptionId(),
                 locationName,
                 operationId,
-                this.client.getApiVersion(),
+                apiVersion,
                 accept,
                 context);
     }
