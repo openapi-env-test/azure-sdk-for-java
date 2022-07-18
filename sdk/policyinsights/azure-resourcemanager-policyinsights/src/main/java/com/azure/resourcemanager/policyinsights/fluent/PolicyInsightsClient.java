@@ -10,7 +10,7 @@ import java.time.Duration;
 /** The interface for PolicyInsightsClient class. */
 public interface PolicyInsightsClient {
     /**
-     * Gets Microsoft Azure subscription ID.
+     * Gets The ID of the target subscription.
      *
      * @return the subscriptionId value.
      */

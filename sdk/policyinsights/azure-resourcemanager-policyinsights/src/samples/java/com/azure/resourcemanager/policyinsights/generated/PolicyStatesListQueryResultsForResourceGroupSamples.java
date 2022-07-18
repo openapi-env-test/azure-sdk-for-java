@@ -23,7 +23,6 @@ public final class PolicyStatesListQueryResultsForResourceGroupSamples {
             .policyStates()
             .listQueryResultsForResourceGroup(
                 PolicyStatesResource.LATEST,
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
                 "myResourceGroup",
                 null,
                 null,
@@ -50,7 +49,6 @@ public final class PolicyStatesListQueryResultsForResourceGroupSamples {
             .policyStates()
             .listQueryResultsForResourceGroup(
                 PolicyStatesResource.LATEST,
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
                 "myResourceGroup",
                 null,
                 null,

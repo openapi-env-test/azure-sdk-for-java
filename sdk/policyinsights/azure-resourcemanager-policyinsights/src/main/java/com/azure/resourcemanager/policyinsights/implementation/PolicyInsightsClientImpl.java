@@ -15,6 +15,7 @@ import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.polling.PollResult;
 import com.azure.core.management.polling.PollerFactory;
 import com.azure.core.util.Context;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.polling.AsyncPollResponse;
 import com.azure.core.util.polling.LongRunningOperationStatus;
@@ -36,20 +37,17 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import java.util.Map;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the PolicyInsightsClientImpl type. */
 @ServiceClient(builder = PolicyInsightsClientBuilder.class)
 public final class PolicyInsightsClientImpl implements PolicyInsightsClient {
-    private final ClientLogger logger = new ClientLogger(PolicyInsightsClientImpl.class);
-
-    /** Microsoft Azure subscription ID. */
+    /** The ID of the target subscription. */
     private final String subscriptionId;
 
     /**
-     * Gets Microsoft Azure subscription ID.
+     * Gets The ID of the target subscription.
      *
      * @return the subscriptionId value.
      */
@@ -208,7 +206,7 @@ public final class PolicyInsightsClientImpl implements PolicyInsightsClient {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param defaultPollInterval The default poll interval for long-running operation.
      * @param environment The Azure environment.
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param subscriptionId The ID of the target subscription.
      * @param endpoint server parameter.
      */
     PolicyInsightsClientImpl(
@@ -249,10 +247,7 @@ public final class PolicyInsightsClientImpl implements PolicyInsightsClient {
      * @return the merged context.
      */
     public Context mergeContext(Context context) {
-        for (Map.Entry<Object, Object> entry : this.getContext().getValues().entrySet()) {
-            context = context.addData(entry.getKey(), entry.getValue());
-        }
-        return context;
+        return CoreUtils.mergeContexts(this.getContext(), context);
     }
 
     /**
@@ -316,7 +311,7 @@ public final class PolicyInsightsClientImpl implements PolicyInsightsClient {
                             managementError = null;
                         }
                     } catch (IOException | RuntimeException ioe) {
-                        logger.logThrowableAsWarning(ioe);
+                        LOGGER.logThrowableAsWarning(ioe);
                     }
                 }
             } else {
@@ -375,4 +370,6 @@ public final class PolicyInsightsClientImpl implements PolicyInsightsClient {
             return Mono.just(new String(responseBody, charset));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(PolicyInsightsClientImpl.class);
 }

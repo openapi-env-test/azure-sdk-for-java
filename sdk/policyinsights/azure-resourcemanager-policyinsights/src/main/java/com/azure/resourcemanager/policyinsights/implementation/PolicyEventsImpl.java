@@ -11,11 +11,11 @@ import com.azure.resourcemanager.policyinsights.fluent.PolicyEventsClient;
 import com.azure.resourcemanager.policyinsights.fluent.models.PolicyEventInner;
 import com.azure.resourcemanager.policyinsights.models.PolicyEvent;
 import com.azure.resourcemanager.policyinsights.models.PolicyEvents;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.azure.resourcemanager.policyinsights.models.PolicyEventsResourceType;
 import java.time.OffsetDateTime;
 
 public final class PolicyEventsImpl implements PolicyEvents {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(PolicyEventsImpl.class);
+    private static final ClientLogger LOGGER = new ClientLogger(PolicyEventsImpl.class);
 
     private final PolicyEventsClient innerClient;
 
@@ -27,13 +27,15 @@ public final class PolicyEventsImpl implements PolicyEvents {
         this.serviceManager = serviceManager;
     }
 
-    public PagedIterable<PolicyEvent> listQueryResultsForManagementGroup(String managementGroupName) {
+    public PagedIterable<PolicyEvent> listQueryResultsForManagementGroup(
+        PolicyEventsResourceType policyEventsResource, String managementGroupName) {
         PagedIterable<PolicyEventInner> inner =
-            this.serviceClient().listQueryResultsForManagementGroup(managementGroupName);
+            this.serviceClient().listQueryResultsForManagementGroup(policyEventsResource, managementGroupName);
         return Utils.mapPage(inner, inner1 -> new PolicyEventImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PolicyEvent> listQueryResultsForManagementGroup(
+        PolicyEventsResourceType policyEventsResource,
         String managementGroupName,
         Integer top,
         String orderBy,
@@ -48,17 +50,28 @@ public final class PolicyEventsImpl implements PolicyEvents {
             this
                 .serviceClient()
                 .listQueryResultsForManagementGroup(
-                    managementGroupName, top, orderBy, select, from, to, filter, apply, skipToken, context);
+                    policyEventsResource,
+                    managementGroupName,
+                    top,
+                    orderBy,
+                    select,
+                    from,
+                    to,
+                    filter,
+                    apply,
+                    skipToken,
+                    context);
         return Utils.mapPage(inner, inner1 -> new PolicyEventImpl(inner1, this.manager()));
     }
 
-    public PagedIterable<PolicyEvent> listQueryResultsForSubscription(String subscriptionId) {
-        PagedIterable<PolicyEventInner> inner = this.serviceClient().listQueryResultsForSubscription(subscriptionId);
+    public PagedIterable<PolicyEvent> listQueryResultsForSubscription(PolicyEventsResourceType policyEventsResource) {
+        PagedIterable<PolicyEventInner> inner =
+            this.serviceClient().listQueryResultsForSubscription(policyEventsResource);
         return Utils.mapPage(inner, inner1 -> new PolicyEventImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PolicyEvent> listQueryResultsForSubscription(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         Integer top,
         String orderBy,
         String select,
@@ -72,19 +85,19 @@ public final class PolicyEventsImpl implements PolicyEvents {
             this
                 .serviceClient()
                 .listQueryResultsForSubscription(
-                    subscriptionId, top, orderBy, select, from, to, filter, apply, skipToken, context);
+                    policyEventsResource, top, orderBy, select, from, to, filter, apply, skipToken, context);
         return Utils.mapPage(inner, inner1 -> new PolicyEventImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PolicyEvent> listQueryResultsForResourceGroup(
-        String subscriptionId, String resourceGroupName) {
+        PolicyEventsResourceType policyEventsResource, String resourceGroupName) {
         PagedIterable<PolicyEventInner> inner =
-            this.serviceClient().listQueryResultsForResourceGroup(subscriptionId, resourceGroupName);
+            this.serviceClient().listQueryResultsForResourceGroup(policyEventsResource, resourceGroupName);
         return Utils.mapPage(inner, inner1 -> new PolicyEventImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PolicyEvent> listQueryResultsForResourceGroup(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String resourceGroupName,
         Integer top,
         String orderBy,
@@ -99,7 +112,7 @@ public final class PolicyEventsImpl implements PolicyEvents {
             this
                 .serviceClient()
                 .listQueryResultsForResourceGroup(
-                    subscriptionId,
+                    policyEventsResource,
                     resourceGroupName,
                     top,
                     orderBy,
@@ -113,12 +126,15 @@ public final class PolicyEventsImpl implements PolicyEvents {
         return Utils.mapPage(inner, inner1 -> new PolicyEventImpl(inner1, this.manager()));
     }
 
-    public PagedIterable<PolicyEvent> listQueryResultsForResource(String resourceId) {
-        PagedIterable<PolicyEventInner> inner = this.serviceClient().listQueryResultsForResource(resourceId);
+    public PagedIterable<PolicyEvent> listQueryResultsForResource(
+        PolicyEventsResourceType policyEventsResource, String resourceId) {
+        PagedIterable<PolicyEventInner> inner =
+            this.serviceClient().listQueryResultsForResource(policyEventsResource, resourceId);
         return Utils.mapPage(inner, inner1 -> new PolicyEventImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PolicyEvent> listQueryResultsForResource(
+        PolicyEventsResourceType policyEventsResource,
         String resourceId,
         Integer top,
         String orderBy,
@@ -134,19 +150,30 @@ public final class PolicyEventsImpl implements PolicyEvents {
             this
                 .serviceClient()
                 .listQueryResultsForResource(
-                    resourceId, top, orderBy, select, from, to, filter, apply, expand, skipToken, context);
+                    policyEventsResource,
+                    resourceId,
+                    top,
+                    orderBy,
+                    select,
+                    from,
+                    to,
+                    filter,
+                    apply,
+                    expand,
+                    skipToken,
+                    context);
         return Utils.mapPage(inner, inner1 -> new PolicyEventImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PolicyEvent> listQueryResultsForPolicySetDefinition(
-        String subscriptionId, String policySetDefinitionName) {
+        PolicyEventsResourceType policyEventsResource, String policySetDefinitionName) {
         PagedIterable<PolicyEventInner> inner =
-            this.serviceClient().listQueryResultsForPolicySetDefinition(subscriptionId, policySetDefinitionName);
+            this.serviceClient().listQueryResultsForPolicySetDefinition(policyEventsResource, policySetDefinitionName);
         return Utils.mapPage(inner, inner1 -> new PolicyEventImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PolicyEvent> listQueryResultsForPolicySetDefinition(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policySetDefinitionName,
         Integer top,
         String orderBy,
@@ -161,7 +188,7 @@ public final class PolicyEventsImpl implements PolicyEvents {
             this
                 .serviceClient()
                 .listQueryResultsForPolicySetDefinition(
-                    subscriptionId,
+                    policyEventsResource,
                     policySetDefinitionName,
                     top,
                     orderBy,
@@ -176,14 +203,14 @@ public final class PolicyEventsImpl implements PolicyEvents {
     }
 
     public PagedIterable<PolicyEvent> listQueryResultsForPolicyDefinition(
-        String subscriptionId, String policyDefinitionName) {
+        PolicyEventsResourceType policyEventsResource, String policyDefinitionName) {
         PagedIterable<PolicyEventInner> inner =
-            this.serviceClient().listQueryResultsForPolicyDefinition(subscriptionId, policyDefinitionName);
+            this.serviceClient().listQueryResultsForPolicyDefinition(policyEventsResource, policyDefinitionName);
         return Utils.mapPage(inner, inner1 -> new PolicyEventImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PolicyEvent> listQueryResultsForPolicyDefinition(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policyDefinitionName,
         Integer top,
         String orderBy,
@@ -198,7 +225,7 @@ public final class PolicyEventsImpl implements PolicyEvents {
             this
                 .serviceClient()
                 .listQueryResultsForPolicyDefinition(
-                    subscriptionId,
+                    policyEventsResource,
                     policyDefinitionName,
                     top,
                     orderBy,
@@ -213,16 +240,16 @@ public final class PolicyEventsImpl implements PolicyEvents {
     }
 
     public PagedIterable<PolicyEvent> listQueryResultsForSubscriptionLevelPolicyAssignment(
-        String subscriptionId, String policyAssignmentName) {
+        PolicyEventsResourceType policyEventsResource, String policyAssignmentName) {
         PagedIterable<PolicyEventInner> inner =
             this
                 .serviceClient()
-                .listQueryResultsForSubscriptionLevelPolicyAssignment(subscriptionId, policyAssignmentName);
+                .listQueryResultsForSubscriptionLevelPolicyAssignment(policyEventsResource, policyAssignmentName);
         return Utils.mapPage(inner, inner1 -> new PolicyEventImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PolicyEvent> listQueryResultsForSubscriptionLevelPolicyAssignment(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policyAssignmentName,
         Integer top,
         String orderBy,
@@ -237,7 +264,7 @@ public final class PolicyEventsImpl implements PolicyEvents {
             this
                 .serviceClient()
                 .listQueryResultsForSubscriptionLevelPolicyAssignment(
-                    subscriptionId,
+                    policyEventsResource,
                     policyAssignmentName,
                     top,
                     orderBy,
@@ -252,17 +279,17 @@ public final class PolicyEventsImpl implements PolicyEvents {
     }
 
     public PagedIterable<PolicyEvent> listQueryResultsForResourceGroupLevelPolicyAssignment(
-        String subscriptionId, String resourceGroupName, String policyAssignmentName) {
+        PolicyEventsResourceType policyEventsResource, String resourceGroupName, String policyAssignmentName) {
         PagedIterable<PolicyEventInner> inner =
             this
                 .serviceClient()
                 .listQueryResultsForResourceGroupLevelPolicyAssignment(
-                    subscriptionId, resourceGroupName, policyAssignmentName);
+                    policyEventsResource, resourceGroupName, policyAssignmentName);
         return Utils.mapPage(inner, inner1 -> new PolicyEventImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PolicyEvent> listQueryResultsForResourceGroupLevelPolicyAssignment(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String resourceGroupName,
         String policyAssignmentName,
         Integer top,
@@ -278,7 +305,7 @@ public final class PolicyEventsImpl implements PolicyEvents {
             this
                 .serviceClient()
                 .listQueryResultsForResourceGroupLevelPolicyAssignment(
-                    subscriptionId,
+                    policyEventsResource,
                     resourceGroupName,
                     policyAssignmentName,
                     top,

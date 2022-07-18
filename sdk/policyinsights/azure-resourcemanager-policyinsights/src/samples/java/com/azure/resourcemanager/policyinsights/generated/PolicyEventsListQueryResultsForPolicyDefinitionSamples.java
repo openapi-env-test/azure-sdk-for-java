@@ -5,6 +5,7 @@
 package com.azure.resourcemanager.policyinsights.generated;
 
 import com.azure.core.util.Context;
+import com.azure.resourcemanager.policyinsights.models.PolicyEventsResourceType;
 
 /** Samples for PolicyEvents ListQueryResultsForPolicyDefinition. */
 public final class PolicyEventsListQueryResultsForPolicyDefinitionSamples {
@@ -21,7 +22,7 @@ public final class PolicyEventsListQueryResultsForPolicyDefinitionSamples {
         manager
             .policyEvents()
             .listQueryResultsForPolicyDefinition(
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+                PolicyEventsResourceType.DEFAULT,
                 "24813039-7534-408a-9842-eb99f45721b1",
                 null,
                 null,
@@ -47,7 +48,7 @@ public final class PolicyEventsListQueryResultsForPolicyDefinitionSamples {
         manager
             .policyEvents()
             .listQueryResultsForPolicyDefinition(
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+                PolicyEventsResourceType.DEFAULT,
                 "24813039-7534-408a-9842-eb99f45721b1",
                 null,
                 null,

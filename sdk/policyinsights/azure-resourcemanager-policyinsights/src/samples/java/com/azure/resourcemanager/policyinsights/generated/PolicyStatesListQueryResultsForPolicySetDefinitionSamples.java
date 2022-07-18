@@ -23,7 +23,6 @@ public final class PolicyStatesListQueryResultsForPolicySetDefinitionSamples {
             .policyStates()
             .listQueryResultsForPolicySetDefinition(
                 PolicyStatesResource.LATEST,
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
                 "3e3807c1-65c9-49e0-a406-82d8ae3e338c",
                 null,
                 null,
@@ -50,7 +49,6 @@ public final class PolicyStatesListQueryResultsForPolicySetDefinitionSamples {
             .policyStates()
             .listQueryResultsForPolicySetDefinition(
                 PolicyStatesResource.LATEST,
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
                 "3e3807c1-65c9-49e0-a406-82d8ae3e338c",
                 null,
                 null,

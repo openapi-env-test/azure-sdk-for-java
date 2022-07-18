@@ -20,7 +20,7 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     PagedIterable<PolicyState> listQueryResultsForManagementGroup(
         PolicyStatesResource policyStatesResource, String managementGroupName);
@@ -48,7 +48,7 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     PagedIterable<PolicyState> listQueryResultsForManagementGroup(
         PolicyStatesResource policyStatesResource,
@@ -66,17 +66,22 @@ public interface PolicyStates {
     /**
      * Summarizes policy states for the resources under the management group.
      *
+     * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for summarize action. In
+     *     a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
      * @param managementGroupName Management group name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return summarize action results.
      */
-    SummarizeResults summarizeForManagementGroup(String managementGroupName);
+    SummarizeResults summarizeForManagementGroup(
+        PolicyStatesSummaryResourceType policyStatesSummaryResource, String managementGroupName);
 
     /**
      * Summarizes policy states for the resources under the management group.
      *
+     * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for summarize action. In
+     *     a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
      * @param managementGroupName Management group name.
      * @param top Maximum number of records to return.
      * @param from ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
@@ -88,9 +93,10 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return summarize action results.
+     * @return summarize action results along with {@link Response}.
      */
     Response<SummarizeResults> summarizeForManagementGroupWithResponse(
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
         String managementGroupName,
         Integer top,
         OffsetDateTime from,
@@ -103,21 +109,18 @@ public interface PolicyStates {
      *
      * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time range,
      *     'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-     * @param subscriptionId Microsoft Azure subscription ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
-    PagedIterable<PolicyState> listQueryResultsForSubscription(
-        PolicyStatesResource policyStatesResource, String subscriptionId);
+    PagedIterable<PolicyState> listQueryResultsForSubscription(PolicyStatesResource policyStatesResource);
 
     /**
      * Queries policy states for the resources under the subscription.
      *
      * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time range,
      *     'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-     * @param subscriptionId Microsoft Azure subscription ID.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
      *     optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
@@ -135,11 +138,10 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     PagedIterable<PolicyState> listQueryResultsForSubscription(
         PolicyStatesResource policyStatesResource,
-        String subscriptionId,
         Integer top,
         String orderBy,
         String select,
@@ -153,18 +155,20 @@ public interface PolicyStates {
     /**
      * Summarizes policy states for the resources under the subscription.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for summarize action. In
+     *     a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return summarize action results.
      */
-    SummarizeResults summarizeForSubscription(String subscriptionId);
+    SummarizeResults summarizeForSubscription(PolicyStatesSummaryResourceType policyStatesSummaryResource);
 
     /**
      * Summarizes policy states for the resources under the subscription.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for summarize action. In
+     *     a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
      * @param top Maximum number of records to return.
      * @param from ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
      *     the service uses ($to - 1-day).
@@ -175,33 +179,36 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return summarize action results.
+     * @return summarize action results along with {@link Response}.
      */
     Response<SummarizeResults> summarizeForSubscriptionWithResponse(
-        String subscriptionId, Integer top, OffsetDateTime from, OffsetDateTime to, String filter, Context context);
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
+        Integer top,
+        OffsetDateTime from,
+        OffsetDateTime to,
+        String filter,
+        Context context);
 
     /**
      * Queries policy states for the resources under the resource group.
      *
      * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time range,
      *     'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     PagedIterable<PolicyState> listQueryResultsForResourceGroup(
-        PolicyStatesResource policyStatesResource, String subscriptionId, String resourceGroupName);
+        PolicyStatesResource policyStatesResource, String resourceGroupName);
 
     /**
      * Queries policy states for the resources under the resource group.
      *
      * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time range,
      *     'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
      *     optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
@@ -219,11 +226,10 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     PagedIterable<PolicyState> listQueryResultsForResourceGroup(
         PolicyStatesResource policyStatesResource,
-        String subscriptionId,
         String resourceGroupName,
         Integer top,
         String orderBy,
@@ -238,20 +244,23 @@ public interface PolicyStates {
     /**
      * Summarizes policy states for the resources under the resource group.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for summarize action. In
+     *     a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return summarize action results.
      */
-    SummarizeResults summarizeForResourceGroup(String subscriptionId, String resourceGroupName);
+    SummarizeResults summarizeForResourceGroup(
+        PolicyStatesSummaryResourceType policyStatesSummaryResource, String resourceGroupName);
 
     /**
      * Summarizes policy states for the resources under the resource group.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for summarize action. In
+     *     a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param top Maximum number of records to return.
      * @param from ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
      *     the service uses ($to - 1-day).
@@ -262,10 +271,10 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return summarize action results.
+     * @return summarize action results along with {@link Response}.
      */
     Response<SummarizeResults> summarizeForResourceGroupWithResponse(
-        String subscriptionId,
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
         String resourceGroupName,
         Integer top,
         OffsetDateTime from,
@@ -282,7 +291,7 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     PagedIterable<PolicyState> listQueryResultsForResource(
         PolicyStatesResource policyStatesResource, String resourceId);
@@ -311,7 +320,7 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     PagedIterable<PolicyState> listQueryResultsForResource(
         PolicyStatesResource policyStatesResource,
@@ -330,17 +339,22 @@ public interface PolicyStates {
     /**
      * Summarizes policy states for the resource.
      *
+     * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for summarize action. In
+     *     a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
      * @param resourceId Resource ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return summarize action results.
      */
-    SummarizeResults summarizeForResource(String resourceId);
+    SummarizeResults summarizeForResource(
+        PolicyStatesSummaryResourceType policyStatesSummaryResource, String resourceId);
 
     /**
      * Summarizes policy states for the resource.
      *
+     * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for summarize action. In
+     *     a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
      * @param resourceId Resource ID.
      * @param top Maximum number of records to return.
      * @param from ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
@@ -352,76 +366,75 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return summarize action results.
+     * @return summarize action results along with {@link Response}.
      */
     Response<SummarizeResults> summarizeForResourceWithResponse(
-        String resourceId, Integer top, OffsetDateTime from, OffsetDateTime to, String filter, Context context);
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
+        String resourceId,
+        Integer top,
+        OffsetDateTime from,
+        OffsetDateTime to,
+        String filter,
+        Context context);
 
     /**
      * Triggers a policy evaluation scan for all the resources under the subscription.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void triggerSubscriptionEvaluation(String subscriptionId);
+    void triggerSubscriptionEvaluation();
 
     /**
      * Triggers a policy evaluation scan for all the resources under the subscription.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void triggerSubscriptionEvaluation(String subscriptionId, Context context);
+    void triggerSubscriptionEvaluation(Context context);
 
     /**
      * Triggers a policy evaluation scan for all the resources under the resource group.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void triggerResourceGroupEvaluation(String subscriptionId, String resourceGroupName);
+    void triggerResourceGroupEvaluation(String resourceGroupName);
 
     /**
      * Triggers a policy evaluation scan for all the resources under the resource group.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void triggerResourceGroupEvaluation(String subscriptionId, String resourceGroupName, Context context);
+    void triggerResourceGroupEvaluation(String resourceGroupName, Context context);
 
     /**
      * Queries policy states for the subscription level policy set definition.
      *
      * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time range,
      *     'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-     * @param subscriptionId Microsoft Azure subscription ID.
      * @param policySetDefinitionName Policy set definition name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     PagedIterable<PolicyState> listQueryResultsForPolicySetDefinition(
-        PolicyStatesResource policyStatesResource, String subscriptionId, String policySetDefinitionName);
+        PolicyStatesResource policyStatesResource, String policySetDefinitionName);
 
     /**
      * Queries policy states for the subscription level policy set definition.
      *
      * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time range,
      *     'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-     * @param subscriptionId Microsoft Azure subscription ID.
      * @param policySetDefinitionName Policy set definition name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -440,11 +453,10 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     PagedIterable<PolicyState> listQueryResultsForPolicySetDefinition(
         PolicyStatesResource policyStatesResource,
-        String subscriptionId,
         String policySetDefinitionName,
         Integer top,
         String orderBy,
@@ -459,19 +471,22 @@ public interface PolicyStates {
     /**
      * Summarizes policy states for the subscription level policy set definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for summarize action. In
+     *     a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
      * @param policySetDefinitionName Policy set definition name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return summarize action results.
      */
-    SummarizeResults summarizeForPolicySetDefinition(String subscriptionId, String policySetDefinitionName);
+    SummarizeResults summarizeForPolicySetDefinition(
+        PolicyStatesSummaryResourceType policyStatesSummaryResource, String policySetDefinitionName);
 
     /**
      * Summarizes policy states for the subscription level policy set definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for summarize action. In
+     *     a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
      * @param policySetDefinitionName Policy set definition name.
      * @param top Maximum number of records to return.
      * @param from ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
@@ -483,10 +498,10 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return summarize action results.
+     * @return summarize action results along with {@link Response}.
      */
     Response<SummarizeResults> summarizeForPolicySetDefinitionWithResponse(
-        String subscriptionId,
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
         String policySetDefinitionName,
         Integer top,
         OffsetDateTime from,
@@ -499,22 +514,20 @@ public interface PolicyStates {
      *
      * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time range,
      *     'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-     * @param subscriptionId Microsoft Azure subscription ID.
      * @param policyDefinitionName Policy definition name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     PagedIterable<PolicyState> listQueryResultsForPolicyDefinition(
-        PolicyStatesResource policyStatesResource, String subscriptionId, String policyDefinitionName);
+        PolicyStatesResource policyStatesResource, String policyDefinitionName);
 
     /**
      * Queries policy states for the subscription level policy definition.
      *
      * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time range,
      *     'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-     * @param subscriptionId Microsoft Azure subscription ID.
      * @param policyDefinitionName Policy definition name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -533,11 +546,10 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     PagedIterable<PolicyState> listQueryResultsForPolicyDefinition(
         PolicyStatesResource policyStatesResource,
-        String subscriptionId,
         String policyDefinitionName,
         Integer top,
         String orderBy,
@@ -552,19 +564,22 @@ public interface PolicyStates {
     /**
      * Summarizes policy states for the subscription level policy definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for summarize action. In
+     *     a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
      * @param policyDefinitionName Policy definition name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return summarize action results.
      */
-    SummarizeResults summarizeForPolicyDefinition(String subscriptionId, String policyDefinitionName);
+    SummarizeResults summarizeForPolicyDefinition(
+        PolicyStatesSummaryResourceType policyStatesSummaryResource, String policyDefinitionName);
 
     /**
      * Summarizes policy states for the subscription level policy definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for summarize action. In
+     *     a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
      * @param policyDefinitionName Policy definition name.
      * @param top Maximum number of records to return.
      * @param from ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
@@ -576,10 +591,10 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return summarize action results.
+     * @return summarize action results along with {@link Response}.
      */
     Response<SummarizeResults> summarizeForPolicyDefinitionWithResponse(
-        String subscriptionId,
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
         String policyDefinitionName,
         Integer top,
         OffsetDateTime from,
@@ -592,22 +607,20 @@ public interface PolicyStates {
      *
      * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time range,
      *     'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-     * @param subscriptionId Microsoft Azure subscription ID.
      * @param policyAssignmentName Policy assignment name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     PagedIterable<PolicyState> listQueryResultsForSubscriptionLevelPolicyAssignment(
-        PolicyStatesResource policyStatesResource, String subscriptionId, String policyAssignmentName);
+        PolicyStatesResource policyStatesResource, String policyAssignmentName);
 
     /**
      * Queries policy states for the subscription level policy assignment.
      *
      * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time range,
      *     'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-     * @param subscriptionId Microsoft Azure subscription ID.
      * @param policyAssignmentName Policy assignment name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -626,11 +639,10 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     PagedIterable<PolicyState> listQueryResultsForSubscriptionLevelPolicyAssignment(
         PolicyStatesResource policyStatesResource,
-        String subscriptionId,
         String policyAssignmentName,
         Integer top,
         String orderBy,
@@ -645,19 +657,22 @@ public interface PolicyStates {
     /**
      * Summarizes policy states for the subscription level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for summarize action. In
+     *     a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
      * @param policyAssignmentName Policy assignment name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return summarize action results.
      */
-    SummarizeResults summarizeForSubscriptionLevelPolicyAssignment(String subscriptionId, String policyAssignmentName);
+    SummarizeResults summarizeForSubscriptionLevelPolicyAssignment(
+        PolicyStatesSummaryResourceType policyStatesSummaryResource, String policyAssignmentName);
 
     /**
      * Summarizes policy states for the subscription level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for summarize action. In
+     *     a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
      * @param policyAssignmentName Policy assignment name.
      * @param top Maximum number of records to return.
      * @param from ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
@@ -669,10 +684,10 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return summarize action results.
+     * @return summarize action results along with {@link Response}.
      */
     Response<SummarizeResults> summarizeForSubscriptionLevelPolicyAssignmentWithResponse(
-        String subscriptionId,
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
         String policyAssignmentName,
         Integer top,
         OffsetDateTime from,
@@ -685,27 +700,22 @@ public interface PolicyStates {
      *
      * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time range,
      *     'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param policyAssignmentName Policy assignment name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     PagedIterable<PolicyState> listQueryResultsForResourceGroupLevelPolicyAssignment(
-        PolicyStatesResource policyStatesResource,
-        String subscriptionId,
-        String resourceGroupName,
-        String policyAssignmentName);
+        PolicyStatesResource policyStatesResource, String resourceGroupName, String policyAssignmentName);
 
     /**
      * Queries policy states for the resource group level policy assignment.
      *
      * @param policyStatesResource The virtual resource under PolicyStates resource type. In a given time range,
      *     'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param policyAssignmentName Policy assignment name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -724,11 +734,10 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     PagedIterable<PolicyState> listQueryResultsForResourceGroupLevelPolicyAssignment(
         PolicyStatesResource policyStatesResource,
-        String subscriptionId,
         String resourceGroupName,
         String policyAssignmentName,
         Integer top,
@@ -744,8 +753,9 @@ public interface PolicyStates {
     /**
      * Summarizes policy states for the resource group level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for summarize action. In
+     *     a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param policyAssignmentName Policy assignment name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -753,13 +763,16 @@ public interface PolicyStates {
      * @return summarize action results.
      */
     SummarizeResults summarizeForResourceGroupLevelPolicyAssignment(
-        String subscriptionId, String resourceGroupName, String policyAssignmentName);
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
+        String resourceGroupName,
+        String policyAssignmentName);
 
     /**
      * Summarizes policy states for the resource group level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyStatesSummaryResource The virtual resource under PolicyStates resource type for summarize action. In
+     *     a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param policyAssignmentName Policy assignment name.
      * @param top Maximum number of records to return.
      * @param from ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
@@ -771,10 +784,10 @@ public interface PolicyStates {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return summarize action results.
+     * @return summarize action results along with {@link Response}.
      */
     Response<SummarizeResults> summarizeForResourceGroupLevelPolicyAssignmentWithResponse(
-        String subscriptionId,
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
         String resourceGroupName,
         String policyAssignmentName,
         Integer top,

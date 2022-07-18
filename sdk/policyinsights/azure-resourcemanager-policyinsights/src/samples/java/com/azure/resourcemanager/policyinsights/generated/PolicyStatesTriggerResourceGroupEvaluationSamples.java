@@ -18,8 +18,6 @@ public final class PolicyStatesTriggerResourceGroupEvaluationSamples {
      */
     public static void triggerEvaluationsForAllResourcesInAResourceGroup(
         com.azure.resourcemanager.policyinsights.PolicyInsightsManager manager) {
-        manager
-            .policyStates()
-            .triggerResourceGroupEvaluation("fffedd8f-ffff-fffd-fffd-fffed2f84852", "myResourceGroup", Context.NONE);
+        manager.policyStates().triggerResourceGroupEvaluation("myResourceGroup", Context.NONE);
     }
 }

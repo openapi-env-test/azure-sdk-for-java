@@ -26,17 +26,15 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.policyinsights.fluent.PolicyEventsClient;
 import com.azure.resourcemanager.policyinsights.fluent.models.PolicyEventInner;
 import com.azure.resourcemanager.policyinsights.models.PolicyEventsQueryResults;
+import com.azure.resourcemanager.policyinsights.models.PolicyEventsResourceType;
 import java.time.OffsetDateTime;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in PolicyEventsClient. */
 public final class PolicyEventsClientImpl implements PolicyEventsClient {
-    private final ClientLogger logger = new ClientLogger(PolicyEventsClientImpl.class);
-
     /** The proxy service used to perform REST calls. */
     private final PolicyEventsService service;
 
@@ -69,7 +67,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<PolicyEventsQueryResults>> listQueryResultsForManagementGroup(
             @HostParam("$host") String endpoint,
-            @PathParam("policyEventsResource") String policyEventsResource,
+            @PathParam("policyEventsResource") PolicyEventsResourceType policyEventsResource,
             @PathParam("managementGroupsNamespace") String managementGroupsNamespace,
             @PathParam("managementGroupName") String managementGroupName,
             @QueryParam("api-version") String apiVersion,
@@ -92,7 +90,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<PolicyEventsQueryResults>> listQueryResultsForSubscription(
             @HostParam("$host") String endpoint,
-            @PathParam("policyEventsResource") String policyEventsResource,
+            @PathParam("policyEventsResource") PolicyEventsResourceType policyEventsResource,
             @PathParam("subscriptionId") String subscriptionId,
             @QueryParam("api-version") String apiVersion,
             @QueryParam("$top") Integer top,
@@ -114,7 +112,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<PolicyEventsQueryResults>> listQueryResultsForResourceGroup(
             @HostParam("$host") String endpoint,
-            @PathParam("policyEventsResource") String policyEventsResource,
+            @PathParam("policyEventsResource") PolicyEventsResourceType policyEventsResource,
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @QueryParam("api-version") String apiVersion,
@@ -135,7 +133,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<PolicyEventsQueryResults>> listQueryResultsForResource(
             @HostParam("$host") String endpoint,
-            @PathParam("policyEventsResource") String policyEventsResource,
+            @PathParam("policyEventsResource") PolicyEventsResourceType policyEventsResource,
             @PathParam(value = "resourceId", encoded = true) String resourceId,
             @QueryParam("api-version") String apiVersion,
             @QueryParam("$top") Integer top,
@@ -159,7 +157,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<PolicyEventsQueryResults>> listQueryResultsForPolicySetDefinition(
             @HostParam("$host") String endpoint,
-            @PathParam("policyEventsResource") String policyEventsResource,
+            @PathParam("policyEventsResource") PolicyEventsResourceType policyEventsResource,
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("authorizationNamespace") String authorizationNamespace,
             @PathParam("policySetDefinitionName") String policySetDefinitionName,
@@ -184,7 +182,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<PolicyEventsQueryResults>> listQueryResultsForPolicyDefinition(
             @HostParam("$host") String endpoint,
-            @PathParam("policyEventsResource") String policyEventsResource,
+            @PathParam("policyEventsResource") PolicyEventsResourceType policyEventsResource,
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("authorizationNamespace") String authorizationNamespace,
             @PathParam("policyDefinitionName") String policyDefinitionName,
@@ -209,7 +207,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<PolicyEventsQueryResults>> listQueryResultsForSubscriptionLevelPolicyAssignment(
             @HostParam("$host") String endpoint,
-            @PathParam("policyEventsResource") String policyEventsResource,
+            @PathParam("policyEventsResource") PolicyEventsResourceType policyEventsResource,
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("authorizationNamespace") String authorizationNamespace,
             @PathParam("policyAssignmentName") String policyAssignmentName,
@@ -234,7 +232,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<PolicyEventsQueryResults>> listQueryResultsForResourceGroupLevelPolicyAssignment(
             @HostParam("$host") String endpoint,
-            @PathParam("policyEventsResource") String policyEventsResource,
+            @PathParam("policyEventsResource") PolicyEventsResourceType policyEventsResource,
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("authorizationNamespace") String authorizationNamespace,
@@ -251,17 +249,92 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
             @HeaderParam("Accept") String accept,
             Context context);
 
-        @Headers({"Accept: application/json", "Content-Type: application/json"})
+        @Headers({"Content-Type: application/json"})
         @Get("{nextLink}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<PolicyEventsQueryResults>> nextLink(
-            @PathParam(value = "nextLink", encoded = true) String nextLink, Context context);
+        Mono<Response<PolicyEventsQueryResults>> listQueryResultsForManagementGroupNext(
+            @PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HostParam("$host") String endpoint,
+            @HeaderParam("Accept") String accept,
+            Context context);
+
+        @Headers({"Content-Type: application/json"})
+        @Get("{nextLink}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ManagementException.class)
+        Mono<Response<PolicyEventsQueryResults>> listQueryResultsForSubscriptionNext(
+            @PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HostParam("$host") String endpoint,
+            @HeaderParam("Accept") String accept,
+            Context context);
+
+        @Headers({"Content-Type: application/json"})
+        @Get("{nextLink}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ManagementException.class)
+        Mono<Response<PolicyEventsQueryResults>> listQueryResultsForResourceGroupNext(
+            @PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HostParam("$host") String endpoint,
+            @HeaderParam("Accept") String accept,
+            Context context);
+
+        @Headers({"Content-Type: application/json"})
+        @Get("{nextLink}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ManagementException.class)
+        Mono<Response<PolicyEventsQueryResults>> listQueryResultsForResourceNext(
+            @PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HostParam("$host") String endpoint,
+            @HeaderParam("Accept") String accept,
+            Context context);
+
+        @Headers({"Content-Type: application/json"})
+        @Get("{nextLink}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ManagementException.class)
+        Mono<Response<PolicyEventsQueryResults>> listQueryResultsForPolicySetDefinitionNext(
+            @PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HostParam("$host") String endpoint,
+            @HeaderParam("Accept") String accept,
+            Context context);
+
+        @Headers({"Content-Type: application/json"})
+        @Get("{nextLink}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ManagementException.class)
+        Mono<Response<PolicyEventsQueryResults>> listQueryResultsForPolicyDefinitionNext(
+            @PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HostParam("$host") String endpoint,
+            @HeaderParam("Accept") String accept,
+            Context context);
+
+        @Headers({"Content-Type: application/json"})
+        @Get("{nextLink}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ManagementException.class)
+        Mono<Response<PolicyEventsQueryResults>> listQueryResultsForSubscriptionLevelPolicyAssignmentNext(
+            @PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HostParam("$host") String endpoint,
+            @HeaderParam("Accept") String accept,
+            Context context);
+
+        @Headers({"Content-Type: application/json"})
+        @Get("{nextLink}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ManagementException.class)
+        Mono<Response<PolicyEventsQueryResults>> listQueryResultsForResourceGroupLevelPolicyAssignmentNext(
+            @PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HostParam("$host") String endpoint,
+            @HeaderParam("Accept") String accept,
+            Context context);
     }
 
     /**
      * Queries policy events for the resources under the management group.
      *
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param managementGroupName Management group name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -279,10 +352,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForManagementGroupSinglePageAsync(
+        PolicyEventsResourceType policyEventsResource,
         String managementGroupName,
         Integer top,
         String orderBy,
@@ -298,11 +372,14 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
+        if (policyEventsResource == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter policyEventsResource is required and cannot be null."));
+        }
         if (managementGroupName == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter managementGroupName is required and cannot be null."));
         }
-        final String policyEventsResource = "default";
         final String managementGroupsNamespace = "Microsoft.Management";
         final String apiVersion = "2019-10-01";
         final String accept = "application/json";
@@ -341,6 +418,8 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the resources under the management group.
      *
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param managementGroupName Management group name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -359,10 +438,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForManagementGroupSinglePageAsync(
+        PolicyEventsResourceType policyEventsResource,
         String managementGroupName,
         Integer top,
         String orderBy,
@@ -379,11 +459,14 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
+        if (policyEventsResource == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter policyEventsResource is required and cannot be null."));
+        }
         if (managementGroupName == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter managementGroupName is required and cannot be null."));
         }
-        final String policyEventsResource = "default";
         final String managementGroupsNamespace = "Microsoft.Management";
         final String apiVersion = "2019-10-01";
         final String accept = "application/json";
@@ -419,6 +502,8 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the resources under the management group.
      *
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param managementGroupName Management group name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -436,10 +521,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForManagementGroupAsync(
+        PolicyEventsResourceType policyEventsResource,
         String managementGroupName,
         Integer top,
         String orderBy,
@@ -452,89 +538,33 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForManagementGroupSinglePageAsync(
-                    managementGroupName, top, orderBy, select, from, to, filter, apply, skipToken),
-            nextLink -> nextLinkSinglePageAsync(nextLink));
+                    policyEventsResource,
+                    managementGroupName,
+                    top,
+                    orderBy,
+                    select,
+                    from,
+                    to,
+                    filter,
+                    apply,
+                    skipToken),
+            nextLink -> listQueryResultsForManagementGroupNextSinglePageAsync(nextLink));
     }
 
     /**
      * Queries policy events for the resources under the management group.
      *
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param managementGroupName Management group name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<PolicyEventInner> listQueryResultsForManagementGroupAsync(String managementGroupName) {
-        final Integer top = null;
-        final String orderBy = null;
-        final String select = null;
-        final OffsetDateTime from = null;
-        final OffsetDateTime to = null;
-        final String filter = null;
-        final String apply = null;
-        final String skipToken = null;
-        return new PagedFlux<>(
-            () ->
-                listQueryResultsForManagementGroupSinglePageAsync(
-                    managementGroupName, top, orderBy, select, from, to, filter, apply, skipToken),
-            nextLink -> nextLinkSinglePageAsync(nextLink));
-    }
-
-    /**
-     * Queries policy events for the resources under the management group.
-     *
-     * @param managementGroupName Management group name.
-     * @param top Maximum number of records to return.
-     * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
-     *     optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
-     * @param select Select expression using OData notation. Limits the columns on each record to just those requested,
-     *     e.g. "$select=PolicyAssignmentId, ResourceId".
-     * @param from ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
-     *     the service uses ($to - 1-day).
-     * @param to ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the
-     *     service uses request time.
-     * @param filter OData filter expression.
-     * @param apply OData apply expression for aggregations.
-     * @param skipToken Skiptoken is only provided if a previous response returned a partial result as a part of
-     *     nextLink element.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForManagementGroupAsync(
-        String managementGroupName,
-        Integer top,
-        String orderBy,
-        String select,
-        OffsetDateTime from,
-        OffsetDateTime to,
-        String filter,
-        String apply,
-        String skipToken,
-        Context context) {
-        return new PagedFlux<>(
-            () ->
-                listQueryResultsForManagementGroupSinglePageAsync(
-                    managementGroupName, top, orderBy, select, from, to, filter, apply, skipToken, context),
-            nextLink -> nextLinkSinglePageAsync(nextLink, context));
-    }
-
-    /**
-     * Queries policy events for the resources under the management group.
-     *
-     * @param managementGroupName Management group name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<PolicyEventInner> listQueryResultsForManagementGroup(String managementGroupName) {
+        PolicyEventsResourceType policyEventsResource, String managementGroupName) {
         final Integer top = null;
         final String orderBy = null;
         final String select = null;
@@ -543,14 +573,27 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         final String filter = null;
         final String apply = null;
         final String skipToken = null;
-        return new PagedIterable<>(
-            listQueryResultsForManagementGroupAsync(
-                managementGroupName, top, orderBy, select, from, to, filter, apply, skipToken));
+        return new PagedFlux<>(
+            () ->
+                listQueryResultsForManagementGroupSinglePageAsync(
+                    policyEventsResource,
+                    managementGroupName,
+                    top,
+                    orderBy,
+                    select,
+                    from,
+                    to,
+                    filter,
+                    apply,
+                    skipToken),
+            nextLink -> listQueryResultsForManagementGroupNextSinglePageAsync(nextLink));
     }
 
     /**
      * Queries policy events for the resources under the management group.
      *
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param managementGroupName Management group name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -569,10 +612,93 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    private PagedFlux<PolicyEventInner> listQueryResultsForManagementGroupAsync(
+        PolicyEventsResourceType policyEventsResource,
+        String managementGroupName,
+        Integer top,
+        String orderBy,
+        String select,
+        OffsetDateTime from,
+        OffsetDateTime to,
+        String filter,
+        String apply,
+        String skipToken,
+        Context context) {
+        return new PagedFlux<>(
+            () ->
+                listQueryResultsForManagementGroupSinglePageAsync(
+                    policyEventsResource,
+                    managementGroupName,
+                    top,
+                    orderBy,
+                    select,
+                    from,
+                    to,
+                    filter,
+                    apply,
+                    skipToken,
+                    context),
+            nextLink -> listQueryResultsForManagementGroupNextSinglePageAsync(nextLink, context));
+    }
+
+    /**
+     * Queries policy events for the resources under the management group.
+     *
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param managementGroupName Management group name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<PolicyEventInner> listQueryResultsForManagementGroup(
+        PolicyEventsResourceType policyEventsResource, String managementGroupName) {
+        final Integer top = null;
+        final String orderBy = null;
+        final String select = null;
+        final OffsetDateTime from = null;
+        final OffsetDateTime to = null;
+        final String filter = null;
+        final String apply = null;
+        final String skipToken = null;
+        return new PagedIterable<>(
+            listQueryResultsForManagementGroupAsync(
+                policyEventsResource, managementGroupName, top, orderBy, select, from, to, filter, apply, skipToken));
+    }
+
+    /**
+     * Queries policy events for the resources under the management group.
+     *
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param managementGroupName Management group name.
+     * @param top Maximum number of records to return.
+     * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
+     *     optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
+     * @param select Select expression using OData notation. Limits the columns on each record to just those requested,
+     *     e.g. "$select=PolicyAssignmentId, ResourceId".
+     * @param from ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
+     *     the service uses ($to - 1-day).
+     * @param to ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the
+     *     service uses request time.
+     * @param filter OData filter expression.
+     * @param apply OData apply expression for aggregations.
+     * @param skipToken Skiptoken is only provided if a previous response returned a partial result as a part of
+     *     nextLink element.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results as paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<PolicyEventInner> listQueryResultsForManagementGroup(
+        PolicyEventsResourceType policyEventsResource,
         String managementGroupName,
         Integer top,
         String orderBy,
@@ -585,13 +711,24 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         Context context) {
         return new PagedIterable<>(
             listQueryResultsForManagementGroupAsync(
-                managementGroupName, top, orderBy, select, from, to, filter, apply, skipToken, context));
+                policyEventsResource,
+                managementGroupName,
+                top,
+                orderBy,
+                select,
+                from,
+                to,
+                filter,
+                apply,
+                skipToken,
+                context));
     }
 
     /**
      * Queries policy events for the resources under the subscription.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
      *     optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
@@ -608,11 +745,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForSubscriptionSinglePageAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         Integer top,
         String orderBy,
         String select,
@@ -627,10 +764,16 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (subscriptionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+        if (policyEventsResource == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter policyEventsResource is required and cannot be null."));
         }
-        final String policyEventsResource = "default";
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
         final String apiVersion = "2019-10-01";
         final String accept = "application/json";
         return FluxUtil
@@ -640,7 +783,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                         .listQueryResultsForSubscription(
                             this.client.getEndpoint(),
                             policyEventsResource,
-                            subscriptionId,
+                            this.client.getSubscriptionId(),
                             apiVersion,
                             top,
                             orderBy,
@@ -667,7 +810,8 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the resources under the subscription.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
      *     optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
@@ -685,11 +829,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForSubscriptionSinglePageAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         Integer top,
         String orderBy,
         String select,
@@ -705,10 +849,16 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (subscriptionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+        if (policyEventsResource == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter policyEventsResource is required and cannot be null."));
         }
-        final String policyEventsResource = "default";
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
         final String apiVersion = "2019-10-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
@@ -716,7 +866,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
             .listQueryResultsForSubscription(
                 this.client.getEndpoint(),
                 policyEventsResource,
-                subscriptionId,
+                this.client.getSubscriptionId(),
                 apiVersion,
                 top,
                 orderBy,
@@ -742,7 +892,8 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the resources under the subscription.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
      *     optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
@@ -759,11 +910,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForSubscriptionAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         Integer top,
         String orderBy,
         String select,
@@ -775,89 +926,23 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForSubscriptionSinglePageAsync(
-                    subscriptionId, top, orderBy, select, from, to, filter, apply, skipToken),
-            nextLink -> nextLinkSinglePageAsync(nextLink));
+                    policyEventsResource, top, orderBy, select, from, to, filter, apply, skipToken),
+            nextLink -> listQueryResultsForSubscriptionNextSinglePageAsync(nextLink));
     }
 
     /**
      * Queries policy events for the resources under the subscription.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<PolicyEventInner> listQueryResultsForSubscriptionAsync(String subscriptionId) {
-        final Integer top = null;
-        final String orderBy = null;
-        final String select = null;
-        final OffsetDateTime from = null;
-        final OffsetDateTime to = null;
-        final String filter = null;
-        final String apply = null;
-        final String skipToken = null;
-        return new PagedFlux<>(
-            () ->
-                listQueryResultsForSubscriptionSinglePageAsync(
-                    subscriptionId, top, orderBy, select, from, to, filter, apply, skipToken),
-            nextLink -> nextLinkSinglePageAsync(nextLink));
-    }
-
-    /**
-     * Queries policy events for the resources under the subscription.
-     *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param top Maximum number of records to return.
-     * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
-     *     optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
-     * @param select Select expression using OData notation. Limits the columns on each record to just those requested,
-     *     e.g. "$select=PolicyAssignmentId, ResourceId".
-     * @param from ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
-     *     the service uses ($to - 1-day).
-     * @param to ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the
-     *     service uses request time.
-     * @param filter OData filter expression.
-     * @param apply OData apply expression for aggregations.
-     * @param skipToken Skiptoken is only provided if a previous response returned a partial result as a part of
-     *     nextLink element.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForSubscriptionAsync(
-        String subscriptionId,
-        Integer top,
-        String orderBy,
-        String select,
-        OffsetDateTime from,
-        OffsetDateTime to,
-        String filter,
-        String apply,
-        String skipToken,
-        Context context) {
-        return new PagedFlux<>(
-            () ->
-                listQueryResultsForSubscriptionSinglePageAsync(
-                    subscriptionId, top, orderBy, select, from, to, filter, apply, skipToken, context),
-            nextLink -> nextLinkSinglePageAsync(nextLink, context));
-    }
-
-    /**
-     * Queries policy events for the resources under the subscription.
-     *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<PolicyEventInner> listQueryResultsForSubscription(String subscriptionId) {
+        PolicyEventsResourceType policyEventsResource) {
         final Integer top = null;
         final String orderBy = null;
         final String select = null;
@@ -866,15 +951,18 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         final String filter = null;
         final String apply = null;
         final String skipToken = null;
-        return new PagedIterable<>(
-            listQueryResultsForSubscriptionAsync(
-                subscriptionId, top, orderBy, select, from, to, filter, apply, skipToken));
+        return new PagedFlux<>(
+            () ->
+                listQueryResultsForSubscriptionSinglePageAsync(
+                    policyEventsResource, top, orderBy, select, from, to, filter, apply, skipToken),
+            nextLink -> listQueryResultsForSubscriptionNextSinglePageAsync(nextLink));
     }
 
     /**
      * Queries policy events for the resources under the subscription.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
      *     optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
@@ -892,11 +980,80 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    private PagedFlux<PolicyEventInner> listQueryResultsForSubscriptionAsync(
+        PolicyEventsResourceType policyEventsResource,
+        Integer top,
+        String orderBy,
+        String select,
+        OffsetDateTime from,
+        OffsetDateTime to,
+        String filter,
+        String apply,
+        String skipToken,
+        Context context) {
+        return new PagedFlux<>(
+            () ->
+                listQueryResultsForSubscriptionSinglePageAsync(
+                    policyEventsResource, top, orderBy, select, from, to, filter, apply, skipToken, context),
+            nextLink -> listQueryResultsForSubscriptionNextSinglePageAsync(nextLink, context));
+    }
+
+    /**
+     * Queries policy events for the resources under the subscription.
+     *
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<PolicyEventInner> listQueryResultsForSubscription(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource) {
+        final Integer top = null;
+        final String orderBy = null;
+        final String select = null;
+        final OffsetDateTime from = null;
+        final OffsetDateTime to = null;
+        final String filter = null;
+        final String apply = null;
+        final String skipToken = null;
+        return new PagedIterable<>(
+            listQueryResultsForSubscriptionAsync(
+                policyEventsResource, top, orderBy, select, from, to, filter, apply, skipToken));
+    }
+
+    /**
+     * Queries policy events for the resources under the subscription.
+     *
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param top Maximum number of records to return.
+     * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
+     *     optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
+     * @param select Select expression using OData notation. Limits the columns on each record to just those requested,
+     *     e.g. "$select=PolicyAssignmentId, ResourceId".
+     * @param from ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
+     *     the service uses ($to - 1-day).
+     * @param to ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the
+     *     service uses request time.
+     * @param filter OData filter expression.
+     * @param apply OData apply expression for aggregations.
+     * @param skipToken Skiptoken is only provided if a previous response returned a partial result as a part of
+     *     nextLink element.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results as paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<PolicyEventInner> listQueryResultsForSubscription(
+        PolicyEventsResourceType policyEventsResource,
         Integer top,
         String orderBy,
         String select,
@@ -908,14 +1065,15 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         Context context) {
         return new PagedIterable<>(
             listQueryResultsForSubscriptionAsync(
-                subscriptionId, top, orderBy, select, from, to, filter, apply, skipToken, context));
+                policyEventsResource, top, orderBy, select, from, to, filter, apply, skipToken, context));
     }
 
     /**
      * Queries policy events for the resources under the resource group.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
      *     optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
@@ -932,11 +1090,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForResourceGroupSinglePageAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String resourceGroupName,
         Integer top,
         String orderBy,
@@ -952,14 +1110,20 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (subscriptionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+        if (policyEventsResource == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter policyEventsResource is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         if (resourceGroupName == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
         }
-        final String policyEventsResource = "default";
         final String apiVersion = "2019-10-01";
         final String accept = "application/json";
         return FluxUtil
@@ -969,7 +1133,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                         .listQueryResultsForResourceGroup(
                             this.client.getEndpoint(),
                             policyEventsResource,
-                            subscriptionId,
+                            this.client.getSubscriptionId(),
                             resourceGroupName,
                             apiVersion,
                             top,
@@ -997,8 +1161,9 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the resources under the resource group.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
      *     optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
@@ -1016,11 +1181,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForResourceGroupSinglePageAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String resourceGroupName,
         Integer top,
         String orderBy,
@@ -1037,14 +1202,20 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (subscriptionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+        if (policyEventsResource == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter policyEventsResource is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         if (resourceGroupName == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
         }
-        final String policyEventsResource = "default";
         final String apiVersion = "2019-10-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
@@ -1052,7 +1223,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
             .listQueryResultsForResourceGroup(
                 this.client.getEndpoint(),
                 policyEventsResource,
-                subscriptionId,
+                this.client.getSubscriptionId(),
                 resourceGroupName,
                 apiVersion,
                 top,
@@ -1079,8 +1250,9 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the resources under the resource group.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
      *     optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
@@ -1097,11 +1269,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForResourceGroupAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String resourceGroupName,
         Integer top,
         String orderBy,
@@ -1114,23 +1286,24 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForResourceGroupSinglePageAsync(
-                    subscriptionId, resourceGroupName, top, orderBy, select, from, to, filter, apply, skipToken),
-            nextLink -> nextLinkSinglePageAsync(nextLink));
+                    policyEventsResource, resourceGroupName, top, orderBy, select, from, to, filter, apply, skipToken),
+            nextLink -> listQueryResultsForResourceGroupNextSinglePageAsync(nextLink));
     }
 
     /**
      * Queries policy events for the resources under the resource group.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForResourceGroupAsync(
-        String subscriptionId, String resourceGroupName) {
+        PolicyEventsResourceType policyEventsResource, String resourceGroupName) {
         final Integer top = null;
         final String orderBy = null;
         final String select = null;
@@ -1142,15 +1315,16 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForResourceGroupSinglePageAsync(
-                    subscriptionId, resourceGroupName, top, orderBy, select, from, to, filter, apply, skipToken),
-            nextLink -> nextLinkSinglePageAsync(nextLink));
+                    policyEventsResource, resourceGroupName, top, orderBy, select, from, to, filter, apply, skipToken),
+            nextLink -> listQueryResultsForResourceGroupNextSinglePageAsync(nextLink));
     }
 
     /**
      * Queries policy events for the resources under the resource group.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
      *     optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
@@ -1168,11 +1342,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForResourceGroupAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String resourceGroupName,
         Integer top,
         String orderBy,
@@ -1186,7 +1360,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForResourceGroupSinglePageAsync(
-                    subscriptionId,
+                    policyEventsResource,
                     resourceGroupName,
                     top,
                     orderBy,
@@ -1197,22 +1371,23 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     apply,
                     skipToken,
                     context),
-            nextLink -> nextLinkSinglePageAsync(nextLink, context));
+            nextLink -> listQueryResultsForResourceGroupNextSinglePageAsync(nextLink, context));
     }
 
     /**
      * Queries policy events for the resources under the resource group.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<PolicyEventInner> listQueryResultsForResourceGroup(
-        String subscriptionId, String resourceGroupName) {
+        PolicyEventsResourceType policyEventsResource, String resourceGroupName) {
         final Integer top = null;
         final String orderBy = null;
         final String select = null;
@@ -1223,14 +1398,15 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         final String skipToken = null;
         return new PagedIterable<>(
             listQueryResultsForResourceGroupAsync(
-                subscriptionId, resourceGroupName, top, orderBy, select, from, to, filter, apply, skipToken));
+                policyEventsResource, resourceGroupName, top, orderBy, select, from, to, filter, apply, skipToken));
     }
 
     /**
      * Queries policy events for the resources under the resource group.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
      *     optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
@@ -1248,11 +1424,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<PolicyEventInner> listQueryResultsForResourceGroup(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String resourceGroupName,
         Integer top,
         String orderBy,
@@ -1265,12 +1441,24 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         Context context) {
         return new PagedIterable<>(
             listQueryResultsForResourceGroupAsync(
-                subscriptionId, resourceGroupName, top, orderBy, select, from, to, filter, apply, skipToken, context));
+                policyEventsResource,
+                resourceGroupName,
+                top,
+                orderBy,
+                select,
+                from,
+                to,
+                filter,
+                apply,
+                skipToken,
+                context));
     }
 
     /**
      * Queries policy events for the resource.
      *
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param resourceId Resource ID.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -1289,10 +1477,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForResourceSinglePageAsync(
+        PolicyEventsResourceType policyEventsResource,
         String resourceId,
         Integer top,
         String orderBy,
@@ -1309,10 +1498,13 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
+        if (policyEventsResource == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter policyEventsResource is required and cannot be null."));
+        }
         if (resourceId == null) {
             return Mono.error(new IllegalArgumentException("Parameter resourceId is required and cannot be null."));
         }
-        final String policyEventsResource = "default";
         final String apiVersion = "2019-10-01";
         final String accept = "application/json";
         return FluxUtil
@@ -1350,6 +1542,8 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the resource.
      *
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param resourceId Resource ID.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -1369,10 +1563,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForResourceSinglePageAsync(
+        PolicyEventsResourceType policyEventsResource,
         String resourceId,
         Integer top,
         String orderBy,
@@ -1390,10 +1585,13 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
+        if (policyEventsResource == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter policyEventsResource is required and cannot be null."));
+        }
         if (resourceId == null) {
             return Mono.error(new IllegalArgumentException("Parameter resourceId is required and cannot be null."));
         }
-        final String policyEventsResource = "default";
         final String apiVersion = "2019-10-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
@@ -1428,6 +1626,8 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the resource.
      *
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param resourceId Resource ID.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -1446,10 +1646,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForResourceAsync(
+        PolicyEventsResourceType policyEventsResource,
         String resourceId,
         Integer top,
         String orderBy,
@@ -1463,92 +1664,24 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForResourceSinglePageAsync(
-                    resourceId, top, orderBy, select, from, to, filter, apply, expand, skipToken),
-            nextLink -> nextLinkSinglePageAsync(nextLink));
+                    policyEventsResource, resourceId, top, orderBy, select, from, to, filter, apply, expand, skipToken),
+            nextLink -> listQueryResultsForResourceNextSinglePageAsync(nextLink));
     }
 
     /**
      * Queries policy events for the resource.
      *
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param resourceId Resource ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<PolicyEventInner> listQueryResultsForResourceAsync(String resourceId) {
-        final Integer top = null;
-        final String orderBy = null;
-        final String select = null;
-        final OffsetDateTime from = null;
-        final OffsetDateTime to = null;
-        final String filter = null;
-        final String apply = null;
-        final String expand = null;
-        final String skipToken = null;
-        return new PagedFlux<>(
-            () ->
-                listQueryResultsForResourceSinglePageAsync(
-                    resourceId, top, orderBy, select, from, to, filter, apply, expand, skipToken),
-            nextLink -> nextLinkSinglePageAsync(nextLink));
-    }
-
-    /**
-     * Queries policy events for the resource.
-     *
-     * @param resourceId Resource ID.
-     * @param top Maximum number of records to return.
-     * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
-     *     optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
-     * @param select Select expression using OData notation. Limits the columns on each record to just those requested,
-     *     e.g. "$select=PolicyAssignmentId, ResourceId".
-     * @param from ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
-     *     the service uses ($to - 1-day).
-     * @param to ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the
-     *     service uses request time.
-     * @param filter OData filter expression.
-     * @param apply OData apply expression for aggregations.
-     * @param expand The $expand query parameter. For example, to expand components use $expand=components.
-     * @param skipToken Skiptoken is only provided if a previous response returned a partial result as a part of
-     *     nextLink element.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForResourceAsync(
-        String resourceId,
-        Integer top,
-        String orderBy,
-        String select,
-        OffsetDateTime from,
-        OffsetDateTime to,
-        String filter,
-        String apply,
-        String expand,
-        String skipToken,
-        Context context) {
-        return new PagedFlux<>(
-            () ->
-                listQueryResultsForResourceSinglePageAsync(
-                    resourceId, top, orderBy, select, from, to, filter, apply, expand, skipToken, context),
-            nextLink -> nextLinkSinglePageAsync(nextLink, context));
-    }
-
-    /**
-     * Queries policy events for the resource.
-     *
-     * @param resourceId Resource ID.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<PolicyEventInner> listQueryResultsForResource(String resourceId) {
+        PolicyEventsResourceType policyEventsResource, String resourceId) {
         final Integer top = null;
         final String orderBy = null;
         final String select = null;
@@ -1558,14 +1691,18 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         final String apply = null;
         final String expand = null;
         final String skipToken = null;
-        return new PagedIterable<>(
-            listQueryResultsForResourceAsync(
-                resourceId, top, orderBy, select, from, to, filter, apply, expand, skipToken));
+        return new PagedFlux<>(
+            () ->
+                listQueryResultsForResourceSinglePageAsync(
+                    policyEventsResource, resourceId, top, orderBy, select, from, to, filter, apply, expand, skipToken),
+            nextLink -> listQueryResultsForResourceNextSinglePageAsync(nextLink));
     }
 
     /**
      * Queries policy events for the resource.
      *
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param resourceId Resource ID.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -1585,10 +1722,97 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    private PagedFlux<PolicyEventInner> listQueryResultsForResourceAsync(
+        PolicyEventsResourceType policyEventsResource,
+        String resourceId,
+        Integer top,
+        String orderBy,
+        String select,
+        OffsetDateTime from,
+        OffsetDateTime to,
+        String filter,
+        String apply,
+        String expand,
+        String skipToken,
+        Context context) {
+        return new PagedFlux<>(
+            () ->
+                listQueryResultsForResourceSinglePageAsync(
+                    policyEventsResource,
+                    resourceId,
+                    top,
+                    orderBy,
+                    select,
+                    from,
+                    to,
+                    filter,
+                    apply,
+                    expand,
+                    skipToken,
+                    context),
+            nextLink -> listQueryResultsForResourceNextSinglePageAsync(nextLink, context));
+    }
+
+    /**
+     * Queries policy events for the resource.
+     *
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param resourceId Resource ID.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<PolicyEventInner> listQueryResultsForResource(
+        PolicyEventsResourceType policyEventsResource, String resourceId) {
+        final Integer top = null;
+        final String orderBy = null;
+        final String select = null;
+        final OffsetDateTime from = null;
+        final OffsetDateTime to = null;
+        final String filter = null;
+        final String apply = null;
+        final String expand = null;
+        final String skipToken = null;
+        return new PagedIterable<>(
+            listQueryResultsForResourceAsync(
+                policyEventsResource, resourceId, top, orderBy, select, from, to, filter, apply, expand, skipToken));
+    }
+
+    /**
+     * Queries policy events for the resource.
+     *
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param resourceId Resource ID.
+     * @param top Maximum number of records to return.
+     * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
+     *     optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
+     * @param select Select expression using OData notation. Limits the columns on each record to just those requested,
+     *     e.g. "$select=PolicyAssignmentId, ResourceId".
+     * @param from ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
+     *     the service uses ($to - 1-day).
+     * @param to ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the
+     *     service uses request time.
+     * @param filter OData filter expression.
+     * @param apply OData apply expression for aggregations.
+     * @param expand The $expand query parameter. For example, to expand components use $expand=components.
+     * @param skipToken Skiptoken is only provided if a previous response returned a partial result as a part of
+     *     nextLink element.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results as paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<PolicyEventInner> listQueryResultsForResource(
+        PolicyEventsResourceType policyEventsResource,
         String resourceId,
         Integer top,
         String orderBy,
@@ -1602,13 +1826,25 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         Context context) {
         return new PagedIterable<>(
             listQueryResultsForResourceAsync(
-                resourceId, top, orderBy, select, from, to, filter, apply, expand, skipToken, context));
+                policyEventsResource,
+                resourceId,
+                top,
+                orderBy,
+                select,
+                from,
+                to,
+                filter,
+                apply,
+                expand,
+                skipToken,
+                context));
     }
 
     /**
      * Queries policy events for the subscription level policy set definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policySetDefinitionName Policy set definition name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -1626,11 +1862,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForPolicySetDefinitionSinglePageAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policySetDefinitionName,
         Integer top,
         String orderBy,
@@ -1646,15 +1882,21 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (subscriptionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+        if (policyEventsResource == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter policyEventsResource is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         if (policySetDefinitionName == null) {
             return Mono
                 .error(
                     new IllegalArgumentException("Parameter policySetDefinitionName is required and cannot be null."));
         }
-        final String policyEventsResource = "default";
         final String authorizationNamespace = "Microsoft.Authorization";
         final String apiVersion = "2019-10-01";
         final String accept = "application/json";
@@ -1665,7 +1907,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                         .listQueryResultsForPolicySetDefinition(
                             this.client.getEndpoint(),
                             policyEventsResource,
-                            subscriptionId,
+                            this.client.getSubscriptionId(),
                             authorizationNamespace,
                             policySetDefinitionName,
                             apiVersion,
@@ -1694,7 +1936,8 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the subscription level policy set definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policySetDefinitionName Policy set definition name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -1713,11 +1956,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForPolicySetDefinitionSinglePageAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policySetDefinitionName,
         Integer top,
         String orderBy,
@@ -1734,15 +1977,21 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (subscriptionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+        if (policyEventsResource == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter policyEventsResource is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         if (policySetDefinitionName == null) {
             return Mono
                 .error(
                     new IllegalArgumentException("Parameter policySetDefinitionName is required and cannot be null."));
         }
-        final String policyEventsResource = "default";
         final String authorizationNamespace = "Microsoft.Authorization";
         final String apiVersion = "2019-10-01";
         final String accept = "application/json";
@@ -1751,7 +2000,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
             .listQueryResultsForPolicySetDefinition(
                 this.client.getEndpoint(),
                 policyEventsResource,
-                subscriptionId,
+                this.client.getSubscriptionId(),
                 authorizationNamespace,
                 policySetDefinitionName,
                 apiVersion,
@@ -1779,7 +2028,8 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the subscription level policy set definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policySetDefinitionName Policy set definition name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -1797,11 +2047,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForPolicySetDefinitionAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policySetDefinitionName,
         Integer top,
         String orderBy,
@@ -1814,23 +2064,33 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForPolicySetDefinitionSinglePageAsync(
-                    subscriptionId, policySetDefinitionName, top, orderBy, select, from, to, filter, apply, skipToken),
-            nextLink -> nextLinkSinglePageAsync(nextLink));
+                    policyEventsResource,
+                    policySetDefinitionName,
+                    top,
+                    orderBy,
+                    select,
+                    from,
+                    to,
+                    filter,
+                    apply,
+                    skipToken),
+            nextLink -> listQueryResultsForPolicySetDefinitionNextSinglePageAsync(nextLink));
     }
 
     /**
      * Queries policy events for the subscription level policy set definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policySetDefinitionName Policy set definition name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForPolicySetDefinitionAsync(
-        String subscriptionId, String policySetDefinitionName) {
+        PolicyEventsResourceType policyEventsResource, String policySetDefinitionName) {
         final Integer top = null;
         final String orderBy = null;
         final String select = null;
@@ -1842,14 +2102,24 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForPolicySetDefinitionSinglePageAsync(
-                    subscriptionId, policySetDefinitionName, top, orderBy, select, from, to, filter, apply, skipToken),
-            nextLink -> nextLinkSinglePageAsync(nextLink));
+                    policyEventsResource,
+                    policySetDefinitionName,
+                    top,
+                    orderBy,
+                    select,
+                    from,
+                    to,
+                    filter,
+                    apply,
+                    skipToken),
+            nextLink -> listQueryResultsForPolicySetDefinitionNextSinglePageAsync(nextLink));
     }
 
     /**
      * Queries policy events for the subscription level policy set definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policySetDefinitionName Policy set definition name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -1868,11 +2138,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForPolicySetDefinitionAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policySetDefinitionName,
         Integer top,
         String orderBy,
@@ -1886,7 +2156,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForPolicySetDefinitionSinglePageAsync(
-                    subscriptionId,
+                    policyEventsResource,
                     policySetDefinitionName,
                     top,
                     orderBy,
@@ -1897,22 +2167,23 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     apply,
                     skipToken,
                     context),
-            nextLink -> nextLinkSinglePageAsync(nextLink, context));
+            nextLink -> listQueryResultsForPolicySetDefinitionNextSinglePageAsync(nextLink, context));
     }
 
     /**
      * Queries policy events for the subscription level policy set definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policySetDefinitionName Policy set definition name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<PolicyEventInner> listQueryResultsForPolicySetDefinition(
-        String subscriptionId, String policySetDefinitionName) {
+        PolicyEventsResourceType policyEventsResource, String policySetDefinitionName) {
         final Integer top = null;
         final String orderBy = null;
         final String select = null;
@@ -1923,13 +2194,23 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         final String skipToken = null;
         return new PagedIterable<>(
             listQueryResultsForPolicySetDefinitionAsync(
-                subscriptionId, policySetDefinitionName, top, orderBy, select, from, to, filter, apply, skipToken));
+                policyEventsResource,
+                policySetDefinitionName,
+                top,
+                orderBy,
+                select,
+                from,
+                to,
+                filter,
+                apply,
+                skipToken));
     }
 
     /**
      * Queries policy events for the subscription level policy set definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policySetDefinitionName Policy set definition name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -1948,11 +2229,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<PolicyEventInner> listQueryResultsForPolicySetDefinition(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policySetDefinitionName,
         Integer top,
         String orderBy,
@@ -1965,7 +2246,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         Context context) {
         return new PagedIterable<>(
             listQueryResultsForPolicySetDefinitionAsync(
-                subscriptionId,
+                policyEventsResource,
                 policySetDefinitionName,
                 top,
                 orderBy,
@@ -1981,7 +2262,8 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the subscription level policy definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policyDefinitionName Policy definition name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -1999,11 +2281,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForPolicyDefinitionSinglePageAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policyDefinitionName,
         Integer top,
         String orderBy,
@@ -2019,14 +2301,20 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (subscriptionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+        if (policyEventsResource == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter policyEventsResource is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         if (policyDefinitionName == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter policyDefinitionName is required and cannot be null."));
         }
-        final String policyEventsResource = "default";
         final String authorizationNamespace = "Microsoft.Authorization";
         final String apiVersion = "2019-10-01";
         final String accept = "application/json";
@@ -2037,7 +2325,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                         .listQueryResultsForPolicyDefinition(
                             this.client.getEndpoint(),
                             policyEventsResource,
-                            subscriptionId,
+                            this.client.getSubscriptionId(),
                             authorizationNamespace,
                             policyDefinitionName,
                             apiVersion,
@@ -2066,7 +2354,8 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the subscription level policy definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policyDefinitionName Policy definition name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -2085,11 +2374,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForPolicyDefinitionSinglePageAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policyDefinitionName,
         Integer top,
         String orderBy,
@@ -2106,14 +2395,20 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (subscriptionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+        if (policyEventsResource == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter policyEventsResource is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         if (policyDefinitionName == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter policyDefinitionName is required and cannot be null."));
         }
-        final String policyEventsResource = "default";
         final String authorizationNamespace = "Microsoft.Authorization";
         final String apiVersion = "2019-10-01";
         final String accept = "application/json";
@@ -2122,7 +2417,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
             .listQueryResultsForPolicyDefinition(
                 this.client.getEndpoint(),
                 policyEventsResource,
-                subscriptionId,
+                this.client.getSubscriptionId(),
                 authorizationNamespace,
                 policyDefinitionName,
                 apiVersion,
@@ -2150,7 +2445,8 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the subscription level policy definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policyDefinitionName Policy definition name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -2168,11 +2464,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForPolicyDefinitionAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policyDefinitionName,
         Integer top,
         String orderBy,
@@ -2185,23 +2481,33 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForPolicyDefinitionSinglePageAsync(
-                    subscriptionId, policyDefinitionName, top, orderBy, select, from, to, filter, apply, skipToken),
-            nextLink -> nextLinkSinglePageAsync(nextLink));
+                    policyEventsResource,
+                    policyDefinitionName,
+                    top,
+                    orderBy,
+                    select,
+                    from,
+                    to,
+                    filter,
+                    apply,
+                    skipToken),
+            nextLink -> listQueryResultsForPolicyDefinitionNextSinglePageAsync(nextLink));
     }
 
     /**
      * Queries policy events for the subscription level policy definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policyDefinitionName Policy definition name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForPolicyDefinitionAsync(
-        String subscriptionId, String policyDefinitionName) {
+        PolicyEventsResourceType policyEventsResource, String policyDefinitionName) {
         final Integer top = null;
         final String orderBy = null;
         final String select = null;
@@ -2213,14 +2519,24 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForPolicyDefinitionSinglePageAsync(
-                    subscriptionId, policyDefinitionName, top, orderBy, select, from, to, filter, apply, skipToken),
-            nextLink -> nextLinkSinglePageAsync(nextLink));
+                    policyEventsResource,
+                    policyDefinitionName,
+                    top,
+                    orderBy,
+                    select,
+                    from,
+                    to,
+                    filter,
+                    apply,
+                    skipToken),
+            nextLink -> listQueryResultsForPolicyDefinitionNextSinglePageAsync(nextLink));
     }
 
     /**
      * Queries policy events for the subscription level policy definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policyDefinitionName Policy definition name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -2239,11 +2555,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForPolicyDefinitionAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policyDefinitionName,
         Integer top,
         String orderBy,
@@ -2257,7 +2573,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForPolicyDefinitionSinglePageAsync(
-                    subscriptionId,
+                    policyEventsResource,
                     policyDefinitionName,
                     top,
                     orderBy,
@@ -2268,22 +2584,23 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     apply,
                     skipToken,
                     context),
-            nextLink -> nextLinkSinglePageAsync(nextLink, context));
+            nextLink -> listQueryResultsForPolicyDefinitionNextSinglePageAsync(nextLink, context));
     }
 
     /**
      * Queries policy events for the subscription level policy definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policyDefinitionName Policy definition name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<PolicyEventInner> listQueryResultsForPolicyDefinition(
-        String subscriptionId, String policyDefinitionName) {
+        PolicyEventsResourceType policyEventsResource, String policyDefinitionName) {
         final Integer top = null;
         final String orderBy = null;
         final String select = null;
@@ -2294,13 +2611,14 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         final String skipToken = null;
         return new PagedIterable<>(
             listQueryResultsForPolicyDefinitionAsync(
-                subscriptionId, policyDefinitionName, top, orderBy, select, from, to, filter, apply, skipToken));
+                policyEventsResource, policyDefinitionName, top, orderBy, select, from, to, filter, apply, skipToken));
     }
 
     /**
      * Queries policy events for the subscription level policy definition.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policyDefinitionName Policy definition name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -2319,11 +2637,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<PolicyEventInner> listQueryResultsForPolicyDefinition(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policyDefinitionName,
         Integer top,
         String orderBy,
@@ -2336,7 +2654,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         Context context) {
         return new PagedIterable<>(
             listQueryResultsForPolicyDefinitionAsync(
-                subscriptionId,
+                policyEventsResource,
                 policyDefinitionName,
                 top,
                 orderBy,
@@ -2352,7 +2670,8 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the subscription level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policyAssignmentName Policy assignment name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -2370,11 +2689,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForSubscriptionLevelPolicyAssignmentSinglePageAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policyAssignmentName,
         Integer top,
         String orderBy,
@@ -2390,14 +2709,20 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (subscriptionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+        if (policyEventsResource == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter policyEventsResource is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         if (policyAssignmentName == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter policyAssignmentName is required and cannot be null."));
         }
-        final String policyEventsResource = "default";
         final String authorizationNamespace = "Microsoft.Authorization";
         final String apiVersion = "2019-10-01";
         final String accept = "application/json";
@@ -2408,7 +2733,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                         .listQueryResultsForSubscriptionLevelPolicyAssignment(
                             this.client.getEndpoint(),
                             policyEventsResource,
-                            subscriptionId,
+                            this.client.getSubscriptionId(),
                             authorizationNamespace,
                             policyAssignmentName,
                             apiVersion,
@@ -2437,7 +2762,8 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the subscription level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policyAssignmentName Policy assignment name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -2456,11 +2782,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForSubscriptionLevelPolicyAssignmentSinglePageAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policyAssignmentName,
         Integer top,
         String orderBy,
@@ -2477,14 +2803,20 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (subscriptionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+        if (policyEventsResource == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter policyEventsResource is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         if (policyAssignmentName == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter policyAssignmentName is required and cannot be null."));
         }
-        final String policyEventsResource = "default";
         final String authorizationNamespace = "Microsoft.Authorization";
         final String apiVersion = "2019-10-01";
         final String accept = "application/json";
@@ -2493,7 +2825,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
             .listQueryResultsForSubscriptionLevelPolicyAssignment(
                 this.client.getEndpoint(),
                 policyEventsResource,
-                subscriptionId,
+                this.client.getSubscriptionId(),
                 authorizationNamespace,
                 policyAssignmentName,
                 apiVersion,
@@ -2521,7 +2853,8 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the subscription level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policyAssignmentName Policy assignment name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -2539,11 +2872,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForSubscriptionLevelPolicyAssignmentAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policyAssignmentName,
         Integer top,
         String orderBy,
@@ -2556,23 +2889,33 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForSubscriptionLevelPolicyAssignmentSinglePageAsync(
-                    subscriptionId, policyAssignmentName, top, orderBy, select, from, to, filter, apply, skipToken),
-            nextLink -> nextLinkSinglePageAsync(nextLink));
+                    policyEventsResource,
+                    policyAssignmentName,
+                    top,
+                    orderBy,
+                    select,
+                    from,
+                    to,
+                    filter,
+                    apply,
+                    skipToken),
+            nextLink -> listQueryResultsForSubscriptionLevelPolicyAssignmentNextSinglePageAsync(nextLink));
     }
 
     /**
      * Queries policy events for the subscription level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policyAssignmentName Policy assignment name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForSubscriptionLevelPolicyAssignmentAsync(
-        String subscriptionId, String policyAssignmentName) {
+        PolicyEventsResourceType policyEventsResource, String policyAssignmentName) {
         final Integer top = null;
         final String orderBy = null;
         final String select = null;
@@ -2584,14 +2927,24 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForSubscriptionLevelPolicyAssignmentSinglePageAsync(
-                    subscriptionId, policyAssignmentName, top, orderBy, select, from, to, filter, apply, skipToken),
-            nextLink -> nextLinkSinglePageAsync(nextLink));
+                    policyEventsResource,
+                    policyAssignmentName,
+                    top,
+                    orderBy,
+                    select,
+                    from,
+                    to,
+                    filter,
+                    apply,
+                    skipToken),
+            nextLink -> listQueryResultsForSubscriptionLevelPolicyAssignmentNextSinglePageAsync(nextLink));
     }
 
     /**
      * Queries policy events for the subscription level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policyAssignmentName Policy assignment name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -2610,11 +2963,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForSubscriptionLevelPolicyAssignmentAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policyAssignmentName,
         Integer top,
         String orderBy,
@@ -2628,7 +2981,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForSubscriptionLevelPolicyAssignmentSinglePageAsync(
-                    subscriptionId,
+                    policyEventsResource,
                     policyAssignmentName,
                     top,
                     orderBy,
@@ -2639,22 +2992,23 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     apply,
                     skipToken,
                     context),
-            nextLink -> nextLinkSinglePageAsync(nextLink, context));
+            nextLink -> listQueryResultsForSubscriptionLevelPolicyAssignmentNextSinglePageAsync(nextLink, context));
     }
 
     /**
      * Queries policy events for the subscription level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policyAssignmentName Policy assignment name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<PolicyEventInner> listQueryResultsForSubscriptionLevelPolicyAssignment(
-        String subscriptionId, String policyAssignmentName) {
+        PolicyEventsResourceType policyEventsResource, String policyAssignmentName) {
         final Integer top = null;
         final String orderBy = null;
         final String select = null;
@@ -2665,13 +3019,14 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         final String skipToken = null;
         return new PagedIterable<>(
             listQueryResultsForSubscriptionLevelPolicyAssignmentAsync(
-                subscriptionId, policyAssignmentName, top, orderBy, select, from, to, filter, apply, skipToken));
+                policyEventsResource, policyAssignmentName, top, orderBy, select, from, to, filter, apply, skipToken));
     }
 
     /**
      * Queries policy events for the subscription level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
      * @param policyAssignmentName Policy assignment name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -2690,11 +3045,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<PolicyEventInner> listQueryResultsForSubscriptionLevelPolicyAssignment(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String policyAssignmentName,
         Integer top,
         String orderBy,
@@ -2707,7 +3062,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         Context context) {
         return new PagedIterable<>(
             listQueryResultsForSubscriptionLevelPolicyAssignmentAsync(
-                subscriptionId,
+                policyEventsResource,
                 policyAssignmentName,
                 top,
                 orderBy,
@@ -2723,8 +3078,9 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the resource group level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param policyAssignmentName Policy assignment name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -2742,11 +3098,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForResourceGroupLevelPolicyAssignmentSinglePageAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String resourceGroupName,
         String policyAssignmentName,
         Integer top,
@@ -2763,8 +3119,15 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (subscriptionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+        if (policyEventsResource == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter policyEventsResource is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         if (resourceGroupName == null) {
             return Mono
@@ -2774,7 +3137,6 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter policyAssignmentName is required and cannot be null."));
         }
-        final String policyEventsResource = "default";
         final String authorizationNamespace = "Microsoft.Authorization";
         final String apiVersion = "2019-10-01";
         final String accept = "application/json";
@@ -2785,7 +3147,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                         .listQueryResultsForResourceGroupLevelPolicyAssignment(
                             this.client.getEndpoint(),
                             policyEventsResource,
-                            subscriptionId,
+                            this.client.getSubscriptionId(),
                             resourceGroupName,
                             authorizationNamespace,
                             policyAssignmentName,
@@ -2815,8 +3177,9 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the resource group level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param policyAssignmentName Policy assignment name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -2835,11 +3198,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForResourceGroupLevelPolicyAssignmentSinglePageAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String resourceGroupName,
         String policyAssignmentName,
         Integer top,
@@ -2857,8 +3220,15 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (subscriptionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+        if (policyEventsResource == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter policyEventsResource is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         if (resourceGroupName == null) {
             return Mono
@@ -2868,7 +3238,6 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter policyAssignmentName is required and cannot be null."));
         }
-        final String policyEventsResource = "default";
         final String authorizationNamespace = "Microsoft.Authorization";
         final String apiVersion = "2019-10-01";
         final String accept = "application/json";
@@ -2877,7 +3246,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
             .listQueryResultsForResourceGroupLevelPolicyAssignment(
                 this.client.getEndpoint(),
                 policyEventsResource,
-                subscriptionId,
+                this.client.getSubscriptionId(),
                 resourceGroupName,
                 authorizationNamespace,
                 policyAssignmentName,
@@ -2906,8 +3275,9 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the resource group level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param policyAssignmentName Policy assignment name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -2925,11 +3295,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForResourceGroupLevelPolicyAssignmentAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String resourceGroupName,
         String policyAssignmentName,
         Integer top,
@@ -2943,7 +3313,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForResourceGroupLevelPolicyAssignmentSinglePageAsync(
-                    subscriptionId,
+                    policyEventsResource,
                     resourceGroupName,
                     policyAssignmentName,
                     top,
@@ -2954,23 +3324,24 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     filter,
                     apply,
                     skipToken),
-            nextLink -> nextLinkSinglePageAsync(nextLink));
+            nextLink -> listQueryResultsForResourceGroupLevelPolicyAssignmentNextSinglePageAsync(nextLink));
     }
 
     /**
      * Queries policy events for the resource group level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param policyAssignmentName Policy assignment name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForResourceGroupLevelPolicyAssignmentAsync(
-        String subscriptionId, String resourceGroupName, String policyAssignmentName) {
+        PolicyEventsResourceType policyEventsResource, String resourceGroupName, String policyAssignmentName) {
         final Integer top = null;
         final String orderBy = null;
         final String select = null;
@@ -2982,7 +3353,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForResourceGroupLevelPolicyAssignmentSinglePageAsync(
-                    subscriptionId,
+                    policyEventsResource,
                     resourceGroupName,
                     policyAssignmentName,
                     top,
@@ -2993,14 +3364,15 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     filter,
                     apply,
                     skipToken),
-            nextLink -> nextLinkSinglePageAsync(nextLink));
+            nextLink -> listQueryResultsForResourceGroupLevelPolicyAssignmentNextSinglePageAsync(nextLink));
     }
 
     /**
      * Queries policy events for the resource group level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param policyAssignmentName Policy assignment name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -3019,11 +3391,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<PolicyEventInner> listQueryResultsForResourceGroupLevelPolicyAssignmentAsync(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String resourceGroupName,
         String policyAssignmentName,
         Integer top,
@@ -3038,7 +3410,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         return new PagedFlux<>(
             () ->
                 listQueryResultsForResourceGroupLevelPolicyAssignmentSinglePageAsync(
-                    subscriptionId,
+                    policyEventsResource,
                     resourceGroupName,
                     policyAssignmentName,
                     top,
@@ -3050,23 +3422,24 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
                     apply,
                     skipToken,
                     context),
-            nextLink -> nextLinkSinglePageAsync(nextLink, context));
+            nextLink -> listQueryResultsForResourceGroupLevelPolicyAssignmentNextSinglePageAsync(nextLink, context));
     }
 
     /**
      * Queries policy events for the resource group level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param policyAssignmentName Policy assignment name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<PolicyEventInner> listQueryResultsForResourceGroupLevelPolicyAssignment(
-        String subscriptionId, String resourceGroupName, String policyAssignmentName) {
+        PolicyEventsResourceType policyEventsResource, String resourceGroupName, String policyAssignmentName) {
         final Integer top = null;
         final String orderBy = null;
         final String select = null;
@@ -3077,7 +3450,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         final String skipToken = null;
         return new PagedIterable<>(
             listQueryResultsForResourceGroupLevelPolicyAssignmentAsync(
-                subscriptionId,
+                policyEventsResource,
                 resourceGroupName,
                 policyAssignmentName,
                 top,
@@ -3093,8 +3466,9 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
     /**
      * Queries policy events for the resource group level policy assignment.
      *
-     * @param subscriptionId Microsoft Azure subscription ID.
-     * @param resourceGroupName Resource group name.
+     * @param policyEventsResource The name of the virtual resource under PolicyEvents resource type; only "default" is
+     *     allowed.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param policyAssignmentName Policy assignment name.
      * @param top Maximum number of records to return.
      * @param orderBy Ordering expression using OData notation. One or more comma-separated column names with an
@@ -3113,11 +3487,11 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<PolicyEventInner> listQueryResultsForResourceGroupLevelPolicyAssignment(
-        String subscriptionId,
+        PolicyEventsResourceType policyEventsResource,
         String resourceGroupName,
         String policyAssignmentName,
         Integer top,
@@ -3131,7 +3505,7 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
         Context context) {
         return new PagedIterable<>(
             listQueryResultsForResourceGroupLevelPolicyAssignmentAsync(
-                subscriptionId,
+                policyEventsResource,
                 resourceGroupName,
                 policyAssignmentName,
                 top,
@@ -3152,15 +3526,26 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<PolicyEventInner>> nextLinkSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForManagementGroupNextSinglePageAsync(
+        String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.nextLink(nextLink, context))
+            .withContext(
+                context ->
+                    service
+                        .listQueryResultsForManagementGroupNext(nextLink, this.client.getEndpoint(), accept, context))
             .<PagedResponse<PolicyEventInner>>map(
                 res ->
                     new PagedResponseBase<>(
@@ -3181,16 +3566,555 @@ public final class PolicyEventsClientImpl implements PolicyEventsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return query results.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<PolicyEventInner>> nextLinkSinglePageAsync(String nextLink, Context context) {
+    private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForManagementGroupNextSinglePageAsync(
+        String nextLink, Context context) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .nextLink(nextLink, context)
+            .listQueryResultsForManagementGroupNext(nextLink, this.client.getEndpoint(), accept, context)
+            .map(
+                res ->
+                    new PagedResponseBase<>(
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().odataNextLink(),
+                        null));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForSubscriptionNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(
+                context ->
+                    service.listQueryResultsForSubscriptionNext(nextLink, this.client.getEndpoint(), accept, context))
+            .<PagedResponse<PolicyEventInner>>map(
+                res ->
+                    new PagedResponseBase<>(
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().odataNextLink(),
+                        null))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The nextLink parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForSubscriptionNextSinglePageAsync(
+        String nextLink, Context context) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service
+            .listQueryResultsForSubscriptionNext(nextLink, this.client.getEndpoint(), accept, context)
+            .map(
+                res ->
+                    new PagedResponseBase<>(
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().odataNextLink(),
+                        null));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForResourceGroupNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(
+                context ->
+                    service.listQueryResultsForResourceGroupNext(nextLink, this.client.getEndpoint(), accept, context))
+            .<PagedResponse<PolicyEventInner>>map(
+                res ->
+                    new PagedResponseBase<>(
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().odataNextLink(),
+                        null))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The nextLink parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForResourceGroupNextSinglePageAsync(
+        String nextLink, Context context) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service
+            .listQueryResultsForResourceGroupNext(nextLink, this.client.getEndpoint(), accept, context)
+            .map(
+                res ->
+                    new PagedResponseBase<>(
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().odataNextLink(),
+                        null));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForResourceNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(
+                context ->
+                    service.listQueryResultsForResourceNext(nextLink, this.client.getEndpoint(), accept, context))
+            .<PagedResponse<PolicyEventInner>>map(
+                res ->
+                    new PagedResponseBase<>(
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().odataNextLink(),
+                        null))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The nextLink parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForResourceNextSinglePageAsync(
+        String nextLink, Context context) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service
+            .listQueryResultsForResourceNext(nextLink, this.client.getEndpoint(), accept, context)
+            .map(
+                res ->
+                    new PagedResponseBase<>(
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().odataNextLink(),
+                        null));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForPolicySetDefinitionNextSinglePageAsync(
+        String nextLink) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(
+                context ->
+                    service
+                        .listQueryResultsForPolicySetDefinitionNext(
+                            nextLink, this.client.getEndpoint(), accept, context))
+            .<PagedResponse<PolicyEventInner>>map(
+                res ->
+                    new PagedResponseBase<>(
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().odataNextLink(),
+                        null))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The nextLink parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForPolicySetDefinitionNextSinglePageAsync(
+        String nextLink, Context context) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service
+            .listQueryResultsForPolicySetDefinitionNext(nextLink, this.client.getEndpoint(), accept, context)
+            .map(
+                res ->
+                    new PagedResponseBase<>(
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().odataNextLink(),
+                        null));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForPolicyDefinitionNextSinglePageAsync(
+        String nextLink) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(
+                context ->
+                    service
+                        .listQueryResultsForPolicyDefinitionNext(nextLink, this.client.getEndpoint(), accept, context))
+            .<PagedResponse<PolicyEventInner>>map(
+                res ->
+                    new PagedResponseBase<>(
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().odataNextLink(),
+                        null))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The nextLink parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<PolicyEventInner>> listQueryResultsForPolicyDefinitionNextSinglePageAsync(
+        String nextLink, Context context) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service
+            .listQueryResultsForPolicyDefinitionNext(nextLink, this.client.getEndpoint(), accept, context)
+            .map(
+                res ->
+                    new PagedResponseBase<>(
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().odataNextLink(),
+                        null));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<PolicyEventInner>>
+        listQueryResultsForSubscriptionLevelPolicyAssignmentNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(
+                context ->
+                    service
+                        .listQueryResultsForSubscriptionLevelPolicyAssignmentNext(
+                            nextLink, this.client.getEndpoint(), accept, context))
+            .<PagedResponse<PolicyEventInner>>map(
+                res ->
+                    new PagedResponseBase<>(
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().odataNextLink(),
+                        null))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The nextLink parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<PolicyEventInner>>
+        listQueryResultsForSubscriptionLevelPolicyAssignmentNextSinglePageAsync(String nextLink, Context context) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service
+            .listQueryResultsForSubscriptionLevelPolicyAssignmentNext(
+                nextLink, this.client.getEndpoint(), accept, context)
+            .map(
+                res ->
+                    new PagedResponseBase<>(
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().odataNextLink(),
+                        null));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<PolicyEventInner>>
+        listQueryResultsForResourceGroupLevelPolicyAssignmentNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(
+                context ->
+                    service
+                        .listQueryResultsForResourceGroupLevelPolicyAssignmentNext(
+                            nextLink, this.client.getEndpoint(), accept, context))
+            .<PagedResponse<PolicyEventInner>>map(
+                res ->
+                    new PagedResponseBase<>(
+                        res.getRequest(),
+                        res.getStatusCode(),
+                        res.getHeaders(),
+                        res.getValue().value(),
+                        res.getValue().odataNextLink(),
+                        null))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * Get the next page of items.
+     *
+     * @param nextLink The nextLink parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return query results along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<PolicyEventInner>>
+        listQueryResultsForResourceGroupLevelPolicyAssignmentNextSinglePageAsync(String nextLink, Context context) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        if (this.client.getEndpoint() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service
+            .listQueryResultsForResourceGroupLevelPolicyAssignmentNext(
+                nextLink, this.client.getEndpoint(), accept, context)
             .map(
                 res ->
                     new PagedResponseBase<>(
