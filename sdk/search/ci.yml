@@ -1,4 +1,5 @@
 # NOTE: Please refer to https://aka.ms/azsdk/engsys/ci-yaml before editing this file.
+
 trigger:
   branches:
     include:
@@ -41,9 +42,18 @@ extends:
       - name: azure-search-documents
         groupId: com.azure
         safeName: azuresearch
+      - name: azure-resourcemanager-search
+        groupId: com.azure.resourcemanager
+        safeName: azureresourcemanagersearch
+        releaseInBatch: ${{ parameters.release_azureresourcemanagersearch }}
     AdditionalModules:
       - name: azure-search-perf
         groupId: com.azure
-        # required by the above perf library
       - name: perf-test-core
         groupId: com.azure
+
+parameters:
+  - name: release_azureresourcemanagersearch
+    displayName: azure-resourcemanager-search
+    type: boolean
+    default: false
