@@ -5,9 +5,7 @@
 package com.azure.resourcemanager.desktopvirtualization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.desktopvirtualization.fluent.models.ScalingPlanPatchProperties;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
@@ -16,8 +14,6 @@ import java.util.Map;
 /** Scaling plan properties that can be patched. */
 @Fluent
 public final class ScalingPlanPatch {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(ScalingPlanPatch.class);
-
     /*
      * tags to be updated
      */
@@ -149,29 +145,6 @@ public final class ScalingPlanPatch {
             this.innerProperties = new ScalingPlanPatchProperties();
         }
         this.innerProperties().withExclusionTag(exclusionTag);
-        return this;
-    }
-
-    /**
-     * Get the schedules property: List of ScalingSchedule definitions.
-     *
-     * @return the schedules value.
-     */
-    public List<ScalingSchedule> schedules() {
-        return this.innerProperties() == null ? null : this.innerProperties().schedules();
-    }
-
-    /**
-     * Set the schedules property: List of ScalingSchedule definitions.
-     *
-     * @param schedules the schedules value to set.
-     * @return the ScalingPlanPatch object itself.
-     */
-    public ScalingPlanPatch withSchedules(List<ScalingSchedule> schedules) {
-        if (this.innerProperties() == null) {
-            this.innerProperties = new ScalingPlanPatchProperties();
-        }
-        this.innerProperties().withSchedules(schedules);
         return this;
     }
 

@@ -147,13 +147,6 @@ public interface ScalingPlan {
     String exclusionTag();
 
     /**
-     * Gets the schedules property: List of ScalingSchedule definitions.
-     *
-     * @return the schedules value.
-     */
-    List<ScalingSchedule> schedules();
-
-    /**
      * Gets the hostPoolReferences property: List of ScalingHostPoolReference definitions.
      *
      * @return the hostPoolReferences value.
@@ -175,6 +168,13 @@ public interface ScalingPlan {
     String regionName();
 
     /**
+     * Gets the name of the resource group.
+     *
+     * @return the name of the resource group.
+     */
+    String resourceGroupName();
+
+    /**
      * Gets the inner com.azure.resourcemanager.desktopvirtualization.fluent.models.ScalingPlanInner object.
      *
      * @return the inner object.
@@ -186,6 +186,7 @@ public interface ScalingPlan {
         extends DefinitionStages.Blank,
             DefinitionStages.WithLocation,
             DefinitionStages.WithResourceGroup,
+            DefinitionStages.WithTimeZone,
             DefinitionStages.WithCreate {
     }
     /** The ScalingPlan definition stages. */
@@ -219,7 +220,17 @@ public interface ScalingPlan {
              * @param resourceGroupName The name of the resource group. The name is case insensitive.
              * @return the next definition stage.
              */
-            WithCreate withExistingResourceGroup(String resourceGroupName);
+            WithTimeZone withExistingResourceGroup(String resourceGroupName);
+        }
+        /** The stage of the ScalingPlan definition allowing to specify timeZone. */
+        interface WithTimeZone {
+            /**
+             * Specifies the timeZone property: Timezone of the scaling plan..
+             *
+             * @param timeZone Timezone of the scaling plan.
+             * @return the next definition stage.
+             */
+            WithCreate withTimeZone(String timeZone);
         }
         /**
          * The stage of the ScalingPlan definition which contains all the minimum required properties for the resource
@@ -234,10 +245,8 @@ public interface ScalingPlan {
                 DefinitionStages.WithPlan,
                 DefinitionStages.WithDescription,
                 DefinitionStages.WithFriendlyName,
-                DefinitionStages.WithTimeZone,
                 DefinitionStages.WithHostPoolType,
                 DefinitionStages.WithExclusionTag,
-                DefinitionStages.WithSchedules,
                 DefinitionStages.WithHostPoolReferences {
             /**
              * Executes the create request.
@@ -343,16 +352,6 @@ public interface ScalingPlan {
              */
             WithCreate withFriendlyName(String friendlyName);
         }
-        /** The stage of the ScalingPlan definition allowing to specify timeZone. */
-        interface WithTimeZone {
-            /**
-             * Specifies the timeZone property: Timezone of the scaling plan..
-             *
-             * @param timeZone Timezone of the scaling plan.
-             * @return the next definition stage.
-             */
-            WithCreate withTimeZone(String timeZone);
-        }
         /** The stage of the ScalingPlan definition allowing to specify hostPoolType. */
         interface WithHostPoolType {
             /**
@@ -372,16 +371,6 @@ public interface ScalingPlan {
              * @return the next definition stage.
              */
             WithCreate withExclusionTag(String exclusionTag);
-        }
-        /** The stage of the ScalingPlan definition allowing to specify schedules. */
-        interface WithSchedules {
-            /**
-             * Specifies the schedules property: List of ScalingSchedule definitions..
-             *
-             * @param schedules List of ScalingSchedule definitions.
-             * @return the next definition stage.
-             */
-            WithCreate withSchedules(List<ScalingSchedule> schedules);
         }
         /** The stage of the ScalingPlan definition allowing to specify hostPoolReferences. */
         interface WithHostPoolReferences {
@@ -408,7 +397,6 @@ public interface ScalingPlan {
             UpdateStages.WithFriendlyName,
             UpdateStages.WithTimeZone,
             UpdateStages.WithExclusionTag,
-            UpdateStages.WithSchedules,
             UpdateStages.WithHostPoolReferences {
         /**
          * Executes the update request.
@@ -476,16 +464,6 @@ public interface ScalingPlan {
              * @return the next definition stage.
              */
             Update withExclusionTag(String exclusionTag);
-        }
-        /** The stage of the ScalingPlan update allowing to specify schedules. */
-        interface WithSchedules {
-            /**
-             * Specifies the schedules property: List of ScalingSchedule definitions..
-             *
-             * @param schedules List of ScalingSchedule definitions.
-             * @return the next definition stage.
-             */
-            Update withSchedules(List<ScalingSchedule> schedules);
         }
         /** The stage of the ScalingPlan update allowing to specify hostPoolReferences. */
         interface WithHostPoolReferences {
