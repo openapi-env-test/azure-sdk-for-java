@@ -5,10 +5,8 @@
 package com.azure.resourcemanager.iothub.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.iothub.fluent.models.PrivateEndpointConnectionInner;
 import com.azure.resourcemanager.iothub.fluent.models.SharedAccessSignatureAuthorizationRuleInner;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
@@ -17,8 +15,6 @@ import java.util.Map;
 /** The properties of an IoT hub. */
 @Fluent
 public final class IotHubProperties {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(IotHubProperties.class);
-
     /*
      * The shared access policies you can use to secure a connection to the IoT
      * hub.
@@ -181,6 +177,12 @@ public final class IotHubProperties {
      */
     @JsonProperty(value = "enableDataResidency")
     private Boolean enableDataResidency;
+
+    /*
+     * This property store root certificate related informaiton
+     */
+    @JsonProperty(value = "rootCertificate")
+    private RootCertificateProperties rootCertificate;
 
     /**
      * Get the authorizationPolicies property: The shared access policies you can use to secure a connection to the IoT
@@ -645,6 +647,26 @@ public final class IotHubProperties {
     }
 
     /**
+     * Get the rootCertificate property: This property store root certificate related informaiton.
+     *
+     * @return the rootCertificate value.
+     */
+    public RootCertificateProperties rootCertificate() {
+        return this.rootCertificate;
+    }
+
+    /**
+     * Set the rootCertificate property: This property store root certificate related informaiton.
+     *
+     * @param rootCertificate the rootCertificate value to set.
+     * @return the IotHubProperties object itself.
+     */
+    public IotHubProperties withRootCertificate(RootCertificateProperties rootCertificate) {
+        this.rootCertificate = rootCertificate;
+        return this;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -700,6 +722,9 @@ public final class IotHubProperties {
         }
         if (locations() != null) {
             locations().forEach(e -> e.validate());
+        }
+        if (rootCertificate() != null) {
+            rootCertificate().validate();
         }
     }
 }
