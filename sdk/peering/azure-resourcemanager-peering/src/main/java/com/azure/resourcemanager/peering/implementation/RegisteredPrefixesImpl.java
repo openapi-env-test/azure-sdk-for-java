@@ -13,10 +13,9 @@ import com.azure.resourcemanager.peering.fluent.RegisteredPrefixesClient;
 import com.azure.resourcemanager.peering.fluent.models.PeeringRegisteredPrefixInner;
 import com.azure.resourcemanager.peering.models.PeeringRegisteredPrefix;
 import com.azure.resourcemanager.peering.models.RegisteredPrefixes;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public final class RegisteredPrefixesImpl implements RegisteredPrefixes {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(RegisteredPrefixesImpl.class);
+    private static final ClientLogger LOGGER = new ClientLogger(RegisteredPrefixesImpl.class);
 
     private final RegisteredPrefixesClient innerClient;
 
@@ -53,6 +52,31 @@ public final class RegisteredPrefixesImpl implements RegisteredPrefixes {
         }
     }
 
+    public PeeringRegisteredPrefix validate(String resourceGroupName, String peeringName, String registeredPrefixName) {
+        PeeringRegisteredPrefixInner inner =
+            this.serviceClient().validate(resourceGroupName, peeringName, registeredPrefixName);
+        if (inner != null) {
+            return new PeeringRegisteredPrefixImpl(inner, this.manager());
+        } else {
+            return null;
+        }
+    }
+
+    public Response<PeeringRegisteredPrefix> validateWithResponse(
+        String resourceGroupName, String peeringName, String registeredPrefixName, Context context) {
+        Response<PeeringRegisteredPrefixInner> inner =
+            this.serviceClient().validateWithResponse(resourceGroupName, peeringName, registeredPrefixName, context);
+        if (inner != null) {
+            return new SimpleResponse<>(
+                inner.getRequest(),
+                inner.getStatusCode(),
+                inner.getHeaders(),
+                new PeeringRegisteredPrefixImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
+    }
+
     public void delete(String resourceGroupName, String peeringName, String registeredPrefixName) {
         this.serviceClient().delete(resourceGroupName, peeringName, registeredPrefixName);
     }
@@ -78,7 +102,7 @@ public final class RegisteredPrefixesImpl implements RegisteredPrefixes {
     public PeeringRegisteredPrefix getById(String id) {
         String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
@@ -86,14 +110,14 @@ public final class RegisteredPrefixesImpl implements RegisteredPrefixes {
         }
         String peeringName = Utils.getValueFromIdByName(id, "peerings");
         if (peeringName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String.format("The resource ID '%s' is not valid. Missing path segment 'peerings'.", id)));
         }
         String registeredPrefixName = Utils.getValueFromIdByName(id, "registeredPrefixes");
         if (registeredPrefixName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
@@ -106,7 +130,7 @@ public final class RegisteredPrefixesImpl implements RegisteredPrefixes {
     public Response<PeeringRegisteredPrefix> getByIdWithResponse(String id, Context context) {
         String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
@@ -114,14 +138,14 @@ public final class RegisteredPrefixesImpl implements RegisteredPrefixes {
         }
         String peeringName = Utils.getValueFromIdByName(id, "peerings");
         if (peeringName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String.format("The resource ID '%s' is not valid. Missing path segment 'peerings'.", id)));
         }
         String registeredPrefixName = Utils.getValueFromIdByName(id, "registeredPrefixes");
         if (registeredPrefixName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
@@ -134,7 +158,7 @@ public final class RegisteredPrefixesImpl implements RegisteredPrefixes {
     public void deleteById(String id) {
         String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
@@ -142,27 +166,27 @@ public final class RegisteredPrefixesImpl implements RegisteredPrefixes {
         }
         String peeringName = Utils.getValueFromIdByName(id, "peerings");
         if (peeringName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String.format("The resource ID '%s' is not valid. Missing path segment 'peerings'.", id)));
         }
         String registeredPrefixName = Utils.getValueFromIdByName(id, "registeredPrefixes");
         if (registeredPrefixName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
                             .format(
                                 "The resource ID '%s' is not valid. Missing path segment 'registeredPrefixes'.", id)));
         }
-        this.deleteWithResponse(resourceGroupName, peeringName, registeredPrefixName, Context.NONE).getValue();
+        this.deleteWithResponse(resourceGroupName, peeringName, registeredPrefixName, Context.NONE);
     }
 
     public Response<Void> deleteByIdWithResponse(String id, Context context) {
         String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
@@ -170,14 +194,14 @@ public final class RegisteredPrefixesImpl implements RegisteredPrefixes {
         }
         String peeringName = Utils.getValueFromIdByName(id, "peerings");
         if (peeringName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String.format("The resource ID '%s' is not valid. Missing path segment 'peerings'.", id)));
         }
         String registeredPrefixName = Utils.getValueFromIdByName(id, "registeredPrefixes");
         if (registeredPrefixName == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         String
