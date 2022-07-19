@@ -5,8 +5,6 @@
 package com.azure.resourcemanager.iothub.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
@@ -17,7 +15,12 @@ import java.util.List;
  */
 @Fluent
 public final class RoutingEndpoints {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(RoutingEndpoints.class);
+    /*
+     * The list of Azure Digital Twins instance endpoints that IoT hub routes
+     * the messages to, based on the routing rules.
+     */
+    @JsonProperty(value = "azureDigitalTwinsInstances")
+    private List<RoutingAzureDigitalTwinsEndpointProperties> azureDigitalTwinsInstances;
 
     /*
      * The list of Service Bus queue endpoints that IoT hub routes the messages
@@ -47,6 +50,29 @@ public final class RoutingEndpoints {
      */
     @JsonProperty(value = "storageContainers")
     private List<RoutingStorageContainerProperties> storageContainers;
+
+    /**
+     * Get the azureDigitalTwinsInstances property: The list of Azure Digital Twins instance endpoints that IoT hub
+     * routes the messages to, based on the routing rules.
+     *
+     * @return the azureDigitalTwinsInstances value.
+     */
+    public List<RoutingAzureDigitalTwinsEndpointProperties> azureDigitalTwinsInstances() {
+        return this.azureDigitalTwinsInstances;
+    }
+
+    /**
+     * Set the azureDigitalTwinsInstances property: The list of Azure Digital Twins instance endpoints that IoT hub
+     * routes the messages to, based on the routing rules.
+     *
+     * @param azureDigitalTwinsInstances the azureDigitalTwinsInstances value to set.
+     * @return the RoutingEndpoints object itself.
+     */
+    public RoutingEndpoints withAzureDigitalTwinsInstances(
+        List<RoutingAzureDigitalTwinsEndpointProperties> azureDigitalTwinsInstances) {
+        this.azureDigitalTwinsInstances = azureDigitalTwinsInstances;
+        return this;
+    }
 
     /**
      * Get the serviceBusQueues property: The list of Service Bus queue endpoints that IoT hub routes the messages to,
@@ -142,6 +168,9 @@ public final class RoutingEndpoints {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+        if (azureDigitalTwinsInstances() != null) {
+            azureDigitalTwinsInstances().forEach(e -> e.validate());
+        }
         if (serviceBusQueues() != null) {
             serviceBusQueues().forEach(e -> e.validate());
         }

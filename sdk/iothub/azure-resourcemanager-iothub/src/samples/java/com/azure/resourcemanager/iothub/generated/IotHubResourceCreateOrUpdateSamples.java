@@ -29,7 +29,7 @@ import java.util.Map;
 /** Samples for IotHubResource CreateOrUpdate. */
 public final class IotHubResourceCreateOrUpdateSamples {
     /*
-     * x-ms-original-file: specification/iothub/resource-manager/Microsoft.Devices/stable/2021-07-02/examples/iothub_createOrUpdate.json
+     * x-ms-original-file: specification/iothub/resource-manager/Microsoft.Devices/preview/2021-10-15-preview/examples/iothub_createOrUpdate.json
      */
     /**
      * Sample code: IotHubResource_CreateOrUpdate.
@@ -70,6 +70,7 @@ public final class IotHubResourceCreateOrUpdateSamples {
                         new RoutingProperties()
                             .withEndpoints(
                                 new RoutingEndpoints()
+                                    .withAzureDigitalTwinsInstances(Arrays.asList())
                                     .withServiceBusQueues(Arrays.asList())
                                     .withServiceBusTopics(Arrays.asList())
                                     .withEventHubs(Arrays.asList())

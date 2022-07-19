@@ -8,41 +8,30 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The properties related to an event hub endpoint. */
+/** The properties related to an Azure Digital Twins endpoint. */
 @Fluent
-public final class RoutingEventHubProperties {
+public final class RoutingAzureDigitalTwinsEndpointProperties {
     /*
-     * Id of the event hub endpoint
+     * Id of the Azure Digital Twins endpoint
      */
     @JsonProperty(value = "id")
     private String id;
 
     /*
-     * The connection string of the event hub endpoint.
-     */
-    @JsonProperty(value = "connectionString")
-    private String connectionString;
-
-    /*
-     * The url of the event hub endpoint. It must include the protocol sb://
+     * The url of the Azure Digital Twins streaming endpoint. It must include
+     * the protocol https://
      */
     @JsonProperty(value = "endpointUri")
     private String endpointUri;
 
     /*
-     * Event hub name on the event hub namespace
-     */
-    @JsonProperty(value = "entityPath")
-    private String entityPath;
-
-    /*
-     * Method used to authenticate against the event hub endpoint
+     * Method used to authenticate against the Azure Digital Twins endpoint
      */
     @JsonProperty(value = "authenticationType")
     private AuthenticationType authenticationType;
 
     /*
-     * Managed identity properties of routing event hub endpoint.
+     * Managed identity properties of routing Azure Digital Twins endpoint.
      */
     @JsonProperty(value = "identity")
     private ManagedIdentity identity;
@@ -58,19 +47,19 @@ public final class RoutingEventHubProperties {
     private String name;
 
     /*
-     * The subscription identifier of the event hub endpoint.
+     * The subscription identifier of the Azure Digital Twins endpoint.
      */
     @JsonProperty(value = "subscriptionId")
     private String subscriptionId;
 
     /*
-     * The name of the resource group of the event hub endpoint.
+     * The name of the resource group of the Azure Digital Twins endpoint.
      */
     @JsonProperty(value = "resourceGroup")
     private String resourceGroup;
 
     /**
-     * Get the id property: Id of the event hub endpoint.
+     * Get the id property: Id of the Azure Digital Twins endpoint.
      *
      * @return the id value.
      */
@@ -79,38 +68,19 @@ public final class RoutingEventHubProperties {
     }
 
     /**
-     * Set the id property: Id of the event hub endpoint.
+     * Set the id property: Id of the Azure Digital Twins endpoint.
      *
      * @param id the id value to set.
-     * @return the RoutingEventHubProperties object itself.
+     * @return the RoutingAzureDigitalTwinsEndpointProperties object itself.
      */
-    public RoutingEventHubProperties withId(String id) {
+    public RoutingAzureDigitalTwinsEndpointProperties withId(String id) {
         this.id = id;
         return this;
     }
 
     /**
-     * Get the connectionString property: The connection string of the event hub endpoint.
-     *
-     * @return the connectionString value.
-     */
-    public String connectionString() {
-        return this.connectionString;
-    }
-
-    /**
-     * Set the connectionString property: The connection string of the event hub endpoint.
-     *
-     * @param connectionString the connectionString value to set.
-     * @return the RoutingEventHubProperties object itself.
-     */
-    public RoutingEventHubProperties withConnectionString(String connectionString) {
-        this.connectionString = connectionString;
-        return this;
-    }
-
-    /**
-     * Get the endpointUri property: The url of the event hub endpoint. It must include the protocol sb://.
+     * Get the endpointUri property: The url of the Azure Digital Twins streaming endpoint. It must include the protocol
+     * https://.
      *
      * @return the endpointUri value.
      */
@@ -119,38 +89,19 @@ public final class RoutingEventHubProperties {
     }
 
     /**
-     * Set the endpointUri property: The url of the event hub endpoint. It must include the protocol sb://.
+     * Set the endpointUri property: The url of the Azure Digital Twins streaming endpoint. It must include the protocol
+     * https://.
      *
      * @param endpointUri the endpointUri value to set.
-     * @return the RoutingEventHubProperties object itself.
+     * @return the RoutingAzureDigitalTwinsEndpointProperties object itself.
      */
-    public RoutingEventHubProperties withEndpointUri(String endpointUri) {
+    public RoutingAzureDigitalTwinsEndpointProperties withEndpointUri(String endpointUri) {
         this.endpointUri = endpointUri;
         return this;
     }
 
     /**
-     * Get the entityPath property: Event hub name on the event hub namespace.
-     *
-     * @return the entityPath value.
-     */
-    public String entityPath() {
-        return this.entityPath;
-    }
-
-    /**
-     * Set the entityPath property: Event hub name on the event hub namespace.
-     *
-     * @param entityPath the entityPath value to set.
-     * @return the RoutingEventHubProperties object itself.
-     */
-    public RoutingEventHubProperties withEntityPath(String entityPath) {
-        this.entityPath = entityPath;
-        return this;
-    }
-
-    /**
-     * Get the authenticationType property: Method used to authenticate against the event hub endpoint.
+     * Get the authenticationType property: Method used to authenticate against the Azure Digital Twins endpoint.
      *
      * @return the authenticationType value.
      */
@@ -159,18 +110,18 @@ public final class RoutingEventHubProperties {
     }
 
     /**
-     * Set the authenticationType property: Method used to authenticate against the event hub endpoint.
+     * Set the authenticationType property: Method used to authenticate against the Azure Digital Twins endpoint.
      *
      * @param authenticationType the authenticationType value to set.
-     * @return the RoutingEventHubProperties object itself.
+     * @return the RoutingAzureDigitalTwinsEndpointProperties object itself.
      */
-    public RoutingEventHubProperties withAuthenticationType(AuthenticationType authenticationType) {
+    public RoutingAzureDigitalTwinsEndpointProperties withAuthenticationType(AuthenticationType authenticationType) {
         this.authenticationType = authenticationType;
         return this;
     }
 
     /**
-     * Get the identity property: Managed identity properties of routing event hub endpoint.
+     * Get the identity property: Managed identity properties of routing Azure Digital Twins endpoint.
      *
      * @return the identity value.
      */
@@ -179,12 +130,12 @@ public final class RoutingEventHubProperties {
     }
 
     /**
-     * Set the identity property: Managed identity properties of routing event hub endpoint.
+     * Set the identity property: Managed identity properties of routing Azure Digital Twins endpoint.
      *
      * @param identity the identity value to set.
-     * @return the RoutingEventHubProperties object itself.
+     * @return the RoutingAzureDigitalTwinsEndpointProperties object itself.
      */
-    public RoutingEventHubProperties withIdentity(ManagedIdentity identity) {
+    public RoutingAzureDigitalTwinsEndpointProperties withIdentity(ManagedIdentity identity) {
         this.identity = identity;
         return this;
     }
@@ -206,15 +157,15 @@ public final class RoutingEventHubProperties {
      * events, fileNotifications, $default. Endpoint names must be unique across endpoint types.
      *
      * @param name the name value to set.
-     * @return the RoutingEventHubProperties object itself.
+     * @return the RoutingAzureDigitalTwinsEndpointProperties object itself.
      */
-    public RoutingEventHubProperties withName(String name) {
+    public RoutingAzureDigitalTwinsEndpointProperties withName(String name) {
         this.name = name;
         return this;
     }
 
     /**
-     * Get the subscriptionId property: The subscription identifier of the event hub endpoint.
+     * Get the subscriptionId property: The subscription identifier of the Azure Digital Twins endpoint.
      *
      * @return the subscriptionId value.
      */
@@ -223,18 +174,18 @@ public final class RoutingEventHubProperties {
     }
 
     /**
-     * Set the subscriptionId property: The subscription identifier of the event hub endpoint.
+     * Set the subscriptionId property: The subscription identifier of the Azure Digital Twins endpoint.
      *
      * @param subscriptionId the subscriptionId value to set.
-     * @return the RoutingEventHubProperties object itself.
+     * @return the RoutingAzureDigitalTwinsEndpointProperties object itself.
      */
-    public RoutingEventHubProperties withSubscriptionId(String subscriptionId) {
+    public RoutingAzureDigitalTwinsEndpointProperties withSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
         return this;
     }
 
     /**
-     * Get the resourceGroup property: The name of the resource group of the event hub endpoint.
+     * Get the resourceGroup property: The name of the resource group of the Azure Digital Twins endpoint.
      *
      * @return the resourceGroup value.
      */
@@ -243,12 +194,12 @@ public final class RoutingEventHubProperties {
     }
 
     /**
-     * Set the resourceGroup property: The name of the resource group of the event hub endpoint.
+     * Set the resourceGroup property: The name of the resource group of the Azure Digital Twins endpoint.
      *
      * @param resourceGroup the resourceGroup value to set.
-     * @return the RoutingEventHubProperties object itself.
+     * @return the RoutingAzureDigitalTwinsEndpointProperties object itself.
      */
-    public RoutingEventHubProperties withResourceGroup(String resourceGroup) {
+    public RoutingAzureDigitalTwinsEndpointProperties withResourceGroup(String resourceGroup) {
         this.resourceGroup = resourceGroup;
         return this;
     }
@@ -265,9 +216,10 @@ public final class RoutingEventHubProperties {
         if (name() == null) {
             throw LOGGER
                 .logExceptionAsError(
-                    new IllegalArgumentException("Missing required property name in model RoutingEventHubProperties"));
+                    new IllegalArgumentException(
+                        "Missing required property name in model RoutingAzureDigitalTwinsEndpointProperties"));
         }
     }
 
-    private static final ClientLogger LOGGER = new ClientLogger(RoutingEventHubProperties.class);
+    private static final ClientLogger LOGGER = new ClientLogger(RoutingAzureDigitalTwinsEndpointProperties.class);
 }

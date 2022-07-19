@@ -9,7 +9,7 @@ import com.azure.resourcemanager.iothub.models.EventHubConsumerGroupName;
 /** Samples for IotHubResource CreateEventHubConsumerGroup. */
 public final class IotHubResourceCreateEventHubConsumerGroupSamples {
     /*
-     * x-ms-original-file: specification/iothub/resource-manager/Microsoft.Devices/stable/2021-07-02/examples/iothub_createconsumergroup.json
+     * x-ms-original-file: specification/iothub/resource-manager/Microsoft.Devices/preview/2021-10-15-preview/examples/iothub_createconsumergroup.json
      */
     /**
      * Sample code: IotHubResource_CreateEventHubConsumerGroup.
