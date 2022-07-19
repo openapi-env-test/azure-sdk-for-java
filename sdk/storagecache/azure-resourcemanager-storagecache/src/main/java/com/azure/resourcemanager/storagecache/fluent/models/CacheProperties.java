@@ -10,8 +10,12 @@ import com.azure.resourcemanager.storagecache.models.CacheEncryptionSettings;
 import com.azure.resourcemanager.storagecache.models.CacheHealth;
 import com.azure.resourcemanager.storagecache.models.CacheNetworkSettings;
 import com.azure.resourcemanager.storagecache.models.CacheSecuritySettings;
+import com.azure.resourcemanager.storagecache.models.CacheUpgradeSettings;
 import com.azure.resourcemanager.storagecache.models.CacheUpgradeStatus;
+import com.azure.resourcemanager.storagecache.models.PrimingJob;
 import com.azure.resourcemanager.storagecache.models.ProvisioningStateType;
+import com.azure.resourcemanager.storagecache.models.ScalingFactor;
+import com.azure.resourcemanager.storagecache.models.StorageTargetSpaceAllocation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
@@ -19,10 +23,20 @@ import java.util.List;
 @Fluent
 public final class CacheProperties {
     /*
-     * The size of this Cache, in GB.
+     * The size of this Cache, in GB, when scalingFactor is 1.0
      */
     @JsonProperty(value = "cacheSizeGB")
     private Integer cacheSizeGB;
+
+    /*
+     * Multiplier that sets the current storage and throughput capacity of the
+     * cache. Values can be 1.0 (the base size, listed in the SKU), 1.33, 2.0,
+     * or 4.0. Values above 1.0 increase the cache size and throughput - for
+     * example, the scaling factor 1.33 gives a cache that's 33% larger than
+     * its base size.
+     */
+    @JsonProperty(value = "scalingFactor")
+    private ScalingFactor scalingFactor;
 
     /*
      * Health of the Cache.
@@ -56,6 +70,12 @@ public final class CacheProperties {
     private CacheUpgradeStatus upgradeStatus;
 
     /*
+     * Upgrade settings of the Cache.
+     */
+    @JsonProperty(value = "upgradeSettings")
+    private CacheUpgradeSettings upgradeSettings;
+
+    /*
      * Specifies network settings of the cache.
      */
     @JsonProperty(value = "networkSettings")
@@ -86,8 +106,21 @@ public final class CacheProperties {
     @JsonProperty(value = "zones")
     private List<String> zones;
 
+    /*
+     * Specifies the priming jobs defined in the cache.
+     */
+    @JsonProperty(value = "primingJobs", access = JsonProperty.Access.WRITE_ONLY)
+    private List<PrimingJob> primingJobs;
+
+    /*
+     * Specifies the space allocation percentage for each storage target in the
+     * cache.
+     */
+    @JsonProperty(value = "spaceAllocation", access = JsonProperty.Access.WRITE_ONLY)
+    private List<StorageTargetSpaceAllocation> spaceAllocation;
+
     /**
-     * Get the cacheSizeGB property: The size of this Cache, in GB.
+     * Get the cacheSizeGB property: The size of this Cache, in GB, when scalingFactor is 1.0.
      *
      * @return the cacheSizeGB value.
      */
@@ -96,13 +129,37 @@ public final class CacheProperties {
     }
 
     /**
-     * Set the cacheSizeGB property: The size of this Cache, in GB.
+     * Set the cacheSizeGB property: The size of this Cache, in GB, when scalingFactor is 1.0.
      *
      * @param cacheSizeGB the cacheSizeGB value to set.
      * @return the CacheProperties object itself.
      */
     public CacheProperties withCacheSizeGB(Integer cacheSizeGB) {
         this.cacheSizeGB = cacheSizeGB;
+        return this;
+    }
+
+    /**
+     * Get the scalingFactor property: Multiplier that sets the current storage and throughput capacity of the cache.
+     * Values can be 1.0 (the base size, listed in the SKU), 1.33, 2.0, or 4.0. Values above 1.0 increase the cache size
+     * and throughput - for example, the scaling factor 1.33 gives a cache that's 33% larger than its base size.
+     *
+     * @return the scalingFactor value.
+     */
+    public ScalingFactor scalingFactor() {
+        return this.scalingFactor;
+    }
+
+    /**
+     * Set the scalingFactor property: Multiplier that sets the current storage and throughput capacity of the cache.
+     * Values can be 1.0 (the base size, listed in the SKU), 1.33, 2.0, or 4.0. Values above 1.0 increase the cache size
+     * and throughput - for example, the scaling factor 1.33 gives a cache that's 33% larger than its base size.
+     *
+     * @param scalingFactor the scalingFactor value to set.
+     * @return the CacheProperties object itself.
+     */
+    public CacheProperties withScalingFactor(ScalingFactor scalingFactor) {
+        this.scalingFactor = scalingFactor;
         return this;
     }
 
@@ -161,6 +218,26 @@ public final class CacheProperties {
      */
     public CacheUpgradeStatus upgradeStatus() {
         return this.upgradeStatus;
+    }
+
+    /**
+     * Get the upgradeSettings property: Upgrade settings of the Cache.
+     *
+     * @return the upgradeSettings value.
+     */
+    public CacheUpgradeSettings upgradeSettings() {
+        return this.upgradeSettings;
+    }
+
+    /**
+     * Set the upgradeSettings property: Upgrade settings of the Cache.
+     *
+     * @param upgradeSettings the upgradeSettings value to set.
+     * @return the CacheProperties object itself.
+     */
+    public CacheProperties withUpgradeSettings(CacheUpgradeSettings upgradeSettings) {
+        this.upgradeSettings = upgradeSettings;
+        return this;
     }
 
     /**
@@ -266,6 +343,24 @@ public final class CacheProperties {
     }
 
     /**
+     * Get the primingJobs property: Specifies the priming jobs defined in the cache.
+     *
+     * @return the primingJobs value.
+     */
+    public List<PrimingJob> primingJobs() {
+        return this.primingJobs;
+    }
+
+    /**
+     * Get the spaceAllocation property: Specifies the space allocation percentage for each storage target in the cache.
+     *
+     * @return the spaceAllocation value.
+     */
+    public List<StorageTargetSpaceAllocation> spaceAllocation() {
+        return this.spaceAllocation;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -276,6 +371,9 @@ public final class CacheProperties {
         }
         if (upgradeStatus() != null) {
             upgradeStatus().validate();
+        }
+        if (upgradeSettings() != null) {
+            upgradeSettings().validate();
         }
         if (networkSettings() != null) {
             networkSettings().validate();
@@ -288,6 +386,12 @@ public final class CacheProperties {
         }
         if (directoryServicesSettings() != null) {
             directoryServicesSettings().validate();
+        }
+        if (primingJobs() != null) {
+            primingJobs().forEach(e -> e.validate());
+        }
+        if (spaceAllocation() != null) {
+            spaceAllocation().forEach(e -> e.validate());
         }
     }
 }

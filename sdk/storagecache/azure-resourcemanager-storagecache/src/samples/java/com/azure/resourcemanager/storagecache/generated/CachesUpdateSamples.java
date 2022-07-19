@@ -10,13 +10,16 @@ import com.azure.resourcemanager.storagecache.models.CacheActiveDirectorySetting
 import com.azure.resourcemanager.storagecache.models.CacheDirectorySettings;
 import com.azure.resourcemanager.storagecache.models.CacheNetworkSettings;
 import com.azure.resourcemanager.storagecache.models.CacheSecuritySettings;
+import com.azure.resourcemanager.storagecache.models.CacheUpgradeSettings;
 import com.azure.resourcemanager.storagecache.models.CacheUsernameDownloadSettings;
 import com.azure.resourcemanager.storagecache.models.CacheUsernameDownloadSettingsCredentials;
 import com.azure.resourcemanager.storagecache.models.NfsAccessPolicy;
 import com.azure.resourcemanager.storagecache.models.NfsAccessRule;
 import com.azure.resourcemanager.storagecache.models.NfsAccessRuleAccess;
 import com.azure.resourcemanager.storagecache.models.NfsAccessRuleScope;
+import com.azure.resourcemanager.storagecache.models.ScalingFactor;
 import com.azure.resourcemanager.storagecache.models.UsernameSource;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +27,7 @@ import java.util.Map;
 /** Samples for Caches Update. */
 public final class CachesUpdateSamples {
     /*
-     * x-ms-original-file: specification/storagecache/resource-manager/Microsoft.StorageCache/stable/2022-01-01/examples/Caches_Update_ldap_only.json
+     * x-ms-original-file: specification/storagecache/resource-manager/Microsoft.StorageCache/preview/2022-09-01-preview/examples/Caches_Update_ldap_only.json
      */
     /**
      * Sample code: Caches_Update_ldap_only.
@@ -36,6 +39,11 @@ public final class CachesUpdateSamples {
         resource
             .update()
             .withTags(mapOf("Dept", "Contoso"))
+            .withScalingFactor(ScalingFactor.ONE)
+            .withUpgradeSettings(
+                new CacheUpgradeSettings()
+                    .withUpgradeScheduleEnabled(true)
+                    .withScheduledTime(OffsetDateTime.parse("2022-04-26T18:25:43.511Z")))
             .withNetworkSettings(
                 new CacheNetworkSettings()
                     .withMtu(1500)
@@ -101,7 +109,7 @@ public final class CachesUpdateSamples {
     }
 
     /*
-     * x-ms-original-file: specification/storagecache/resource-manager/Microsoft.StorageCache/stable/2022-01-01/examples/Caches_Update.json
+     * x-ms-original-file: specification/storagecache/resource-manager/Microsoft.StorageCache/preview/2022-09-01-preview/examples/Caches_Update.json
      */
     /**
      * Sample code: Caches_Update.
@@ -113,6 +121,11 @@ public final class CachesUpdateSamples {
         resource
             .update()
             .withTags(mapOf("Dept", "Contoso"))
+            .withScalingFactor(ScalingFactor.TWO)
+            .withUpgradeSettings(
+                new CacheUpgradeSettings()
+                    .withUpgradeScheduleEnabled(true)
+                    .withScheduledTime(OffsetDateTime.parse("2022-04-26T18:25:43.511Z")))
             .withNetworkSettings(
                 new CacheNetworkSettings()
                     .withMtu(1500)
