@@ -15,7 +15,6 @@ import com.azure.resourcemanager.desktopvirtualization.models.ScalingHostPoolRef
 import com.azure.resourcemanager.desktopvirtualization.models.ScalingHostPoolType;
 import com.azure.resourcemanager.desktopvirtualization.models.ScalingPlan;
 import com.azure.resourcemanager.desktopvirtualization.models.ScalingPlanPatch;
-import com.azure.resourcemanager.desktopvirtualization.models.ScalingSchedule;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -102,15 +101,6 @@ public final class ScalingPlanImpl implements ScalingPlan, ScalingPlan.Definitio
         return this.innerModel().exclusionTag();
     }
 
-    public List<ScalingSchedule> schedules() {
-        List<ScalingSchedule> inner = this.innerModel().schedules();
-        if (inner != null) {
-            return Collections.unmodifiableList(inner);
-        } else {
-            return Collections.emptyList();
-        }
-    }
-
     public List<ScalingHostPoolReference> hostPoolReferences() {
         List<ScalingHostPoolReference> inner = this.innerModel().hostPoolReferences();
         if (inner != null) {
@@ -126,6 +116,10 @@ public final class ScalingPlanImpl implements ScalingPlan, ScalingPlan.Definitio
 
     public String regionName() {
         return this.location();
+    }
+
+    public String resourceGroupName() {
+        return resourceGroupName;
     }
 
     public ScalingPlanInner innerModel() {
@@ -238,6 +232,16 @@ public final class ScalingPlanImpl implements ScalingPlan, ScalingPlan.Definitio
         return this;
     }
 
+    public ScalingPlanImpl withTimeZone(String timeZone) {
+        if (isInCreateMode()) {
+            this.innerModel().withTimeZone(timeZone);
+            return this;
+        } else {
+            this.updateScalingPlan.withTimeZone(timeZone);
+            return this;
+        }
+    }
+
     public ScalingPlanImpl withTags(Map<String, String> tags) {
         if (isInCreateMode()) {
             this.innerModel().withTags(tags);
@@ -293,16 +297,6 @@ public final class ScalingPlanImpl implements ScalingPlan, ScalingPlan.Definitio
         }
     }
 
-    public ScalingPlanImpl withTimeZone(String timeZone) {
-        if (isInCreateMode()) {
-            this.innerModel().withTimeZone(timeZone);
-            return this;
-        } else {
-            this.updateScalingPlan.withTimeZone(timeZone);
-            return this;
-        }
-    }
-
     public ScalingPlanImpl withHostPoolType(ScalingHostPoolType hostPoolType) {
         this.innerModel().withHostPoolType(hostPoolType);
         return this;
@@ -314,16 +308,6 @@ public final class ScalingPlanImpl implements ScalingPlan, ScalingPlan.Definitio
             return this;
         } else {
             this.updateScalingPlan.withExclusionTag(exclusionTag);
-            return this;
-        }
-    }
-
-    public ScalingPlanImpl withSchedules(List<ScalingSchedule> schedules) {
-        if (isInCreateMode()) {
-            this.innerModel().withSchedules(schedules);
-            return this;
-        } else {
-            this.updateScalingPlan.withSchedules(schedules);
             return this;
         }
     }
