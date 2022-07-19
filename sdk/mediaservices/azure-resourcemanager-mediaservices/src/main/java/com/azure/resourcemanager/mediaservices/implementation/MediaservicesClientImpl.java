@@ -238,6 +238,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -247,7 +248,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
                             this.client.getEndpoint(),
                             this.client.getSubscriptionId(),
                             resourceGroupName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             accept,
                             context))
             .<PagedResponse<MediaServiceInner>>map(
@@ -292,6 +293,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
             return Mono
                 .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -299,7 +301,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
                 this.client.getEndpoint(),
                 this.client.getSubscriptionId(),
                 resourceGroupName,
-                this.client.getApiVersion(),
+                apiVersion,
                 accept,
                 context)
             .map(
@@ -407,6 +409,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
         if (accountName == null) {
             return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -417,7 +420,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
                             this.client.getSubscriptionId(),
                             resourceGroupName,
                             accountName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             accept,
                             context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
@@ -457,6 +460,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
         if (accountName == null) {
             return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -465,7 +469,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
                 this.client.getSubscriptionId(),
                 resourceGroupName,
                 accountName,
-                this.client.getApiVersion(),
+                apiVersion,
                 accept,
                 context);
     }
@@ -556,6 +560,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
         } else {
             parameters.validate();
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -566,7 +571,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
                             this.client.getSubscriptionId(),
                             resourceGroupName,
                             accountName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             parameters,
                             accept,
                             context))
@@ -612,6 +617,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
         } else {
             parameters.validate();
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -620,7 +626,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
                 this.client.getSubscriptionId(),
                 resourceGroupName,
                 accountName,
-                this.client.getApiVersion(),
+                apiVersion,
                 parameters,
                 accept,
                 context);
@@ -816,6 +822,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
         if (accountName == null) {
             return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -826,7 +833,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
                             this.client.getSubscriptionId(),
                             resourceGroupName,
                             accountName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             accept,
                             context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
@@ -865,6 +872,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
         if (accountName == null) {
             return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -873,7 +881,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
                 this.client.getSubscriptionId(),
                 resourceGroupName,
                 accountName,
-                this.client.getApiVersion(),
+                apiVersion,
                 accept,
                 context);
     }
@@ -961,6 +969,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
         } else {
             parameters.validate();
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -971,7 +980,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
                             this.client.getSubscriptionId(),
                             resourceGroupName,
                             accountName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             parameters,
                             accept,
                             context))
@@ -1017,6 +1026,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
         } else {
             parameters.validate();
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -1025,7 +1035,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
                 this.client.getSubscriptionId(),
                 resourceGroupName,
                 accountName,
-                this.client.getApiVersion(),
+                apiVersion,
                 parameters,
                 accept,
                 context);
@@ -1226,6 +1236,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
         } else {
             parameters.validate();
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -1236,7 +1247,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
                             this.client.getSubscriptionId(),
                             resourceGroupName,
                             accountName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             parameters,
                             accept,
                             context))
@@ -1282,6 +1293,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
         } else {
             parameters.validate();
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -1290,7 +1302,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
                 this.client.getSubscriptionId(),
                 resourceGroupName,
                 accountName,
-                this.client.getApiVersion(),
+                apiVersion,
                 parameters,
                 accept,
                 context);
@@ -1385,6 +1397,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
         } else {
             parameters.validate();
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -1395,7 +1408,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
                             this.client.getSubscriptionId(),
                             resourceGroupName,
                             accountName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             parameters,
                             accept,
                             context))
@@ -1441,6 +1454,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
         } else {
             parameters.validate();
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
@@ -1449,7 +1463,7 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
                 this.client.getSubscriptionId(),
                 resourceGroupName,
                 accountName,
-                this.client.getApiVersion(),
+                apiVersion,
                 parameters,
                 accept,
                 context);
@@ -1530,17 +1544,13 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
                 context ->
                     service
-                        .list(
-                            this.client.getEndpoint(),
-                            this.client.getSubscriptionId(),
-                            this.client.getApiVersion(),
-                            accept,
-                            context))
+                        .list(this.client.getEndpoint(), this.client.getSubscriptionId(), apiVersion, accept, context))
             .<PagedResponse<MediaServiceInner>>map(
                 res ->
                     new PagedResponseBase<>(
@@ -1577,15 +1587,11 @@ public final class MediaservicesClientImpl implements MediaservicesClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
+        final String apiVersion = "2021-11-01";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .list(
-                this.client.getEndpoint(),
-                this.client.getSubscriptionId(),
-                this.client.getApiVersion(),
-                accept,
-                context)
+            .list(this.client.getEndpoint(), this.client.getSubscriptionId(), apiVersion, accept, context)
             .map(
                 res ->
                     new PagedResponseBase<>(
