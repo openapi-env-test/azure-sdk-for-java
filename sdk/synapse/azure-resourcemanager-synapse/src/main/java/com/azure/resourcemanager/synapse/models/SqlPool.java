@@ -159,6 +159,13 @@ public interface SqlPool {
     String regionName();
 
     /**
+     * Gets the name of the resource group.
+     *
+     * @return the name of the resource group.
+     */
+    String resourceGroupName();
+
+    /**
      * Gets the inner com.azure.resourcemanager.synapse.fluent.models.SqlPoolInner object.
      *
      * @return the inner object.
@@ -386,7 +393,6 @@ public interface SqlPool {
             UpdateStages.WithSourceDatabaseId,
             UpdateStages.WithRecoverableDatabaseId,
             UpdateStages.WithProvisioningState,
-            UpdateStages.WithRestorePointInTime,
             UpdateStages.WithCreateMode,
             UpdateStages.WithStorageAccountType {
         /**
@@ -475,16 +481,6 @@ public interface SqlPool {
              * @return the next definition stage.
              */
             Update withProvisioningState(String provisioningState);
-        }
-        /** The stage of the SqlPool update allowing to specify restorePointInTime. */
-        interface WithRestorePointInTime {
-            /**
-             * Specifies the restorePointInTime property: Snapshot time to restore.
-             *
-             * @param restorePointInTime Snapshot time to restore.
-             * @return the next definition stage.
-             */
-            Update withRestorePointInTime(OffsetDateTime restorePointInTime);
         }
         /** The stage of the SqlPool update allowing to specify createMode. */
         interface WithCreateMode {

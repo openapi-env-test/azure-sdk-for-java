@@ -4387,7 +4387,6 @@ public final class SqlPoolSecurityAlertPoliciesCreateOrUpdateSamples {
         resource
             .update()
             .withState(SecurityAlertPolicyState.ENABLED)
-            .withDisabledAlerts(Arrays.asList("Sql_Injection", "Usage_Anomaly"))
             .withEmailAddresses(Arrays.asList("test@microsoft.com", "user@microsoft.com"))
             .withEmailAccountAdmins(true)
             .withStorageEndpoint("https://mystorage.blob.core.windows.net")
@@ -5701,7 +5700,6 @@ public final class SqlPoolsResumeSamples {
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.synapse.models.Sku;
 import com.azure.resourcemanager.synapse.models.SqlPool;
-import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -5727,7 +5725,6 @@ public final class SqlPoolsUpdateSamples {
             .withSku(new Sku().withTier("").withName(""))
             .withMaxSizeBytes(0L)
             .withCollation("")
-            .withRestorePointInTime(OffsetDateTime.parse("1970-01-01T00:00:00.000Z"))
             .apply();
     }
 
@@ -5824,8 +5821,8 @@ public final class WorkspaceAadAdminsGetSamples {
 ```java
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.synapse.fluent.models.ManagedIdentitySqlControlSettingsModelInner;
+import com.azure.resourcemanager.synapse.models.DesiredState;
 import com.azure.resourcemanager.synapse.models.ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentity;
-import com.azure.resourcemanager.synapse.models.ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState;
 
 /** Samples for WorkspaceManagedIdentitySqlControlSettings CreateOrUpdate. */
 public final class WorkspaceManagedIdentitySqlControlSettingsCreateOrUpdateSamples {
@@ -5847,9 +5844,7 @@ public final class WorkspaceManagedIdentitySqlControlSettingsCreateOrUpdateSampl
                 new ManagedIdentitySqlControlSettingsModelInner()
                     .withGrantSqlControlToManagedIdentity(
                         new ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentity()
-                            .withDesiredState(
-                                ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState
-                                    .ENABLED)),
+                            .withDesiredState(DesiredState.ENABLED)),
                 Context.NONE);
     }
 }
