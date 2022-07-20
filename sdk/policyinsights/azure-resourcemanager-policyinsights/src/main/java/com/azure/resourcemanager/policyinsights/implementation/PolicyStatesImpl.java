@@ -15,12 +15,12 @@ import com.azure.resourcemanager.policyinsights.fluent.models.SummarizeResultsIn
 import com.azure.resourcemanager.policyinsights.models.PolicyState;
 import com.azure.resourcemanager.policyinsights.models.PolicyStates;
 import com.azure.resourcemanager.policyinsights.models.PolicyStatesResource;
+import com.azure.resourcemanager.policyinsights.models.PolicyStatesSummaryResourceType;
 import com.azure.resourcemanager.policyinsights.models.SummarizeResults;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.OffsetDateTime;
 
 public final class PolicyStatesImpl implements PolicyStates {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(PolicyStatesImpl.class);
+    private static final ClientLogger LOGGER = new ClientLogger(PolicyStatesImpl.class);
 
     private final PolicyStatesClient innerClient;
 
@@ -69,8 +69,10 @@ public final class PolicyStatesImpl implements PolicyStates {
         return Utils.mapPage(inner, inner1 -> new PolicyStateImpl(inner1, this.manager()));
     }
 
-    public SummarizeResults summarizeForManagementGroup(String managementGroupName) {
-        SummarizeResultsInner inner = this.serviceClient().summarizeForManagementGroup(managementGroupName);
+    public SummarizeResults summarizeForManagementGroup(
+        PolicyStatesSummaryResourceType policyStatesSummaryResource, String managementGroupName) {
+        SummarizeResultsInner inner =
+            this.serviceClient().summarizeForManagementGroup(policyStatesSummaryResource, managementGroupName);
         if (inner != null) {
             return new SummarizeResultsImpl(inner, this.manager());
         } else {
@@ -79,6 +81,7 @@ public final class PolicyStatesImpl implements PolicyStates {
     }
 
     public Response<SummarizeResults> summarizeForManagementGroupWithResponse(
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
         String managementGroupName,
         Integer top,
         OffsetDateTime from,
@@ -88,7 +91,8 @@ public final class PolicyStatesImpl implements PolicyStates {
         Response<SummarizeResultsInner> inner =
             this
                 .serviceClient()
-                .summarizeForManagementGroupWithResponse(managementGroupName, top, from, to, filter, context);
+                .summarizeForManagementGroupWithResponse(
+                    policyStatesSummaryResource, managementGroupName, top, from, to, filter, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),
@@ -100,16 +104,14 @@ public final class PolicyStatesImpl implements PolicyStates {
         }
     }
 
-    public PagedIterable<PolicyState> listQueryResultsForSubscription(
-        PolicyStatesResource policyStatesResource, String subscriptionId) {
+    public PagedIterable<PolicyState> listQueryResultsForSubscription(PolicyStatesResource policyStatesResource) {
         PagedIterable<PolicyStateInner> inner =
-            this.serviceClient().listQueryResultsForSubscription(policyStatesResource, subscriptionId);
+            this.serviceClient().listQueryResultsForSubscription(policyStatesResource);
         return Utils.mapPage(inner, inner1 -> new PolicyStateImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PolicyState> listQueryResultsForSubscription(
         PolicyStatesResource policyStatesResource,
-        String subscriptionId,
         Integer top,
         String orderBy,
         String select,
@@ -123,22 +125,12 @@ public final class PolicyStatesImpl implements PolicyStates {
             this
                 .serviceClient()
                 .listQueryResultsForSubscription(
-                    policyStatesResource,
-                    subscriptionId,
-                    top,
-                    orderBy,
-                    select,
-                    from,
-                    to,
-                    filter,
-                    apply,
-                    skipToken,
-                    context);
+                    policyStatesResource, top, orderBy, select, from, to, filter, apply, skipToken, context);
         return Utils.mapPage(inner, inner1 -> new PolicyStateImpl(inner1, this.manager()));
     }
 
-    public SummarizeResults summarizeForSubscription(String subscriptionId) {
-        SummarizeResultsInner inner = this.serviceClient().summarizeForSubscription(subscriptionId);
+    public SummarizeResults summarizeForSubscription(PolicyStatesSummaryResourceType policyStatesSummaryResource) {
+        SummarizeResultsInner inner = this.serviceClient().summarizeForSubscription(policyStatesSummaryResource);
         if (inner != null) {
             return new SummarizeResultsImpl(inner, this.manager());
         } else {
@@ -147,9 +139,16 @@ public final class PolicyStatesImpl implements PolicyStates {
     }
 
     public Response<SummarizeResults> summarizeForSubscriptionWithResponse(
-        String subscriptionId, Integer top, OffsetDateTime from, OffsetDateTime to, String filter, Context context) {
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
+        Integer top,
+        OffsetDateTime from,
+        OffsetDateTime to,
+        String filter,
+        Context context) {
         Response<SummarizeResultsInner> inner =
-            this.serviceClient().summarizeForSubscriptionWithResponse(subscriptionId, top, from, to, filter, context);
+            this
+                .serviceClient()
+                .summarizeForSubscriptionWithResponse(policyStatesSummaryResource, top, from, to, filter, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),
@@ -162,17 +161,14 @@ public final class PolicyStatesImpl implements PolicyStates {
     }
 
     public PagedIterable<PolicyState> listQueryResultsForResourceGroup(
-        PolicyStatesResource policyStatesResource, String subscriptionId, String resourceGroupName) {
+        PolicyStatesResource policyStatesResource, String resourceGroupName) {
         PagedIterable<PolicyStateInner> inner =
-            this
-                .serviceClient()
-                .listQueryResultsForResourceGroup(policyStatesResource, subscriptionId, resourceGroupName);
+            this.serviceClient().listQueryResultsForResourceGroup(policyStatesResource, resourceGroupName);
         return Utils.mapPage(inner, inner1 -> new PolicyStateImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PolicyState> listQueryResultsForResourceGroup(
         PolicyStatesResource policyStatesResource,
-        String subscriptionId,
         String resourceGroupName,
         Integer top,
         String orderBy,
@@ -188,7 +184,6 @@ public final class PolicyStatesImpl implements PolicyStates {
                 .serviceClient()
                 .listQueryResultsForResourceGroup(
                     policyStatesResource,
-                    subscriptionId,
                     resourceGroupName,
                     top,
                     orderBy,
@@ -202,8 +197,10 @@ public final class PolicyStatesImpl implements PolicyStates {
         return Utils.mapPage(inner, inner1 -> new PolicyStateImpl(inner1, this.manager()));
     }
 
-    public SummarizeResults summarizeForResourceGroup(String subscriptionId, String resourceGroupName) {
-        SummarizeResultsInner inner = this.serviceClient().summarizeForResourceGroup(subscriptionId, resourceGroupName);
+    public SummarizeResults summarizeForResourceGroup(
+        PolicyStatesSummaryResourceType policyStatesSummaryResource, String resourceGroupName) {
+        SummarizeResultsInner inner =
+            this.serviceClient().summarizeForResourceGroup(policyStatesSummaryResource, resourceGroupName);
         if (inner != null) {
             return new SummarizeResultsImpl(inner, this.manager());
         } else {
@@ -212,7 +209,7 @@ public final class PolicyStatesImpl implements PolicyStates {
     }
 
     public Response<SummarizeResults> summarizeForResourceGroupWithResponse(
-        String subscriptionId,
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
         String resourceGroupName,
         Integer top,
         OffsetDateTime from,
@@ -223,7 +220,7 @@ public final class PolicyStatesImpl implements PolicyStates {
             this
                 .serviceClient()
                 .summarizeForResourceGroupWithResponse(
-                    subscriptionId, resourceGroupName, top, from, to, filter, context);
+                    policyStatesSummaryResource, resourceGroupName, top, from, to, filter, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),
@@ -274,8 +271,10 @@ public final class PolicyStatesImpl implements PolicyStates {
         return Utils.mapPage(inner, inner1 -> new PolicyStateImpl(inner1, this.manager()));
     }
 
-    public SummarizeResults summarizeForResource(String resourceId) {
-        SummarizeResultsInner inner = this.serviceClient().summarizeForResource(resourceId);
+    public SummarizeResults summarizeForResource(
+        PolicyStatesSummaryResourceType policyStatesSummaryResource, String resourceId) {
+        SummarizeResultsInner inner =
+            this.serviceClient().summarizeForResource(policyStatesSummaryResource, resourceId);
         if (inner != null) {
             return new SummarizeResultsImpl(inner, this.manager());
         } else {
@@ -284,9 +283,18 @@ public final class PolicyStatesImpl implements PolicyStates {
     }
 
     public Response<SummarizeResults> summarizeForResourceWithResponse(
-        String resourceId, Integer top, OffsetDateTime from, OffsetDateTime to, String filter, Context context) {
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
+        String resourceId,
+        Integer top,
+        OffsetDateTime from,
+        OffsetDateTime to,
+        String filter,
+        Context context) {
         Response<SummarizeResultsInner> inner =
-            this.serviceClient().summarizeForResourceWithResponse(resourceId, top, from, to, filter, context);
+            this
+                .serviceClient()
+                .summarizeForResourceWithResponse(
+                    policyStatesSummaryResource, resourceId, top, from, to, filter, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),
@@ -298,34 +306,31 @@ public final class PolicyStatesImpl implements PolicyStates {
         }
     }
 
-    public void triggerSubscriptionEvaluation(String subscriptionId) {
-        this.serviceClient().triggerSubscriptionEvaluation(subscriptionId);
+    public void triggerSubscriptionEvaluation() {
+        this.serviceClient().triggerSubscriptionEvaluation();
     }
 
-    public void triggerSubscriptionEvaluation(String subscriptionId, Context context) {
-        this.serviceClient().triggerSubscriptionEvaluation(subscriptionId, context);
+    public void triggerSubscriptionEvaluation(Context context) {
+        this.serviceClient().triggerSubscriptionEvaluation(context);
     }
 
-    public void triggerResourceGroupEvaluation(String subscriptionId, String resourceGroupName) {
-        this.serviceClient().triggerResourceGroupEvaluation(subscriptionId, resourceGroupName);
+    public void triggerResourceGroupEvaluation(String resourceGroupName) {
+        this.serviceClient().triggerResourceGroupEvaluation(resourceGroupName);
     }
 
-    public void triggerResourceGroupEvaluation(String subscriptionId, String resourceGroupName, Context context) {
-        this.serviceClient().triggerResourceGroupEvaluation(subscriptionId, resourceGroupName, context);
+    public void triggerResourceGroupEvaluation(String resourceGroupName, Context context) {
+        this.serviceClient().triggerResourceGroupEvaluation(resourceGroupName, context);
     }
 
     public PagedIterable<PolicyState> listQueryResultsForPolicySetDefinition(
-        PolicyStatesResource policyStatesResource, String subscriptionId, String policySetDefinitionName) {
+        PolicyStatesResource policyStatesResource, String policySetDefinitionName) {
         PagedIterable<PolicyStateInner> inner =
-            this
-                .serviceClient()
-                .listQueryResultsForPolicySetDefinition(policyStatesResource, subscriptionId, policySetDefinitionName);
+            this.serviceClient().listQueryResultsForPolicySetDefinition(policyStatesResource, policySetDefinitionName);
         return Utils.mapPage(inner, inner1 -> new PolicyStateImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PolicyState> listQueryResultsForPolicySetDefinition(
         PolicyStatesResource policyStatesResource,
-        String subscriptionId,
         String policySetDefinitionName,
         Integer top,
         String orderBy,
@@ -341,7 +346,6 @@ public final class PolicyStatesImpl implements PolicyStates {
                 .serviceClient()
                 .listQueryResultsForPolicySetDefinition(
                     policyStatesResource,
-                    subscriptionId,
                     policySetDefinitionName,
                     top,
                     orderBy,
@@ -355,9 +359,10 @@ public final class PolicyStatesImpl implements PolicyStates {
         return Utils.mapPage(inner, inner1 -> new PolicyStateImpl(inner1, this.manager()));
     }
 
-    public SummarizeResults summarizeForPolicySetDefinition(String subscriptionId, String policySetDefinitionName) {
+    public SummarizeResults summarizeForPolicySetDefinition(
+        PolicyStatesSummaryResourceType policyStatesSummaryResource, String policySetDefinitionName) {
         SummarizeResultsInner inner =
-            this.serviceClient().summarizeForPolicySetDefinition(subscriptionId, policySetDefinitionName);
+            this.serviceClient().summarizeForPolicySetDefinition(policyStatesSummaryResource, policySetDefinitionName);
         if (inner != null) {
             return new SummarizeResultsImpl(inner, this.manager());
         } else {
@@ -366,7 +371,7 @@ public final class PolicyStatesImpl implements PolicyStates {
     }
 
     public Response<SummarizeResults> summarizeForPolicySetDefinitionWithResponse(
-        String subscriptionId,
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
         String policySetDefinitionName,
         Integer top,
         OffsetDateTime from,
@@ -377,7 +382,7 @@ public final class PolicyStatesImpl implements PolicyStates {
             this
                 .serviceClient()
                 .summarizeForPolicySetDefinitionWithResponse(
-                    subscriptionId, policySetDefinitionName, top, from, to, filter, context);
+                    policyStatesSummaryResource, policySetDefinitionName, top, from, to, filter, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),
@@ -390,17 +395,14 @@ public final class PolicyStatesImpl implements PolicyStates {
     }
 
     public PagedIterable<PolicyState> listQueryResultsForPolicyDefinition(
-        PolicyStatesResource policyStatesResource, String subscriptionId, String policyDefinitionName) {
+        PolicyStatesResource policyStatesResource, String policyDefinitionName) {
         PagedIterable<PolicyStateInner> inner =
-            this
-                .serviceClient()
-                .listQueryResultsForPolicyDefinition(policyStatesResource, subscriptionId, policyDefinitionName);
+            this.serviceClient().listQueryResultsForPolicyDefinition(policyStatesResource, policyDefinitionName);
         return Utils.mapPage(inner, inner1 -> new PolicyStateImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PolicyState> listQueryResultsForPolicyDefinition(
         PolicyStatesResource policyStatesResource,
-        String subscriptionId,
         String policyDefinitionName,
         Integer top,
         String orderBy,
@@ -416,7 +418,6 @@ public final class PolicyStatesImpl implements PolicyStates {
                 .serviceClient()
                 .listQueryResultsForPolicyDefinition(
                     policyStatesResource,
-                    subscriptionId,
                     policyDefinitionName,
                     top,
                     orderBy,
@@ -430,9 +431,10 @@ public final class PolicyStatesImpl implements PolicyStates {
         return Utils.mapPage(inner, inner1 -> new PolicyStateImpl(inner1, this.manager()));
     }
 
-    public SummarizeResults summarizeForPolicyDefinition(String subscriptionId, String policyDefinitionName) {
+    public SummarizeResults summarizeForPolicyDefinition(
+        PolicyStatesSummaryResourceType policyStatesSummaryResource, String policyDefinitionName) {
         SummarizeResultsInner inner =
-            this.serviceClient().summarizeForPolicyDefinition(subscriptionId, policyDefinitionName);
+            this.serviceClient().summarizeForPolicyDefinition(policyStatesSummaryResource, policyDefinitionName);
         if (inner != null) {
             return new SummarizeResultsImpl(inner, this.manager());
         } else {
@@ -441,7 +443,7 @@ public final class PolicyStatesImpl implements PolicyStates {
     }
 
     public Response<SummarizeResults> summarizeForPolicyDefinitionWithResponse(
-        String subscriptionId,
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
         String policyDefinitionName,
         Integer top,
         OffsetDateTime from,
@@ -452,7 +454,7 @@ public final class PolicyStatesImpl implements PolicyStates {
             this
                 .serviceClient()
                 .summarizeForPolicyDefinitionWithResponse(
-                    subscriptionId, policyDefinitionName, top, from, to, filter, context);
+                    policyStatesSummaryResource, policyDefinitionName, top, from, to, filter, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),
@@ -465,18 +467,16 @@ public final class PolicyStatesImpl implements PolicyStates {
     }
 
     public PagedIterable<PolicyState> listQueryResultsForSubscriptionLevelPolicyAssignment(
-        PolicyStatesResource policyStatesResource, String subscriptionId, String policyAssignmentName) {
+        PolicyStatesResource policyStatesResource, String policyAssignmentName) {
         PagedIterable<PolicyStateInner> inner =
             this
                 .serviceClient()
-                .listQueryResultsForSubscriptionLevelPolicyAssignment(
-                    policyStatesResource, subscriptionId, policyAssignmentName);
+                .listQueryResultsForSubscriptionLevelPolicyAssignment(policyStatesResource, policyAssignmentName);
         return Utils.mapPage(inner, inner1 -> new PolicyStateImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PolicyState> listQueryResultsForSubscriptionLevelPolicyAssignment(
         PolicyStatesResource policyStatesResource,
-        String subscriptionId,
         String policyAssignmentName,
         Integer top,
         String orderBy,
@@ -492,7 +492,6 @@ public final class PolicyStatesImpl implements PolicyStates {
                 .serviceClient()
                 .listQueryResultsForSubscriptionLevelPolicyAssignment(
                     policyStatesResource,
-                    subscriptionId,
                     policyAssignmentName,
                     top,
                     orderBy,
@@ -507,9 +506,11 @@ public final class PolicyStatesImpl implements PolicyStates {
     }
 
     public SummarizeResults summarizeForSubscriptionLevelPolicyAssignment(
-        String subscriptionId, String policyAssignmentName) {
+        PolicyStatesSummaryResourceType policyStatesSummaryResource, String policyAssignmentName) {
         SummarizeResultsInner inner =
-            this.serviceClient().summarizeForSubscriptionLevelPolicyAssignment(subscriptionId, policyAssignmentName);
+            this
+                .serviceClient()
+                .summarizeForSubscriptionLevelPolicyAssignment(policyStatesSummaryResource, policyAssignmentName);
         if (inner != null) {
             return new SummarizeResultsImpl(inner, this.manager());
         } else {
@@ -518,7 +519,7 @@ public final class PolicyStatesImpl implements PolicyStates {
     }
 
     public Response<SummarizeResults> summarizeForSubscriptionLevelPolicyAssignmentWithResponse(
-        String subscriptionId,
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
         String policyAssignmentName,
         Integer top,
         OffsetDateTime from,
@@ -529,7 +530,7 @@ public final class PolicyStatesImpl implements PolicyStates {
             this
                 .serviceClient()
                 .summarizeForSubscriptionLevelPolicyAssignmentWithResponse(
-                    subscriptionId, policyAssignmentName, top, from, to, filter, context);
+                    policyStatesSummaryResource, policyAssignmentName, top, from, to, filter, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),
@@ -542,21 +543,17 @@ public final class PolicyStatesImpl implements PolicyStates {
     }
 
     public PagedIterable<PolicyState> listQueryResultsForResourceGroupLevelPolicyAssignment(
-        PolicyStatesResource policyStatesResource,
-        String subscriptionId,
-        String resourceGroupName,
-        String policyAssignmentName) {
+        PolicyStatesResource policyStatesResource, String resourceGroupName, String policyAssignmentName) {
         PagedIterable<PolicyStateInner> inner =
             this
                 .serviceClient()
                 .listQueryResultsForResourceGroupLevelPolicyAssignment(
-                    policyStatesResource, subscriptionId, resourceGroupName, policyAssignmentName);
+                    policyStatesResource, resourceGroupName, policyAssignmentName);
         return Utils.mapPage(inner, inner1 -> new PolicyStateImpl(inner1, this.manager()));
     }
 
     public PagedIterable<PolicyState> listQueryResultsForResourceGroupLevelPolicyAssignment(
         PolicyStatesResource policyStatesResource,
-        String subscriptionId,
         String resourceGroupName,
         String policyAssignmentName,
         Integer top,
@@ -573,7 +570,6 @@ public final class PolicyStatesImpl implements PolicyStates {
                 .serviceClient()
                 .listQueryResultsForResourceGroupLevelPolicyAssignment(
                     policyStatesResource,
-                    subscriptionId,
                     resourceGroupName,
                     policyAssignmentName,
                     top,
@@ -589,12 +585,14 @@ public final class PolicyStatesImpl implements PolicyStates {
     }
 
     public SummarizeResults summarizeForResourceGroupLevelPolicyAssignment(
-        String subscriptionId, String resourceGroupName, String policyAssignmentName) {
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
+        String resourceGroupName,
+        String policyAssignmentName) {
         SummarizeResultsInner inner =
             this
                 .serviceClient()
                 .summarizeForResourceGroupLevelPolicyAssignment(
-                    subscriptionId, resourceGroupName, policyAssignmentName);
+                    policyStatesSummaryResource, resourceGroupName, policyAssignmentName);
         if (inner != null) {
             return new SummarizeResultsImpl(inner, this.manager());
         } else {
@@ -603,7 +601,7 @@ public final class PolicyStatesImpl implements PolicyStates {
     }
 
     public Response<SummarizeResults> summarizeForResourceGroupLevelPolicyAssignmentWithResponse(
-        String subscriptionId,
+        PolicyStatesSummaryResourceType policyStatesSummaryResource,
         String resourceGroupName,
         String policyAssignmentName,
         Integer top,
@@ -615,7 +613,14 @@ public final class PolicyStatesImpl implements PolicyStates {
             this
                 .serviceClient()
                 .summarizeForResourceGroupLevelPolicyAssignmentWithResponse(
-                    subscriptionId, resourceGroupName, policyAssignmentName, top, from, to, filter, context);
+                    policyStatesSummaryResource,
+                    resourceGroupName,
+                    policyAssignmentName,
+                    top,
+                    from,
+                    to,
+                    filter,
+                    context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),

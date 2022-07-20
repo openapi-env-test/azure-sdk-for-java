@@ -23,7 +23,6 @@ public final class PolicyStatesListQueryResultsForResourceGroupLevelPolicyAssign
             .policyStates()
             .listQueryResultsForResourceGroupLevelPolicyAssignment(
                 PolicyStatesResource.LATEST,
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
                 "myResourceGroup",
                 "myPolicyAssignment",
                 null,
@@ -51,7 +50,6 @@ public final class PolicyStatesListQueryResultsForResourceGroupLevelPolicyAssign
             .policyStates()
             .listQueryResultsForResourceGroupLevelPolicyAssignment(
                 PolicyStatesResource.LATEST,
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
                 "myResourceGroup",
                 "myPolicyAssignment",
                 null,

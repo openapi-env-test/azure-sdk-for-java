@@ -5,6 +5,7 @@
 package com.azure.resourcemanager.policyinsights.generated;
 
 import com.azure.core.util.Context;
+import com.azure.resourcemanager.policyinsights.models.PolicyStatesSummaryResourceType;
 
 /** Samples for PolicyStates SummarizeForSubscription. */
 public final class PolicyStatesSummarizeForSubscriptionSamples {
@@ -21,7 +22,7 @@ public final class PolicyStatesSummarizeForSubscriptionSamples {
         manager
             .policyStates()
             .summarizeForSubscriptionWithResponse(
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+                PolicyStatesSummaryResourceType.LATEST,
                 1,
                 null,
                 null,
@@ -42,6 +43,6 @@ public final class PolicyStatesSummarizeForSubscriptionSamples {
         manager
             .policyStates()
             .summarizeForSubscriptionWithResponse(
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852", 5, null, null, null, Context.NONE);
+                PolicyStatesSummaryResourceType.LATEST, 5, null, null, null, Context.NONE);
     }
 }

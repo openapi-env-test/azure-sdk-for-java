@@ -18,6 +18,6 @@ public final class PolicyStatesTriggerSubscriptionEvaluationSamples {
      */
     public static void triggerEvaluationsForAllResourcesInASubscription(
         com.azure.resourcemanager.policyinsights.PolicyInsightsManager manager) {
-        manager.policyStates().triggerSubscriptionEvaluation("fffedd8f-ffff-fffd-fffd-fffed2f84852", Context.NONE);
+        manager.policyStates().triggerSubscriptionEvaluation(Context.NONE);
     }
 }

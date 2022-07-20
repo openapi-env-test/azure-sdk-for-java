@@ -23,17 +23,7 @@ public final class PolicyStatesListQueryResultsForSubscriptionSamples {
         manager
             .policyStates()
             .listQueryResultsForSubscription(
-                PolicyStatesResource.LATEST,
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                Context.NONE);
+                PolicyStatesResource.LATEST, null, null, null, null, null, null, null, null, Context.NONE);
     }
 
     /*
@@ -50,7 +40,6 @@ public final class PolicyStatesListQueryResultsForSubscriptionSamples {
             .policyStates()
             .listQueryResultsForSubscription(
                 PolicyStatesResource.LATEST,
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
                 null,
                 null,
                 null,
@@ -76,7 +65,6 @@ public final class PolicyStatesListQueryResultsForSubscriptionSamples {
             .policyStates()
             .listQueryResultsForSubscription(
                 PolicyStatesResource.LATEST,
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
                 2,
                 "Timestamp desc, PolicyAssignmentId asc, SubscriptionId asc, ResourceGroup asc, ResourceId",
                 "Timestamp, PolicyAssignmentId, PolicyDefinitionId, SubscriptionId, ResourceGroup, ResourceId,"
@@ -102,7 +90,6 @@ public final class PolicyStatesListQueryResultsForSubscriptionSamples {
             .policyStates()
             .listQueryResultsForSubscription(
                 PolicyStatesResource.LATEST,
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
                 null,
                 null,
                 null,
@@ -128,7 +115,6 @@ public final class PolicyStatesListQueryResultsForSubscriptionSamples {
             .policyStates()
             .listQueryResultsForSubscription(
                 PolicyStatesResource.LATEST,
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
                 2,
                 null,
                 null,
@@ -153,7 +139,6 @@ public final class PolicyStatesListQueryResultsForSubscriptionSamples {
             .policyStates()
             .listQueryResultsForSubscription(
                 PolicyStatesResource.LATEST,
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
                 10,
                 "NumNonCompliantResources desc",
                 null,
@@ -181,7 +166,6 @@ public final class PolicyStatesListQueryResultsForSubscriptionSamples {
             .policyStates()
             .listQueryResultsForSubscription(
                 PolicyStatesResource.LATEST,
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
                 2,
                 "NumAuditDenyNonComplianceRecords desc",
                 null,

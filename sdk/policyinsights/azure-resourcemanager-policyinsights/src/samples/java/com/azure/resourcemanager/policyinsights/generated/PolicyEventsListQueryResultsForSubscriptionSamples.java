@@ -5,6 +5,7 @@
 package com.azure.resourcemanager.policyinsights.generated;
 
 import com.azure.core.util.Context;
+import com.azure.resourcemanager.policyinsights.models.PolicyEventsResourceType;
 import java.time.OffsetDateTime;
 
 /** Samples for PolicyEvents ListQueryResultsForSubscription. */
@@ -22,7 +23,7 @@ public final class PolicyEventsListQueryResultsForSubscriptionSamples {
         manager
             .policyEvents()
             .listQueryResultsForSubscription(
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+                PolicyEventsResourceType.DEFAULT,
                 2,
                 "Timestamp desc, PolicyAssignmentId asc, SubscriptionId asc, ResourceGroup asc, ResourceId",
                 "Timestamp, PolicyAssignmentId, PolicyDefinitionId, SubscriptionId, ResourceGroup, ResourceId",
@@ -46,7 +47,7 @@ public final class PolicyEventsListQueryResultsForSubscriptionSamples {
         manager
             .policyEvents()
             .listQueryResultsForSubscription(
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+                PolicyEventsResourceType.DEFAULT,
                 null,
                 null,
                 null,
@@ -71,7 +72,7 @@ public final class PolicyEventsListQueryResultsForSubscriptionSamples {
         manager
             .policyEvents()
             .listQueryResultsForSubscription(
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+                PolicyEventsResourceType.DEFAULT,
                 2,
                 null,
                 null,
@@ -96,7 +97,7 @@ public final class PolicyEventsListQueryResultsForSubscriptionSamples {
         manager
             .policyEvents()
             .listQueryResultsForSubscription(
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+                PolicyEventsResourceType.DEFAULT,
                 null,
                 null,
                 null,
@@ -120,7 +121,7 @@ public final class PolicyEventsListQueryResultsForSubscriptionSamples {
         manager
             .policyEvents()
             .listQueryResultsForSubscription(
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+                PolicyEventsResourceType.DEFAULT,
                 10,
                 "NumDeniedResources desc",
                 null,
@@ -146,7 +147,7 @@ public final class PolicyEventsListQueryResultsForSubscriptionSamples {
         manager
             .policyEvents()
             .listQueryResultsForSubscription(
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+                PolicyEventsResourceType.DEFAULT,
                 2,
                 null,
                 null,
@@ -172,6 +173,6 @@ public final class PolicyEventsListQueryResultsForSubscriptionSamples {
         manager
             .policyEvents()
             .listQueryResultsForSubscription(
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852", null, null, null, null, null, null, null, null, Context.NONE);
+                PolicyEventsResourceType.DEFAULT, null, null, null, null, null, null, null, null, Context.NONE);
     }
 }

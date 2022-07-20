@@ -23,7 +23,6 @@ public final class PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignm
             .policyStates()
             .listQueryResultsForSubscriptionLevelPolicyAssignment(
                 PolicyStatesResource.LATEST,
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
                 "ec8f9645-8ecb-4abb-9c0b-5292f19d4003",
                 null,
                 null,
@@ -50,7 +49,6 @@ public final class PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignm
             .policyStates()
             .listQueryResultsForSubscriptionLevelPolicyAssignment(
                 PolicyStatesResource.LATEST,
-                "fffedd8f-ffff-fffd-fffd-fffed2f84852",
                 "ec8f9645-8ecb-4abb-9c0b-5292f19d4003",
                 null,
                 null,
