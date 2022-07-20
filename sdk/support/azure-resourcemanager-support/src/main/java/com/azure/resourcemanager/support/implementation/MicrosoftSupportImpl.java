@@ -15,6 +15,7 @@ import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.polling.PollResult;
 import com.azure.core.management.polling.PollerFactory;
 import com.azure.core.util.Context;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.polling.AsyncPollResponse;
 import com.azure.core.util.polling.LongRunningOperationStatus;
@@ -25,6 +26,7 @@ import com.azure.resourcemanager.support.fluent.CommunicationsClient;
 import com.azure.resourcemanager.support.fluent.MicrosoftSupport;
 import com.azure.resourcemanager.support.fluent.OperationsClient;
 import com.azure.resourcemanager.support.fluent.ProblemClassificationsClient;
+import com.azure.resourcemanager.support.fluent.ResourceProvidersClient;
 import com.azure.resourcemanager.support.fluent.ServicesClient;
 import com.azure.resourcemanager.support.fluent.SupportTicketsClient;
 import java.io.IOException;
@@ -33,15 +35,12 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import java.util.Map;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the MicrosoftSupportImpl type. */
 @ServiceClient(builder = MicrosoftSupportBuilder.class)
 public final class MicrosoftSupportImpl implements MicrosoftSupport {
-    private final ClientLogger logger = new ClientLogger(MicrosoftSupportImpl.class);
-
     /** Azure subscription Id. */
     private final String subscriptionId;
 
@@ -162,6 +161,18 @@ public final class MicrosoftSupportImpl implements MicrosoftSupport {
         return this.supportTickets;
     }
 
+    /** The ResourceProvidersClient object to access its operations. */
+    private final ResourceProvidersClient resourceProviders;
+
+    /**
+     * Gets the ResourceProvidersClient object to access its operations.
+     *
+     * @return the ResourceProvidersClient object.
+     */
+    public ResourceProvidersClient getResourceProviders() {
+        return this.resourceProviders;
+    }
+
     /** The CommunicationsClient object to access its operations. */
     private final CommunicationsClient communications;
 
@@ -201,6 +212,7 @@ public final class MicrosoftSupportImpl implements MicrosoftSupport {
         this.services = new ServicesClientImpl(this);
         this.problemClassifications = new ProblemClassificationsClientImpl(this);
         this.supportTickets = new SupportTicketsClientImpl(this);
+        this.resourceProviders = new ResourceProvidersClientImpl(this);
         this.communications = new CommunicationsClientImpl(this);
     }
 
@@ -220,10 +232,7 @@ public final class MicrosoftSupportImpl implements MicrosoftSupport {
      * @return the merged context.
      */
     public Context mergeContext(Context context) {
-        for (Map.Entry<Object, Object> entry : this.getContext().getValues().entrySet()) {
-            context = context.addData(entry.getKey(), entry.getValue());
-        }
-        return context;
+        return CoreUtils.mergeContexts(this.getContext(), context);
     }
 
     /**
@@ -287,7 +296,7 @@ public final class MicrosoftSupportImpl implements MicrosoftSupport {
                             managementError = null;
                         }
                     } catch (IOException | RuntimeException ioe) {
-                        logger.logThrowableAsWarning(ioe);
+                        LOGGER.logThrowableAsWarning(ioe);
                     }
                 }
             } else {
@@ -346,4 +355,6 @@ public final class MicrosoftSupportImpl implements MicrosoftSupport {
             return Mono.just(new String(responseBody, charset));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(MicrosoftSupportImpl.class);
 }
