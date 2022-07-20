@@ -130,12 +130,20 @@ public final class BigDataPoolResourceInfoImpl
         return this.innerModel().lastSucceededTimestamp();
     }
 
+    public Boolean isAutotuneEnabled() {
+        return this.innerModel().isAutotuneEnabled();
+    }
+
     public Region region() {
         return Region.fromName(this.regionName());
     }
 
     public String regionName() {
         return this.location();
+    }
+
+    public String resourceGroupName() {
+        return resourceGroupName;
     }
 
     public BigDataPoolResourceInfoInner innerModel() {
@@ -343,6 +351,11 @@ public final class BigDataPoolResourceInfoImpl
 
     public BigDataPoolResourceInfoImpl withNodeSizeFamily(NodeSizeFamily nodeSizeFamily) {
         this.innerModel().withNodeSizeFamily(nodeSizeFamily);
+        return this;
+    }
+
+    public BigDataPoolResourceInfoImpl withIsAutotuneEnabled(Boolean isAutotuneEnabled) {
+        this.innerModel().withIsAutotuneEnabled(isAutotuneEnabled);
         return this;
     }
 

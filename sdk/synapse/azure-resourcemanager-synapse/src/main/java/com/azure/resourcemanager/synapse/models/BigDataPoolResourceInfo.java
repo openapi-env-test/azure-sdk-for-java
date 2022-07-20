@@ -177,6 +177,13 @@ public interface BigDataPoolResourceInfo {
     OffsetDateTime lastSucceededTimestamp();
 
     /**
+     * Gets the isAutotuneEnabled property: The isAutotuneEnabled property.
+     *
+     * @return the isAutotuneEnabled value.
+     */
+    Boolean isAutotuneEnabled();
+
+    /**
      * Gets the region of the resource.
      *
      * @return the region of the resource.
@@ -189,6 +196,13 @@ public interface BigDataPoolResourceInfo {
      * @return the name of the resource region.
      */
     String regionName();
+
+    /**
+     * Gets the name of the resource group.
+     *
+     * @return the name of the resource group.
+     */
+    String resourceGroupName();
 
     /**
      * Gets the inner com.azure.resourcemanager.synapse.fluent.models.BigDataPoolResourceInfoInner object.
@@ -260,6 +274,7 @@ public interface BigDataPoolResourceInfo {
                 DefinitionStages.WithDefaultSparkLogFolder,
                 DefinitionStages.WithNodeSize,
                 DefinitionStages.WithNodeSizeFamily,
+                DefinitionStages.WithIsAutotuneEnabled,
                 DefinitionStages.WithForce {
             /**
              * Executes the create request.
@@ -449,6 +464,16 @@ public interface BigDataPoolResourceInfo {
              * @return the next definition stage.
              */
             WithCreate withNodeSizeFamily(NodeSizeFamily nodeSizeFamily);
+        }
+        /** The stage of the BigDataPoolResourceInfo definition allowing to specify isAutotuneEnabled. */
+        interface WithIsAutotuneEnabled {
+            /**
+             * Specifies the isAutotuneEnabled property: The isAutotuneEnabled property..
+             *
+             * @param isAutotuneEnabled The isAutotuneEnabled property.
+             * @return the next definition stage.
+             */
+            WithCreate withIsAutotuneEnabled(Boolean isAutotuneEnabled);
         }
         /** The stage of the BigDataPoolResourceInfo definition allowing to specify force. */
         interface WithForce {

@@ -440,6 +440,29 @@ public final class BigDataPoolResourceInfoInner extends Resource {
     }
 
     /**
+     * Get the isAutotuneEnabled property: The isAutotuneEnabled property.
+     *
+     * @return the isAutotuneEnabled value.
+     */
+    public Boolean isAutotuneEnabled() {
+        return this.innerProperties() == null ? null : this.innerProperties().isAutotuneEnabled();
+    }
+
+    /**
+     * Set the isAutotuneEnabled property: The isAutotuneEnabled property.
+     *
+     * @param isAutotuneEnabled the isAutotuneEnabled value to set.
+     * @return the BigDataPoolResourceInfoInner object itself.
+     */
+    public BigDataPoolResourceInfoInner withIsAutotuneEnabled(Boolean isAutotuneEnabled) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new BigDataPoolResourceProperties();
+        }
+        this.innerProperties().withIsAutotuneEnabled(isAutotuneEnabled);
+        return this;
+    }
+
+    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.

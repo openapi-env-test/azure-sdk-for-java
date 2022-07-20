@@ -128,6 +128,12 @@ public final class BigDataPoolResourceProperties {
     @JsonProperty(value = "lastSucceededTimestamp", access = JsonProperty.Access.WRITE_ONLY)
     private OffsetDateTime lastSucceededTimestamp;
 
+    /*
+     * The isAutotuneEnabled property.
+     */
+    @JsonProperty(value = "isAutotuneEnabled")
+    private Boolean isAutotuneEnabled;
+
     /**
      * Get the provisioningState property: The state of the Big Data pool.
      *
@@ -467,6 +473,26 @@ public final class BigDataPoolResourceProperties {
      */
     public OffsetDateTime lastSucceededTimestamp() {
         return this.lastSucceededTimestamp;
+    }
+
+    /**
+     * Get the isAutotuneEnabled property: The isAutotuneEnabled property.
+     *
+     * @return the isAutotuneEnabled value.
+     */
+    public Boolean isAutotuneEnabled() {
+        return this.isAutotuneEnabled;
+    }
+
+    /**
+     * Set the isAutotuneEnabled property: The isAutotuneEnabled property.
+     *
+     * @param isAutotuneEnabled the isAutotuneEnabled value to set.
+     * @return the BigDataPoolResourceProperties object itself.
+     */
+    public BigDataPoolResourceProperties withIsAutotuneEnabled(Boolean isAutotuneEnabled) {
+        this.isAutotuneEnabled = isAutotuneEnabled;
+        return this;
     }
 
     /**
