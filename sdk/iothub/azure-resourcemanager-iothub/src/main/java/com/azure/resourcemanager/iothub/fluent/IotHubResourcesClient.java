@@ -29,7 +29,6 @@ import com.azure.resourcemanager.iothub.models.OperationInputs;
 import com.azure.resourcemanager.iothub.models.TagsResource;
 import com.azure.resourcemanager.iothub.models.TestAllRoutesInput;
 import com.azure.resourcemanager.iothub.models.TestRouteInput;
-import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in IotHubResourcesClient. */
 public interface IotHubResourcesClient {
@@ -66,8 +65,7 @@ public interface IotHubResourcesClient {
     /**
      * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub
      * metadata and security metadata, and then combine them with the modified values in a new body to update the IoT
-     * hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to
-     * default, which may lead to unexpected behavior.
+     * hub.
      *
      * @param resourceGroupName The name of the resource group that contains the IoT hub.
      * @param resourceName The name of the IoT hub.
@@ -78,7 +76,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link SyncPoller} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginCreateOrUpdate(
@@ -87,8 +85,7 @@ public interface IotHubResourcesClient {
     /**
      * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub
      * metadata and security metadata, and then combine them with the modified values in a new body to update the IoT
-     * hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to
-     * default, which may lead to unexpected behavior.
+     * hub.
      *
      * @param resourceGroupName The name of the resource group that contains the IoT hub.
      * @param resourceName The name of the IoT hub.
@@ -100,7 +97,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link SyncPoller} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginCreateOrUpdate(
@@ -113,8 +110,7 @@ public interface IotHubResourcesClient {
     /**
      * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub
      * metadata and security metadata, and then combine them with the modified values in a new body to update the IoT
-     * hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to
-     * default, which may lead to unexpected behavior.
+     * hub.
      *
      * @param resourceGroupName The name of the resource group that contains the IoT hub.
      * @param resourceName The name of the IoT hub.
@@ -134,8 +130,7 @@ public interface IotHubResourcesClient {
     /**
      * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub
      * metadata and security metadata, and then combine them with the modified values in a new body to update the IoT
-     * hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to
-     * default, which may lead to unexpected behavior.
+     * hub.
      *
      * @param resourceGroupName The name of the resource group that contains the IoT hub.
      * @param resourceName The name of the IoT hub.
@@ -153,8 +148,7 @@ public interface IotHubResourcesClient {
     /**
      * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub
      * metadata and security metadata, and then combine them with the modified values in a new body to update the IoT
-     * hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to
-     * default, which may lead to unexpected behavior.
+     * hub.
      *
      * @param resourceGroupName The name of the resource group that contains the IoT hub.
      * @param resourceName The name of the IoT hub.
@@ -185,7 +179,7 @@ public interface IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link SyncPoller} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginUpdate(
@@ -201,7 +195,7 @@ public interface IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link SyncPoller} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginUpdate(
@@ -246,7 +240,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link SyncPoller} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginDelete(
@@ -262,7 +256,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link SyncPoller} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginDelete(
@@ -303,7 +297,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return all the IoT hubs in a subscription.
+     * @return all the IoT hubs in a subscription as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<IotHubDescriptionInner> list();
@@ -316,7 +310,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return all the IoT hubs in a subscription.
+     * @return all the IoT hubs in a subscription as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<IotHubDescriptionInner> list(Context context);
@@ -329,7 +323,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return all the IoT hubs in a resource group.
+     * @return all the IoT hubs in a resource group as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<IotHubDescriptionInner> listByResourceGroup(String resourceGroupName);
@@ -343,7 +337,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return all the IoT hubs in a resource group.
+     * @return all the IoT hubs in a resource group as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<IotHubDescriptionInner> listByResourceGroup(String resourceGroupName, Context context);
@@ -387,7 +381,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of valid SKUs for an IoT hub.
+     * @return the list of valid SKUs for an IoT hub as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<IotHubSkuDescriptionInner> getValidSkus(String resourceGroupName, String resourceName);
@@ -402,7 +396,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of valid SKUs for an IoT hub.
+     * @return the list of valid SKUs for an IoT hub as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<IotHubSkuDescriptionInner> getValidSkus(
@@ -418,7 +412,8 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub.
+     * @return a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub as
+     *     paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<EventHubConsumerGroupInfoInner> listEventHubConsumerGroups(
@@ -435,7 +430,8 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub.
+     * @return a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub as
+     *     paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<EventHubConsumerGroupInfoInner> listEventHubConsumerGroups(
@@ -567,7 +563,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of all the jobs in an IoT hub.
+     * @return a list of all the jobs in an IoT hub as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<JobResponseInner> listJobs(String resourceGroupName, String resourceName);
@@ -583,7 +579,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of all the jobs in an IoT hub.
+     * @return a list of all the jobs in an IoT hub as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<JobResponseInner> listJobs(String resourceGroupName, String resourceName, Context context);
@@ -631,7 +627,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the quota metrics for an IoT hub.
+     * @return the quota metrics for an IoT hub as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<IotHubQuotaMetricInfoInner> getQuotaMetrics(String resourceGroupName, String resourceName);
@@ -646,7 +642,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the quota metrics for an IoT hub.
+     * @return the quota metrics for an IoT hub as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<IotHubQuotaMetricInfoInner> getQuotaMetrics(
@@ -661,7 +657,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the health for routing endpoints.
+     * @return the health for routing endpoints as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<EndpointHealthDataInner> getEndpointHealth(String resourceGroupName, String iotHubName);
@@ -676,7 +672,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the health for routing endpoints.
+     * @return the health for routing endpoints as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<EndpointHealthDataInner> getEndpointHealth(
@@ -786,7 +782,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the security metadata for an IoT hub.
+     * @return the security metadata for an IoT hub as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<SharedAccessSignatureAuthorizationRuleInner> listKeys(String resourceGroupName, String resourceName);
@@ -802,7 +798,7 @@ public interface IotHubResourcesClient {
      * @throws com.azure.resourcemanager.iothub.models.ErrorDetailsException thrown if the request is rejected by
      *     server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the security metadata for an IoT hub.
+     * @return the security metadata for an IoT hub as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<SharedAccessSignatureAuthorizationRuleInner> listKeys(

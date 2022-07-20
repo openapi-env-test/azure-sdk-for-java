@@ -31,7 +31,6 @@ import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.polling.PollResult;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.iothub.fluent.IotHubResourcesClient;
@@ -67,8 +66,6 @@ import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in IotHubResourcesClient. */
 public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
-    private final ClientLogger logger = new ClientLogger(IotHubResourcesClientImpl.class);
-
     /** The proxy service used to perform REST calls. */
     private final IotHubResourcesService service;
 
@@ -635,14 +632,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<IotHubDescriptionInner> getByResourceGroupAsync(String resourceGroupName, String resourceName) {
         return getByResourceGroupWithResponseAsync(resourceGroupName, resourceName)
-            .flatMap(
-                (Response<IotHubDescriptionInner> res) -> {
-                    if (res.getValue() != null) {
-                        return Mono.just(res.getValue());
-                    } else {
-                        return Mono.empty();
-                    }
-                });
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -680,8 +670,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     /**
      * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub
      * metadata and security metadata, and then combine them with the modified values in a new body to update the IoT
-     * hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to
-     * default, which may lead to unexpected behavior.
+     * hub.
      *
      * @param resourceGroupName The name of the resource group that contains the IoT hub.
      * @param resourceName The name of the IoT hub.
@@ -742,8 +731,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     /**
      * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub
      * metadata and security metadata, and then combine them with the modified values in a new body to update the IoT
-     * hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to
-     * default, which may lead to unexpected behavior.
+     * hub.
      *
      * @param resourceGroupName The name of the resource group that contains the IoT hub.
      * @param resourceName The name of the IoT hub.
@@ -806,8 +794,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     /**
      * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub
      * metadata and security metadata, and then combine them with the modified values in a new body to update the IoT
-     * hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to
-     * default, which may lead to unexpected behavior.
+     * hub.
      *
      * @param resourceGroupName The name of the resource group that contains the IoT hub.
      * @param resourceName The name of the IoT hub.
@@ -817,7 +804,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link PollerFlux} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginCreateOrUpdateAsync(
@@ -837,8 +824,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     /**
      * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub
      * metadata and security metadata, and then combine them with the modified values in a new body to update the IoT
-     * hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to
-     * default, which may lead to unexpected behavior.
+     * hub.
      *
      * @param resourceGroupName The name of the resource group that contains the IoT hub.
      * @param resourceName The name of the IoT hub.
@@ -849,7 +835,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link PollerFlux} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginCreateOrUpdateAsync(
@@ -874,8 +860,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     /**
      * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub
      * metadata and security metadata, and then combine them with the modified values in a new body to update the IoT
-     * hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to
-     * default, which may lead to unexpected behavior.
+     * hub.
      *
      * @param resourceGroupName The name of the resource group that contains the IoT hub.
      * @param resourceName The name of the IoT hub.
@@ -885,7 +870,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link SyncPoller} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginCreateOrUpdate(
@@ -896,8 +881,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     /**
      * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub
      * metadata and security metadata, and then combine them with the modified values in a new body to update the IoT
-     * hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to
-     * default, which may lead to unexpected behavior.
+     * hub.
      *
      * @param resourceGroupName The name of the resource group that contains the IoT hub.
      * @param resourceName The name of the IoT hub.
@@ -908,7 +892,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link SyncPoller} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginCreateOrUpdate(
@@ -924,8 +908,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     /**
      * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub
      * metadata and security metadata, and then combine them with the modified values in a new body to update the IoT
-     * hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to
-     * default, which may lead to unexpected behavior.
+     * hub.
      *
      * @param resourceGroupName The name of the resource group that contains the IoT hub.
      * @param resourceName The name of the IoT hub.
@@ -948,8 +931,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     /**
      * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub
      * metadata and security metadata, and then combine them with the modified values in a new body to update the IoT
-     * hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to
-     * default, which may lead to unexpected behavior.
+     * hub.
      *
      * @param resourceGroupName The name of the resource group that contains the IoT hub.
      * @param resourceName The name of the IoT hub.
@@ -971,8 +953,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     /**
      * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub
      * metadata and security metadata, and then combine them with the modified values in a new body to update the IoT
-     * hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to
-     * default, which may lead to unexpected behavior.
+     * hub.
      *
      * @param resourceGroupName The name of the resource group that contains the IoT hub.
      * @param resourceName The name of the IoT hub.
@@ -1000,8 +981,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     /**
      * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub
      * metadata and security metadata, and then combine them with the modified values in a new body to update the IoT
-     * hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to
-     * default, which may lead to unexpected behavior.
+     * hub.
      *
      * @param resourceGroupName The name of the resource group that contains the IoT hub.
      * @param resourceName The name of the IoT hub.
@@ -1022,8 +1002,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     /**
      * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub
      * metadata and security metadata, and then combine them with the modified values in a new body to update the IoT
-     * hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to
-     * default, which may lead to unexpected behavior.
+     * hub.
      *
      * @param resourceGroupName The name of the resource group that contains the IoT hub.
      * @param resourceName The name of the IoT hub.
@@ -1043,8 +1022,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     /**
      * Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub
      * metadata and security metadata, and then combine them with the modified values in a new body to update the IoT
-     * hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to
-     * default, which may lead to unexpected behavior.
+     * hub.
      *
      * @param resourceGroupName The name of the resource group that contains the IoT hub.
      * @param resourceName The name of the IoT hub.
@@ -1184,7 +1162,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link PollerFlux} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginUpdateAsync(
@@ -1210,7 +1188,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link PollerFlux} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginUpdateAsync(
@@ -1237,7 +1215,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link SyncPoller} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginUpdate(
@@ -1255,7 +1233,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link SyncPoller} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginUpdate(
@@ -1437,7 +1415,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link PollerFlux} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginDeleteAsync(
@@ -1462,7 +1440,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link PollerFlux} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginDeleteAsync(
@@ -1487,7 +1465,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link SyncPoller} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginDelete(
@@ -1504,7 +1482,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the description of the IoT hub along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link SyncPoller} for polling of the description of the IoT hub.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<IotHubDescriptionInner>, IotHubDescriptionInner> beginDelete(
@@ -1670,7 +1648,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      *
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return all the IoT hubs in a subscription.
+     * @return all the IoT hubs in a subscription as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<IotHubDescriptionInner> listAsync() {
@@ -1685,7 +1663,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return all the IoT hubs in a subscription.
+     * @return all the IoT hubs in a subscription as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<IotHubDescriptionInner> listAsync(Context context) {
@@ -1698,7 +1676,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      *
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return all the IoT hubs in a subscription.
+     * @return all the IoT hubs in a subscription as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<IotHubDescriptionInner> list() {
@@ -1712,7 +1690,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return all the IoT hubs in a subscription.
+     * @return all the IoT hubs in a subscription as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<IotHubDescriptionInner> list(Context context) {
@@ -1829,7 +1807,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return all the IoT hubs in a resource group.
+     * @return all the IoT hubs in a resource group as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<IotHubDescriptionInner> listByResourceGroupAsync(String resourceGroupName) {
@@ -1846,7 +1824,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return all the IoT hubs in a resource group.
+     * @return all the IoT hubs in a resource group as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<IotHubDescriptionInner> listByResourceGroupAsync(String resourceGroupName, Context context) {
@@ -1862,7 +1840,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return all the IoT hubs in a resource group.
+     * @return all the IoT hubs in a resource group as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<IotHubDescriptionInner> listByResourceGroup(String resourceGroupName) {
@@ -1877,7 +1855,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return all the IoT hubs in a resource group.
+     * @return all the IoT hubs in a resource group as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<IotHubDescriptionInner> listByResourceGroup(String resourceGroupName, Context context) {
@@ -1991,14 +1969,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<RegistryStatisticsInner> getStatsAsync(String resourceGroupName, String resourceName) {
         return getStatsWithResponseAsync(resourceGroupName, resourceName)
-            .flatMap(
-                (Response<RegistryStatisticsInner> res) -> {
-                    if (res.getValue() != null) {
-                        return Mono.just(res.getValue());
-                    } else {
-                        return Mono.empty();
-                    }
-                });
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2155,7 +2126,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of valid SKUs for an IoT hub.
+     * @return the list of valid SKUs for an IoT hub as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<IotHubSkuDescriptionInner> getValidSkusAsync(String resourceGroupName, String resourceName) {
@@ -2173,7 +2144,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of valid SKUs for an IoT hub.
+     * @return the list of valid SKUs for an IoT hub as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<IotHubSkuDescriptionInner> getValidSkusAsync(
@@ -2191,7 +2162,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of valid SKUs for an IoT hub.
+     * @return the list of valid SKUs for an IoT hub as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<IotHubSkuDescriptionInner> getValidSkus(String resourceGroupName, String resourceName) {
@@ -2207,7 +2178,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of valid SKUs for an IoT hub.
+     * @return the list of valid SKUs for an IoT hub as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<IotHubSkuDescriptionInner> getValidSkus(
@@ -2350,7 +2321,8 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub.
+     * @return a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub as
+     *     paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<EventHubConsumerGroupInfoInner> listEventHubConsumerGroupsAsync(
@@ -2370,7 +2342,8 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub.
+     * @return a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub as
+     *     paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<EventHubConsumerGroupInfoInner> listEventHubConsumerGroupsAsync(
@@ -2391,7 +2364,8 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub.
+     * @return a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub as
+     *     paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<EventHubConsumerGroupInfoInner> listEventHubConsumerGroups(
@@ -2410,7 +2384,8 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub.
+     * @return a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub as
+     *     paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<EventHubConsumerGroupInfoInner> listEventHubConsumerGroups(
@@ -2554,14 +2529,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     private Mono<EventHubConsumerGroupInfoInner> getEventHubConsumerGroupAsync(
         String resourceGroupName, String resourceName, String eventHubEndpointName, String name) {
         return getEventHubConsumerGroupWithResponseAsync(resourceGroupName, resourceName, eventHubEndpointName, name)
-            .flatMap(
-                (Response<EventHubConsumerGroupInfoInner> res) -> {
-                    if (res.getValue() != null) {
-                        return Mono.just(res.getValue());
-                    } else {
-                        return Mono.empty();
-                    }
-                });
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2769,14 +2737,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
         EventHubConsumerGroupBodyDescription consumerGroupBody) {
         return createEventHubConsumerGroupWithResponseAsync(
                 resourceGroupName, resourceName, eventHubEndpointName, name, consumerGroupBody)
-            .flatMap(
-                (Response<EventHubConsumerGroupInfoInner> res) -> {
-                    if (res.getValue() != null) {
-                        return Mono.just(res.getValue());
-                    } else {
-                        return Mono.empty();
-                    }
-                });
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -2963,7 +2924,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     private Mono<Void> deleteEventHubConsumerGroupAsync(
         String resourceGroupName, String resourceName, String eventHubEndpointName, String name) {
         return deleteEventHubConsumerGroupWithResponseAsync(resourceGroupName, resourceName, eventHubEndpointName, name)
-            .flatMap((Response<Void> res) -> Mono.empty());
+            .flatMap(ignored -> Mono.empty());
     }
 
     /**
@@ -3129,7 +3090,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of all the jobs in an IoT hub.
+     * @return a list of all the jobs in an IoT hub as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<JobResponseInner> listJobsAsync(String resourceGroupName, String resourceName) {
@@ -3148,7 +3109,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of all the jobs in an IoT hub.
+     * @return a list of all the jobs in an IoT hub as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<JobResponseInner> listJobsAsync(String resourceGroupName, String resourceName, Context context) {
@@ -3166,7 +3127,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of all the jobs in an IoT hub.
+     * @return a list of all the jobs in an IoT hub as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<JobResponseInner> listJobs(String resourceGroupName, String resourceName) {
@@ -3183,7 +3144,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a list of all the jobs in an IoT hub.
+     * @return a list of all the jobs in an IoT hub as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<JobResponseInner> listJobs(String resourceGroupName, String resourceName, Context context) {
@@ -3313,14 +3274,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<JobResponseInner> getJobAsync(String resourceGroupName, String resourceName, String jobId) {
         return getJobWithResponseAsync(resourceGroupName, resourceName, jobId)
-            .flatMap(
-                (Response<JobResponseInner> res) -> {
-                    if (res.getValue() != null) {
-                        return Mono.just(res.getValue());
-                    } else {
-                        return Mono.empty();
-                    }
-                });
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3481,7 +3435,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the quota metrics for an IoT hub.
+     * @return the quota metrics for an IoT hub as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<IotHubQuotaMetricInfoInner> getQuotaMetricsAsync(String resourceGroupName, String resourceName) {
@@ -3499,7 +3453,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the quota metrics for an IoT hub.
+     * @return the quota metrics for an IoT hub as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<IotHubQuotaMetricInfoInner> getQuotaMetricsAsync(
@@ -3517,7 +3471,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the quota metrics for an IoT hub.
+     * @return the quota metrics for an IoT hub as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<IotHubQuotaMetricInfoInner> getQuotaMetrics(String resourceGroupName, String resourceName) {
@@ -3533,7 +3487,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the quota metrics for an IoT hub.
+     * @return the quota metrics for an IoT hub as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<IotHubQuotaMetricInfoInner> getQuotaMetrics(
@@ -3663,7 +3617,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the health for routing endpoints.
+     * @return the health for routing endpoints as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<EndpointHealthDataInner> getEndpointHealthAsync(String resourceGroupName, String iotHubName) {
@@ -3681,7 +3635,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the health for routing endpoints.
+     * @return the health for routing endpoints as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<EndpointHealthDataInner> getEndpointHealthAsync(
@@ -3699,7 +3653,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the health for routing endpoints.
+     * @return the health for routing endpoints as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<EndpointHealthDataInner> getEndpointHealth(String resourceGroupName, String iotHubName) {
@@ -3715,7 +3669,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the health for routing endpoints.
+     * @return the health for routing endpoints as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<EndpointHealthDataInner> getEndpointHealth(
@@ -3828,15 +3782,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<IotHubNameAvailabilityInfoInner> checkNameAvailabilityAsync(OperationInputs operationInputs) {
-        return checkNameAvailabilityWithResponseAsync(operationInputs)
-            .flatMap(
-                (Response<IotHubNameAvailabilityInfoInner> res) -> {
-                    if (res.getValue() != null) {
-                        return Mono.just(res.getValue());
-                    } else {
-                        return Mono.empty();
-                    }
-                });
+        return checkNameAvailabilityWithResponseAsync(operationInputs).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -3994,14 +3940,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     private Mono<TestAllRoutesResultInner> testAllRoutesAsync(
         String iotHubName, String resourceGroupName, TestAllRoutesInput input) {
         return testAllRoutesWithResponseAsync(iotHubName, resourceGroupName, input)
-            .flatMap(
-                (Response<TestAllRoutesResultInner> res) -> {
-                    if (res.getValue() != null) {
-                        return Mono.just(res.getValue());
-                    } else {
-                        return Mono.empty();
-                    }
-                });
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -4162,14 +4101,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     private Mono<TestRouteResultInner> testRouteAsync(
         String iotHubName, String resourceGroupName, TestRouteInput input) {
         return testRouteWithResponseAsync(iotHubName, resourceGroupName, input)
-            .flatMap(
-                (Response<TestRouteResultInner> res) -> {
-                    if (res.getValue() != null) {
-                        return Mono.just(res.getValue());
-                    } else {
-                        return Mono.empty();
-                    }
-                });
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -4331,7 +4263,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the security metadata for an IoT hub.
+     * @return the security metadata for an IoT hub as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<SharedAccessSignatureAuthorizationRuleInner> listKeysAsync(
@@ -4351,7 +4283,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the security metadata for an IoT hub.
+     * @return the security metadata for an IoT hub as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<SharedAccessSignatureAuthorizationRuleInner> listKeysAsync(
@@ -4370,7 +4302,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the security metadata for an IoT hub.
+     * @return the security metadata for an IoT hub as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<SharedAccessSignatureAuthorizationRuleInner> listKeys(
@@ -4388,7 +4320,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorDetailsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the security metadata for an IoT hub.
+     * @return the security metadata for an IoT hub as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<SharedAccessSignatureAuthorizationRuleInner> listKeys(
@@ -4520,14 +4452,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     private Mono<SharedAccessSignatureAuthorizationRuleInner> getKeysForKeyNameAsync(
         String resourceGroupName, String resourceName, String keyName) {
         return getKeysForKeyNameWithResponseAsync(resourceGroupName, resourceName, keyName)
-            .flatMap(
-                (Response<SharedAccessSignatureAuthorizationRuleInner> res) -> {
-                    if (res.getValue() != null) {
-                        return Mono.just(res.getValue());
-                    } else {
-                        return Mono.empty();
-                    }
-                });
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -4702,14 +4627,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     private Mono<JobResponseInner> exportDevicesAsync(
         String resourceGroupName, String resourceName, ExportDevicesRequest exportDevicesParameters) {
         return exportDevicesWithResponseAsync(resourceGroupName, resourceName, exportDevicesParameters)
-            .flatMap(
-                (Response<JobResponseInner> res) -> {
-                    if (res.getValue() != null) {
-                        return Mono.just(res.getValue());
-                    } else {
-                        return Mono.empty();
-                    }
-                });
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -4887,14 +4805,7 @@ public final class IotHubResourcesClientImpl implements IotHubResourcesClient {
     private Mono<JobResponseInner> importDevicesAsync(
         String resourceGroupName, String resourceName, ImportDevicesRequest importDevicesParameters) {
         return importDevicesWithResponseAsync(resourceGroupName, resourceName, importDevicesParameters)
-            .flatMap(
-                (Response<JobResponseInner> res) -> {
-                    if (res.getValue() != null) {
-                        return Mono.just(res.getValue());
-                    } else {
-                        return Mono.empty();
-                    }
-                });
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
