@@ -106,6 +106,7 @@ public final class AscUsagesClientImpl implements AscUsagesClient {
         if (location == null) {
             return Mono.error(new IllegalArgumentException("Parameter location is required and cannot be null."));
         }
+        final String apiVersion = "2022-11-01-preview";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -113,7 +114,7 @@ public final class AscUsagesClientImpl implements AscUsagesClient {
                     service
                         .list(
                             this.client.getEndpoint(),
-                            this.client.getApiVersion(),
+                            apiVersion,
                             this.client.getSubscriptionId(),
                             location,
                             accept,
@@ -158,16 +159,11 @@ public final class AscUsagesClientImpl implements AscUsagesClient {
         if (location == null) {
             return Mono.error(new IllegalArgumentException("Parameter location is required and cannot be null."));
         }
+        final String apiVersion = "2022-11-01-preview";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .list(
-                this.client.getEndpoint(),
-                this.client.getApiVersion(),
-                this.client.getSubscriptionId(),
-                location,
-                accept,
-                context)
+            .list(this.client.getEndpoint(), apiVersion, this.client.getSubscriptionId(), location, accept, context)
             .map(
                 res ->
                     new PagedResponseBase<>(

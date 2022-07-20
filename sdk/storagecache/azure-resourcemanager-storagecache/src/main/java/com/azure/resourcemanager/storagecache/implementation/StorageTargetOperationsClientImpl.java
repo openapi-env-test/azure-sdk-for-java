@@ -160,6 +160,7 @@ public final class StorageTargetOperationsClientImpl implements StorageTargetOpe
             return Mono
                 .error(new IllegalArgumentException("Parameter storageTargetName is required and cannot be null."));
         }
+        final String apiVersion = "2022-11-01-preview";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -168,7 +169,7 @@ public final class StorageTargetOperationsClientImpl implements StorageTargetOpe
                         .flush(
                             this.client.getEndpoint(),
                             resourceGroupName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             this.client.getSubscriptionId(),
                             cacheName,
                             storageTargetName,
@@ -217,13 +218,14 @@ public final class StorageTargetOperationsClientImpl implements StorageTargetOpe
             return Mono
                 .error(new IllegalArgumentException("Parameter storageTargetName is required and cannot be null."));
         }
+        final String apiVersion = "2022-11-01-preview";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .flush(
                 this.client.getEndpoint(),
                 resourceGroupName,
-                this.client.getApiVersion(),
+                apiVersion,
                 this.client.getSubscriptionId(),
                 cacheName,
                 storageTargetName,
@@ -433,6 +435,7 @@ public final class StorageTargetOperationsClientImpl implements StorageTargetOpe
             return Mono
                 .error(new IllegalArgumentException("Parameter storageTargetName is required and cannot be null."));
         }
+        final String apiVersion = "2022-11-01-preview";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -441,7 +444,7 @@ public final class StorageTargetOperationsClientImpl implements StorageTargetOpe
                         .suspend(
                             this.client.getEndpoint(),
                             resourceGroupName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             this.client.getSubscriptionId(),
                             cacheName,
                             storageTargetName,
@@ -489,13 +492,14 @@ public final class StorageTargetOperationsClientImpl implements StorageTargetOpe
             return Mono
                 .error(new IllegalArgumentException("Parameter storageTargetName is required and cannot be null."));
         }
+        final String apiVersion = "2022-11-01-preview";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .suspend(
                 this.client.getEndpoint(),
                 resourceGroupName,
-                this.client.getApiVersion(),
+                apiVersion,
                 this.client.getSubscriptionId(),
                 cacheName,
                 storageTargetName,
@@ -698,6 +702,7 @@ public final class StorageTargetOperationsClientImpl implements StorageTargetOpe
             return Mono
                 .error(new IllegalArgumentException("Parameter storageTargetName is required and cannot be null."));
         }
+        final String apiVersion = "2022-11-01-preview";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -706,7 +711,7 @@ public final class StorageTargetOperationsClientImpl implements StorageTargetOpe
                         .resume(
                             this.client.getEndpoint(),
                             resourceGroupName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             this.client.getSubscriptionId(),
                             cacheName,
                             storageTargetName,
@@ -754,13 +759,14 @@ public final class StorageTargetOperationsClientImpl implements StorageTargetOpe
             return Mono
                 .error(new IllegalArgumentException("Parameter storageTargetName is required and cannot be null."));
         }
+        final String apiVersion = "2022-11-01-preview";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .resume(
                 this.client.getEndpoint(),
                 resourceGroupName,
-                this.client.getApiVersion(),
+                apiVersion,
                 this.client.getSubscriptionId(),
                 cacheName,
                 storageTargetName,
@@ -964,6 +970,7 @@ public final class StorageTargetOperationsClientImpl implements StorageTargetOpe
             return Mono
                 .error(new IllegalArgumentException("Parameter storageTargetName is required and cannot be null."));
         }
+        final String apiVersion = "2022-11-01-preview";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -972,7 +979,7 @@ public final class StorageTargetOperationsClientImpl implements StorageTargetOpe
                         .invalidate(
                             this.client.getEndpoint(),
                             resourceGroupName,
-                            this.client.getApiVersion(),
+                            apiVersion,
                             this.client.getSubscriptionId(),
                             cacheName,
                             storageTargetName,
@@ -1021,13 +1028,14 @@ public final class StorageTargetOperationsClientImpl implements StorageTargetOpe
             return Mono
                 .error(new IllegalArgumentException("Parameter storageTargetName is required and cannot be null."));
         }
+        final String apiVersion = "2022-11-01-preview";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .invalidate(
                 this.client.getEndpoint(),
                 resourceGroupName,
-                this.client.getApiVersion(),
+                apiVersion,
                 this.client.getSubscriptionId(),
                 cacheName,
                 storageTargetName,

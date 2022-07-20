@@ -10,11 +10,13 @@ import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
+import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
+import com.azure.core.http.policy.RetryOptions;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.management.http.policy.ArmChallengeAuthenticationPolicy;
@@ -22,19 +24,23 @@ import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.storagecache.fluent.StorageCacheManagementClient;
+import com.azure.resourcemanager.storagecache.implementation.AmlFilesystemsImpl;
 import com.azure.resourcemanager.storagecache.implementation.AscOperationsImpl;
 import com.azure.resourcemanager.storagecache.implementation.AscUsagesImpl;
 import com.azure.resourcemanager.storagecache.implementation.CachesImpl;
 import com.azure.resourcemanager.storagecache.implementation.OperationsImpl;
+import com.azure.resourcemanager.storagecache.implementation.ResourceProvidersImpl;
 import com.azure.resourcemanager.storagecache.implementation.SkusImpl;
 import com.azure.resourcemanager.storagecache.implementation.StorageCacheManagementClientBuilder;
 import com.azure.resourcemanager.storagecache.implementation.StorageTargetOperationsImpl;
 import com.azure.resourcemanager.storagecache.implementation.StorageTargetsImpl;
 import com.azure.resourcemanager.storagecache.implementation.UsageModelsImpl;
+import com.azure.resourcemanager.storagecache.models.AmlFilesystems;
 import com.azure.resourcemanager.storagecache.models.AscOperations;
 import com.azure.resourcemanager.storagecache.models.AscUsages;
 import com.azure.resourcemanager.storagecache.models.Caches;
 import com.azure.resourcemanager.storagecache.models.Operations;
+import com.azure.resourcemanager.storagecache.models.ResourceProviders;
 import com.azure.resourcemanager.storagecache.models.Skus;
 import com.azure.resourcemanager.storagecache.models.StorageTargetOperations;
 import com.azure.resourcemanager.storagecache.models.StorageTargets;
@@ -68,6 +74,10 @@ public final class StorageCacheManager {
 
     private StorageTargetOperations storageTargetOperations;
 
+    private AmlFilesystems amlFilesystems;
+
+    private ResourceProviders resourceProviders;
+
     private final StorageCacheManagementClient clientObject;
 
     private StorageCacheManager(HttpPipeline httpPipeline, AzureProfile profile, Duration defaultPollInterval) {
@@ -96,6 +106,19 @@ public final class StorageCacheManager {
     }
 
     /**
+     * Creates an instance of StorageCache service API entry point.
+     *
+     * @param httpPipeline the {@link HttpPipeline} configured with Azure authentication credential.
+     * @param profile the Azure profile for client.
+     * @return the StorageCache service API instance.
+     */
+    public static StorageCacheManager authenticate(HttpPipeline httpPipeline, AzureProfile profile) {
+        Objects.requireNonNull(httpPipeline, "'httpPipeline' cannot be null.");
+        Objects.requireNonNull(profile, "'profile' cannot be null.");
+        return new StorageCacheManager(httpPipeline, profile, null);
+    }
+
+    /**
      * Gets a Configurable instance that can be used to create StorageCacheManager with optional configuration.
      *
      * @return the Configurable instance allowing configurations.
@@ -113,6 +136,7 @@ public final class StorageCacheManager {
         private final List<HttpPipelinePolicy> policies = new ArrayList<>();
         private final List<String> scopes = new ArrayList<>();
         private RetryPolicy retryPolicy;
+        private RetryOptions retryOptions;
         private Duration defaultPollInterval;
 
         private Configurable() {
@@ -174,6 +198,19 @@ public final class StorageCacheManager {
         }
 
         /**
+         * Sets the retry options for the HTTP pipeline retry policy.
+         *
+         * <p>This setting has no effect, if retry policy is set via {@link #withRetryPolicy(RetryPolicy)}.
+         *
+         * @param retryOptions the retry options for the HTTP pipeline retry policy.
+         * @return the configurable object itself.
+         */
+        public Configurable withRetryOptions(RetryOptions retryOptions) {
+            this.retryOptions = Objects.requireNonNull(retryOptions, "'retryOptions' cannot be null.");
+            return this;
+        }
+
+        /**
          * Sets the default poll interval, used when service does not provide "Retry-After" header.
          *
          * @param defaultPollInterval the default poll interval.
@@ -206,7 +243,7 @@ public final class StorageCacheManager {
                 .append("-")
                 .append("com.azure.resourcemanager.storagecache")
                 .append("/")
-                .append("1.0.0-beta.5");
+                .append("1.0.0-beta.1");
             if (!Configuration.getGlobalConfiguration().get("AZURE_TELEMETRY_DISABLED", false)) {
                 userAgentBuilder
                     .append(" (")
@@ -224,10 +261,15 @@ public final class StorageCacheManager {
                 scopes.add(profile.getEnvironment().getManagementEndpoint() + "/.default");
             }
             if (retryPolicy == null) {
-                retryPolicy = new RetryPolicy("Retry-After", ChronoUnit.SECONDS);
+                if (retryOptions != null) {
+                    retryPolicy = new RetryPolicy(retryOptions);
+                } else {
+                    retryPolicy = new RetryPolicy("Retry-After", ChronoUnit.SECONDS);
+                }
             }
             List<HttpPipelinePolicy> policies = new ArrayList<>();
             policies.add(new UserAgentPolicy(userAgentBuilder.toString()));
+            policies.add(new AddHeadersFromContextPolicy());
             policies.add(new RequestIdPolicy());
             policies
                 .addAll(
@@ -258,7 +300,11 @@ public final class StorageCacheManager {
         }
     }
 
-    /** @return Resource collection API of Operations. */
+    /**
+     * Gets the resource collection API of Operations.
+     *
+     * @return Resource collection API of Operations.
+     */
     public Operations operations() {
         if (this.operations == null) {
             this.operations = new OperationsImpl(clientObject.getOperations(), this);
@@ -266,7 +312,11 @@ public final class StorageCacheManager {
         return operations;
     }
 
-    /** @return Resource collection API of Skus. */
+    /**
+     * Gets the resource collection API of Skus.
+     *
+     * @return Resource collection API of Skus.
+     */
     public Skus skus() {
         if (this.skus == null) {
             this.skus = new SkusImpl(clientObject.getSkus(), this);
@@ -274,7 +324,11 @@ public final class StorageCacheManager {
         return skus;
     }
 
-    /** @return Resource collection API of UsageModels. */
+    /**
+     * Gets the resource collection API of UsageModels.
+     *
+     * @return Resource collection API of UsageModels.
+     */
     public UsageModels usageModels() {
         if (this.usageModels == null) {
             this.usageModels = new UsageModelsImpl(clientObject.getUsageModels(), this);
@@ -282,7 +336,11 @@ public final class StorageCacheManager {
         return usageModels;
     }
 
-    /** @return Resource collection API of AscOperations. */
+    /**
+     * Gets the resource collection API of AscOperations.
+     *
+     * @return Resource collection API of AscOperations.
+     */
     public AscOperations ascOperations() {
         if (this.ascOperations == null) {
             this.ascOperations = new AscOperationsImpl(clientObject.getAscOperations(), this);
@@ -290,7 +348,11 @@ public final class StorageCacheManager {
         return ascOperations;
     }
 
-    /** @return Resource collection API of AscUsages. */
+    /**
+     * Gets the resource collection API of AscUsages.
+     *
+     * @return Resource collection API of AscUsages.
+     */
     public AscUsages ascUsages() {
         if (this.ascUsages == null) {
             this.ascUsages = new AscUsagesImpl(clientObject.getAscUsages(), this);
@@ -298,7 +360,11 @@ public final class StorageCacheManager {
         return ascUsages;
     }
 
-    /** @return Resource collection API of Caches. */
+    /**
+     * Gets the resource collection API of Caches. It manages Cache.
+     *
+     * @return Resource collection API of Caches.
+     */
     public Caches caches() {
         if (this.caches == null) {
             this.caches = new CachesImpl(clientObject.getCaches(), this);
@@ -306,7 +372,11 @@ public final class StorageCacheManager {
         return caches;
     }
 
-    /** @return Resource collection API of StorageTargets. */
+    /**
+     * Gets the resource collection API of StorageTargets. It manages StorageTarget.
+     *
+     * @return Resource collection API of StorageTargets.
+     */
     public StorageTargets storageTargets() {
         if (this.storageTargets == null) {
             this.storageTargets = new StorageTargetsImpl(clientObject.getStorageTargets(), this);
@@ -314,13 +384,41 @@ public final class StorageCacheManager {
         return storageTargets;
     }
 
-    /** @return Resource collection API of StorageTargetOperations. */
+    /**
+     * Gets the resource collection API of StorageTargetOperations.
+     *
+     * @return Resource collection API of StorageTargetOperations.
+     */
     public StorageTargetOperations storageTargetOperations() {
         if (this.storageTargetOperations == null) {
             this.storageTargetOperations =
                 new StorageTargetOperationsImpl(clientObject.getStorageTargetOperations(), this);
         }
         return storageTargetOperations;
+    }
+
+    /**
+     * Gets the resource collection API of AmlFilesystems. It manages AmlFilesystem.
+     *
+     * @return Resource collection API of AmlFilesystems.
+     */
+    public AmlFilesystems amlFilesystems() {
+        if (this.amlFilesystems == null) {
+            this.amlFilesystems = new AmlFilesystemsImpl(clientObject.getAmlFilesystems(), this);
+        }
+        return amlFilesystems;
+    }
+
+    /**
+     * Gets the resource collection API of ResourceProviders.
+     *
+     * @return Resource collection API of ResourceProviders.
+     */
+    public ResourceProviders resourceProviders() {
+        if (this.resourceProviders == null) {
+            this.resourceProviders = new ResourceProvidersImpl(clientObject.getResourceProviders(), this);
+        }
+        return resourceProviders;
     }
 
     /**

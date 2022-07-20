@@ -98,6 +98,7 @@ public final class AscOperationsClientImpl implements AscOperationsClient {
         if (operationId == null) {
             return Mono.error(new IllegalArgumentException("Parameter operationId is required and cannot be null."));
         }
+        final String apiVersion = "2022-11-01-preview";
         final String accept = "application/json";
         return FluxUtil
             .withContext(
@@ -105,7 +106,7 @@ public final class AscOperationsClientImpl implements AscOperationsClient {
                     service
                         .get(
                             this.client.getEndpoint(),
-                            this.client.getApiVersion(),
+                            apiVersion,
                             this.client.getSubscriptionId(),
                             location,
                             operationId,
@@ -147,12 +148,13 @@ public final class AscOperationsClientImpl implements AscOperationsClient {
         if (operationId == null) {
             return Mono.error(new IllegalArgumentException("Parameter operationId is required and cannot be null."));
         }
+        final String apiVersion = "2022-11-01-preview";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .get(
                 this.client.getEndpoint(),
-                this.client.getApiVersion(),
+                apiVersion,
                 this.client.getSubscriptionId(),
                 location,
                 operationId,
@@ -172,15 +174,7 @@ public final class AscOperationsClientImpl implements AscOperationsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<AscOperationInner> getAsync(String location, String operationId) {
-        return getWithResponseAsync(location, operationId)
-            .flatMap(
-                (Response<AscOperationInner> res) -> {
-                    if (res.getValue() != null) {
-                        return Mono.just(res.getValue());
-                    } else {
-                        return Mono.empty();
-                    }
-                });
+        return getWithResponseAsync(location, operationId).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**

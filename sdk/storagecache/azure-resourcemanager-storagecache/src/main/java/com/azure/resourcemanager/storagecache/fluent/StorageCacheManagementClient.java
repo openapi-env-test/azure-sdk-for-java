@@ -25,13 +25,6 @@ public interface StorageCacheManagementClient {
     String getEndpoint();
 
     /**
-     * Gets Api Version.
-     *
-     * @return the apiVersion value.
-     */
-    String getApiVersion();
-
-    /**
      * Gets The HTTP pipeline to send requests through.
      *
      * @return the httpPipeline value.
@@ -100,4 +93,18 @@ public interface StorageCacheManagementClient {
      * @return the StorageTargetOperationsClient object.
      */
     StorageTargetOperationsClient getStorageTargetOperations();
+
+    /**
+     * Gets the AmlFilesystemsClient object to access its operations.
+     *
+     * @return the AmlFilesystemsClient object.
+     */
+    AmlFilesystemsClient getAmlFilesystems();
+
+    /**
+     * Gets the ResourceProvidersClient object to access its operations.
+     *
+     * @return the ResourceProvidersClient object.
+     */
+    ResourceProvidersClient getResourceProviders();
 }
