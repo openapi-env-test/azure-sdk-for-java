@@ -1,0 +1,47 @@
+# NOTE: Please refer to https://aka.ms/azsdk/engsys/ci-yaml before editing this file.
+
+trigger:
+  branches:
+    include:
+      - main
+      - hotfix/*
+      - release/*
+  paths:
+    include:
+      - sdk/afdwaf/ci.yml
+      - sdk/afdwaf/azure-resourcemanager-afdwaf/
+    exclude:
+      - sdk/afdwaf/pom.xml
+      - sdk/afdwaf/azure-resourcemanager-afdwaf/pom.xml
+
+pr:
+  branches:
+    include:
+      - main
+      - feature/*
+      - hotfix/*
+      - release/*
+  paths:
+    include:
+      - sdk/afdwaf/ci.yml
+      - sdk/afdwaf/azure-resourcemanager-afdwaf/
+    exclude:
+      - sdk/afdwaf/pom.xml
+      - sdk/afdwaf/azure-resourcemanager-afdwaf/pom.xml
+
+parameters:
+  - name: release_azureresourcemanagerafdwaf
+    displayName: azure-resourcemanager-afdwaf
+    type: boolean
+    default: false
+
+extends:
+  template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
+  parameters:
+    ServiceDirectory: afdwaf
+    EnableBatchRelease: true
+    Artifacts:
+      - name: azure-resourcemanager-afdwaf
+        groupId: com.azure.resourcemanager
+        safeName: azureresourcemanagerafdwaf
+        releaseInBatch: ${{ parameters.release_azureresourcemanagerafdwaf }}
