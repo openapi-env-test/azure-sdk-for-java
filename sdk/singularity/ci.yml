@@ -1,0 +1,47 @@
+# NOTE: Please refer to https://aka.ms/azsdk/engsys/ci-yaml before editing this file.
+
+trigger:
+  branches:
+    include:
+      - main
+      - hotfix/*
+      - release/*
+  paths:
+    include:
+      - sdk/singularity/ci.yml
+      - sdk/singularity/azure-resourcemanager-singularity/
+    exclude:
+      - sdk/singularity/pom.xml
+      - sdk/singularity/azure-resourcemanager-singularity/pom.xml
+
+pr:
+  branches:
+    include:
+      - main
+      - feature/*
+      - hotfix/*
+      - release/*
+  paths:
+    include:
+      - sdk/singularity/ci.yml
+      - sdk/singularity/azure-resourcemanager-singularity/
+    exclude:
+      - sdk/singularity/pom.xml
+      - sdk/singularity/azure-resourcemanager-singularity/pom.xml
+
+parameters:
+  - name: release_azureresourcemanagersingularity
+    displayName: azure-resourcemanager-singularity
+    type: boolean
+    default: false
+
+extends:
+  template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
+  parameters:
+    ServiceDirectory: singularity
+    EnableBatchRelease: true
+    Artifacts:
+      - name: azure-resourcemanager-singularity
+        groupId: com.azure.resourcemanager
+        safeName: azureresourcemanagersingularity
+        releaseInBatch: ${{ parameters.release_azureresourcemanagersingularity }}
