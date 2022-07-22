@@ -1,0 +1,47 @@
+# NOTE: Please refer to https://aka.ms/azsdk/engsys/ci-yaml before editing this file.
+
+trigger:
+  branches:
+    include:
+      - main
+      - hotfix/*
+      - release/*
+  paths:
+    include:
+      - sdk/demoservice/ci.yml
+      - sdk/demoservice/azure-resourcemanager-demoservice/
+    exclude:
+      - sdk/demoservice/pom.xml
+      - sdk/demoservice/azure-resourcemanager-demoservice/pom.xml
+
+pr:
+  branches:
+    include:
+      - main
+      - feature/*
+      - hotfix/*
+      - release/*
+  paths:
+    include:
+      - sdk/demoservice/ci.yml
+      - sdk/demoservice/azure-resourcemanager-demoservice/
+    exclude:
+      - sdk/demoservice/pom.xml
+      - sdk/demoservice/azure-resourcemanager-demoservice/pom.xml
+
+parameters:
+  - name: release_azureresourcemanagerdemoservice
+    displayName: azure-resourcemanager-demoservice
+    type: boolean
+    default: false
+
+extends:
+  template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
+  parameters:
+    ServiceDirectory: demoservice
+    EnableBatchRelease: true
+    Artifacts:
+      - name: azure-resourcemanager-demoservice
+        groupId: com.azure.resourcemanager
+        safeName: azureresourcemanagerdemoservice
+        releaseInBatch: ${{ parameters.release_azureresourcemanagerdemoservice }}
