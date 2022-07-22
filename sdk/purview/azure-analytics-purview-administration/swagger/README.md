@@ -2,6 +2,7 @@
 
 ``` yaml
 data-plane: true
+tag: false
 require:
   - https://github.com/Azure/azure-rest-api-specs/blob/9e30496a8803beb5a84909997e5cd7ea0f242fd8/specification/purview/data-plane/readme.md
 batch:
