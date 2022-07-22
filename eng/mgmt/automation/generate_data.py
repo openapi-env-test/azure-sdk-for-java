@@ -95,7 +95,7 @@ def find_sdk_readme(spec_readme: str, candidate_sdk_readmes: List[str]) -> Optio
     if 'data-plane' in segments:
         index = segments.index('data-plane')
         # include service name, exclude readme.md
-        search_target = '/' + '/'.join(segments[index-1:-1]) + '/'
+        search_target = '/' + '/'.join(segments[index-1:])
 
         for sdk_readme_path in candidate_sdk_readmes:
             spec_reference = find_sdk_spec_reference(sdk_readme_path)
