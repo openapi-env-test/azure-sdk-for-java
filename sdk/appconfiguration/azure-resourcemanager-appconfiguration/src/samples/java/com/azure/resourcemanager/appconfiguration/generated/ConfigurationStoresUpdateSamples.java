@@ -16,25 +16,7 @@ import java.util.Map;
 /** Samples for ConfigurationStores Update. */
 public final class ConfigurationStoresUpdateSamples {
     /*
-     * x-ms-original-file: specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/examples/ConfigurationStoresUpdateDisableLocalAuth.json
-     */
-    /**
-     * Sample code: ConfigurationStores_Update_Disable_Local_Auth.
-     *
-     * @param manager Entry point to AppConfigurationManager.
-     */
-    public static void configurationStoresUpdateDisableLocalAuth(
-        com.azure.resourcemanager.appconfiguration.AppConfigurationManager manager) {
-        ConfigurationStore resource =
-            manager
-                .configurationStores()
-                .getByResourceGroupWithResponse("myResourceGroup", "contoso", Context.NONE)
-                .getValue();
-        resource.update().withSku(new Sku().withName("Standard")).withDisableLocalAuth(true).apply();
-    }
-
-    /*
-     * x-ms-original-file: specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/examples/ConfigurationStoresUpdate.json
+     * x-ms-original-file: specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2011-01-01/examples/ConfigurationStoresUpdate.json
      */
     /**
      * Sample code: ConfigurationStores_Update.
@@ -52,10 +34,10 @@ public final class ConfigurationStoresUpdateSamples {
     }
 
     /*
-     * x-ms-original-file: specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/examples/ConfigurationStoresUpdateWithIdentity.json
+     * x-ms-original-file: specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2011-01-01/examples/ConfigurationStoresUpdateWithIdentity.json
      */
     /**
-     * Sample code: ConfigurationStores_Update_With_Identity.
+     * Sample code: ConfigurationStores_Update_WithIdentity.
      *
      * @param manager Entry point to AppConfigurationManager.
      */
