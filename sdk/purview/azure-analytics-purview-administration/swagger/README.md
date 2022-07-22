@@ -1,15 +1,14 @@
 ## Generate autorest code
 
 ``` yaml
+require:
+  - https://github.com/Azure/azure-rest-api-specs/blob/9e30496a8803beb5a84909997e5cd7ea0f242fd8/specification/purview/data-plane/readme.md
 batch:
-  - package-metadata: true
-  - package-account: true
+  - purview-metadata: true
+  - purview-account: true
 ```
 
-``` yaml $(package-metadata)
-input-file:
-  - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/purview/data-plane/Azure.Analytics.Purview.MetadataPolicies/preview/2021-07-01-preview/purviewMetadataPolicy.json
-
+``` yaml $(purview-metadata)
 java: true
 output-folder: ../
 namespace: com.azure.analytics.purview.administration
@@ -27,10 +26,7 @@ service-versions:
   - 2021-07-01-preview
 ```
 
-``` yaml $(package-account)
-input-file:
-  - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/purview/data-plane/Azure.Analytics.Purview.Account/preview/2019-11-01-preview/account.json
-
+``` yaml $(purview-account)
 java: true
 output-folder: ../
 namespace: com.azure.analytics.purview.administration
