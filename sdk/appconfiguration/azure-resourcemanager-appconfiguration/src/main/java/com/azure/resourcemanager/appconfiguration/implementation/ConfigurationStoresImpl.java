@@ -43,18 +43,6 @@ public final class ConfigurationStoresImpl implements ConfigurationStores {
         return Utils.mapPage(inner, inner1 -> new ConfigurationStoreImpl(inner1, this.manager()));
     }
 
-    public PagedIterable<ConfigurationStore> listByResourceGroup(String resourceGroupName) {
-        PagedIterable<ConfigurationStoreInner> inner = this.serviceClient().listByResourceGroup(resourceGroupName);
-        return Utils.mapPage(inner, inner1 -> new ConfigurationStoreImpl(inner1, this.manager()));
-    }
-
-    public PagedIterable<ConfigurationStore> listByResourceGroup(
-        String resourceGroupName, String skipToken, Context context) {
-        PagedIterable<ConfigurationStoreInner> inner =
-            this.serviceClient().listByResourceGroup(resourceGroupName, skipToken, context);
-        return Utils.mapPage(inner, inner1 -> new ConfigurationStoreImpl(inner1, this.manager()));
-    }
-
     public ConfigurationStore getByResourceGroup(String resourceGroupName, String configStoreName) {
         ConfigurationStoreInner inner = this.serviceClient().getByResourceGroup(resourceGroupName, configStoreName);
         if (inner != null) {
