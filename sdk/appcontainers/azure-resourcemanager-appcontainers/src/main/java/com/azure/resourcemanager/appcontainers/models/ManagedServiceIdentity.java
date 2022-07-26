@@ -36,7 +36,7 @@ public class ManagedServiceIdentity {
     private ManagedServiceIdentityType type;
 
     /*
-     * The set of user assigned identities associated with the resource. The
+     * The set of  user assigned identities associated with the resource. The
      * userAssignedIdentities dictionary keys will be ARM resource ids in the
      * form:
      * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}.
