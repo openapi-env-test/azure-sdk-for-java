@@ -93,8 +93,8 @@ public final class AvailabilityStatusProperties {
     /*
      * Timestamp for when last change in health status occurred.
      */
-    @JsonProperty(value = "occurredTime")
-    private OffsetDateTime occurredTime;
+    @JsonProperty(value = "occuredTime")
+    private OffsetDateTime occuredTime;
 
     /*
      * Chronicity of the availability transition.
@@ -364,22 +364,22 @@ public final class AvailabilityStatusProperties {
     }
 
     /**
-     * Get the occurredTime property: Timestamp for when last change in health status occurred.
+     * Get the occuredTime property: Timestamp for when last change in health status occurred.
      *
-     * @return the occurredTime value.
+     * @return the occuredTime value.
      */
-    public OffsetDateTime occurredTime() {
-        return this.occurredTime;
+    public OffsetDateTime occuredTime() {
+        return this.occuredTime;
     }
 
     /**
-     * Set the occurredTime property: Timestamp for when last change in health status occurred.
+     * Set the occuredTime property: Timestamp for when last change in health status occurred.
      *
-     * @param occurredTime the occurredTime value to set.
+     * @param occuredTime the occuredTime value to set.
      * @return the AvailabilityStatusProperties object itself.
      */
-    public AvailabilityStatusProperties withOccurredTime(OffsetDateTime occurredTime) {
-        this.occurredTime = occurredTime;
+    public AvailabilityStatusProperties withOccuredTime(OffsetDateTime occuredTime) {
+        this.occuredTime = occuredTime;
         return this;
     }
 
