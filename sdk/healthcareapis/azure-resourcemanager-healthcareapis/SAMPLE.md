@@ -1,6 +1,17 @@
 # Code snippets and samples
 
 
+## AnalyticsConnectorOperation
+
+- [Update](#analyticsconnectoroperation_update)
+
+## AnalyticsConnectors
+
+- [CreateOrUpdate](#analyticsconnectors_createorupdate)
+- [Delete](#analyticsconnectors_delete)
+- [Get](#analyticsconnectors_get)
+- [ListByWorkspace](#analyticsconnectors_listbyworkspace)
+
 ## DicomServices
 
 - [CreateOrUpdate](#dicomservices_createorupdate)
@@ -85,13 +96,188 @@
 - [List](#workspaces_list)
 - [ListByResourceGroup](#workspaces_listbyresourcegroup)
 - [Update](#workspaces_update)
+### AnalyticsConnectorOperation_Update
+
+```java
+import com.azure.core.util.Context;
+import com.azure.resourcemanager.healthcareapis.models.AnalyticsConnectorPatchResource;
+import java.util.HashMap;
+import java.util.Map;
+
+/** Samples for AnalyticsConnectorOperation Update. */
+public final class AnalyticsConnectorOperationUpdateSamples {
+    /*
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/analyticsconnectors/AnalyticsConnectors_Patch.json
+     */
+    /**
+     * Sample code: Update a Analytics Connector Service.
+     *
+     * @param manager Entry point to HealthcareApisManager.
+     */
+    public static void updateAAnalyticsConnectorService(
+        com.azure.resourcemanager.healthcareapis.HealthcareApisManager manager) {
+        manager
+            .analyticsConnectorOperations()
+            .update(
+                "testRG",
+                "workspace1",
+                "exampleconnector",
+                new AnalyticsConnectorPatchResource().withTags(mapOf("tagKey", "tagValue")),
+                Context.NONE);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> Map<String, T> mapOf(Object... inputs) {
+        Map<String, T> map = new HashMap<>();
+        for (int i = 0; i < inputs.length; i += 2) {
+            String key = (String) inputs[i];
+            T value = (T) inputs[i + 1];
+            map.put(key, value);
+        }
+        return map;
+    }
+}
+```
+
+### AnalyticsConnectors_CreateOrUpdate
+
+```java
+import com.azure.resourcemanager.healthcareapis.models.AnalyticsConnectorDataDestination;
+import com.azure.resourcemanager.healthcareapis.models.AnalyticsConnectorDataDestinationType;
+import com.azure.resourcemanager.healthcareapis.models.AnalyticsConnectorDataSource;
+import com.azure.resourcemanager.healthcareapis.models.AnalyticsConnectorDataSourceType;
+import com.azure.resourcemanager.healthcareapis.models.AnalyticsConnectorMapping;
+import com.azure.resourcemanager.healthcareapis.models.AnalyticsConnectorMappingType;
+import java.util.HashMap;
+import java.util.Map;
+
+/** Samples for AnalyticsConnectors CreateOrUpdate. */
+public final class AnalyticsConnectorsCreateOrUpdateSamples {
+    /*
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/analyticsconnectors/AnalyticsConnectors_Create.json
+     */
+    /**
+     * Sample code: Create or update a Analytics Connectors Service.
+     *
+     * @param manager Entry point to HealthcareApisManager.
+     */
+    public static void createOrUpdateAAnalyticsConnectorsService(
+        com.azure.resourcemanager.healthcareapis.HealthcareApisManager manager) {
+        manager
+            .analyticsConnectors()
+            .define("exampleconnector")
+            .withExistingWorkspace("testRG", "workspace1")
+            .withRegion("westus")
+            .withDataSourceConfiguration(
+                new AnalyticsConnectorDataSource()
+                    .withType(AnalyticsConnectorDataSourceType.FHIRSERVICE)
+                    .withAdditionalProperties(
+                        mapOf("kind", "R4", "url", "https://workspace-examplefhir.fhir.azurehealthcareapis.com")))
+            .withDataMappingConfiguration(
+                new AnalyticsConnectorMapping()
+                    .withType(AnalyticsConnectorMappingType.FHIR_TO_PARQUET)
+                    .withAdditionalProperties(
+                        mapOf(
+                            "filterConfigurationReference",
+                            "acrexample.azurecr.io/blah@sha256xxx",
+                            "extensionSchemaReference",
+                            "acrexample.azurecr.io/blah@sha256aaa/Extension",
+                            "anonymizationSchemaReference",
+                            "acrexample.azurecr.io/blah@sha256ccc",
+                            "transformationSchemaReference",
+                            "acrexample.azurecr.io/blah@sha256bbb")))
+            .withDataDestinationConfiguration(
+                new AnalyticsConnectorDataDestination()
+                    .withType(AnalyticsConnectorDataDestinationType.DATALAKE)
+                    .withAdditionalProperties(mapOf("dataLakeName", "exampledatalake")))
+            .create();
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> Map<String, T> mapOf(Object... inputs) {
+        Map<String, T> map = new HashMap<>();
+        for (int i = 0; i < inputs.length; i += 2) {
+            String key = (String) inputs[i];
+            T value = (T) inputs[i + 1];
+            map.put(key, value);
+        }
+        return map;
+    }
+}
+```
+
+### AnalyticsConnectors_Delete
+
+```java
+import com.azure.core.util.Context;
+
+/** Samples for AnalyticsConnectors Delete. */
+public final class AnalyticsConnectorsDeleteSamples {
+    /*
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/analyticsconnectors/AnalyticsConnectors_Delete.json
+     */
+    /**
+     * Sample code: Delete a Analytics Connectors.
+     *
+     * @param manager Entry point to HealthcareApisManager.
+     */
+    public static void deleteAAnalyticsConnectors(
+        com.azure.resourcemanager.healthcareapis.HealthcareApisManager manager) {
+        manager.analyticsConnectors().delete("testRG", "workspace1", "exampleconnector", Context.NONE);
+    }
+}
+```
+
+### AnalyticsConnectors_Get
+
+```java
+import com.azure.core.util.Context;
+
+/** Samples for AnalyticsConnectors Get. */
+public final class AnalyticsConnectorsGetSamples {
+    /*
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/analyticsconnectors/AnalyticsConnectors_Get.json
+     */
+    /**
+     * Sample code: Get a Analytics Connector Service.
+     *
+     * @param manager Entry point to HealthcareApisManager.
+     */
+    public static void getAAnalyticsConnectorService(
+        com.azure.resourcemanager.healthcareapis.HealthcareApisManager manager) {
+        manager.analyticsConnectors().getWithResponse("testRG", "workspace1", "exampleconnector", Context.NONE);
+    }
+}
+```
+
+### AnalyticsConnectors_ListByWorkspace
+
+```java
+import com.azure.core.util.Context;
+
+/** Samples for AnalyticsConnectors ListByWorkspace. */
+public final class AnalyticsConnectorsListByWorkspaceSamples {
+    /*
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/analyticsconnectors/AnalyticsConnectors_List.json
+     */
+    /**
+     * Sample code: List Analytics Connectors.
+     *
+     * @param manager Entry point to HealthcareApisManager.
+     */
+    public static void listAnalyticsConnectors(com.azure.resourcemanager.healthcareapis.HealthcareApisManager manager) {
+        manager.analyticsConnectors().listByWorkspace("testRG", "workspace1", Context.NONE);
+    }
+}
+```
+
 ### DicomServices_CreateOrUpdate
 
 ```java
 /** Samples for DicomServices CreateOrUpdate. */
 public final class DicomServicesCreateOrUpdateSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/dicomservices/DicomServices_Create.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/dicomservices/DicomServices_Create.json
      */
     /**
      * Sample code: Create or update a Dicom Service.
@@ -118,7 +304,7 @@ import com.azure.core.util.Context;
 /** Samples for DicomServices Delete. */
 public final class DicomServicesDeleteSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/dicomservices/DicomServices_Delete.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/dicomservices/DicomServices_Delete.json
      */
     /**
      * Sample code: Delete a dicomservice.
@@ -139,7 +325,7 @@ import com.azure.core.util.Context;
 /** Samples for DicomServices Get. */
 public final class DicomServicesGetSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/dicomservices/DicomServices_Get.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/dicomservices/DicomServices_Get.json
      */
     /**
      * Sample code: Get a dicomservice.
@@ -160,7 +346,7 @@ import com.azure.core.util.Context;
 /** Samples for DicomServices ListByWorkspace. */
 public final class DicomServicesListByWorkspaceSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/dicomservices/DicomServices_List.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/dicomservices/DicomServices_List.json
      */
     /**
      * Sample code: List dicomservices.
@@ -184,7 +370,7 @@ import java.util.Map;
 /** Samples for DicomServices Update. */
 public final class DicomServicesUpdateSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/dicomservices/DicomServices_Patch.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/dicomservices/DicomServices_Patch.json
      */
     /**
      * Sample code: Update a dicomservice.
@@ -218,7 +404,7 @@ import com.azure.core.util.Context;
 /** Samples for FhirDestinations ListByIotConnector. */
 public final class FhirDestinationsListByIotConnectorSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/iotconnectors/iotconnector_fhirdestination_List.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/iotconnectors/iotconnector_fhirdestination_List.json
      */
     /**
      * Sample code: List IoT Connectors.
@@ -239,6 +425,7 @@ import com.azure.resourcemanager.healthcareapis.models.FhirServiceAcrConfigurati
 import com.azure.resourcemanager.healthcareapis.models.FhirServiceAuthenticationConfiguration;
 import com.azure.resourcemanager.healthcareapis.models.FhirServiceCorsConfiguration;
 import com.azure.resourcemanager.healthcareapis.models.FhirServiceExportConfiguration;
+import com.azure.resourcemanager.healthcareapis.models.FhirServiceImportConfiguration;
 import com.azure.resourcemanager.healthcareapis.models.FhirServiceKind;
 import com.azure.resourcemanager.healthcareapis.models.ServiceManagedIdentityIdentity;
 import com.azure.resourcemanager.healthcareapis.models.ServiceManagedIdentityType;
@@ -249,7 +436,7 @@ import java.util.Map;
 /** Samples for FhirServices CreateOrUpdate. */
 public final class FhirServicesCreateOrUpdateSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/fhirservices/FhirServices_Create.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/fhirservices/FhirServices_Create.json
      */
     /**
      * Sample code: Create or update a Fhir Service.
@@ -286,6 +473,11 @@ public final class FhirServicesCreateOrUpdateSamples {
                     .withAllowCredentials(false))
             .withExportConfiguration(
                 new FhirServiceExportConfiguration().withStorageAccountName("existingStorageAccount"))
+            .withImportConfiguration(
+                new FhirServiceImportConfiguration()
+                    .withIntegrationDataStore("existingStorageAccount")
+                    .withInitialImportMode(false)
+                    .withEnabled(false))
             .create();
     }
 
@@ -310,7 +502,7 @@ import com.azure.core.util.Context;
 /** Samples for FhirServices Delete. */
 public final class FhirServicesDeleteSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/fhirservices/FhirServices_Delete.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/fhirservices/FhirServices_Delete.json
      */
     /**
      * Sample code: Delete a Fhir Service.
@@ -331,7 +523,7 @@ import com.azure.core.util.Context;
 /** Samples for FhirServices Get. */
 public final class FhirServicesGetSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/fhirservices/FhirServices_Get.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/fhirservices/FhirServices_Get.json
      */
     /**
      * Sample code: Get a Fhir Service.
@@ -352,7 +544,7 @@ import com.azure.core.util.Context;
 /** Samples for FhirServices ListByWorkspace. */
 public final class FhirServicesListByWorkspaceSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/fhirservices/FhirServices_List.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/fhirservices/FhirServices_List.json
      */
     /**
      * Sample code: List fhirservices.
@@ -376,7 +568,7 @@ import java.util.Map;
 /** Samples for FhirServices Update. */
 public final class FhirServicesUpdateSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/fhirservices/FhirServices_Patch.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/fhirservices/FhirServices_Patch.json
      */
     /**
      * Sample code: Update a Fhir Service.
@@ -414,7 +606,7 @@ import java.io.IOException;
 /** Samples for IotConnectorFhirDestination CreateOrUpdate. */
 public final class IotConnectorFhirDestinationCreateOrUpdateSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/iotconnectors/iotconnector_fhirdestination_Create.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/iotconnectors/iotconnector_fhirdestination_Create.json
      */
     /**
      * Sample code: Create or update an Iot Connector FHIR destination.
@@ -454,7 +646,7 @@ import com.azure.core.util.Context;
 /** Samples for IotConnectorFhirDestination Delete. */
 public final class IotConnectorFhirDestinationDeleteSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/iotconnectors/iotconnector_fhirdestination_Delete.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/iotconnectors/iotconnector_fhirdestination_Delete.json
      */
     /**
      * Sample code: Delete an IoT Connector destination.
@@ -476,7 +668,7 @@ import com.azure.core.util.Context;
 /** Samples for IotConnectorFhirDestination Get. */
 public final class IotConnectorFhirDestinationGetSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/iotconnectors/iotconnector_fhirdestination_Get.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/iotconnectors/iotconnector_fhirdestination_Get.json
      */
     /**
      * Sample code: Get an IoT Connector destination.
@@ -506,7 +698,7 @@ import java.util.Map;
 /** Samples for IotConnectors CreateOrUpdate. */
 public final class IotConnectorsCreateOrUpdateSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/iotconnectors/iotconnector_Create.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/iotconnectors/iotconnector_Create.json
      */
     /**
      * Sample code: Create an IoT Connector.
@@ -560,7 +752,7 @@ import com.azure.core.util.Context;
 /** Samples for IotConnectors Delete. */
 public final class IotConnectorsDeleteSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/iotconnectors/iotconnector_Delete.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/iotconnectors/iotconnector_Delete.json
      */
     /**
      * Sample code: Delete an IoT Connector.
@@ -581,7 +773,7 @@ import com.azure.core.util.Context;
 /** Samples for IotConnectors Get. */
 public final class IotConnectorsGetSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/iotconnectors/iotconnector_Get.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/iotconnectors/iotconnector_Get.json
      */
     /**
      * Sample code: Get an IoT Connector.
@@ -602,7 +794,7 @@ import com.azure.core.util.Context;
 /** Samples for IotConnectors ListByWorkspace. */
 public final class IotConnectorsListByWorkspaceSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/iotconnectors/iotconnector_List.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/iotconnectors/iotconnector_List.json
      */
     /**
      * Sample code: List iotconnectors.
@@ -628,7 +820,7 @@ import java.util.Map;
 /** Samples for IotConnectors Update. */
 public final class IotConnectorsUpdateSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/iotconnectors/iotconnector_Patch.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/iotconnectors/iotconnector_Patch.json
      */
     /**
      * Sample code: Patch an IoT Connector.
@@ -666,7 +858,7 @@ import com.azure.core.util.Context;
 /** Samples for OperationResults Get. */
 public final class OperationResultsGetSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/OperationResultsGet.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/OperationResultsGet.json
      */
     /**
      * Sample code: Get operation result.
@@ -687,7 +879,7 @@ import com.azure.core.util.Context;
 /** Samples for Operations List. */
 public final class OperationsListSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/OperationsList.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/OperationsList.json
      */
     /**
      * Sample code: List operations.
@@ -709,7 +901,7 @@ import com.azure.resourcemanager.healthcareapis.models.PrivateLinkServiceConnect
 /** Samples for PrivateEndpointConnections CreateOrUpdate. */
 public final class PrivateEndpointConnectionsCreateOrUpdateSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/legacy/ServiceCreatePrivateEndpointConnection.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/legacy/ServiceCreatePrivateEndpointConnection.json
      */
     /**
      * Sample code: PrivateEndpointConnection_CreateOrUpdate.
@@ -739,7 +931,7 @@ import com.azure.core.util.Context;
 /** Samples for PrivateEndpointConnections Delete. */
 public final class PrivateEndpointConnectionsDeleteSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/legacy/ServiceDeletePrivateEndpointConnection.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/legacy/ServiceDeletePrivateEndpointConnection.json
      */
     /**
      * Sample code: PrivateEndpointConnections_Delete.
@@ -761,7 +953,7 @@ import com.azure.core.util.Context;
 /** Samples for PrivateEndpointConnections Get. */
 public final class PrivateEndpointConnectionsGetSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/legacy/ServiceGetPrivateEndpointConnection.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/legacy/ServiceGetPrivateEndpointConnection.json
      */
     /**
      * Sample code: PrivateEndpointConnection_GetConnection.
@@ -783,7 +975,7 @@ import com.azure.core.util.Context;
 /** Samples for PrivateEndpointConnections ListByService. */
 public final class PrivateEndpointConnectionsListByServiceSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/legacy/ServiceListPrivateEndpointConnections.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/legacy/ServiceListPrivateEndpointConnections.json
      */
     /**
      * Sample code: PrivateEndpointConnection_List.
@@ -805,7 +997,7 @@ import com.azure.core.util.Context;
 /** Samples for PrivateLinkResources Get. */
 public final class PrivateLinkResourcesGetSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/legacy/PrivateLinkResourceGet.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/legacy/PrivateLinkResourceGet.json
      */
     /**
      * Sample code: PrivateLinkResources_Get.
@@ -826,7 +1018,7 @@ import com.azure.core.util.Context;
 /** Samples for PrivateLinkResources ListByService. */
 public final class PrivateLinkResourcesListByServiceSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/legacy/PrivateLinkResourcesListByService.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/legacy/PrivateLinkResourcesListByService.json
      */
     /**
      * Sample code: PrivateLinkResources_ListGroupIds.
@@ -849,7 +1041,7 @@ import com.azure.resourcemanager.healthcareapis.models.CheckNameAvailabilityPara
 /** Samples for Services CheckNameAvailability. */
 public final class ServicesCheckNameAvailabilitySamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/CheckNameAvailabilityPost.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/CheckNameAvailabilityPost.json
      */
     /**
      * Sample code: Check name availability.
@@ -888,7 +1080,7 @@ import java.util.Map;
 /** Samples for Services CreateOrUpdate. */
 public final class ServicesCreateOrUpdateSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/legacy/ServiceCreate.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/legacy/ServiceCreate.json
      */
     /**
      * Sample code: Create or Update a service with all parameters.
@@ -936,7 +1128,7 @@ public final class ServicesCreateOrUpdateSamples {
     }
 
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/legacy/ServiceCreateMinimum.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/legacy/ServiceCreateMinimum.json
      */
     /**
      * Sample code: Create or Update a service with minimum parameters.
@@ -982,7 +1174,7 @@ import com.azure.core.util.Context;
 /** Samples for Services Delete. */
 public final class ServicesDeleteSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/legacy/ServiceDelete.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/legacy/ServiceDelete.json
      */
     /**
      * Sample code: Delete service.
@@ -1003,7 +1195,7 @@ import com.azure.core.util.Context;
 /** Samples for Services GetByResourceGroup. */
 public final class ServicesGetByResourceGroupSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/legacy/ServiceGet.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/legacy/ServiceGet.json
      */
     /**
      * Sample code: Get metadata.
@@ -1024,7 +1216,7 @@ import com.azure.core.util.Context;
 /** Samples for Services List. */
 public final class ServicesListSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/legacy/ServiceList.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/legacy/ServiceList.json
      */
     /**
      * Sample code: List all services in subscription.
@@ -1046,7 +1238,7 @@ import com.azure.core.util.Context;
 /** Samples for Services ListByResourceGroup. */
 public final class ServicesListByResourceGroupSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/legacy/ServiceListByResourceGroup.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/legacy/ServiceListByResourceGroup.json
      */
     /**
      * Sample code: List all services in resource group.
@@ -1071,7 +1263,7 @@ import java.util.Map;
 /** Samples for Services Update. */
 public final class ServicesUpdateSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/legacy/ServicePatch.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/legacy/ServicePatch.json
      */
     /**
      * Sample code: Patch service.
@@ -1108,7 +1300,7 @@ import com.azure.resourcemanager.healthcareapis.models.PrivateLinkServiceConnect
 /** Samples for WorkspacePrivateEndpointConnections CreateOrUpdate. */
 public final class WorkspacePrivateEndpointConnectionsCreateOrUpdateSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/privatelink/WorkspaceCreatePrivateEndpointConnection.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/privatelink/WorkspaceCreatePrivateEndpointConnection.json
      */
     /**
      * Sample code: WorkspacePrivateEndpointConnection_CreateOrUpdate.
@@ -1141,7 +1333,7 @@ import com.azure.core.util.Context;
 /** Samples for WorkspacePrivateEndpointConnections Delete. */
 public final class WorkspacePrivateEndpointConnectionsDeleteSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/privatelink/WorkspaceDeletePrivateEndpointConnection.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/privatelink/WorkspaceDeletePrivateEndpointConnection.json
      */
     /**
      * Sample code: WorkspacePrivateEndpointConnections_Delete.
@@ -1163,7 +1355,7 @@ import com.azure.core.util.Context;
 /** Samples for WorkspacePrivateEndpointConnections Get. */
 public final class WorkspacePrivateEndpointConnectionsGetSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/privatelink/WorkspaceGetPrivateEndpointConnection.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/privatelink/WorkspaceGetPrivateEndpointConnection.json
      */
     /**
      * Sample code: WorkspacePrivateEndpointConnection_GetConnection.
@@ -1187,7 +1379,7 @@ import com.azure.core.util.Context;
 /** Samples for WorkspacePrivateEndpointConnections ListByWorkspace. */
 public final class WorkspacePrivateEndpointConnectionsListByWorkspaceSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/privatelink/WorkspaceListPrivateEndpointConnections.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/privatelink/WorkspaceListPrivateEndpointConnections.json
      */
     /**
      * Sample code: WorkspacePrivateEndpointConnection_List.
@@ -1209,7 +1401,7 @@ import com.azure.core.util.Context;
 /** Samples for WorkspacePrivateLinkResources Get. */
 public final class WorkspacePrivateLinkResourcesGetSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/privatelink/WorkspacePrivateLinkResourceGet.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/privatelink/WorkspacePrivateLinkResourceGet.json
      */
     /**
      * Sample code: WorkspacePrivateLinkResources_Get.
@@ -1233,7 +1425,7 @@ import com.azure.core.util.Context;
 /** Samples for WorkspacePrivateLinkResources ListByWorkspace. */
 public final class WorkspacePrivateLinkResourcesListByWorkspaceSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/privatelink/PrivateLinkResourcesListByWorkspace.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/privatelink/PrivateLinkResourcesListByWorkspace.json
      */
     /**
      * Sample code: WorkspacePrivateLinkResources_ListGroupIds.
@@ -1255,7 +1447,7 @@ import com.azure.resourcemanager.healthcareapis.models.WorkspaceProperties;
 /** Samples for Workspaces CreateOrUpdate. */
 public final class WorkspacesCreateOrUpdateSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/workspaces/Workspaces_Create.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/workspaces/Workspaces_Create.json
      */
     /**
      * Sample code: Create or update a workspace.
@@ -1283,7 +1475,7 @@ import com.azure.core.util.Context;
 /** Samples for Workspaces Delete. */
 public final class WorkspacesDeleteSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/workspaces/Workspaces_Delete.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/workspaces/Workspaces_Delete.json
      */
     /**
      * Sample code: Delete a workspace.
@@ -1304,7 +1496,7 @@ import com.azure.core.util.Context;
 /** Samples for Workspaces GetByResourceGroup. */
 public final class WorkspacesGetByResourceGroupSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/workspaces/Workspaces_Get.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/workspaces/Workspaces_Get.json
      */
     /**
      * Sample code: Get workspace.
@@ -1325,7 +1517,7 @@ import com.azure.core.util.Context;
 /** Samples for Workspaces List. */
 public final class WorkspacesListSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/workspaces/Workspaces_ListBySubscription.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/workspaces/Workspaces_ListBySubscription.json
      */
     /**
      * Sample code: Get workspaces by subscription.
@@ -1347,7 +1539,7 @@ import com.azure.core.util.Context;
 /** Samples for Workspaces ListByResourceGroup. */
 public final class WorkspacesListByResourceGroupSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/workspaces/Workspaces_ListByResourceGroup.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/workspaces/Workspaces_ListByResourceGroup.json
      */
     /**
      * Sample code: Get workspaces by resource group.
@@ -1372,7 +1564,7 @@ import java.util.Map;
 /** Samples for Workspaces Update. */
 public final class WorkspacesUpdateSamples {
     /*
-     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2021-11-01/examples/workspaces/Workspaces_Patch.json
+     * x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/preview/2022-10-01-preview/examples/workspaces/Workspaces_Patch.json
      */
     /**
      * Sample code: Update a workspace.
