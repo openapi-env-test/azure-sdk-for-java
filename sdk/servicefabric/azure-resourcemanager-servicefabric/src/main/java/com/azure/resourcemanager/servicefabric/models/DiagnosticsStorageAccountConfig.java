@@ -6,14 +6,11 @@ package com.azure.resourcemanager.servicefabric.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The storage account information for storing Service Fabric diagnostic logs. */
 @Fluent
 public final class DiagnosticsStorageAccountConfig {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(DiagnosticsStorageAccountConfig.class);
-
     /*
      * The Azure storage account name.
      */
@@ -181,34 +178,36 @@ public final class DiagnosticsStorageAccountConfig {
      */
     public void validate() {
         if (storageAccountName() == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property storageAccountName in model DiagnosticsStorageAccountConfig"));
         }
         if (protectedAccountKeyName() == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property protectedAccountKeyName in model DiagnosticsStorageAccountConfig"));
         }
         if (blobEndpoint() == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property blobEndpoint in model DiagnosticsStorageAccountConfig"));
         }
         if (queueEndpoint() == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property queueEndpoint in model DiagnosticsStorageAccountConfig"));
         }
         if (tableEndpoint() == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property tableEndpoint in model DiagnosticsStorageAccountConfig"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(DiagnosticsStorageAccountConfig.class);
 }

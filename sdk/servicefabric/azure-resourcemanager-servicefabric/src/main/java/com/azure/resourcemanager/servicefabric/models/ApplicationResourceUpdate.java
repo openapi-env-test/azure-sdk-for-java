@@ -7,9 +7,7 @@ package com.azure.resourcemanager.servicefabric.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.management.ProxyResource;
 import com.azure.core.management.SystemData;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.servicefabric.fluent.models.ApplicationResourceUpdateProperties;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
@@ -18,8 +16,6 @@ import java.util.Map;
 /** The application resource for patch operations. */
 @Fluent
 public final class ApplicationResourceUpdate extends ProxyResource {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(ApplicationResourceUpdate.class);
-
     /*
      * The application resource properties for patch operations.
      */

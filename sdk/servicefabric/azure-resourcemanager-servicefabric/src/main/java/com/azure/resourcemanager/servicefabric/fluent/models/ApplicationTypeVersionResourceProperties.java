@@ -6,7 +6,6 @@ package com.azure.resourcemanager.servicefabric.fluent.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
@@ -14,8 +13,6 @@ import java.util.Map;
 /** The properties of the application type version resource. */
 @Fluent
 public final class ApplicationTypeVersionResourceProperties {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(ApplicationTypeVersionResourceProperties.class);
-
     /*
      * The current deployment or provisioning state, which only appears in the
      * response
@@ -84,10 +81,12 @@ public final class ApplicationTypeVersionResourceProperties {
      */
     public void validate() {
         if (appPackageUrl() == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property appPackageUrl in model ApplicationTypeVersionResourceProperties"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(ApplicationTypeVersionResourceProperties.class);
 }
