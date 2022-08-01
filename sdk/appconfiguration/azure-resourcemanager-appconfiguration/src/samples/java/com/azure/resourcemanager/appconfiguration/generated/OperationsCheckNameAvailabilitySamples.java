@@ -11,7 +11,7 @@ import com.azure.resourcemanager.appconfiguration.models.ConfigurationResourceTy
 /** Samples for Operations CheckNameAvailability. */
 public final class OperationsCheckNameAvailabilitySamples {
     /*
-     * x-ms-original-file: specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/examples/CheckNameAvailable.json
+     * x-ms-original-file: specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/preview/2022-01-11/examples/CheckNameAvailable.json
      */
     /**
      * Sample code: ConfigurationStores_CheckNameAvailable.
@@ -24,13 +24,13 @@ public final class OperationsCheckNameAvailabilitySamples {
             .operations()
             .checkNameAvailabilityWithResponse(
                 new CheckNameAvailabilityParameters()
-                    .withName("contoso")
+                    .withName("fayeh")
                     .withType(ConfigurationResourceType.MICROSOFT_APP_CONFIGURATION_CONFIGURATION_STORES),
                 Context.NONE);
     }
 
     /*
-     * x-ms-original-file: specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/examples/CheckNameNotAvailable.json
+     * x-ms-original-file: specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/preview/2022-01-11/examples/CheckNameNotAvailable.json
      */
     /**
      * Sample code: ConfigurationStores_CheckNameNotAvailable.
@@ -43,7 +43,7 @@ public final class OperationsCheckNameAvailabilitySamples {
             .operations()
             .checkNameAvailabilityWithResponse(
                 new CheckNameAvailabilityParameters()
-                    .withName("contoso")
+                    .withName("fayeh")
                     .withType(ConfigurationResourceType.MICROSOFT_APP_CONFIGURATION_CONFIGURATION_STORES),
                 Context.NONE);
     }
