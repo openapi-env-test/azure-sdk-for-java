@@ -61,7 +61,7 @@ public interface Workbook {
      *
      * @return the kind value.
      */
-    WorkbookSharedTypeKind kind();
+    Kind kind();
 
     /**
      * Gets the etag property: Resource etag.
@@ -286,7 +286,7 @@ public interface Workbook {
              * @param kind The kind of workbook. Only valid value is shared.
              * @return the next definition stage.
              */
-            WithCreate withKind(WorkbookSharedTypeKind kind);
+            WithCreate withKind(Kind kind);
         }
         /** The stage of the Workbook definition allowing to specify etag. */
         interface WithEtag {
@@ -447,7 +447,7 @@ public interface Workbook {
              * @param kind The kind of workbook. Only valid value is shared.
              * @return the next definition stage.
              */
-            Update withKind(WorkbookUpdateSharedTypeKind kind);
+            Update withKind(SharedTypeKind kind);
         }
         /** The stage of the Workbook update allowing to specify displayName. */
         interface WithDisplayName {
