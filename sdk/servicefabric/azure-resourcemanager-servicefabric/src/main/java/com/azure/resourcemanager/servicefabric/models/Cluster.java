@@ -344,6 +344,13 @@ public interface Cluster {
     String regionName();
 
     /**
+     * Gets the name of the resource group.
+     *
+     * @return the name of the resource group.
+     */
+    String resourceGroupName();
+
+    /**
      * Gets the inner com.azure.resourcemanager.servicefabric.fluent.models.ClusterInner object.
      *
      * @return the inner object.
@@ -1140,7 +1147,7 @@ public interface Cluster {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of intermediate cluster code versions for an upgrade or downgrade.
+     * @return the list of intermediate cluster code versions for an upgrade or downgrade along with {@link Response}.
      */
     Response<UpgradableVersionPathResult> listUpgradableVersionsWithResponse(
         UpgradableVersionsDescription versionsDescription, Context context);

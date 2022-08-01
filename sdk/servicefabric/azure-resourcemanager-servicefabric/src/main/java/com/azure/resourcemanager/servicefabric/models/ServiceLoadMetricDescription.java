@@ -6,14 +6,11 @@ package com.azure.resourcemanager.servicefabric.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Specifies a metric to load balance a service during runtime. */
 @Fluent
 public final class ServiceLoadMetricDescription {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(ServiceLoadMetricDescription.class);
-
     /*
      * The name of the metric. If the service chooses to report load during
      * runtime, the load metric name should match the name that is specified in
@@ -169,10 +166,12 @@ public final class ServiceLoadMetricDescription {
      */
     public void validate() {
         if (name() == null) {
-            throw logger
+            throw LOGGER
                 .logExceptionAsError(
                     new IllegalArgumentException(
                         "Missing required property name in model ServiceLoadMetricDescription"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(ServiceLoadMetricDescription.class);
 }

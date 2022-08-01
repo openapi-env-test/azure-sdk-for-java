@@ -39,7 +39,7 @@ public interface ApplicationTypeVersions {
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a Service Fabric application type version resource created or in the process of being created in the
-     *     Service Fabric application type name resource.
+     *     Service Fabric application type name resource along with {@link Response}.
      */
     Response<ApplicationTypeVersionResource> getWithResponse(
         String resourceGroupName, String clusterName, String applicationTypeName, String version, Context context);
@@ -99,7 +99,7 @@ public interface ApplicationTypeVersions {
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return all application type version resources created or in the process of being created in the Service Fabric
-     *     application type name resource.
+     *     application type name resource along with {@link Response}.
      */
     Response<ApplicationTypeVersionResourceList> listWithResponse(
         String resourceGroupName, String clusterName, String applicationTypeName, Context context);
@@ -113,7 +113,7 @@ public interface ApplicationTypeVersions {
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a Service Fabric application type version resource created or in the process of being created in the
-     *     Service Fabric application type name resource.
+     *     Service Fabric application type name resource along with {@link Response}.
      */
     ApplicationTypeVersionResource getById(String id);
 
@@ -127,7 +127,7 @@ public interface ApplicationTypeVersions {
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a Service Fabric application type version resource created or in the process of being created in the
-     *     Service Fabric application type name resource.
+     *     Service Fabric application type name resource along with {@link Response}.
      */
     Response<ApplicationTypeVersionResource> getByIdWithResponse(String id, Context context);
 

@@ -5,8 +5,6 @@
 package com.azure.resourcemanager.servicefabric.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
@@ -14,8 +12,6 @@ import java.util.Map;
 /** Describes the delta health policies for the cluster upgrade. */
 @Fluent
 public final class ClusterUpgradeDeltaHealthPolicy {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(ClusterUpgradeDeltaHealthPolicy.class);
-
     /*
      * The maximum allowed percentage of nodes health degradation allowed
      * during cluster upgrades.

@@ -5,15 +5,11 @@
 package com.azure.resourcemanager.servicefabric.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Describes the policy for a monitored application upgrade. */
 @Fluent
 public final class ApplicationUpgradePolicy {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(ApplicationUpgradePolicy.class);
-
     /*
      * The maximum amount of time to block processing of an upgrade domain and
      * prevent loss of availability when there are unexpected issues. When this

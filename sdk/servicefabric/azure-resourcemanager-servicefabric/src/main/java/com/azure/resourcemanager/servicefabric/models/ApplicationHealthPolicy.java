@@ -5,8 +5,6 @@
 package com.azure.resourcemanager.servicefabric.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
@@ -14,8 +12,6 @@ import java.util.Map;
 /** Defines a health policy used to evaluate the health of an application or one of its children entities. */
 @Fluent
 public final class ApplicationHealthPolicy {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(ApplicationHealthPolicy.class);
-
     /*
      * The health policy used by default to evaluate the health of a service
      * type.
