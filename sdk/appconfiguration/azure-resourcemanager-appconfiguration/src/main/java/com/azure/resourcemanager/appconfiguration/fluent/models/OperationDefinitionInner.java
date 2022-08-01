@@ -6,7 +6,6 @@ package com.azure.resourcemanager.appconfiguration.fluent.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.resourcemanager.appconfiguration.models.OperationDefinitionDisplay;
-import com.azure.resourcemanager.appconfiguration.models.OperationProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The definition of a configuration store operation. */
@@ -19,28 +18,10 @@ public final class OperationDefinitionInner {
     private String name;
 
     /*
-     * Indicates whether the operation is a data action
-     */
-    @JsonProperty(value = "isDataAction")
-    private Boolean isDataAction;
-
-    /*
      * The display information for the configuration store operation.
      */
     @JsonProperty(value = "display")
     private OperationDefinitionDisplay display;
-
-    /*
-     * Origin of the operation
-     */
-    @JsonProperty(value = "origin")
-    private String origin;
-
-    /*
-     * Properties of the operation
-     */
-    @JsonProperty(value = "properties")
-    private OperationProperties properties;
 
     /**
      * Get the name property: Operation name: {provider}/{resource}/{operation}.
@@ -59,26 +40,6 @@ public final class OperationDefinitionInner {
      */
     public OperationDefinitionInner withName(String name) {
         this.name = name;
-        return this;
-    }
-
-    /**
-     * Get the isDataAction property: Indicates whether the operation is a data action.
-     *
-     * @return the isDataAction value.
-     */
-    public Boolean isDataAction() {
-        return this.isDataAction;
-    }
-
-    /**
-     * Set the isDataAction property: Indicates whether the operation is a data action.
-     *
-     * @param isDataAction the isDataAction value to set.
-     * @return the OperationDefinitionInner object itself.
-     */
-    public OperationDefinitionInner withIsDataAction(Boolean isDataAction) {
-        this.isDataAction = isDataAction;
         return this;
     }
 
@@ -103,46 +64,6 @@ public final class OperationDefinitionInner {
     }
 
     /**
-     * Get the origin property: Origin of the operation.
-     *
-     * @return the origin value.
-     */
-    public String origin() {
-        return this.origin;
-    }
-
-    /**
-     * Set the origin property: Origin of the operation.
-     *
-     * @param origin the origin value to set.
-     * @return the OperationDefinitionInner object itself.
-     */
-    public OperationDefinitionInner withOrigin(String origin) {
-        this.origin = origin;
-        return this;
-    }
-
-    /**
-     * Get the properties property: Properties of the operation.
-     *
-     * @return the properties value.
-     */
-    public OperationProperties properties() {
-        return this.properties;
-    }
-
-    /**
-     * Set the properties property: Properties of the operation.
-     *
-     * @param properties the properties value to set.
-     * @return the OperationDefinitionInner object itself.
-     */
-    public OperationDefinitionInner withProperties(OperationProperties properties) {
-        this.properties = properties;
-        return this;
-    }
-
-    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -150,9 +71,6 @@ public final class OperationDefinitionInner {
     public void validate() {
         if (display() != null) {
             display().validate();
-        }
-        if (properties() != null) {
-            properties().validate();
         }
     }
 }
