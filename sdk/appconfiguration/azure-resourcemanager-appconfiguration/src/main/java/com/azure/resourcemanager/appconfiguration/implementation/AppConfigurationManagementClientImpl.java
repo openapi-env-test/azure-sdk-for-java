@@ -24,10 +24,7 @@ import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.resourcemanager.appconfiguration.fluent.AppConfigurationManagementClient;
 import com.azure.resourcemanager.appconfiguration.fluent.ConfigurationStoresClient;
-import com.azure.resourcemanager.appconfiguration.fluent.KeyValuesClient;
 import com.azure.resourcemanager.appconfiguration.fluent.OperationsClient;
-import com.azure.resourcemanager.appconfiguration.fluent.PrivateEndpointConnectionsClient;
-import com.azure.resourcemanager.appconfiguration.fluent.PrivateLinkResourcesClient;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.ByteBuffer;
@@ -136,42 +133,6 @@ public final class AppConfigurationManagementClientImpl implements AppConfigurat
         return this.operations;
     }
 
-    /** The PrivateEndpointConnectionsClient object to access its operations. */
-    private final PrivateEndpointConnectionsClient privateEndpointConnections;
-
-    /**
-     * Gets the PrivateEndpointConnectionsClient object to access its operations.
-     *
-     * @return the PrivateEndpointConnectionsClient object.
-     */
-    public PrivateEndpointConnectionsClient getPrivateEndpointConnections() {
-        return this.privateEndpointConnections;
-    }
-
-    /** The PrivateLinkResourcesClient object to access its operations. */
-    private final PrivateLinkResourcesClient privateLinkResources;
-
-    /**
-     * Gets the PrivateLinkResourcesClient object to access its operations.
-     *
-     * @return the PrivateLinkResourcesClient object.
-     */
-    public PrivateLinkResourcesClient getPrivateLinkResources() {
-        return this.privateLinkResources;
-    }
-
-    /** The KeyValuesClient object to access its operations. */
-    private final KeyValuesClient keyValues;
-
-    /**
-     * Gets the KeyValuesClient object to access its operations.
-     *
-     * @return the KeyValuesClient object.
-     */
-    public KeyValuesClient getKeyValues() {
-        return this.keyValues;
-    }
-
     /**
      * Initializes an instance of AppConfigurationManagementClient client.
      *
@@ -194,12 +155,9 @@ public final class AppConfigurationManagementClientImpl implements AppConfigurat
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
-        this.apiVersion = "2022-05-01";
+        this.apiVersion = "2022-01-11";
         this.configurationStores = new ConfigurationStoresClientImpl(this);
         this.operations = new OperationsClientImpl(this);
-        this.privateEndpointConnections = new PrivateEndpointConnectionsClientImpl(this);
-        this.privateLinkResources = new PrivateLinkResourcesClientImpl(this);
-        this.keyValues = new KeyValuesClientImpl(this);
     }
 
     /**
