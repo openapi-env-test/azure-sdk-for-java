@@ -24,46 +24,8 @@ import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.applicationinsights.fluent.ApplicationInsightsManagementClient;
-import com.azure.resourcemanager.applicationinsights.implementation.AnalyticsItemsImpl;
-import com.azure.resourcemanager.applicationinsights.implementation.AnnotationsImpl;
-import com.azure.resourcemanager.applicationinsights.implementation.ApiKeysImpl;
 import com.azure.resourcemanager.applicationinsights.implementation.ApplicationInsightsManagementClientBuilder;
-import com.azure.resourcemanager.applicationinsights.implementation.ComponentAvailableFeaturesImpl;
-import com.azure.resourcemanager.applicationinsights.implementation.ComponentCurrentBillingFeaturesImpl;
-import com.azure.resourcemanager.applicationinsights.implementation.ComponentFeatureCapabilitiesImpl;
-import com.azure.resourcemanager.applicationinsights.implementation.ComponentLinkedStorageAccountsOperationsImpl;
-import com.azure.resourcemanager.applicationinsights.implementation.ComponentQuotaStatusImpl;
-import com.azure.resourcemanager.applicationinsights.implementation.ComponentsImpl;
-import com.azure.resourcemanager.applicationinsights.implementation.ExportConfigurationsImpl;
-import com.azure.resourcemanager.applicationinsights.implementation.FavoritesImpl;
-import com.azure.resourcemanager.applicationinsights.implementation.LiveTokensImpl;
-import com.azure.resourcemanager.applicationinsights.implementation.MyWorkbooksImpl;
-import com.azure.resourcemanager.applicationinsights.implementation.OperationsImpl;
-import com.azure.resourcemanager.applicationinsights.implementation.ProactiveDetectionConfigurationsImpl;
-import com.azure.resourcemanager.applicationinsights.implementation.WebTestLocationsImpl;
-import com.azure.resourcemanager.applicationinsights.implementation.WebTestsImpl;
-import com.azure.resourcemanager.applicationinsights.implementation.WorkItemConfigurationsImpl;
-import com.azure.resourcemanager.applicationinsights.implementation.WorkbookTemplatesImpl;
 import com.azure.resourcemanager.applicationinsights.implementation.WorkbooksImpl;
-import com.azure.resourcemanager.applicationinsights.models.AnalyticsItems;
-import com.azure.resourcemanager.applicationinsights.models.Annotations;
-import com.azure.resourcemanager.applicationinsights.models.ApiKeys;
-import com.azure.resourcemanager.applicationinsights.models.ComponentAvailableFeatures;
-import com.azure.resourcemanager.applicationinsights.models.ComponentCurrentBillingFeatures;
-import com.azure.resourcemanager.applicationinsights.models.ComponentFeatureCapabilities;
-import com.azure.resourcemanager.applicationinsights.models.ComponentLinkedStorageAccountsOperations;
-import com.azure.resourcemanager.applicationinsights.models.ComponentQuotaStatus;
-import com.azure.resourcemanager.applicationinsights.models.Components;
-import com.azure.resourcemanager.applicationinsights.models.ExportConfigurations;
-import com.azure.resourcemanager.applicationinsights.models.Favorites;
-import com.azure.resourcemanager.applicationinsights.models.LiveTokens;
-import com.azure.resourcemanager.applicationinsights.models.MyWorkbooks;
-import com.azure.resourcemanager.applicationinsights.models.Operations;
-import com.azure.resourcemanager.applicationinsights.models.ProactiveDetectionConfigurations;
-import com.azure.resourcemanager.applicationinsights.models.WebTestLocations;
-import com.azure.resourcemanager.applicationinsights.models.WebTests;
-import com.azure.resourcemanager.applicationinsights.models.WorkItemConfigurations;
-import com.azure.resourcemanager.applicationinsights.models.WorkbookTemplates;
 import com.azure.resourcemanager.applicationinsights.models.Workbooks;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -74,45 +36,7 @@ import java.util.stream.Collectors;
 
 /** Entry point to ApplicationInsightsManager. Composite Swagger for Application Insights Management Client. */
 public final class ApplicationInsightsManager {
-    private Operations operations;
-
-    private Annotations annotations;
-
-    private ApiKeys apiKeys;
-
-    private ExportConfigurations exportConfigurations;
-
-    private ComponentCurrentBillingFeatures componentCurrentBillingFeatures;
-
-    private ComponentQuotaStatus componentQuotaStatus;
-
-    private ComponentFeatureCapabilities componentFeatureCapabilities;
-
-    private ComponentAvailableFeatures componentAvailableFeatures;
-
-    private ProactiveDetectionConfigurations proactiveDetectionConfigurations;
-
-    private WorkItemConfigurations workItemConfigurations;
-
-    private Favorites favorites;
-
-    private WebTestLocations webTestLocations;
-
-    private WebTests webTests;
-
-    private AnalyticsItems analyticsItems;
-
-    private WorkbookTemplates workbookTemplates;
-
-    private MyWorkbooks myWorkbooks;
-
     private Workbooks workbooks;
-
-    private Components components;
-
-    private ComponentLinkedStorageAccountsOperations componentLinkedStorageAccountsOperations;
-
-    private LiveTokens liveTokens;
 
     private final ApplicationInsightsManagementClient clientObject;
 
@@ -279,7 +203,7 @@ public final class ApplicationInsightsManager {
                 .append("-")
                 .append("com.azure.resourcemanager.applicationinsights")
                 .append("/")
-                .append("1.0.0-beta.5");
+                .append("1.0.0-beta.1");
             if (!Configuration.getGlobalConfiguration().get("AZURE_TELEMETRY_DISABLED", false)) {
                 userAgentBuilder
                     .append(" (")
@@ -337,203 +261,6 @@ public final class ApplicationInsightsManager {
     }
 
     /**
-     * Gets the resource collection API of Operations.
-     *
-     * @return Resource collection API of Operations.
-     */
-    public Operations operations() {
-        if (this.operations == null) {
-            this.operations = new OperationsImpl(clientObject.getOperations(), this);
-        }
-        return operations;
-    }
-
-    /**
-     * Gets the resource collection API of Annotations.
-     *
-     * @return Resource collection API of Annotations.
-     */
-    public Annotations annotations() {
-        if (this.annotations == null) {
-            this.annotations = new AnnotationsImpl(clientObject.getAnnotations(), this);
-        }
-        return annotations;
-    }
-
-    /**
-     * Gets the resource collection API of ApiKeys.
-     *
-     * @return Resource collection API of ApiKeys.
-     */
-    public ApiKeys apiKeys() {
-        if (this.apiKeys == null) {
-            this.apiKeys = new ApiKeysImpl(clientObject.getApiKeys(), this);
-        }
-        return apiKeys;
-    }
-
-    /**
-     * Gets the resource collection API of ExportConfigurations.
-     *
-     * @return Resource collection API of ExportConfigurations.
-     */
-    public ExportConfigurations exportConfigurations() {
-        if (this.exportConfigurations == null) {
-            this.exportConfigurations = new ExportConfigurationsImpl(clientObject.getExportConfigurations(), this);
-        }
-        return exportConfigurations;
-    }
-
-    /**
-     * Gets the resource collection API of ComponentCurrentBillingFeatures.
-     *
-     * @return Resource collection API of ComponentCurrentBillingFeatures.
-     */
-    public ComponentCurrentBillingFeatures componentCurrentBillingFeatures() {
-        if (this.componentCurrentBillingFeatures == null) {
-            this.componentCurrentBillingFeatures =
-                new ComponentCurrentBillingFeaturesImpl(clientObject.getComponentCurrentBillingFeatures(), this);
-        }
-        return componentCurrentBillingFeatures;
-    }
-
-    /**
-     * Gets the resource collection API of ComponentQuotaStatus.
-     *
-     * @return Resource collection API of ComponentQuotaStatus.
-     */
-    public ComponentQuotaStatus componentQuotaStatus() {
-        if (this.componentQuotaStatus == null) {
-            this.componentQuotaStatus = new ComponentQuotaStatusImpl(clientObject.getComponentQuotaStatus(), this);
-        }
-        return componentQuotaStatus;
-    }
-
-    /**
-     * Gets the resource collection API of ComponentFeatureCapabilities.
-     *
-     * @return Resource collection API of ComponentFeatureCapabilities.
-     */
-    public ComponentFeatureCapabilities componentFeatureCapabilities() {
-        if (this.componentFeatureCapabilities == null) {
-            this.componentFeatureCapabilities =
-                new ComponentFeatureCapabilitiesImpl(clientObject.getComponentFeatureCapabilities(), this);
-        }
-        return componentFeatureCapabilities;
-    }
-
-    /**
-     * Gets the resource collection API of ComponentAvailableFeatures.
-     *
-     * @return Resource collection API of ComponentAvailableFeatures.
-     */
-    public ComponentAvailableFeatures componentAvailableFeatures() {
-        if (this.componentAvailableFeatures == null) {
-            this.componentAvailableFeatures =
-                new ComponentAvailableFeaturesImpl(clientObject.getComponentAvailableFeatures(), this);
-        }
-        return componentAvailableFeatures;
-    }
-
-    /**
-     * Gets the resource collection API of ProactiveDetectionConfigurations.
-     *
-     * @return Resource collection API of ProactiveDetectionConfigurations.
-     */
-    public ProactiveDetectionConfigurations proactiveDetectionConfigurations() {
-        if (this.proactiveDetectionConfigurations == null) {
-            this.proactiveDetectionConfigurations =
-                new ProactiveDetectionConfigurationsImpl(clientObject.getProactiveDetectionConfigurations(), this);
-        }
-        return proactiveDetectionConfigurations;
-    }
-
-    /**
-     * Gets the resource collection API of WorkItemConfigurations.
-     *
-     * @return Resource collection API of WorkItemConfigurations.
-     */
-    public WorkItemConfigurations workItemConfigurations() {
-        if (this.workItemConfigurations == null) {
-            this.workItemConfigurations =
-                new WorkItemConfigurationsImpl(clientObject.getWorkItemConfigurations(), this);
-        }
-        return workItemConfigurations;
-    }
-
-    /**
-     * Gets the resource collection API of Favorites.
-     *
-     * @return Resource collection API of Favorites.
-     */
-    public Favorites favorites() {
-        if (this.favorites == null) {
-            this.favorites = new FavoritesImpl(clientObject.getFavorites(), this);
-        }
-        return favorites;
-    }
-
-    /**
-     * Gets the resource collection API of WebTestLocations.
-     *
-     * @return Resource collection API of WebTestLocations.
-     */
-    public WebTestLocations webTestLocations() {
-        if (this.webTestLocations == null) {
-            this.webTestLocations = new WebTestLocationsImpl(clientObject.getWebTestLocations(), this);
-        }
-        return webTestLocations;
-    }
-
-    /**
-     * Gets the resource collection API of WebTests. It manages WebTest.
-     *
-     * @return Resource collection API of WebTests.
-     */
-    public WebTests webTests() {
-        if (this.webTests == null) {
-            this.webTests = new WebTestsImpl(clientObject.getWebTests(), this);
-        }
-        return webTests;
-    }
-
-    /**
-     * Gets the resource collection API of AnalyticsItems.
-     *
-     * @return Resource collection API of AnalyticsItems.
-     */
-    public AnalyticsItems analyticsItems() {
-        if (this.analyticsItems == null) {
-            this.analyticsItems = new AnalyticsItemsImpl(clientObject.getAnalyticsItems(), this);
-        }
-        return analyticsItems;
-    }
-
-    /**
-     * Gets the resource collection API of WorkbookTemplates. It manages WorkbookTemplate.
-     *
-     * @return Resource collection API of WorkbookTemplates.
-     */
-    public WorkbookTemplates workbookTemplates() {
-        if (this.workbookTemplates == null) {
-            this.workbookTemplates = new WorkbookTemplatesImpl(clientObject.getWorkbookTemplates(), this);
-        }
-        return workbookTemplates;
-    }
-
-    /**
-     * Gets the resource collection API of MyWorkbooks. It manages MyWorkbook.
-     *
-     * @return Resource collection API of MyWorkbooks.
-     */
-    public MyWorkbooks myWorkbooks() {
-        if (this.myWorkbooks == null) {
-            this.myWorkbooks = new MyWorkbooksImpl(clientObject.getMyWorkbooks(), this);
-        }
-        return myWorkbooks;
-    }
-
-    /**
      * Gets the resource collection API of Workbooks. It manages Workbook.
      *
      * @return Resource collection API of Workbooks.
@@ -543,45 +270,6 @@ public final class ApplicationInsightsManager {
             this.workbooks = new WorkbooksImpl(clientObject.getWorkbooks(), this);
         }
         return workbooks;
-    }
-
-    /**
-     * Gets the resource collection API of Components. It manages ApplicationInsightsComponent.
-     *
-     * @return Resource collection API of Components.
-     */
-    public Components components() {
-        if (this.components == null) {
-            this.components = new ComponentsImpl(clientObject.getComponents(), this);
-        }
-        return components;
-    }
-
-    /**
-     * Gets the resource collection API of ComponentLinkedStorageAccountsOperations. It manages
-     * ComponentLinkedStorageAccounts.
-     *
-     * @return Resource collection API of ComponentLinkedStorageAccountsOperations.
-     */
-    public ComponentLinkedStorageAccountsOperations componentLinkedStorageAccountsOperations() {
-        if (this.componentLinkedStorageAccountsOperations == null) {
-            this.componentLinkedStorageAccountsOperations =
-                new ComponentLinkedStorageAccountsOperationsImpl(
-                    clientObject.getComponentLinkedStorageAccountsOperations(), this);
-        }
-        return componentLinkedStorageAccountsOperations;
-    }
-
-    /**
-     * Gets the resource collection API of LiveTokens.
-     *
-     * @return Resource collection API of LiveTokens.
-     */
-    public LiveTokens liveTokens() {
-        if (this.liveTokens == null) {
-            this.liveTokens = new LiveTokensImpl(clientObject.getLiveTokens(), this);
-        }
-        return liveTokens;
     }
 
     /**
