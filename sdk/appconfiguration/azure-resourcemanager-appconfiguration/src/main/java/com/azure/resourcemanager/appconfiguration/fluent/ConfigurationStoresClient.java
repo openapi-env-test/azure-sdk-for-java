@@ -367,7 +367,7 @@ public interface ConfigurationStoresClient {
      *     PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<DeletedConfigurationStoreInner> listDeleted();
+    PagedIterable<DeletedConfigurationStoreInner> list();
 
     /**
      * Gets information about the deleted configuration stores in a subscription.
@@ -380,7 +380,7 @@ public interface ConfigurationStoresClient {
      *     PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<DeletedConfigurationStoreInner> listDeleted(Context context);
+    PagedIterable<DeletedConfigurationStoreInner> list(Context context);
 
     /**
      * Gets a deleted Azure app configuration store.

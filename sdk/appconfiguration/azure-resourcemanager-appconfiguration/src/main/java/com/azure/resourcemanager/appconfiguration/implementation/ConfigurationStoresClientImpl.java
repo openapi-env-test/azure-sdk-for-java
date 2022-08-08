@@ -73,7 +73,7 @@ public final class ConfigurationStoresClientImpl implements ConfigurationStoresC
     @ServiceInterface(name = "AppConfigurationMana")
     private interface ConfigurationStoresService {
         @Headers({"Content-Type: application/json"})
-        @Get("/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/configurationStores")
+        @Get("/subscriptions/{subscriptionId}/providersss/Microsoft.AppConfiguration/configurationStores")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<ConfigurationStoreListResult>> list(
@@ -197,7 +197,7 @@ public final class ConfigurationStoresClientImpl implements ConfigurationStoresC
         @Get("/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/deletedConfigurationStores")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<DeletedConfigurationStoreListResult>> listDeleted(
+        Mono<Response<DeletedConfigurationStoreListResult>> list(
             @HostParam("$host") String endpoint,
             @QueryParam("api-version") String apiVersion,
             @PathParam("subscriptionId") String subscriptionId,
@@ -2040,7 +2040,7 @@ public final class ConfigurationStoresClientImpl implements ConfigurationStoresC
      *     successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<DeletedConfigurationStoreInner>> listDeletedSinglePageAsync() {
+    private Mono<PagedResponse<DeletedConfigurationStoreInner>> listSinglePageAsync() {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -2058,7 +2058,7 @@ public final class ConfigurationStoresClientImpl implements ConfigurationStoresC
             .withContext(
                 context ->
                     service
-                        .listDeleted(
+                        .list(
                             this.client.getEndpoint(),
                             this.client.getApiVersion(),
                             this.client.getSubscriptionId(),
@@ -2087,7 +2087,7 @@ public final class ConfigurationStoresClientImpl implements ConfigurationStoresC
      *     successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<DeletedConfigurationStoreInner>> listDeletedSinglePageAsync(Context context) {
+    private Mono<PagedResponse<DeletedConfigurationStoreInner>> listSinglePageAsync(Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
@@ -2103,7 +2103,7 @@ public final class ConfigurationStoresClientImpl implements ConfigurationStoresC
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listDeleted(
+            .list(
                 this.client.getEndpoint(),
                 this.client.getApiVersion(),
                 this.client.getSubscriptionId(),
@@ -2129,9 +2129,8 @@ public final class ConfigurationStoresClientImpl implements ConfigurationStoresC
      *     PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<DeletedConfigurationStoreInner> listDeletedAsync() {
-        return new PagedFlux<>(
-            () -> listDeletedSinglePageAsync(), nextLink -> listDeletedNextSinglePageAsync(nextLink));
+    private PagedFlux<DeletedConfigurationStoreInner> listAsync() {
+        return new PagedFlux<>(() -> listSinglePageAsync(), nextLink -> listDeletedNextSinglePageAsync(nextLink));
     }
 
     /**
@@ -2145,9 +2144,9 @@ public final class ConfigurationStoresClientImpl implements ConfigurationStoresC
      *     PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<DeletedConfigurationStoreInner> listDeletedAsync(Context context) {
+    private PagedFlux<DeletedConfigurationStoreInner> listAsync(Context context) {
         return new PagedFlux<>(
-            () -> listDeletedSinglePageAsync(context), nextLink -> listDeletedNextSinglePageAsync(nextLink, context));
+            () -> listSinglePageAsync(context), nextLink -> listDeletedNextSinglePageAsync(nextLink, context));
     }
 
     /**
@@ -2159,8 +2158,8 @@ public final class ConfigurationStoresClientImpl implements ConfigurationStoresC
      *     PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<DeletedConfigurationStoreInner> listDeleted() {
-        return new PagedIterable<>(listDeletedAsync());
+    public PagedIterable<DeletedConfigurationStoreInner> list() {
+        return new PagedIterable<>(listAsync());
     }
 
     /**
@@ -2174,8 +2173,8 @@ public final class ConfigurationStoresClientImpl implements ConfigurationStoresC
      *     PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<DeletedConfigurationStoreInner> listDeleted(Context context) {
-        return new PagedIterable<>(listDeletedAsync(context));
+    public PagedIterable<DeletedConfigurationStoreInner> list(Context context) {
+        return new PagedIterable<>(listAsync(context));
     }
 
     /**

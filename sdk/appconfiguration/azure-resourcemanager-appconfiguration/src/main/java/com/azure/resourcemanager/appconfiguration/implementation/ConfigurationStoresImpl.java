@@ -130,13 +130,13 @@ public final class ConfigurationStoresImpl implements ConfigurationStores {
         }
     }
 
-    public PagedIterable<DeletedConfigurationStore> listDeleted() {
-        PagedIterable<DeletedConfigurationStoreInner> inner = this.serviceClient().listDeleted();
+    public PagedIterable<DeletedConfigurationStore> list() {
+        PagedIterable<DeletedConfigurationStoreInner> inner = this.serviceClient().list();
         return Utils.mapPage(inner, inner1 -> new DeletedConfigurationStoreImpl(inner1, this.manager()));
     }
 
-    public PagedIterable<DeletedConfigurationStore> listDeleted(Context context) {
-        PagedIterable<DeletedConfigurationStoreInner> inner = this.serviceClient().listDeleted(context);
+    public PagedIterable<DeletedConfigurationStore> list(Context context) {
+        PagedIterable<DeletedConfigurationStoreInner> inner = this.serviceClient().list(context);
         return Utils.mapPage(inner, inner1 -> new DeletedConfigurationStoreImpl(inner1, this.manager()));
     }
 

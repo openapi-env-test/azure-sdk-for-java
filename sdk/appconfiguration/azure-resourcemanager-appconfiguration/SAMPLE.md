@@ -9,7 +9,6 @@
 - [GetDeleted](#configurationstores_getdeleted)
 - [List](#configurationstores_list)
 - [ListByResourceGroup](#configurationstores_listbyresourcegroup)
-- [ListDeleted](#configurationstores_listdeleted)
 - [ListKeys](#configurationstores_listkeys)
 - [PurgeDeleted](#configurationstores_purgedeleted)
 - [RegenerateKey](#configurationstores_regeneratekey)
@@ -215,6 +214,19 @@ public final class ConfigurationStoresListSamples {
         com.azure.resourcemanager.appconfiguration.AppConfigurationManager manager) {
         manager.configurationStores().list(null, Context.NONE);
     }
+
+    /*
+     * x-ms-original-file: specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/examples/DeletedConfigurationStoresList.json
+     */
+    /**
+     * Sample code: DeletedConfigurationStores_List.
+     *
+     * @param manager Entry point to AppConfigurationManager.
+     */
+    public static void deletedConfigurationStoresList(
+        com.azure.resourcemanager.appconfiguration.AppConfigurationManager manager) {
+        manager.configurationStores().list(Context.NONE);
+    }
 }
 ```
 
@@ -236,28 +248,6 @@ public final class ConfigurationStoresListByResourceGroupSamples {
     public static void configurationStoresListByResourceGroup(
         com.azure.resourcemanager.appconfiguration.AppConfigurationManager manager) {
         manager.configurationStores().listByResourceGroup("myResourceGroup", null, Context.NONE);
-    }
-}
-```
-
-### ConfigurationStores_ListDeleted
-
-```java
-import com.azure.core.util.Context;
-
-/** Samples for ConfigurationStores ListDeleted. */
-public final class ConfigurationStoresListDeletedSamples {
-    /*
-     * x-ms-original-file: specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/examples/DeletedConfigurationStoresList.json
-     */
-    /**
-     * Sample code: DeletedConfigurationStores_List.
-     *
-     * @param manager Entry point to AppConfigurationManager.
-     */
-    public static void deletedConfigurationStoresList(
-        com.azure.resourcemanager.appconfiguration.AppConfigurationManager manager) {
-        manager.configurationStores().listDeleted(Context.NONE);
     }
 }
 ```

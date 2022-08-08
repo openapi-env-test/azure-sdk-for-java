@@ -176,7 +176,7 @@ public interface ConfigurationStores {
      * @return information about the deleted configuration stores in a subscription as paginated response with {@link
      *     PagedIterable}.
      */
-    PagedIterable<DeletedConfigurationStore> listDeleted();
+    PagedIterable<DeletedConfigurationStore> list();
 
     /**
      * Gets information about the deleted configuration stores in a subscription.
@@ -188,7 +188,7 @@ public interface ConfigurationStores {
      * @return information about the deleted configuration stores in a subscription as paginated response with {@link
      *     PagedIterable}.
      */
-    PagedIterable<DeletedConfigurationStore> listDeleted(Context context);
+    PagedIterable<DeletedConfigurationStore> list(Context context);
 
     /**
      * Gets a deleted Azure app configuration store.
