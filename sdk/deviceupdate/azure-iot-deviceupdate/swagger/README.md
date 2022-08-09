@@ -1,28 +1,7 @@
-# Azure Device Update for IoT Hub for Java
-
-> see https://aka.ms/autorest
-
-### Setup
-```ps
-Fork and clone https://github.com/Azure/autorest.java 
-git checkout main
-git submodule update --init --recursive
-mvn package -Dlocal
-npm install
-npm install -g autorest
-```
-
-### Generation
-```ps
-cd <swagger-folder>
-autorest --java --use=C:/work/autorest.java
-```
-
-## Generate autorest code
-```yaml
-require: https://github.com/Azure/azure-rest-api-specs/blob/9e30496a8803beb5a84909997e5cd7ea0f242fd8/specification/deviceupdate/data-plane/readme.md
+# azure-sdk-for-java
+``` yaml
 java: true
-output-folder: ../
+output-folder: sdk/deviceupdate/azure-iot-deviceupdate
 regenerate-pom: false
 title: DeviceUpdateClient
 generate-sync-async-clients: true
@@ -39,8 +18,13 @@ namespace: com.azure.iot.deviceupdate
 service-name: DeviceUpdate
 context-client-method-parameter: true
 azure-arm: false
+partial-update: true
 credential-types: tokencredential
 credential-scopes: https://api.adu.microsoft.com/.default
 service-versions:
-  - '2021-06-01-preview'
+  - 2022-07-01-preview
+polling:
+  default:
+    strategy: new OperationResourcePollingStrategyWithEndpoint<>({httpPipeline}, "https://" + this.client.getEndpoint(), null, null, {context})
+require: /spec-repo/specification/deviceupdate/data-plane/readme.md
 ```
