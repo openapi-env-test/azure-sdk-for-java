@@ -9,14 +9,14 @@ import com.azure.core.util.Context;
 /** Samples for FarmBeatsExtensions List. */
 public final class FarmBeatsExtensionsListSamples {
     /*
-     * x-ms-original-file: specification/agrifood/resource-manager/Microsoft.AgFoodPlatform/preview/2021-09-01-preview/examples/FarmBeatsExtensions_List.json
+     * x-ms-original-file: specification/agrifood/resource-manager/Microsoft.AgFoodPlatform/preview/2020-05-12-preview/examples/FarmBeatsExtensions_List.json
      */
     /**
      * Sample code: FarmBeatsExtensions_List.
      *
-     * @param manager Entry point to AgriFoodManager.
+     * @param manager Entry point to AgrifoodManager.
      */
-    public static void farmBeatsExtensionsList(com.azure.resourcemanager.agrifood.AgriFoodManager manager) {
+    public static void farmBeatsExtensionsList(com.azure.resourcemanager.agrifood.AgrifoodManager manager) {
         manager.farmBeatsExtensions().list(null, null, null, null, null, Context.NONE);
     }
 }

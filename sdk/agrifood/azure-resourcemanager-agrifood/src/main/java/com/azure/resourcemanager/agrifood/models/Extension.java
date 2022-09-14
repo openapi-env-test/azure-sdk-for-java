@@ -4,6 +4,7 @@
 
 package com.azure.resourcemanager.agrifood.models;
 
+import com.azure.core.management.SystemData;
 import com.azure.resourcemanager.agrifood.fluent.models.ExtensionInner;
 
 /** An immutable client-side representation of Extension. */
@@ -28,6 +29,13 @@ public interface Extension {
      * @return the type value.
      */
     String type();
+
+    /**
+     * Gets the systemData property: Metadata pertaining to creation and last modification of the resource.
+     *
+     * @return the systemData value.
+     */
+    SystemData systemData();
 
     /**
      * Gets the etag property: The ETag value to implement optimistic concurrency.
