@@ -20,16 +20,16 @@ public final class ExtensionsImpl implements Extensions {
 
     private final ExtensionsClient innerClient;
 
-    private final com.azure.resourcemanager.agrifood.AgriFoodManager serviceManager;
+    private final com.azure.resourcemanager.agrifood.AgrifoodManager serviceManager;
 
     public ExtensionsImpl(
-        ExtensionsClient innerClient, com.azure.resourcemanager.agrifood.AgriFoodManager serviceManager) {
+        ExtensionsClient innerClient, com.azure.resourcemanager.agrifood.AgrifoodManager serviceManager) {
         this.innerClient = innerClient;
         this.serviceManager = serviceManager;
     }
 
-    public Extension create(String resourceGroupName, String farmBeatsResourceName, String extensionId) {
-        ExtensionInner inner = this.serviceClient().create(resourceGroupName, farmBeatsResourceName, extensionId);
+    public Extension create(String extensionId, String farmBeatsResourceName, String resourceGroupName) {
+        ExtensionInner inner = this.serviceClient().create(extensionId, farmBeatsResourceName, resourceGroupName);
         if (inner != null) {
             return new ExtensionImpl(inner, this.manager());
         } else {
@@ -38,9 +38,9 @@ public final class ExtensionsImpl implements Extensions {
     }
 
     public Response<Extension> createWithResponse(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId, Context context) {
+        String extensionId, String farmBeatsResourceName, String resourceGroupName, Context context) {
         Response<ExtensionInner> inner =
-            this.serviceClient().createWithResponse(resourceGroupName, farmBeatsResourceName, extensionId, context);
+            this.serviceClient().createWithResponse(extensionId, farmBeatsResourceName, resourceGroupName, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),
@@ -52,8 +52,8 @@ public final class ExtensionsImpl implements Extensions {
         }
     }
 
-    public Extension get(String resourceGroupName, String farmBeatsResourceName, String extensionId) {
-        ExtensionInner inner = this.serviceClient().get(resourceGroupName, farmBeatsResourceName, extensionId);
+    public Extension get(String extensionId, String farmBeatsResourceName, String resourceGroupName) {
+        ExtensionInner inner = this.serviceClient().get(extensionId, farmBeatsResourceName, resourceGroupName);
         if (inner != null) {
             return new ExtensionImpl(inner, this.manager());
         } else {
@@ -62,9 +62,9 @@ public final class ExtensionsImpl implements Extensions {
     }
 
     public Response<Extension> getWithResponse(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId, Context context) {
+        String extensionId, String farmBeatsResourceName, String resourceGroupName, Context context) {
         Response<ExtensionInner> inner =
-            this.serviceClient().getWithResponse(resourceGroupName, farmBeatsResourceName, extensionId, context);
+            this.serviceClient().getWithResponse(extensionId, farmBeatsResourceName, resourceGroupName, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),
@@ -76,8 +76,8 @@ public final class ExtensionsImpl implements Extensions {
         }
     }
 
-    public Extension update(String resourceGroupName, String farmBeatsResourceName, String extensionId) {
-        ExtensionInner inner = this.serviceClient().update(resourceGroupName, farmBeatsResourceName, extensionId);
+    public Extension update(String extensionId, String farmBeatsResourceName, String resourceGroupName) {
+        ExtensionInner inner = this.serviceClient().update(extensionId, farmBeatsResourceName, resourceGroupName);
         if (inner != null) {
             return new ExtensionImpl(inner, this.manager());
         } else {
@@ -86,9 +86,9 @@ public final class ExtensionsImpl implements Extensions {
     }
 
     public Response<Extension> updateWithResponse(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId, Context context) {
+        String extensionId, String farmBeatsResourceName, String resourceGroupName, Context context) {
         Response<ExtensionInner> inner =
-            this.serviceClient().updateWithResponse(resourceGroupName, farmBeatsResourceName, extensionId, context);
+            this.serviceClient().updateWithResponse(extensionId, farmBeatsResourceName, resourceGroupName, context);
         if (inner != null) {
             return new SimpleResponse<>(
                 inner.getRequest(),
@@ -100,13 +100,13 @@ public final class ExtensionsImpl implements Extensions {
         }
     }
 
-    public void delete(String resourceGroupName, String farmBeatsResourceName, String extensionId) {
-        this.serviceClient().delete(resourceGroupName, farmBeatsResourceName, extensionId);
+    public void delete(String extensionId, String farmBeatsResourceName, String resourceGroupName) {
+        this.serviceClient().delete(extensionId, farmBeatsResourceName, resourceGroupName);
     }
 
     public Response<Void> deleteWithResponse(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId, Context context) {
-        return this.serviceClient().deleteWithResponse(resourceGroupName, farmBeatsResourceName, extensionId, context);
+        String extensionId, String farmBeatsResourceName, String resourceGroupName, Context context) {
+        return this.serviceClient().deleteWithResponse(extensionId, farmBeatsResourceName, resourceGroupName, context);
     }
 
     public PagedIterable<Extension> listByFarmBeats(String resourceGroupName, String farmBeatsResourceName) {
@@ -141,7 +141,7 @@ public final class ExtensionsImpl implements Extensions {
         return this.innerClient;
     }
 
-    private com.azure.resourcemanager.agrifood.AgriFoodManager manager() {
+    private com.azure.resourcemanager.agrifood.AgrifoodManager manager() {
         return this.serviceManager;
     }
 }

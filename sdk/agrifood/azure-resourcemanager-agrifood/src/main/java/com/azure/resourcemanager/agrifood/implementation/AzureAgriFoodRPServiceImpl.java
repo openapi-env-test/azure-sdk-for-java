@@ -22,14 +22,12 @@ import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
-import com.azure.resourcemanager.agrifood.fluent.AgriFoodManagementClient;
+import com.azure.resourcemanager.agrifood.fluent.AzureAgriFoodRPService;
 import com.azure.resourcemanager.agrifood.fluent.ExtensionsClient;
 import com.azure.resourcemanager.agrifood.fluent.FarmBeatsExtensionsClient;
 import com.azure.resourcemanager.agrifood.fluent.FarmBeatsModelsClient;
 import com.azure.resourcemanager.agrifood.fluent.LocationsClient;
 import com.azure.resourcemanager.agrifood.fluent.OperationsClient;
-import com.azure.resourcemanager.agrifood.fluent.PrivateEndpointConnectionsClient;
-import com.azure.resourcemanager.agrifood.fluent.PrivateLinkResourcesClient;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.ByteBuffer;
@@ -39,9 +37,9 @@ import java.time.Duration;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the AgriFoodManagementClientImpl type. */
-@ServiceClient(builder = AgriFoodManagementClientBuilder.class)
-public final class AgriFoodManagementClientImpl implements AgriFoodManagementClient {
+/** Initializes a new instance of the AzureAgriFoodRPServiceImpl type. */
+@ServiceClient(builder = AzureAgriFoodRPServiceBuilder.class)
+public final class AzureAgriFoodRPServiceImpl implements AzureAgriFoodRPService {
     /** The ID of the target subscription. */
     private final String subscriptionId;
 
@@ -174,32 +172,8 @@ public final class AgriFoodManagementClientImpl implements AgriFoodManagementCli
         return this.operations;
     }
 
-    /** The PrivateEndpointConnectionsClient object to access its operations. */
-    private final PrivateEndpointConnectionsClient privateEndpointConnections;
-
     /**
-     * Gets the PrivateEndpointConnectionsClient object to access its operations.
-     *
-     * @return the PrivateEndpointConnectionsClient object.
-     */
-    public PrivateEndpointConnectionsClient getPrivateEndpointConnections() {
-        return this.privateEndpointConnections;
-    }
-
-    /** The PrivateLinkResourcesClient object to access its operations. */
-    private final PrivateLinkResourcesClient privateLinkResources;
-
-    /**
-     * Gets the PrivateLinkResourcesClient object to access its operations.
-     *
-     * @return the PrivateLinkResourcesClient object.
-     */
-    public PrivateLinkResourcesClient getPrivateLinkResources() {
-        return this.privateLinkResources;
-    }
-
-    /**
-     * Initializes an instance of AgriFoodManagementClient client.
+     * Initializes an instance of AzureAgriFoodRPService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
@@ -208,7 +182,7 @@ public final class AgriFoodManagementClientImpl implements AgriFoodManagementCli
      * @param subscriptionId The ID of the target subscription.
      * @param endpoint server parameter.
      */
-    AgriFoodManagementClientImpl(
+    AzureAgriFoodRPServiceImpl(
         HttpPipeline httpPipeline,
         SerializerAdapter serializerAdapter,
         Duration defaultPollInterval,
@@ -220,14 +194,12 @@ public final class AgriFoodManagementClientImpl implements AgriFoodManagementCli
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
         this.endpoint = endpoint;
-        this.apiVersion = "2021-09-01-preview";
+        this.apiVersion = "2020-05-12-preview";
         this.extensions = new ExtensionsClientImpl(this);
         this.farmBeatsExtensions = new FarmBeatsExtensionsClientImpl(this);
         this.farmBeatsModels = new FarmBeatsModelsClientImpl(this);
         this.locations = new LocationsClientImpl(this);
         this.operations = new OperationsClientImpl(this);
-        this.privateEndpointConnections = new PrivateEndpointConnectionsClientImpl(this);
-        this.privateLinkResources = new PrivateLinkResourcesClientImpl(this);
     }
 
     /**
@@ -370,5 +342,5 @@ public final class AgriFoodManagementClientImpl implements AgriFoodManagementCli
         }
     }
 
-    private static final ClientLogger LOGGER = new ClientLogger(AgriFoodManagementClientImpl.class);
+    private static final ClientLogger LOGGER = new ClientLogger(AzureAgriFoodRPServiceImpl.class);
 }
