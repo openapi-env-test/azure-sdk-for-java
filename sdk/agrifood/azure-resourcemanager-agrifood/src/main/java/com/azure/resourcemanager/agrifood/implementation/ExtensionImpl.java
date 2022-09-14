@@ -4,15 +4,16 @@
 
 package com.azure.resourcemanager.agrifood.implementation;
 
+import com.azure.core.management.SystemData;
 import com.azure.resourcemanager.agrifood.fluent.models.ExtensionInner;
 import com.azure.resourcemanager.agrifood.models.Extension;
 
 public final class ExtensionImpl implements Extension {
     private ExtensionInner innerObject;
 
-    private final com.azure.resourcemanager.agrifood.AgriFoodManager serviceManager;
+    private final com.azure.resourcemanager.agrifood.AgrifoodManager serviceManager;
 
-    ExtensionImpl(ExtensionInner innerObject, com.azure.resourcemanager.agrifood.AgriFoodManager serviceManager) {
+    ExtensionImpl(ExtensionInner innerObject, com.azure.resourcemanager.agrifood.AgrifoodManager serviceManager) {
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
     }
@@ -27,6 +28,10 @@ public final class ExtensionImpl implements Extension {
 
     public String type() {
         return this.innerModel().type();
+    }
+
+    public SystemData systemData() {
+        return this.innerModel().systemData();
     }
 
     public String etag() {
@@ -57,7 +62,7 @@ public final class ExtensionImpl implements Extension {
         return this.innerObject;
     }
 
-    private com.azure.resourcemanager.agrifood.AgriFoodManager manager() {
+    private com.azure.resourcemanager.agrifood.AgrifoodManager manager() {
         return this.serviceManager;
     }
 }
