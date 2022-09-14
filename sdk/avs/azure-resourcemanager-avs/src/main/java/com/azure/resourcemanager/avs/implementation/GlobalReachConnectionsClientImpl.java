@@ -29,7 +29,6 @@ import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.polling.PollResult;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.avs.fluent.GlobalReachConnectionsClient;
@@ -41,8 +40,6 @@ import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in GlobalReachConnectionsClient. */
 public final class GlobalReachConnectionsClientImpl implements GlobalReachConnectionsClient {
-    private final ClientLogger logger = new ClientLogger(GlobalReachConnectionsClientImpl.class);
-
     /** The proxy service used to perform REST calls. */
     private final GlobalReachConnectionsService service;
 
@@ -151,7 +148,8 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a paged list of global reach connections.
+     * @return a paged list of global reach connections along with {@link PagedResponse} on successful completion of
+     *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<GlobalReachConnectionInner>> listSinglePageAsync(
@@ -210,7 +208,8 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a paged list of global reach connections.
+     * @return a paged list of global reach connections along with {@link PagedResponse} on successful completion of
+     *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<GlobalReachConnectionInner>> listSinglePageAsync(
@@ -265,7 +264,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a paged list of global reach connections.
+     * @return a paged list of global reach connections as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<GlobalReachConnectionInner> listAsync(String resourceGroupName, String privateCloudName) {
@@ -283,7 +282,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a paged list of global reach connections.
+     * @return a paged list of global reach connections as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<GlobalReachConnectionInner> listAsync(
@@ -301,7 +300,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a paged list of global reach connections.
+     * @return a paged list of global reach connections as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<GlobalReachConnectionInner> list(String resourceGroupName, String privateCloudName) {
@@ -317,7 +316,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a paged list of global reach connections.
+     * @return a paged list of global reach connections as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<GlobalReachConnectionInner> list(
@@ -334,7 +333,8 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a global reach connection by name in a private cloud.
+     * @return a global reach connection by name in a private cloud along with {@link Response} on successful completion
+     *     of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<GlobalReachConnectionInner>> getWithResponseAsync(
@@ -392,7 +392,8 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a global reach connection by name in a private cloud.
+     * @return a global reach connection by name in a private cloud along with {@link Response} on successful completion
+     *     of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<GlobalReachConnectionInner>> getWithResponseAsync(
@@ -446,20 +447,13 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a global reach connection by name in a private cloud.
+     * @return a global reach connection by name in a private cloud on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<GlobalReachConnectionInner> getAsync(
         String resourceGroupName, String privateCloudName, String globalReachConnectionName) {
         return getWithResponseAsync(resourceGroupName, privateCloudName, globalReachConnectionName)
-            .flatMap(
-                (Response<GlobalReachConnectionInner> res) -> {
-                    if (res.getValue() != null) {
-                        return Mono.just(res.getValue());
-                    } else {
-                        return Mono.empty();
-                    }
-                });
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -489,7 +483,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a global reach connection by name in a private cloud.
+     * @return a global reach connection by name in a private cloud along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<GlobalReachConnectionInner> getWithResponse(
@@ -507,7 +501,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a global reach connection resource.
+     * @return a global reach connection resource along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(
@@ -576,7 +570,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a global reach connection resource.
+     * @return a global reach connection resource along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(
@@ -642,7 +636,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a global reach connection resource.
+     * @return the {@link PollerFlux} for polling of a global reach connection resource.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<GlobalReachConnectionInner>, GlobalReachConnectionInner> beginCreateOrUpdateAsync(
@@ -660,7 +654,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
                 this.client.getHttpPipeline(),
                 GlobalReachConnectionInner.class,
                 GlobalReachConnectionInner.class,
-                Context.NONE);
+                this.client.getContext());
     }
 
     /**
@@ -674,7 +668,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a global reach connection resource.
+     * @return the {@link PollerFlux} for polling of a global reach connection resource.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<GlobalReachConnectionInner>, GlobalReachConnectionInner> beginCreateOrUpdateAsync(
@@ -707,7 +701,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a global reach connection resource.
+     * @return the {@link SyncPoller} for polling of a global reach connection resource.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<GlobalReachConnectionInner>, GlobalReachConnectionInner> beginCreateOrUpdate(
@@ -731,7 +725,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a global reach connection resource.
+     * @return the {@link SyncPoller} for polling of a global reach connection resource.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<GlobalReachConnectionInner>, GlobalReachConnectionInner> beginCreateOrUpdate(
@@ -755,7 +749,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a global reach connection resource.
+     * @return a global reach connection resource on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<GlobalReachConnectionInner> createOrUpdateAsync(
@@ -780,7 +774,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a global reach connection resource.
+     * @return a global reach connection resource on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<GlobalReachConnectionInner> createOrUpdateAsync(
@@ -852,7 +846,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(
@@ -910,7 +904,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(
@@ -964,7 +958,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsync(
@@ -973,7 +967,8 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
             deleteWithResponseAsync(resourceGroupName, privateCloudName, globalReachConnectionName);
         return this
             .client
-            .<Void, Void>getLroResult(mono, this.client.getHttpPipeline(), Void.class, Void.class, Context.NONE);
+            .<Void, Void>getLroResult(
+                mono, this.client.getHttpPipeline(), Void.class, Void.class, this.client.getContext());
     }
 
     /**
@@ -986,7 +981,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsync(
@@ -1008,7 +1003,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete(
@@ -1026,7 +1021,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete(
@@ -1044,7 +1039,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * @return A {@link Mono} that completes when a successful response is received.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> deleteAsync(
@@ -1064,7 +1059,7 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the completion.
+     * @return A {@link Mono} that completes when a successful response is received.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> deleteAsync(
@@ -1113,7 +1108,8 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a paged list of global reach connections.
+     * @return a paged list of global reach connections along with {@link PagedResponse} on successful completion of
+     *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<GlobalReachConnectionInner>> listNextSinglePageAsync(String nextLink) {
@@ -1149,7 +1145,8 @@ public final class GlobalReachConnectionsClientImpl implements GlobalReachConnec
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a paged list of global reach connections.
+     * @return a paged list of global reach connections along with {@link PagedResponse} on successful completion of
+     *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<GlobalReachConnectionInner>> listNextSinglePageAsync(String nextLink, Context context) {

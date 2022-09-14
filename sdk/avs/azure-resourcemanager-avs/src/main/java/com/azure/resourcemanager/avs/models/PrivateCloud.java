@@ -206,6 +206,13 @@ public interface PrivateCloud {
     String regionName();
 
     /**
+     * Gets the name of the resource group.
+     *
+     * @return the name of the resource group.
+     */
+    String resourceGroupName();
+
+    /**
      * Gets the inner com.azure.resourcemanager.avs.fluent.models.PrivateCloudInner object.
      *
      * @return the inner object.
@@ -439,7 +446,6 @@ public interface PrivateCloud {
             UpdateStages.WithManagementCluster,
             UpdateStages.WithInternet,
             UpdateStages.WithIdentitySources,
-            UpdateStages.WithAvailability,
             UpdateStages.WithEncryption {
         /**
          * Executes the update request.
@@ -507,17 +513,6 @@ public interface PrivateCloud {
              * @return the next definition stage.
              */
             Update withIdentitySources(List<IdentitySource> identitySources);
-        }
-        /** The stage of the PrivateCloud update allowing to specify availability. */
-        interface WithAvailability {
-            /**
-             * Specifies the availability property: Properties describing how the cloud is distributed across
-             * availability zones.
-             *
-             * @param availability Properties describing how the cloud is distributed across availability zones.
-             * @return the next definition stage.
-             */
-            Update withAvailability(AvailabilityProperties availability);
         }
         /** The stage of the PrivateCloud update allowing to specify encryption. */
         interface WithEncryption {
@@ -597,7 +592,7 @@ public interface PrivateCloud {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return administrative credentials for accessing vCenter and NSX-T.
+     * @return administrative credentials for accessing vCenter and NSX-T along with {@link Response}.
      */
     Response<AdminCredentials> listAdminCredentialsWithResponse(Context context);
 }

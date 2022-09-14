@@ -14,10 +14,9 @@ import com.azure.resourcemanager.avs.fluent.models.TrialInner;
 import com.azure.resourcemanager.avs.models.Locations;
 import com.azure.resourcemanager.avs.models.Quota;
 import com.azure.resourcemanager.avs.models.Trial;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public final class LocationsImpl implements Locations {
-    @JsonIgnore private final ClientLogger logger = new ClientLogger(LocationsImpl.class);
+    private static final ClientLogger LOGGER = new ClientLogger(LocationsImpl.class);
 
     private final LocationsClient innerClient;
 

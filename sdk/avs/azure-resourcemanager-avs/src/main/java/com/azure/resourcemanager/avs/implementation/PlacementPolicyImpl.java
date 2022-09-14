@@ -33,6 +33,10 @@ public final class PlacementPolicyImpl implements PlacementPolicy, PlacementPoli
         return this.innerModel().properties();
     }
 
+    public String resourceGroupName() {
+        return resourceGroupName;
+    }
+
     public PlacementPolicyInner innerModel() {
         return this.innerObject;
     }

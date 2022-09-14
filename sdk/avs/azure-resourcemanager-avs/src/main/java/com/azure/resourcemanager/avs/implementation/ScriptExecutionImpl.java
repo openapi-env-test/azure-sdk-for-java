@@ -128,6 +128,10 @@ public final class ScriptExecutionImpl implements ScriptExecution, ScriptExecuti
         }
     }
 
+    public String resourceGroupName() {
+        return resourceGroupName;
+    }
+
     public ScriptExecutionInner innerModel() {
         return this.innerObject;
     }
