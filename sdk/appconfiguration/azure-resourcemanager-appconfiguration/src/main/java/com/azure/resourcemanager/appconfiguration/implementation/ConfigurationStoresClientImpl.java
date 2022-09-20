@@ -73,7 +73,7 @@ public final class ConfigurationStoresClientImpl implements ConfigurationStoresC
     @ServiceInterface(name = "AppConfigurationMana")
     private interface ConfigurationStoresService {
         @Headers({"Content-Type: application/json"})
-        @Get("/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/configurationStores")
+        @Get("/subscriptions/{subscriptionId}/providers/Microsoft.AppConfiguration/configurationStores1")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<ConfigurationStoreListResult>> list(
