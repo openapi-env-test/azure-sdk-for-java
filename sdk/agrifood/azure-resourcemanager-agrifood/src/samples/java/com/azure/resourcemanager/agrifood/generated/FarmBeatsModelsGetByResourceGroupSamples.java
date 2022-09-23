@@ -9,14 +9,14 @@ import com.azure.core.util.Context;
 /** Samples for FarmBeatsModels GetByResourceGroup. */
 public final class FarmBeatsModelsGetByResourceGroupSamples {
     /*
-     * x-ms-original-file: specification/agrifood/resource-manager/Microsoft.AgFoodPlatform/preview/2021-09-01-preview/examples/FarmBeatsModels_Get.json
+     * x-ms-original-file: specification/agrifood/resource-manager/Microsoft.AgFoodPlatform/preview/2020-05-12-preview/examples/FarmBeatsModels_Get.json
      */
     /**
      * Sample code: FarmBeatsModels_Get.
      *
-     * @param manager Entry point to AgriFoodManager.
+     * @param manager Entry point to AgrifoodManager.
      */
-    public static void farmBeatsModelsGet(com.azure.resourcemanager.agrifood.AgriFoodManager manager) {
+    public static void farmBeatsModelsGet(com.azure.resourcemanager.agrifood.AgrifoodManager manager) {
         manager
             .farmBeatsModels()
             .getByResourceGroupWithResponse("examples-rg", "examples-farmBeatsResourceName", Context.NONE);
