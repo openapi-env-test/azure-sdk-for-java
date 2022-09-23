@@ -9,16 +9,16 @@ import com.azure.core.util.Context;
 /** Samples for Extensions Delete. */
 public final class ExtensionsDeleteSamples {
     /*
-     * x-ms-original-file: specification/agrifood/resource-manager/Microsoft.AgFoodPlatform/preview/2021-09-01-preview/examples/Extensions_Delete.json
+     * x-ms-original-file: specification/agrifood/resource-manager/Microsoft.AgFoodPlatform/preview/2020-05-12-preview/examples/Extensions_Delete.json
      */
     /**
      * Sample code: Extensions_Delete.
      *
-     * @param manager Entry point to AgriFoodManager.
+     * @param manager Entry point to AgrifoodManager.
      */
-    public static void extensionsDelete(com.azure.resourcemanager.agrifood.AgriFoodManager manager) {
+    public static void extensionsDelete(com.azure.resourcemanager.agrifood.AgrifoodManager manager) {
         manager
             .extensions()
-            .deleteWithResponse("examples-rg", "examples-farmbeatsResourceName", "provider.extension", Context.NONE);
+            .deleteWithResponse("provider.extension", "examples-farmbeatsResourceName", "examples-rg", Context.NONE);
     }
 }
