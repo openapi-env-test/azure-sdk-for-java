@@ -5,6 +5,7 @@
 package com.azure.resourcemanager.agrifood.models;
 
 import com.azure.core.management.Region;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.agrifood.fluent.models.FarmBeatsInner;
 import java.util.Map;
@@ -47,11 +48,11 @@ public interface FarmBeats {
     Map<String, String> tags();
 
     /**
-     * Gets the identity property: Identity for the resource.
+     * Gets the systemData property: Metadata pertaining to creation and last modification of the resource.
      *
-     * @return the identity value.
+     * @return the systemData value.
      */
-    Identity identity();
+    SystemData systemData();
 
     /**
      * Gets the instanceUri property: Uri of the FarmBeats instance.
@@ -66,27 +67,6 @@ public interface FarmBeats {
      * @return the provisioningState value.
      */
     ProvisioningState provisioningState();
-
-    /**
-     * Gets the sensorIntegration property: Sensor integration request model.
-     *
-     * @return the sensorIntegration value.
-     */
-    SensorIntegration sensorIntegration();
-
-    /**
-     * Gets the publicNetworkAccess property: Property to allow or block public traffic for an Azure FarmBeats resource.
-     *
-     * @return the publicNetworkAccess value.
-     */
-    PublicNetworkAccess publicNetworkAccess();
-
-    /**
-     * Gets the privateEndpointConnections property: The Private Endpoint Connection resource.
-     *
-     * @return the privateEndpointConnections value.
-     */
-    PrivateEndpointConnection privateEndpointConnections();
 
     /**
      * Gets the region of the resource.
@@ -160,11 +140,7 @@ public interface FarmBeats {
          * The stage of the FarmBeats definition which contains all the minimum required properties for the resource to
          * be created, but also allows for any other optional properties to be specified.
          */
-        interface WithCreate
-            extends DefinitionStages.WithTags,
-                DefinitionStages.WithIdentity,
-                DefinitionStages.WithSensorIntegration,
-                DefinitionStages.WithPublicNetworkAccess {
+        interface WithCreate extends DefinitionStages.WithTags {
             /**
              * Executes the create request.
              *
@@ -190,37 +166,6 @@ public interface FarmBeats {
              */
             WithCreate withTags(Map<String, String> tags);
         }
-        /** The stage of the FarmBeats definition allowing to specify identity. */
-        interface WithIdentity {
-            /**
-             * Specifies the identity property: Identity for the resource..
-             *
-             * @param identity Identity for the resource.
-             * @return the next definition stage.
-             */
-            WithCreate withIdentity(Identity identity);
-        }
-        /** The stage of the FarmBeats definition allowing to specify sensorIntegration. */
-        interface WithSensorIntegration {
-            /**
-             * Specifies the sensorIntegration property: Sensor integration request model..
-             *
-             * @param sensorIntegration Sensor integration request model.
-             * @return the next definition stage.
-             */
-            WithCreate withSensorIntegration(SensorIntegration sensorIntegration);
-        }
-        /** The stage of the FarmBeats definition allowing to specify publicNetworkAccess. */
-        interface WithPublicNetworkAccess {
-            /**
-             * Specifies the publicNetworkAccess property: Property to allow or block public traffic for an Azure
-             * FarmBeats resource..
-             *
-             * @param publicNetworkAccess Property to allow or block public traffic for an Azure FarmBeats resource.
-             * @return the next definition stage.
-             */
-            WithCreate withPublicNetworkAccess(PublicNetworkAccess publicNetworkAccess);
-        }
     }
     /**
      * Begins update for the FarmBeats resource.
@@ -230,7 +175,7 @@ public interface FarmBeats {
     FarmBeats.Update update();
 
     /** The template for FarmBeats update. */
-    interface Update extends UpdateStages.WithTags, UpdateStages.WithIdentity, UpdateStages.WithProperties {
+    interface Update extends UpdateStages.WithTags {
         /**
          * Executes the update request.
          *
@@ -257,26 +202,6 @@ public interface FarmBeats {
              * @return the next definition stage.
              */
             Update withTags(Map<String, String> tags);
-        }
-        /** The stage of the FarmBeats update allowing to specify identity. */
-        interface WithIdentity {
-            /**
-             * Specifies the identity property: Identity for the resource..
-             *
-             * @param identity Identity for the resource.
-             * @return the next definition stage.
-             */
-            Update withIdentity(Identity identity);
-        }
-        /** The stage of the FarmBeats update allowing to specify properties. */
-        interface WithProperties {
-            /**
-             * Specifies the properties property: FarmBeats ARM Resource properties..
-             *
-             * @param properties FarmBeats ARM Resource properties.
-             * @return the next definition stage.
-             */
-            Update withProperties(FarmBeatsUpdateProperties properties);
         }
     }
     /**

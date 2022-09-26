@@ -10,9 +10,7 @@ import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.agrifood.fluent.FarmBeatsModelsClient;
-import com.azure.resourcemanager.agrifood.fluent.models.ArmAsyncOperationInner;
 import com.azure.resourcemanager.agrifood.fluent.models.FarmBeatsInner;
-import com.azure.resourcemanager.agrifood.models.ArmAsyncOperation;
 import com.azure.resourcemanager.agrifood.models.FarmBeats;
 import com.azure.resourcemanager.agrifood.models.FarmBeatsModels;
 
@@ -21,10 +19,10 @@ public final class FarmBeatsModelsImpl implements FarmBeatsModels {
 
     private final FarmBeatsModelsClient innerClient;
 
-    private final com.azure.resourcemanager.agrifood.AgriFoodManager serviceManager;
+    private final com.azure.resourcemanager.agrifood.AgrifoodManager serviceManager;
 
     public FarmBeatsModelsImpl(
-        FarmBeatsModelsClient innerClient, com.azure.resourcemanager.agrifood.AgriFoodManager serviceManager) {
+        FarmBeatsModelsClient innerClient, com.azure.resourcemanager.agrifood.AgrifoodManager serviceManager) {
         this.innerClient = innerClient;
         this.serviceManager = serviceManager;
     }
@@ -81,34 +79,6 @@ public final class FarmBeatsModelsImpl implements FarmBeatsModels {
         PagedIterable<FarmBeatsInner> inner =
             this.serviceClient().listByResourceGroup(resourceGroupName, maxPageSize, skipToken, context);
         return Utils.mapPage(inner, inner1 -> new FarmBeatsImpl(inner1, this.manager()));
-    }
-
-    public ArmAsyncOperation getOperationResult(
-        String resourceGroupName, String farmBeatsResourceName, String operationResultsId) {
-        ArmAsyncOperationInner inner =
-            this.serviceClient().getOperationResult(resourceGroupName, farmBeatsResourceName, operationResultsId);
-        if (inner != null) {
-            return new ArmAsyncOperationImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public Response<ArmAsyncOperation> getOperationResultWithResponse(
-        String resourceGroupName, String farmBeatsResourceName, String operationResultsId, Context context) {
-        Response<ArmAsyncOperationInner> inner =
-            this
-                .serviceClient()
-                .getOperationResultWithResponse(resourceGroupName, farmBeatsResourceName, operationResultsId, context);
-        if (inner != null) {
-            return new SimpleResponse<>(
-                inner.getRequest(),
-                inner.getStatusCode(),
-                inner.getHeaders(),
-                new ArmAsyncOperationImpl(inner.getValue(), this.manager()));
-        } else {
-            return null;
-        }
     }
 
     public FarmBeats getById(String id) {
@@ -191,7 +161,7 @@ public final class FarmBeatsModelsImpl implements FarmBeatsModels {
         return this.innerClient;
     }
 
-    private com.azure.resourcemanager.agrifood.AgriFoodManager manager() {
+    private com.azure.resourcemanager.agrifood.AgrifoodManager manager() {
         return this.serviceManager;
     }
 

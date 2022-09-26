@@ -8,10 +8,7 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
-import com.azure.core.management.polling.PollResult;
 import com.azure.core.util.Context;
-import com.azure.core.util.polling.SyncPoller;
-import com.azure.resourcemanager.agrifood.fluent.models.ArmAsyncOperationInner;
 import com.azure.resourcemanager.agrifood.fluent.models.FarmBeatsInner;
 import com.azure.resourcemanager.agrifood.models.FarmBeatsUpdateRequestModel;
 
@@ -48,8 +45,8 @@ public interface FarmBeatsModelsClient {
     /**
      * Create or update FarmBeats resource.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param body FarmBeats resource create or update request object.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -57,13 +54,13 @@ public interface FarmBeatsModelsClient {
      * @return farmBeats ARM Resource.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    FarmBeatsInner createOrUpdate(String resourceGroupName, String farmBeatsResourceName, FarmBeatsInner body);
+    FarmBeatsInner createOrUpdate(String farmBeatsResourceName, String resourceGroupName, FarmBeatsInner body);
 
     /**
      * Create or update FarmBeats resource.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param body FarmBeats resource create or update request object.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -73,44 +70,13 @@ public interface FarmBeatsModelsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<FarmBeatsInner> createOrUpdateWithResponse(
-        String resourceGroupName, String farmBeatsResourceName, FarmBeatsInner body, Context context);
+        String farmBeatsResourceName, String resourceGroupName, FarmBeatsInner body, Context context);
 
     /**
      * Update a FarmBeats resource.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param farmBeatsResourceName FarmBeats resource name.
-     * @param body Request object.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of farmBeats ARM Resource.
-     */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<FarmBeatsInner>, FarmBeatsInner> beginUpdate(
-        String resourceGroupName, String farmBeatsResourceName, FarmBeatsUpdateRequestModel body);
-
-    /**
-     * Update a FarmBeats resource.
-     *
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
-     * @param body Request object.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of farmBeats ARM Resource.
-     */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<FarmBeatsInner>, FarmBeatsInner> beginUpdate(
-        String resourceGroupName, String farmBeatsResourceName, FarmBeatsUpdateRequestModel body, Context context);
-
-    /**
-     * Update a FarmBeats resource.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param body Request object.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -118,23 +84,23 @@ public interface FarmBeatsModelsClient {
      * @return farmBeats ARM Resource.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    FarmBeatsInner update(String resourceGroupName, String farmBeatsResourceName, FarmBeatsUpdateRequestModel body);
+    FarmBeatsInner update(String farmBeatsResourceName, String resourceGroupName, FarmBeatsUpdateRequestModel body);
 
     /**
      * Update a FarmBeats resource.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param body Request object.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return farmBeats ARM Resource.
+     * @return farmBeats ARM Resource along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    FarmBeatsInner update(
-        String resourceGroupName, String farmBeatsResourceName, FarmBeatsUpdateRequestModel body, Context context);
+    Response<FarmBeatsInner> updateWithResponse(
+        String farmBeatsResourceName, String resourceGroupName, FarmBeatsUpdateRequestModel body, Context context);
 
     /**
      * Delete a FarmBeats resource.
@@ -217,35 +183,4 @@ public interface FarmBeatsModelsClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<FarmBeatsInner> listByResourceGroup(
         String resourceGroupName, Integer maxPageSize, String skipToken, Context context);
-
-    /**
-     * Get operationResults for a FarmBeats resource.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
-     * @param operationResultsId The operation results id.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return operationResults for a FarmBeats resource.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    ArmAsyncOperationInner getOperationResult(
-        String resourceGroupName, String farmBeatsResourceName, String operationResultsId);
-
-    /**
-     * Get operationResults for a FarmBeats resource.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
-     * @param operationResultsId The operation results id.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return operationResults for a FarmBeats resource along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<ArmAsyncOperationInner> getOperationResultWithResponse(
-        String resourceGroupName, String farmBeatsResourceName, String operationResultsId, Context context);
 }
