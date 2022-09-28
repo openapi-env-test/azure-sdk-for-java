@@ -40,25 +40,25 @@ public final class FarmBeatsExtensionsClientImpl implements FarmBeatsExtensionsC
     private final FarmBeatsExtensionsService service;
 
     /** The service client containing this operation class. */
-    private final AgriFoodManagementClientImpl client;
+    private final AzureAgriFoodRPServiceImpl client;
 
     /**
      * Initializes an instance of FarmBeatsExtensionsClientImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    FarmBeatsExtensionsClientImpl(AgriFoodManagementClientImpl client) {
+    FarmBeatsExtensionsClientImpl(AzureAgriFoodRPServiceImpl client) {
         this.service =
             RestProxy.create(FarmBeatsExtensionsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for AgriFoodManagementClientFarmBeatsExtensions to be used by the proxy
+     * The interface defining all the services for AzureAgriFoodRPServiceFarmBeatsExtensions to be used by the proxy
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AgriFoodManagementCl")
+    @ServiceInterface(name = "AzureAgriFoodRPServi")
     private interface FarmBeatsExtensionsService {
         @Headers({"Content-Type: application/json"})
         @Get("/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions")

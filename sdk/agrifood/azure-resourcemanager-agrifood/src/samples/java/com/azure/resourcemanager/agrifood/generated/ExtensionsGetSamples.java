@@ -9,16 +9,16 @@ import com.azure.core.util.Context;
 /** Samples for Extensions Get. */
 public final class ExtensionsGetSamples {
     /*
-     * x-ms-original-file: specification/agrifood/resource-manager/Microsoft.AgFoodPlatform/preview/2021-09-01-preview/examples/Extensions_Get.json
+     * x-ms-original-file: specification/agrifood/resource-manager/Microsoft.AgFoodPlatform/preview/2020-05-12-preview/examples/Extensions_Get.json
      */
     /**
      * Sample code: Extensions_Get.
      *
-     * @param manager Entry point to AgriFoodManager.
+     * @param manager Entry point to AgrifoodManager.
      */
-    public static void extensionsGet(com.azure.resourcemanager.agrifood.AgriFoodManager manager) {
+    public static void extensionsGet(com.azure.resourcemanager.agrifood.AgrifoodManager manager) {
         manager
             .extensions()
-            .getWithResponse("examples-rg", "examples-farmbeatsResourceName", "provider.extension", Context.NONE);
+            .getWithResponse("provider.extension", "examples-farmbeatsResourceName", "examples-rg", Context.NONE);
     }
 }
