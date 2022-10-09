@@ -5,24 +5,19 @@
 package com.azure.resourcemanager.agrifood.implementation;
 
 import com.azure.core.management.Region;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.agrifood.fluent.models.FarmBeatsInner;
-import com.azure.resourcemanager.agrifood.fluent.models.PrivateEndpointConnectionInner;
 import com.azure.resourcemanager.agrifood.models.FarmBeats;
-import com.azure.resourcemanager.agrifood.models.FarmBeatsUpdateProperties;
 import com.azure.resourcemanager.agrifood.models.FarmBeatsUpdateRequestModel;
-import com.azure.resourcemanager.agrifood.models.Identity;
-import com.azure.resourcemanager.agrifood.models.PrivateEndpointConnection;
 import com.azure.resourcemanager.agrifood.models.ProvisioningState;
-import com.azure.resourcemanager.agrifood.models.PublicNetworkAccess;
-import com.azure.resourcemanager.agrifood.models.SensorIntegration;
 import java.util.Collections;
 import java.util.Map;
 
 public final class FarmBeatsImpl implements FarmBeats, FarmBeats.Definition, FarmBeats.Update {
     private FarmBeatsInner innerObject;
 
-    private final com.azure.resourcemanager.agrifood.AgriFoodManager serviceManager;
+    private final com.azure.resourcemanager.agrifood.AgrifoodManager serviceManager;
 
     public String id() {
         return this.innerModel().id();
@@ -49,8 +44,8 @@ public final class FarmBeatsImpl implements FarmBeats, FarmBeats.Definition, Far
         }
     }
 
-    public Identity identity() {
-        return this.innerModel().identity();
+    public SystemData systemData() {
+        return this.innerModel().systemData();
     }
 
     public String instanceUri() {
@@ -59,23 +54,6 @@ public final class FarmBeatsImpl implements FarmBeats, FarmBeats.Definition, Far
 
     public ProvisioningState provisioningState() {
         return this.innerModel().provisioningState();
-    }
-
-    public SensorIntegration sensorIntegration() {
-        return this.innerModel().sensorIntegration();
-    }
-
-    public PublicNetworkAccess publicNetworkAccess() {
-        return this.innerModel().publicNetworkAccess();
-    }
-
-    public PrivateEndpointConnection privateEndpointConnections() {
-        PrivateEndpointConnectionInner inner = this.innerModel().privateEndpointConnections();
-        if (inner != null) {
-            return new PrivateEndpointConnectionImpl(inner, this.manager());
-        } else {
-            return null;
-        }
     }
 
     public Region region() {
@@ -94,13 +72,13 @@ public final class FarmBeatsImpl implements FarmBeats, FarmBeats.Definition, Far
         return this.innerObject;
     }
 
-    private com.azure.resourcemanager.agrifood.AgriFoodManager manager() {
+    private com.azure.resourcemanager.agrifood.AgrifoodManager manager() {
         return this.serviceManager;
     }
 
-    private String resourceGroupName;
-
     private String farmBeatsResourceName;
+
+    private String resourceGroupName;
 
     private FarmBeatsUpdateRequestModel updateBody;
 
@@ -114,7 +92,7 @@ public final class FarmBeatsImpl implements FarmBeats, FarmBeats.Definition, Far
             serviceManager
                 .serviceClient()
                 .getFarmBeatsModels()
-                .createOrUpdateWithResponse(resourceGroupName, farmBeatsResourceName, this.innerModel(), Context.NONE)
+                .createOrUpdateWithResponse(farmBeatsResourceName, resourceGroupName, this.innerModel(), Context.NONE)
                 .getValue();
         return this;
     }
@@ -124,12 +102,12 @@ public final class FarmBeatsImpl implements FarmBeats, FarmBeats.Definition, Far
             serviceManager
                 .serviceClient()
                 .getFarmBeatsModels()
-                .createOrUpdateWithResponse(resourceGroupName, farmBeatsResourceName, this.innerModel(), context)
+                .createOrUpdateWithResponse(farmBeatsResourceName, resourceGroupName, this.innerModel(), context)
                 .getValue();
         return this;
     }
 
-    FarmBeatsImpl(String name, com.azure.resourcemanager.agrifood.AgriFoodManager serviceManager) {
+    FarmBeatsImpl(String name, com.azure.resourcemanager.agrifood.AgrifoodManager serviceManager) {
         this.innerObject = new FarmBeatsInner();
         this.serviceManager = serviceManager;
         this.farmBeatsResourceName = name;
@@ -145,7 +123,8 @@ public final class FarmBeatsImpl implements FarmBeats, FarmBeats.Definition, Far
             serviceManager
                 .serviceClient()
                 .getFarmBeatsModels()
-                .update(resourceGroupName, farmBeatsResourceName, updateBody, Context.NONE);
+                .updateWithResponse(farmBeatsResourceName, resourceGroupName, updateBody, Context.NONE)
+                .getValue();
         return this;
     }
 
@@ -154,15 +133,16 @@ public final class FarmBeatsImpl implements FarmBeats, FarmBeats.Definition, Far
             serviceManager
                 .serviceClient()
                 .getFarmBeatsModels()
-                .update(resourceGroupName, farmBeatsResourceName, updateBody, context);
+                .updateWithResponse(farmBeatsResourceName, resourceGroupName, updateBody, context)
+                .getValue();
         return this;
     }
 
-    FarmBeatsImpl(FarmBeatsInner innerObject, com.azure.resourcemanager.agrifood.AgriFoodManager serviceManager) {
+    FarmBeatsImpl(FarmBeatsInner innerObject, com.azure.resourcemanager.agrifood.AgrifoodManager serviceManager) {
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
-        this.resourceGroupName = Utils.getValueFromIdByName(innerObject.id(), "resourceGroups");
         this.farmBeatsResourceName = Utils.getValueFromIdByName(innerObject.id(), "farmBeats");
+        this.resourceGroupName = Utils.getValueFromIdByName(innerObject.id(), "resourceGroups");
     }
 
     public FarmBeats refresh() {
@@ -203,31 +183,6 @@ public final class FarmBeatsImpl implements FarmBeats, FarmBeats.Definition, Far
             this.updateBody.withTags(tags);
             return this;
         }
-    }
-
-    public FarmBeatsImpl withIdentity(Identity identity) {
-        if (isInCreateMode()) {
-            this.innerModel().withIdentity(identity);
-            return this;
-        } else {
-            this.updateBody.withIdentity(identity);
-            return this;
-        }
-    }
-
-    public FarmBeatsImpl withSensorIntegration(SensorIntegration sensorIntegration) {
-        this.innerModel().withSensorIntegration(sensorIntegration);
-        return this;
-    }
-
-    public FarmBeatsImpl withPublicNetworkAccess(PublicNetworkAccess publicNetworkAccess) {
-        this.innerModel().withPublicNetworkAccess(publicNetworkAccess);
-        return this;
-    }
-
-    public FarmBeatsImpl withProperties(FarmBeatsUpdateProperties properties) {
-        this.updateBody.withProperties(properties);
-        return this;
     }
 
     private boolean isInCreateMode() {
