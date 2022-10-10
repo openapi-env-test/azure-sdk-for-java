@@ -19,18 +19,6 @@ public final class FarmBeatsUpdateRequestModel {
     private String location;
 
     /*
-     * Identity for the resource.
-     */
-    @JsonProperty(value = "identity")
-    private Identity identity;
-
-    /*
-     * FarmBeats ARM Resource properties.
-     */
-    @JsonProperty(value = "properties")
-    private FarmBeatsUpdateProperties properties;
-
-    /*
      * Resource tags.
      */
     @JsonProperty(value = "tags")
@@ -54,46 +42,6 @@ public final class FarmBeatsUpdateRequestModel {
      */
     public FarmBeatsUpdateRequestModel withLocation(String location) {
         this.location = location;
-        return this;
-    }
-
-    /**
-     * Get the identity property: Identity for the resource.
-     *
-     * @return the identity value.
-     */
-    public Identity identity() {
-        return this.identity;
-    }
-
-    /**
-     * Set the identity property: Identity for the resource.
-     *
-     * @param identity the identity value to set.
-     * @return the FarmBeatsUpdateRequestModel object itself.
-     */
-    public FarmBeatsUpdateRequestModel withIdentity(Identity identity) {
-        this.identity = identity;
-        return this;
-    }
-
-    /**
-     * Get the properties property: FarmBeats ARM Resource properties.
-     *
-     * @return the properties value.
-     */
-    public FarmBeatsUpdateProperties properties() {
-        return this.properties;
-    }
-
-    /**
-     * Set the properties property: FarmBeats ARM Resource properties.
-     *
-     * @param properties the properties value to set.
-     * @return the FarmBeatsUpdateRequestModel object itself.
-     */
-    public FarmBeatsUpdateRequestModel withProperties(FarmBeatsUpdateProperties properties) {
-        this.properties = properties;
         return this;
     }
 
@@ -123,11 +71,5 @@ public final class FarmBeatsUpdateRequestModel {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (identity() != null) {
-            identity().validate();
-        }
-        if (properties() != null) {
-            properties().validate();
-        }
     }
 }

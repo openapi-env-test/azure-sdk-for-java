@@ -43,25 +43,25 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
     private final ExtensionsService service;
 
     /** The service client containing this operation class. */
-    private final AgriFoodManagementClientImpl client;
+    private final AzureAgriFoodRPServiceImpl client;
 
     /**
      * Initializes an instance of ExtensionsClientImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
-    ExtensionsClientImpl(AgriFoodManagementClientImpl client) {
+    ExtensionsClientImpl(AzureAgriFoodRPServiceImpl client) {
         this.service =
             RestProxy.create(ExtensionsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for AgriFoodManagementClientExtensions to be used by the proxy service to
+     * The interface defining all the services for AzureAgriFoodRPServiceExtensions to be used by the proxy service to
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AgriFoodManagementCl")
+    @ServiceInterface(name = "AzureAgriFoodRPServi")
     private interface ExtensionsService {
         @Headers({"Content-Type: application/json"})
         @Put(
@@ -71,10 +71,10 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<ExtensionInner>> create(
             @HostParam("$host") String endpoint,
-            @PathParam("subscriptionId") String subscriptionId,
-            @PathParam("resourceGroupName") String resourceGroupName,
-            @PathParam("farmBeatsResourceName") String farmBeatsResourceName,
             @PathParam("extensionId") String extensionId,
+            @PathParam("farmBeatsResourceName") String farmBeatsResourceName,
+            @PathParam("resourceGroupName") String resourceGroupName,
+            @PathParam("subscriptionId") String subscriptionId,
             @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept,
             Context context);
@@ -87,10 +87,10 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<ExtensionInner>> get(
             @HostParam("$host") String endpoint,
-            @PathParam("subscriptionId") String subscriptionId,
-            @PathParam("resourceGroupName") String resourceGroupName,
-            @PathParam("farmBeatsResourceName") String farmBeatsResourceName,
             @PathParam("extensionId") String extensionId,
+            @PathParam("farmBeatsResourceName") String farmBeatsResourceName,
+            @PathParam("resourceGroupName") String resourceGroupName,
+            @PathParam("subscriptionId") String subscriptionId,
             @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept,
             Context context);
@@ -103,10 +103,10 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<ExtensionInner>> update(
             @HostParam("$host") String endpoint,
-            @PathParam("subscriptionId") String subscriptionId,
-            @PathParam("resourceGroupName") String resourceGroupName,
-            @PathParam("farmBeatsResourceName") String farmBeatsResourceName,
             @PathParam("extensionId") String extensionId,
+            @PathParam("farmBeatsResourceName") String farmBeatsResourceName,
+            @PathParam("resourceGroupName") String resourceGroupName,
+            @PathParam("subscriptionId") String subscriptionId,
             @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept,
             Context context);
@@ -119,10 +119,10 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Void>> delete(
             @HostParam("$host") String endpoint,
-            @PathParam("subscriptionId") String subscriptionId,
-            @PathParam("resourceGroupName") String resourceGroupName,
-            @PathParam("farmBeatsResourceName") String farmBeatsResourceName,
             @PathParam("extensionId") String extensionId,
+            @PathParam("farmBeatsResourceName") String farmBeatsResourceName,
+            @PathParam("resourceGroupName") String resourceGroupName,
+            @PathParam("subscriptionId") String subscriptionId,
             @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept,
             Context context);
@@ -135,10 +135,10 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<ExtensionListResponse>> listByFarmBeats(
             @HostParam("$host") String endpoint,
-            @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
-            @PathParam("farmBeatsResourceName") String farmBeatsResourceName,
+            @PathParam("subscriptionId") String subscriptionId,
             @QueryParam("api-version") String apiVersion,
+            @PathParam("farmBeatsResourceName") String farmBeatsResourceName,
             @QueryParam(value = "extensionIds", multipleQueryParams = true) List<String> extensionIds,
             @QueryParam(value = "extensionCategories", multipleQueryParams = true) List<String> extensionCategories,
             @QueryParam("$maxPageSize") Integer maxPageSize,
@@ -160,9 +160,9 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
     /**
      * Install extension.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -170,29 +170,29 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ExtensionInner>> createWithResponseAsync(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId) {
+        String extensionId, String farmBeatsResourceName, String resourceGroupName) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (this.client.getSubscriptionId() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
-        }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        if (extensionId == null) {
+            return Mono.error(new IllegalArgumentException("Parameter extensionId is required and cannot be null."));
         }
         if (farmBeatsResourceName == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter farmBeatsResourceName is required and cannot be null."));
         }
-        if (extensionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter extensionId is required and cannot be null."));
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil
@@ -201,10 +201,10 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
                     service
                         .create(
                             this.client.getEndpoint(),
-                            this.client.getSubscriptionId(),
-                            resourceGroupName,
-                            farmBeatsResourceName,
                             extensionId,
+                            farmBeatsResourceName,
+                            resourceGroupName,
+                            this.client.getSubscriptionId(),
                             this.client.getApiVersion(),
                             accept,
                             context))
@@ -214,9 +214,9 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
     /**
      * Install extension.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -225,12 +225,23 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ExtensionInner>> createWithResponseAsync(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId, Context context) {
+        String extensionId, String farmBeatsResourceName, String resourceGroupName, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (extensionId == null) {
+            return Mono.error(new IllegalArgumentException("Parameter extensionId is required and cannot be null."));
+        }
+        if (farmBeatsResourceName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter farmBeatsResourceName is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
             return Mono
@@ -238,26 +249,15 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-        }
-        if (farmBeatsResourceName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter farmBeatsResourceName is required and cannot be null."));
-        }
-        if (extensionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter extensionId is required and cannot be null."));
-        }
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .create(
                 this.client.getEndpoint(),
-                this.client.getSubscriptionId(),
-                resourceGroupName,
-                farmBeatsResourceName,
                 extensionId,
+                farmBeatsResourceName,
+                resourceGroupName,
+                this.client.getSubscriptionId(),
                 this.client.getApiVersion(),
                 accept,
                 context);
@@ -266,9 +266,9 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
     /**
      * Install extension.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -276,33 +276,33 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ExtensionInner> createAsync(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId) {
-        return createWithResponseAsync(resourceGroupName, farmBeatsResourceName, extensionId)
+        String extensionId, String farmBeatsResourceName, String resourceGroupName) {
+        return createWithResponseAsync(extensionId, farmBeatsResourceName, resourceGroupName)
             .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Install extension.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return extension resource.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ExtensionInner create(String resourceGroupName, String farmBeatsResourceName, String extensionId) {
-        return createAsync(resourceGroupName, farmBeatsResourceName, extensionId).block();
+    public ExtensionInner create(String extensionId, String farmBeatsResourceName, String resourceGroupName) {
+        return createAsync(extensionId, farmBeatsResourceName, resourceGroupName).block();
     }
 
     /**
      * Install extension.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -311,16 +311,16 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ExtensionInner> createWithResponse(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId, Context context) {
-        return createWithResponseAsync(resourceGroupName, farmBeatsResourceName, extensionId, context).block();
+        String extensionId, String farmBeatsResourceName, String resourceGroupName, Context context) {
+        return createWithResponseAsync(extensionId, farmBeatsResourceName, resourceGroupName, context).block();
     }
 
     /**
      * Get installed extension details by extension id.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -329,29 +329,29 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ExtensionInner>> getWithResponseAsync(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId) {
+        String extensionId, String farmBeatsResourceName, String resourceGroupName) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (this.client.getSubscriptionId() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
-        }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        if (extensionId == null) {
+            return Mono.error(new IllegalArgumentException("Parameter extensionId is required and cannot be null."));
         }
         if (farmBeatsResourceName == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter farmBeatsResourceName is required and cannot be null."));
         }
-        if (extensionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter extensionId is required and cannot be null."));
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil
@@ -360,10 +360,10 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
                     service
                         .get(
                             this.client.getEndpoint(),
-                            this.client.getSubscriptionId(),
-                            resourceGroupName,
-                            farmBeatsResourceName,
                             extensionId,
+                            farmBeatsResourceName,
+                            resourceGroupName,
+                            this.client.getSubscriptionId(),
                             this.client.getApiVersion(),
                             accept,
                             context))
@@ -373,9 +373,9 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
     /**
      * Get installed extension details by extension id.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -385,12 +385,23 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ExtensionInner>> getWithResponseAsync(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId, Context context) {
+        String extensionId, String farmBeatsResourceName, String resourceGroupName, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (extensionId == null) {
+            return Mono.error(new IllegalArgumentException("Parameter extensionId is required and cannot be null."));
+        }
+        if (farmBeatsResourceName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter farmBeatsResourceName is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
             return Mono
@@ -398,26 +409,15 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-        }
-        if (farmBeatsResourceName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter farmBeatsResourceName is required and cannot be null."));
-        }
-        if (extensionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter extensionId is required and cannot be null."));
-        }
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .get(
                 this.client.getEndpoint(),
-                this.client.getSubscriptionId(),
-                resourceGroupName,
-                farmBeatsResourceName,
                 extensionId,
+                farmBeatsResourceName,
+                resourceGroupName,
+                this.client.getSubscriptionId(),
                 this.client.getApiVersion(),
                 accept,
                 context);
@@ -426,42 +426,42 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
     /**
      * Get installed extension details by extension id.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return installed extension details by extension id on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<ExtensionInner> getAsync(String resourceGroupName, String farmBeatsResourceName, String extensionId) {
-        return getWithResponseAsync(resourceGroupName, farmBeatsResourceName, extensionId)
+    private Mono<ExtensionInner> getAsync(String extensionId, String farmBeatsResourceName, String resourceGroupName) {
+        return getWithResponseAsync(extensionId, farmBeatsResourceName, resourceGroupName)
             .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Get installed extension details by extension id.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return installed extension details by extension id.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ExtensionInner get(String resourceGroupName, String farmBeatsResourceName, String extensionId) {
-        return getAsync(resourceGroupName, farmBeatsResourceName, extensionId).block();
+    public ExtensionInner get(String extensionId, String farmBeatsResourceName, String resourceGroupName) {
+        return getAsync(extensionId, farmBeatsResourceName, resourceGroupName).block();
     }
 
     /**
      * Get installed extension details by extension id.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -470,16 +470,16 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ExtensionInner> getWithResponse(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId, Context context) {
-        return getWithResponseAsync(resourceGroupName, farmBeatsResourceName, extensionId, context).block();
+        String extensionId, String farmBeatsResourceName, String resourceGroupName, Context context) {
+        return getWithResponseAsync(extensionId, farmBeatsResourceName, resourceGroupName, context).block();
     }
 
     /**
      * Upgrade to latest extension.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -487,29 +487,29 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ExtensionInner>> updateWithResponseAsync(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId) {
+        String extensionId, String farmBeatsResourceName, String resourceGroupName) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (this.client.getSubscriptionId() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
-        }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        if (extensionId == null) {
+            return Mono.error(new IllegalArgumentException("Parameter extensionId is required and cannot be null."));
         }
         if (farmBeatsResourceName == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter farmBeatsResourceName is required and cannot be null."));
         }
-        if (extensionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter extensionId is required and cannot be null."));
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil
@@ -518,10 +518,10 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
                     service
                         .update(
                             this.client.getEndpoint(),
-                            this.client.getSubscriptionId(),
-                            resourceGroupName,
-                            farmBeatsResourceName,
                             extensionId,
+                            farmBeatsResourceName,
+                            resourceGroupName,
+                            this.client.getSubscriptionId(),
                             this.client.getApiVersion(),
                             accept,
                             context))
@@ -531,9 +531,9 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
     /**
      * Upgrade to latest extension.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -542,12 +542,23 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ExtensionInner>> updateWithResponseAsync(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId, Context context) {
+        String extensionId, String farmBeatsResourceName, String resourceGroupName, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (extensionId == null) {
+            return Mono.error(new IllegalArgumentException("Parameter extensionId is required and cannot be null."));
+        }
+        if (farmBeatsResourceName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter farmBeatsResourceName is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
             return Mono
@@ -555,26 +566,15 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-        }
-        if (farmBeatsResourceName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter farmBeatsResourceName is required and cannot be null."));
-        }
-        if (extensionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter extensionId is required and cannot be null."));
-        }
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .update(
                 this.client.getEndpoint(),
-                this.client.getSubscriptionId(),
-                resourceGroupName,
-                farmBeatsResourceName,
                 extensionId,
+                farmBeatsResourceName,
+                resourceGroupName,
+                this.client.getSubscriptionId(),
                 this.client.getApiVersion(),
                 accept,
                 context);
@@ -583,9 +583,9 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
     /**
      * Upgrade to latest extension.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -593,33 +593,33 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ExtensionInner> updateAsync(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId) {
-        return updateWithResponseAsync(resourceGroupName, farmBeatsResourceName, extensionId)
+        String extensionId, String farmBeatsResourceName, String resourceGroupName) {
+        return updateWithResponseAsync(extensionId, farmBeatsResourceName, resourceGroupName)
             .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Upgrade to latest extension.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return extension resource.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ExtensionInner update(String resourceGroupName, String farmBeatsResourceName, String extensionId) {
-        return updateAsync(resourceGroupName, farmBeatsResourceName, extensionId).block();
+    public ExtensionInner update(String extensionId, String farmBeatsResourceName, String resourceGroupName) {
+        return updateAsync(extensionId, farmBeatsResourceName, resourceGroupName).block();
     }
 
     /**
      * Upgrade to latest extension.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -628,16 +628,16 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ExtensionInner> updateWithResponse(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId, Context context) {
-        return updateWithResponseAsync(resourceGroupName, farmBeatsResourceName, extensionId, context).block();
+        String extensionId, String farmBeatsResourceName, String resourceGroupName, Context context) {
+        return updateWithResponseAsync(extensionId, farmBeatsResourceName, resourceGroupName, context).block();
     }
 
     /**
      * Uninstall extension.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -645,29 +645,29 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Void>> deleteWithResponseAsync(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId) {
+        String extensionId, String farmBeatsResourceName, String resourceGroupName) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
-        if (this.client.getSubscriptionId() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
-        }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        if (extensionId == null) {
+            return Mono.error(new IllegalArgumentException("Parameter extensionId is required and cannot be null."));
         }
         if (farmBeatsResourceName == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter farmBeatsResourceName is required and cannot be null."));
         }
-        if (extensionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter extensionId is required and cannot be null."));
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono
+                .error(
+                    new IllegalArgumentException(
+                        "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil
@@ -676,10 +676,10 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
                     service
                         .delete(
                             this.client.getEndpoint(),
-                            this.client.getSubscriptionId(),
-                            resourceGroupName,
-                            farmBeatsResourceName,
                             extensionId,
+                            farmBeatsResourceName,
+                            resourceGroupName,
+                            this.client.getSubscriptionId(),
                             this.client.getApiVersion(),
                             accept,
                             context))
@@ -689,9 +689,9 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
     /**
      * Uninstall extension.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -700,12 +700,23 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Void>> deleteWithResponseAsync(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId, Context context) {
+        String extensionId, String farmBeatsResourceName, String resourceGroupName, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono
                 .error(
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (extensionId == null) {
+            return Mono.error(new IllegalArgumentException("Parameter extensionId is required and cannot be null."));
+        }
+        if (farmBeatsResourceName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter farmBeatsResourceName is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
             return Mono
@@ -713,26 +724,15 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-        }
-        if (farmBeatsResourceName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter farmBeatsResourceName is required and cannot be null."));
-        }
-        if (extensionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter extensionId is required and cannot be null."));
-        }
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
             .delete(
                 this.client.getEndpoint(),
-                this.client.getSubscriptionId(),
-                resourceGroupName,
-                farmBeatsResourceName,
                 extensionId,
+                farmBeatsResourceName,
+                resourceGroupName,
+                this.client.getSubscriptionId(),
                 this.client.getApiVersion(),
                 accept,
                 context);
@@ -741,41 +741,41 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
     /**
      * Uninstall extension.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Void> deleteAsync(String resourceGroupName, String farmBeatsResourceName, String extensionId) {
-        return deleteWithResponseAsync(resourceGroupName, farmBeatsResourceName, extensionId)
+    private Mono<Void> deleteAsync(String extensionId, String farmBeatsResourceName, String resourceGroupName) {
+        return deleteWithResponseAsync(extensionId, farmBeatsResourceName, resourceGroupName)
             .flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Uninstall extension.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void delete(String resourceGroupName, String farmBeatsResourceName, String extensionId) {
-        deleteAsync(resourceGroupName, farmBeatsResourceName, extensionId).block();
+    public void delete(String extensionId, String farmBeatsResourceName, String resourceGroupName) {
+        deleteAsync(extensionId, farmBeatsResourceName, resourceGroupName).block();
     }
 
     /**
      * Uninstall extension.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
      * @param extensionId Id of extension resource.
+     * @param farmBeatsResourceName FarmBeats resource name.
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -784,8 +784,8 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteWithResponse(
-        String resourceGroupName, String farmBeatsResourceName, String extensionId, Context context) {
-        return deleteWithResponseAsync(resourceGroupName, farmBeatsResourceName, extensionId, context).block();
+        String extensionId, String farmBeatsResourceName, String resourceGroupName, Context context) {
+        return deleteWithResponseAsync(extensionId, farmBeatsResourceName, resourceGroupName, context).block();
     }
 
     /**
@@ -816,15 +816,15 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono
                 .error(
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
-        }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
         }
         if (farmBeatsResourceName == null) {
             return Mono
@@ -845,10 +845,10 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
                     service
                         .listByFarmBeats(
                             this.client.getEndpoint(),
-                            this.client.getSubscriptionId(),
                             resourceGroupName,
-                            farmBeatsResourceName,
+                            this.client.getSubscriptionId(),
                             this.client.getApiVersion(),
+                            farmBeatsResourceName,
                             extensionIdsConverted,
                             extensionCategoriesConverted,
                             maxPageSize,
@@ -897,15 +897,15 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
                     new IllegalArgumentException(
                         "Parameter this.client.getEndpoint() is required and cannot be null."));
         }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono
                 .error(
                     new IllegalArgumentException(
                         "Parameter this.client.getSubscriptionId() is required and cannot be null."));
-        }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
         }
         if (farmBeatsResourceName == null) {
             return Mono
@@ -924,10 +924,10 @@ public final class ExtensionsClientImpl implements ExtensionsClient {
         return service
             .listByFarmBeats(
                 this.client.getEndpoint(),
-                this.client.getSubscriptionId(),
                 resourceGroupName,
-                farmBeatsResourceName,
+                this.client.getSubscriptionId(),
                 this.client.getApiVersion(),
+                farmBeatsResourceName,
                 extensionIdsConverted,
                 extensionCategoriesConverted,
                 maxPageSize,
