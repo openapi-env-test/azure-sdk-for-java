@@ -7,8 +7,8 @@ package com.azure.resourcemanager.agrifood.fluent;
 import com.azure.core.http.HttpPipeline;
 import java.time.Duration;
 
-/** The interface for AgriFoodManagementClient class. */
-public interface AgriFoodManagementClient {
+/** The interface for AzureAgriFoodRPService class. */
+public interface AzureAgriFoodRPService {
     /**
      * Gets The ID of the target subscription.
      *
@@ -78,18 +78,4 @@ public interface AgriFoodManagementClient {
      * @return the OperationsClient object.
      */
     OperationsClient getOperations();
-
-    /**
-     * Gets the PrivateEndpointConnectionsClient object to access its operations.
-     *
-     * @return the PrivateEndpointConnectionsClient object.
-     */
-    PrivateEndpointConnectionsClient getPrivateEndpointConnections();
-
-    /**
-     * Gets the PrivateLinkResourcesClient object to access its operations.
-     *
-     * @return the PrivateLinkResourcesClient object.
-     */
-    PrivateLinkResourcesClient getPrivateLinkResources();
 }

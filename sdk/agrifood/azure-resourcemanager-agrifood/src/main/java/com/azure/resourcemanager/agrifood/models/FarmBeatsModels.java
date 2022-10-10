@@ -113,35 +113,6 @@ public interface FarmBeatsModels {
         String resourceGroupName, Integer maxPageSize, String skipToken, Context context);
 
     /**
-     * Get operationResults for a FarmBeats resource.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
-     * @param operationResultsId The operation results id.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return operationResults for a FarmBeats resource.
-     */
-    ArmAsyncOperation getOperationResult(
-        String resourceGroupName, String farmBeatsResourceName, String operationResultsId);
-
-    /**
-     * Get operationResults for a FarmBeats resource.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param farmBeatsResourceName FarmBeats resource name.
-     * @param operationResultsId The operation results id.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return operationResults for a FarmBeats resource along with {@link Response}.
-     */
-    Response<ArmAsyncOperation> getOperationResultWithResponse(
-        String resourceGroupName, String farmBeatsResourceName, String operationResultsId, Context context);
-
-    /**
      * Get FarmBeats resource.
      *
      * @param id the resource ID.
