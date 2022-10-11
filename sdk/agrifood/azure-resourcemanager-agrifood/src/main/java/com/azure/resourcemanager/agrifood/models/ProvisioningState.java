@@ -8,17 +8,8 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Sensor integration instance provisioning state. */
+/** FarmBeats instance provisioning state. */
 public final class ProvisioningState extends ExpandableStringEnum<ProvisioningState> {
-    /** Static value Creating for ProvisioningState. */
-    public static final ProvisioningState CREATING = fromString("Creating");
-
-    /** Static value Updating for ProvisioningState. */
-    public static final ProvisioningState UPDATING = fromString("Updating");
-
-    /** Static value Deleting for ProvisioningState. */
-    public static final ProvisioningState DELETING = fromString("Deleting");
-
     /** Static value Succeeded for ProvisioningState. */
     public static final ProvisioningState SUCCEEDED = fromString("Succeeded");
 

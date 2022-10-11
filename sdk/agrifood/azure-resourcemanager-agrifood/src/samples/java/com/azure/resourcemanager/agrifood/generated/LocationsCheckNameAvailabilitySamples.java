@@ -10,15 +10,15 @@ import com.azure.resourcemanager.agrifood.models.CheckNameAvailabilityRequest;
 /** Samples for Locations CheckNameAvailability. */
 public final class LocationsCheckNameAvailabilitySamples {
     /*
-     * x-ms-original-file: specification/agrifood/resource-manager/Microsoft.AgFoodPlatform/preview/2021-09-01-preview/examples/Locations_CheckNameAvailability_Available.json
+     * x-ms-original-file: specification/agrifood/resource-manager/Microsoft.AgFoodPlatform/preview/2020-05-12-preview/examples/Locations_CheckNameAvailability_Available.json
      */
     /**
      * Sample code: Locations_CheckNameAvailability_Available.
      *
-     * @param manager Entry point to AgriFoodManager.
+     * @param manager Entry point to AgrifoodManager.
      */
     public static void locationsCheckNameAvailabilityAvailable(
-        com.azure.resourcemanager.agrifood.AgriFoodManager manager) {
+        com.azure.resourcemanager.agrifood.AgrifoodManager manager) {
         manager
             .locations()
             .checkNameAvailabilityWithResponse(
@@ -29,15 +29,15 @@ public final class LocationsCheckNameAvailabilitySamples {
     }
 
     /*
-     * x-ms-original-file: specification/agrifood/resource-manager/Microsoft.AgFoodPlatform/preview/2021-09-01-preview/examples/Locations_CheckNameAvailability_AlreadyExists.json
+     * x-ms-original-file: specification/agrifood/resource-manager/Microsoft.AgFoodPlatform/preview/2020-05-12-preview/examples/Locations_CheckNameAvailability_AlreadyExists.json
      */
     /**
      * Sample code: Locations_CheckNameAvailability_AlreadyExists.
      *
-     * @param manager Entry point to AgriFoodManager.
+     * @param manager Entry point to AgrifoodManager.
      */
     public static void locationsCheckNameAvailabilityAlreadyExists(
-        com.azure.resourcemanager.agrifood.AgriFoodManager manager) {
+        com.azure.resourcemanager.agrifood.AgrifoodManager manager) {
         manager
             .locations()
             .checkNameAvailabilityWithResponse(
