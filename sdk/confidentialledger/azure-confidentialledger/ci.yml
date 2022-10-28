@@ -1,0 +1,47 @@
+# NOTE: Please refer to https://aka.ms/azsdk/engsys/ci-yaml before editing this file.
+
+trigger:
+  branches:
+    include:
+      - main
+      - hotfix/*
+      - release/*
+  paths:
+    include:
+      - sdk/confidentialledger/azure-confidentialledger/ci.yml
+      - sdk/confidentialledger/azure-confidentialledger/src/
+    exclude:
+      - sdk/confidentialledger/azure-confidentialledger/pom.xml
+      - sdk/confidentialledger/azure-confidentialledger/src/pom.xml
+
+pr:
+  branches:
+    include:
+      - main
+      - feature/*
+      - hotfix/*
+      - release/*
+  paths:
+    include:
+      - sdk/confidentialledger/azure-confidentialledger/ci.yml
+      - sdk/confidentialledger/azure-confidentialledger/src/
+    exclude:
+      - sdk/confidentialledger/azure-confidentialledger/pom.xml
+      - sdk/confidentialledger/azure-confidentialledger/src/pom.xml
+
+parameters:
+  - name: release_src
+    displayName: src
+    type: boolean
+    default: true
+
+extends:
+  template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
+  parameters:
+    ServiceDirectory: confidentialledger/azure-confidentialledger
+    EnableBatchRelease: true
+    Artifacts:
+      - name: src
+        groupId: com.azure
+        safeName: src
+        releaseInBatch: ${{ parameters.release_src }}

@@ -40,6 +40,7 @@
     <module>sdk/commerce</module>
     <module>sdk/communication</module>
     <module>sdk/confidentialledger</module>
+    <module>sdk/confidentialledger/azure-confidentialledger</module>
     <module>sdk/confluent</module>
     <module>sdk/connectedvmware</module>
     <module>sdk/consumption</module>
