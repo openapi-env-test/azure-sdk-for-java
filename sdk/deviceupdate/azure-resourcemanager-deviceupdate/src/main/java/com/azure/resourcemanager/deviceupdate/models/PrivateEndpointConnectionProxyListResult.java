@@ -27,6 +27,10 @@ public final class PrivateEndpointConnectionProxyListResult {
     @JsonProperty(value = "nextLink")
     private String nextLink;
 
+    /** Creates an instance of PrivateEndpointConnectionProxyListResult class. */
+    public PrivateEndpointConnectionProxyListResult() {
+    }
+
     /**
      * Get the value property: The list of available private endpoint connection proxies for an Account.
      *

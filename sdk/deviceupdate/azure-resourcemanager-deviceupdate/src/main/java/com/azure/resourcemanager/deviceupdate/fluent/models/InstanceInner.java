@@ -30,6 +30,10 @@ public final class InstanceInner extends Resource {
     @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
     private SystemData systemData;
 
+    /** Creates an instance of InstanceInner class. */
+    public InstanceInner() {
+    }
+
     /**
      * Get the innerProperties property: Device Update instance properties.
      *

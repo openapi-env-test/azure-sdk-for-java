@@ -40,15 +40,6 @@ public final class PrivateLinkResourcesImpl implements PrivateLinkResources {
         return Utils.mapPage(inner, inner1 -> new GroupInformationImpl(inner1, this.manager()));
     }
 
-    public GroupInformation get(String resourceGroupName, String accountName, String groupId) {
-        GroupInformationInner inner = this.serviceClient().get(resourceGroupName, accountName, groupId);
-        if (inner != null) {
-            return new GroupInformationImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Response<GroupInformation> getWithResponse(
         String resourceGroupName, String accountName, String groupId, Context context) {
         Response<GroupInformationInner> inner =
@@ -59,6 +50,15 @@ public final class PrivateLinkResourcesImpl implements PrivateLinkResources {
                 inner.getStatusCode(),
                 inner.getHeaders(),
                 new GroupInformationImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
+    }
+
+    public GroupInformation get(String resourceGroupName, String accountName, String groupId) {
+        GroupInformationInner inner = this.serviceClient().get(resourceGroupName, accountName, groupId);
+        if (inner != null) {
+            return new GroupInformationImpl(inner, this.manager());
         } else {
             return null;
         }

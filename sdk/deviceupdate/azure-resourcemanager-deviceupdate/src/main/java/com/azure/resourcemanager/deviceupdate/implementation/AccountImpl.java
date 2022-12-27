@@ -5,6 +5,7 @@
 package com.azure.resourcemanager.deviceupdate.implementation;
 
 import com.azure.core.management.Region;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.deviceupdate.fluent.models.AccountInner;
 import com.azure.resourcemanager.deviceupdate.fluent.models.PrivateEndpointConnectionInner;
@@ -55,12 +56,16 @@ public final class AccountImpl implements Account, Account.Definition, Account.U
         return this.innerModel().identity();
     }
 
+    public SystemData systemData() {
+        return this.innerModel().systemData();
+    }
+
     public ProvisioningState provisioningState() {
         return this.innerModel().provisioningState();
     }
 
-    public String hostname() {
-        return this.innerModel().hostname();
+    public String hostnameSZ() {
+        return this.innerModel().hostnameSZ();
     }
 
     public PublicNetworkAccess publicNetworkAccess() {

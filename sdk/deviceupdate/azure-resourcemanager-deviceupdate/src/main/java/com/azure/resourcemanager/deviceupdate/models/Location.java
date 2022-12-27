@@ -22,6 +22,10 @@ public final class Location {
     @JsonProperty(value = "role")
     private Role role;
 
+    /** Creates an instance of Location class. */
+    public Location() {
+    }
+
     /**
      * Get the name property: The name property.
      *

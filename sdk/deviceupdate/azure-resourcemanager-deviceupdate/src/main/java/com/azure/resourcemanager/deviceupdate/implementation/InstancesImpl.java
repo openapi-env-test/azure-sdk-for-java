@@ -38,15 +38,6 @@ public final class InstancesImpl implements Instances {
         return Utils.mapPage(inner, inner1 -> new InstanceImpl(inner1, this.manager()));
     }
 
-    public Instance get(String resourceGroupName, String accountName, String instanceName) {
-        InstanceInner inner = this.serviceClient().get(resourceGroupName, accountName, instanceName);
-        if (inner != null) {
-            return new InstanceImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Response<Instance> getWithResponse(
         String resourceGroupName, String accountName, String instanceName, Context context) {
         Response<InstanceInner> inner =
@@ -62,13 +53,22 @@ public final class InstancesImpl implements Instances {
         }
     }
 
-    public void head(String resourceGroupName, String accountName, String instanceName) {
-        this.serviceClient().head(resourceGroupName, accountName, instanceName);
+    public Instance get(String resourceGroupName, String accountName, String instanceName) {
+        InstanceInner inner = this.serviceClient().get(resourceGroupName, accountName, instanceName);
+        if (inner != null) {
+            return new InstanceImpl(inner, this.manager());
+        } else {
+            return null;
+        }
     }
 
     public Response<Void> headWithResponse(
         String resourceGroupName, String accountName, String instanceName, Context context) {
         return this.serviceClient().headWithResponse(resourceGroupName, accountName, instanceName, context);
+    }
+
+    public void head(String resourceGroupName, String accountName, String instanceName) {
+        this.serviceClient().head(resourceGroupName, accountName, instanceName);
     }
 
     public void delete(String resourceGroupName, String accountName, String instanceName) {

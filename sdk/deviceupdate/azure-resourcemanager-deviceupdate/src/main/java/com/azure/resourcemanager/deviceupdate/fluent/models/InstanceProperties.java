@@ -44,6 +44,10 @@ public final class InstanceProperties {
     @JsonProperty(value = "diagnosticStorageProperties")
     private DiagnosticStorageProperties diagnosticStorageProperties;
 
+    /** Creates an instance of InstanceProperties class. */
+    public InstanceProperties() {
+    }
+
     /**
      * Get the provisioningState property: Provisioning state.
      *

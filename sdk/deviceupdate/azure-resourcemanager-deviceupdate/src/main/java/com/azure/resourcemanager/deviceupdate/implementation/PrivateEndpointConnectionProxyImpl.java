@@ -159,12 +159,6 @@ public final class PrivateEndpointConnectionProxyImpl
         return this;
     }
 
-    public void validate(PrivateEndpointConnectionProxyInner privateEndpointConnectionProxy) {
-        serviceManager
-            .privateEndpointConnectionProxies()
-            .validate(resourceGroupName, accountName, privateEndpointConnectionProxyId, privateEndpointConnectionProxy);
-    }
-
     public Response<Void> validateWithResponse(
         PrivateEndpointConnectionProxyInner privateEndpointConnectionProxy, Context context) {
         return serviceManager
@@ -177,11 +171,10 @@ public final class PrivateEndpointConnectionProxyImpl
                 context);
     }
 
-    public void updatePrivateEndpointProperties(PrivateEndpointUpdate privateEndpointUpdate) {
+    public void validate(PrivateEndpointConnectionProxyInner privateEndpointConnectionProxy) {
         serviceManager
             .privateEndpointConnectionProxies()
-            .updatePrivateEndpointProperties(
-                resourceGroupName, accountName, privateEndpointConnectionProxyId, privateEndpointUpdate);
+            .validate(resourceGroupName, accountName, privateEndpointConnectionProxyId, privateEndpointConnectionProxy);
     }
 
     public Response<Void> updatePrivateEndpointPropertiesWithResponse(
@@ -190,6 +183,13 @@ public final class PrivateEndpointConnectionProxyImpl
             .privateEndpointConnectionProxies()
             .updatePrivateEndpointPropertiesWithResponse(
                 resourceGroupName, accountName, privateEndpointConnectionProxyId, privateEndpointUpdate, context);
+    }
+
+    public void updatePrivateEndpointProperties(PrivateEndpointUpdate privateEndpointUpdate) {
+        serviceManager
+            .privateEndpointConnectionProxies()
+            .updatePrivateEndpointProperties(
+                resourceGroupName, accountName, privateEndpointConnectionProxyId, privateEndpointUpdate);
     }
 
     public PrivateEndpointConnectionProxyImpl withRemotePrivateEndpoint(RemotePrivateEndpoint remotePrivateEndpoint) {

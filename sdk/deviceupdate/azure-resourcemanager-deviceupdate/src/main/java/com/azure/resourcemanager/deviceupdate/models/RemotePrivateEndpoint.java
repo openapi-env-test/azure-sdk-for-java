@@ -65,6 +65,10 @@ public final class RemotePrivateEndpoint {
     @JsonProperty(value = "connectionDetails")
     private List<ConnectionDetails> connectionDetails;
 
+    /** Creates an instance of RemotePrivateEndpoint class. */
+    public RemotePrivateEndpoint() {
+    }
+
     /**
      * Get the id property: Remote endpoint resource ID.
      *

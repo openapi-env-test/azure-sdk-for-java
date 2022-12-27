@@ -47,6 +47,10 @@ public final class GroupConnectivityInformation {
     @JsonProperty(value = "privateLinkServiceArmRegion")
     private String privateLinkServiceArmRegion;
 
+    /** Creates an instance of GroupConnectivityInformation class. */
+    public GroupConnectivityInformation() {
+    }
+
     /**
      * Get the groupId property: Group ID.
      *
