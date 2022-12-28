@@ -24,6 +24,10 @@ public final class InstanceList {
     @JsonProperty(value = "value")
     private List<InstanceInner> value;
 
+    /** Creates an instance of InstanceList class. */
+    public InstanceList() {
+    }
+
     /**
      * Get the nextLink property: The link used to get the next page of Instances list.
      *

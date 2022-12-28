@@ -5,6 +5,7 @@
 package com.azure.resourcemanager.deviceupdate.models;
 
 import com.azure.core.management.Region;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.azure.resourcemanager.deviceupdate.fluent.models.AccountInner;
 import com.azure.resourcemanager.deviceupdate.fluent.models.PrivateEndpointConnectionInner;
@@ -56,6 +57,13 @@ public interface Account {
     ManagedServiceIdentity identity();
 
     /**
+     * Gets the systemData property: Azure Resource Manager metadata containing createdBy and modifiedBy information.
+     *
+     * @return the systemData value.
+     */
+    SystemData systemData();
+
+    /**
      * Gets the provisioningState property: Provisioning state.
      *
      * @return the provisioningState value.
@@ -63,11 +71,11 @@ public interface Account {
     ProvisioningState provisioningState();
 
     /**
-     * Gets the hostname property: API host name.
+     * Gets the hostnameSZ property: API host name.
      *
-     * @return the hostname value.
+     * @return the hostnameSZ value.
      */
-    String hostname();
+    String hostnameSZ();
 
     /**
      * Gets the publicNetworkAccess property: Whether or not public network access is allowed for the account.

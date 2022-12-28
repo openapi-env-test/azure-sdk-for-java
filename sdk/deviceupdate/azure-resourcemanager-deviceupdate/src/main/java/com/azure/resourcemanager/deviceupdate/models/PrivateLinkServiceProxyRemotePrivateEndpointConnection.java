@@ -9,6 +9,10 @@ import com.azure.core.annotation.Immutable;
 /** Remote private endpoint connection details. */
 @Immutable
 public final class PrivateLinkServiceProxyRemotePrivateEndpointConnection extends RemotePrivateEndpointConnection {
+    /** Creates an instance of PrivateLinkServiceProxyRemotePrivateEndpointConnection class. */
+    public PrivateLinkServiceProxyRemotePrivateEndpointConnection() {
+    }
+
     /**
      * Validates the instance.
      *

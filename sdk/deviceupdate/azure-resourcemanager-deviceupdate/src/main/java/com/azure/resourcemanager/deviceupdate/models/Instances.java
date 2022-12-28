@@ -41,19 +41,6 @@ public interface Instances {
      * @param resourceGroupName The resource group name.
      * @param accountName Account name.
      * @param instanceName Instance name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return device Update instance details.
-     */
-    Instance get(String resourceGroupName, String accountName, String instanceName);
-
-    /**
-     * Returns instance details for the given instance and account name.
-     *
-     * @param resourceGroupName The resource group name.
-     * @param accountName Account name.
-     * @param instanceName Instance name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -64,7 +51,7 @@ public interface Instances {
         String resourceGroupName, String accountName, String instanceName, Context context);
 
     /**
-     * Checks whether instance exists.
+     * Returns instance details for the given instance and account name.
      *
      * @param resourceGroupName The resource group name.
      * @param accountName Account name.
@@ -72,8 +59,9 @@ public interface Instances {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return device Update instance details.
      */
-    void head(String resourceGroupName, String accountName, String instanceName);
+    Instance get(String resourceGroupName, String accountName, String instanceName);
 
     /**
      * Checks whether instance exists.
@@ -88,6 +76,18 @@ public interface Instances {
      * @return the {@link Response}.
      */
     Response<Void> headWithResponse(String resourceGroupName, String accountName, String instanceName, Context context);
+
+    /**
+     * Checks whether instance exists.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param accountName Account name.
+     * @param instanceName Instance name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void head(String resourceGroupName, String accountName, String instanceName);
 
     /**
      * Deletes instance.

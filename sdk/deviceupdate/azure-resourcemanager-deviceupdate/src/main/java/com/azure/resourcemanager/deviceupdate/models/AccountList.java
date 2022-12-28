@@ -24,6 +24,10 @@ public final class AccountList {
     @JsonProperty(value = "value")
     private List<AccountInner> value;
 
+    /** Creates an instance of AccountList class. */
+    public AccountList() {
+    }
+
     /**
      * Get the nextLink property: The link used to get the next page of Accounts list.
      *

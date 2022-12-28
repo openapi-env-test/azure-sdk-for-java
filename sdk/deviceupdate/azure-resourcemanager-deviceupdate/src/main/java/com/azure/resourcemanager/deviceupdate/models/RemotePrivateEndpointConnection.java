@@ -16,6 +16,10 @@ public class RemotePrivateEndpointConnection {
     @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
+    /** Creates an instance of RemotePrivateEndpointConnection class. */
+    public RemotePrivateEndpointConnection() {
+    }
+
     /**
      * Get the id property: Remote private endpoint connection ID.
      *

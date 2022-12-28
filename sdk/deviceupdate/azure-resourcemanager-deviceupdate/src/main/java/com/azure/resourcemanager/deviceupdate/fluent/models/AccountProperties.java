@@ -24,8 +24,8 @@ public final class AccountProperties {
     /*
      * API host name.
      */
-    @JsonProperty(value = "hostName", access = JsonProperty.Access.WRITE_ONLY)
-    private String hostname;
+    @JsonProperty(value = "hostNameSZ", access = JsonProperty.Access.WRITE_ONLY)
+    private String hostnameSZ;
 
     /*
      * Whether or not public network access is allowed for the account.
@@ -51,6 +51,10 @@ public final class AccountProperties {
     @JsonProperty(value = "locations", access = JsonProperty.Access.WRITE_ONLY)
     private List<Location> locations;
 
+    /** Creates an instance of AccountProperties class. */
+    public AccountProperties() {
+    }
+
     /**
      * Get the provisioningState property: Provisioning state.
      *
@@ -61,12 +65,12 @@ public final class AccountProperties {
     }
 
     /**
-     * Get the hostname property: API host name.
+     * Get the hostnameSZ property: API host name.
      *
-     * @return the hostname value.
+     * @return the hostnameSZ value.
      */
-    public String hostname() {
-        return this.hostname;
+    public String hostnameSZ() {
+        return this.hostnameSZ;
     }
 
     /**
