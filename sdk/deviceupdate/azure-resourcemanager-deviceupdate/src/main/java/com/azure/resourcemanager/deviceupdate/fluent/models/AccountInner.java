@@ -6,6 +6,7 @@ package com.azure.resourcemanager.deviceupdate.fluent.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.management.Resource;
+import com.azure.core.management.SystemData;
 import com.azure.resourcemanager.deviceupdate.models.Location;
 import com.azure.resourcemanager.deviceupdate.models.ManagedServiceIdentity;
 import com.azure.resourcemanager.deviceupdate.models.ProvisioningState;
@@ -29,6 +30,16 @@ public final class AccountInner extends Resource {
      */
     @JsonProperty(value = "identity")
     private ManagedServiceIdentity identity;
+
+    /*
+     * Azure Resource Manager metadata containing createdBy and modifiedBy information.
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
+
+    /** Creates an instance of AccountInner class. */
+    public AccountInner() {
+    }
 
     /**
      * Get the innerProperties property: Device Update account properties.
@@ -59,6 +70,15 @@ public final class AccountInner extends Resource {
         return this;
     }
 
+    /**
+     * Get the systemData property: Azure Resource Manager metadata containing createdBy and modifiedBy information.
+     *
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
+    }
+
     /** {@inheritDoc} */
     @Override
     public AccountInner withLocation(String location) {
@@ -83,12 +103,12 @@ public final class AccountInner extends Resource {
     }
 
     /**
-     * Get the hostname property: API host name.
+     * Get the hostnameSZ property: API host name.
      *
-     * @return the hostname value.
+     * @return the hostnameSZ value.
      */
-    public String hostname() {
-        return this.innerProperties() == null ? null : this.innerProperties().hostname();
+    public String hostnameSZ() {
+        return this.innerProperties() == null ? null : this.innerProperties().hostnameSZ();
     }
 
     /**

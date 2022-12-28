@@ -29,6 +29,10 @@ public final class DiagnosticStorageProperties {
     @JsonProperty(value = "resourceId", required = true)
     private String resourceId;
 
+    /** Creates an instance of DiagnosticStorageProperties class. */
+    public DiagnosticStorageProperties() {
+    }
+
     /**
      * Get the authenticationType property: Authentication Type.
      *

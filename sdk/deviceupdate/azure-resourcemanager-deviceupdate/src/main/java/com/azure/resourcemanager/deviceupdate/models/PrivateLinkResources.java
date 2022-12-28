@@ -41,19 +41,6 @@ public interface PrivateLinkResources {
      * @param resourceGroupName The resource group name.
      * @param accountName Account name.
      * @param groupId The group ID of the private link resource.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the specified private link resource associated with the device update account.
-     */
-    GroupInformation get(String resourceGroupName, String accountName, String groupId);
-
-    /**
-     * Get the specified private link resource associated with the device update account.
-     *
-     * @param resourceGroupName The resource group name.
-     * @param accountName Account name.
-     * @param groupId The group ID of the private link resource.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -63,4 +50,17 @@ public interface PrivateLinkResources {
      */
     Response<GroupInformation> getWithResponse(
         String resourceGroupName, String accountName, String groupId, Context context);
+
+    /**
+     * Get the specified private link resource associated with the device update account.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param accountName Account name.
+     * @param groupId The group ID of the private link resource.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the specified private link resource associated with the device update account.
+     */
+    GroupInformation get(String resourceGroupName, String accountName, String groupId);
 }

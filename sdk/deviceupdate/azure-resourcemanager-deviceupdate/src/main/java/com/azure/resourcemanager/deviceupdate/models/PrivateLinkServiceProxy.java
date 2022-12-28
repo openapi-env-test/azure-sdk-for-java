@@ -35,6 +35,10 @@ public final class PrivateLinkServiceProxy {
     @JsonProperty(value = "groupConnectivityInformation")
     private List<GroupConnectivityInformation> groupConnectivityInformation;
 
+    /** Creates an instance of PrivateLinkServiceProxy class. */
+    public PrivateLinkServiceProxy() {
+    }
+
     /**
      * Get the id property: NRP resource ID.
      *

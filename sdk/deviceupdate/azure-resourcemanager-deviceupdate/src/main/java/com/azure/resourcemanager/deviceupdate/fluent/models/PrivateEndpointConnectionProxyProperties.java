@@ -17,6 +17,10 @@ public final class PrivateEndpointConnectionProxyProperties {
     @JsonProperty(value = "provisioningState", access = JsonProperty.Access.WRITE_ONLY)
     private PrivateEndpointConnectionProxyProvisioningState provisioningState;
 
+    /** Creates an instance of PrivateEndpointConnectionProxyProperties class. */
+    public PrivateEndpointConnectionProxyProperties() {
+    }
+
     /**
      * Get the provisioningState property: The provisioning state of the private endpoint connection proxy resource.
      *
