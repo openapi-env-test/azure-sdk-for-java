@@ -44,6 +44,10 @@ public final class PrivateEndpointConnectionProxyInner extends ProxyResource {
     @JsonProperty(value = "status")
     private String status;
 
+    /** Creates an instance of PrivateEndpointConnectionProxyInner class. */
+    public PrivateEndpointConnectionProxyInner() {
+    }
+
     /**
      * Get the innerProperties property: Private endpoint connection proxy object property bag.
      *

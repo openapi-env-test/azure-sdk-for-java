@@ -40,6 +40,10 @@ public final class PrivateEndpointUpdate {
     @JsonProperty(value = "vnetTrafficTag")
     private String vnetTrafficTag;
 
+    /** Creates an instance of PrivateEndpointUpdate class. */
+    public PrivateEndpointUpdate() {
+    }
+
     /**
      * Get the id property: Remote endpoint resource ID.
      *

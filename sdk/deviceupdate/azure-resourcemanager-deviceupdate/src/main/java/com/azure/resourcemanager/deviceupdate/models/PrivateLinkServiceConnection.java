@@ -29,6 +29,10 @@ public final class PrivateLinkServiceConnection {
     @JsonProperty(value = "requestMessage")
     private String requestMessage;
 
+    /** Creates an instance of PrivateLinkServiceConnection class. */
+    public PrivateLinkServiceConnection() {
+    }
+
     /**
      * Get the name property: Private link service connection name.
      *

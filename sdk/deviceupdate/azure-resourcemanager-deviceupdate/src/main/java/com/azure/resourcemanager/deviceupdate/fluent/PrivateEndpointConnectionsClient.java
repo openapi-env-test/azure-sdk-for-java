@@ -52,22 +52,6 @@ public interface PrivateEndpointConnectionsClient {
      * @param accountName Account name.
      * @param privateEndpointConnectionName The name of the private endpoint connection associated with the Azure
      *     resource.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the specified private endpoint connection associated with the device update account.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    PrivateEndpointConnectionInner get(
-        String resourceGroupName, String accountName, String privateEndpointConnectionName);
-
-    /**
-     * Get the specified private endpoint connection associated with the device update account.
-     *
-     * @param resourceGroupName The resource group name.
-     * @param accountName Account name.
-     * @param privateEndpointConnectionName The name of the private endpoint connection associated with the Azure
-     *     resource.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -78,6 +62,22 @@ public interface PrivateEndpointConnectionsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<PrivateEndpointConnectionInner> getWithResponse(
         String resourceGroupName, String accountName, String privateEndpointConnectionName, Context context);
+
+    /**
+     * Get the specified private endpoint connection associated with the device update account.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param accountName Account name.
+     * @param privateEndpointConnectionName The name of the private endpoint connection associated with the Azure
+     *     resource.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the specified private endpoint connection associated with the device update account.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    PrivateEndpointConnectionInner get(
+        String resourceGroupName, String accountName, String privateEndpointConnectionName);
 
     /**
      * Update the state of specified private endpoint connection associated with the device update account.

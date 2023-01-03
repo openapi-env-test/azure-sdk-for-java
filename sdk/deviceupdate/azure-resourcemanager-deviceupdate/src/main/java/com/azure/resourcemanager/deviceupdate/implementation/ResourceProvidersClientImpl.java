@@ -52,7 +52,7 @@ public final class ResourceProvidersClientImpl implements ResourceProvidersClien
      */
     @Host("{$host}")
     @ServiceInterface(name = "DeviceUpdateResource")
-    private interface ResourceProvidersService {
+    public interface ResourceProvidersService {
         @Headers({"Content-Type: application/json"})
         @Post("/subscriptions/{subscriptionId}/providers/Microsoft.DeviceUpdate/checknameavailability")
         @ExpectedResponses({200})
@@ -170,20 +170,6 @@ public final class ResourceProvidersClientImpl implements ResourceProvidersClien
      * Checks ADU resource name availability.
      *
      * @param request Check Name Availability Request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the check availability result.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public CheckNameAvailabilityResponseInner checkNameAvailability(CheckNameAvailabilityRequest request) {
-        return checkNameAvailabilityAsync(request).block();
-    }
-
-    /**
-     * Checks ADU resource name availability.
-     *
-     * @param request Check Name Availability Request.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -194,5 +180,19 @@ public final class ResourceProvidersClientImpl implements ResourceProvidersClien
     public Response<CheckNameAvailabilityResponseInner> checkNameAvailabilityWithResponse(
         CheckNameAvailabilityRequest request, Context context) {
         return checkNameAvailabilityWithResponseAsync(request, context).block();
+    }
+
+    /**
+     * Checks ADU resource name availability.
+     *
+     * @param request Check Name Availability Request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the check availability result.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public CheckNameAvailabilityResponseInner checkNameAvailability(CheckNameAvailabilityRequest request) {
+        return checkNameAvailabilityWithResponse(request, Context.NONE).getValue();
     }
 }

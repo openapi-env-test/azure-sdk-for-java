@@ -66,7 +66,7 @@ public final class InstancesClientImpl implements InstancesClient {
      */
     @Host("{$host}")
     @ServiceInterface(name = "DeviceUpdateInstance")
-    private interface InstancesService {
+    public interface InstancesService {
         @Headers({"Content-Type: application/json"})
         @Get(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate"
@@ -480,22 +480,6 @@ public final class InstancesClientImpl implements InstancesClient {
      * @param resourceGroupName The resource group name.
      * @param accountName Account name.
      * @param instanceName Instance name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return device Update instance details.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public InstanceInner get(String resourceGroupName, String accountName, String instanceName) {
-        return getAsync(resourceGroupName, accountName, instanceName).block();
-    }
-
-    /**
-     * Returns instance details for the given instance and account name.
-     *
-     * @param resourceGroupName The resource group name.
-     * @param accountName Account name.
-     * @param instanceName Instance name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -506,6 +490,22 @@ public final class InstancesClientImpl implements InstancesClient {
     public Response<InstanceInner> getWithResponse(
         String resourceGroupName, String accountName, String instanceName, Context context) {
         return getWithResponseAsync(resourceGroupName, accountName, instanceName, context).block();
+    }
+
+    /**
+     * Returns instance details for the given instance and account name.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param accountName Account name.
+     * @param instanceName Instance name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return device Update instance details.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public InstanceInner get(String resourceGroupName, String accountName, String instanceName) {
+        return getWithResponse(resourceGroupName, accountName, instanceName, Context.NONE).getValue();
     }
 
     /**
@@ -634,21 +634,6 @@ public final class InstancesClientImpl implements InstancesClient {
      * @param resourceGroupName The resource group name.
      * @param accountName Account name.
      * @param instanceName Instance name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void head(String resourceGroupName, String accountName, String instanceName) {
-        headAsync(resourceGroupName, accountName, instanceName).block();
-    }
-
-    /**
-     * Checks whether instance exists.
-     *
-     * @param resourceGroupName The resource group name.
-     * @param accountName Account name.
-     * @param instanceName Instance name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -659,6 +644,21 @@ public final class InstancesClientImpl implements InstancesClient {
     public Response<Void> headWithResponse(
         String resourceGroupName, String accountName, String instanceName, Context context) {
         return headWithResponseAsync(resourceGroupName, accountName, instanceName, context).block();
+    }
+
+    /**
+     * Checks whether instance exists.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param accountName Account name.
+     * @param instanceName Instance name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void head(String resourceGroupName, String accountName, String instanceName) {
+        headWithResponse(resourceGroupName, accountName, instanceName, Context.NONE);
     }
 
     /**
@@ -1347,24 +1347,6 @@ public final class InstancesClientImpl implements InstancesClient {
      * @param accountName Account name.
      * @param instanceName Instance name.
      * @param tagUpdatePayload Updated tags.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return device Update instance details.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public InstanceInner update(
-        String resourceGroupName, String accountName, String instanceName, TagUpdate tagUpdatePayload) {
-        return updateAsync(resourceGroupName, accountName, instanceName, tagUpdatePayload).block();
-    }
-
-    /**
-     * Updates instance's tags.
-     *
-     * @param resourceGroupName The resource group name.
-     * @param accountName Account name.
-     * @param instanceName Instance name.
-     * @param tagUpdatePayload Updated tags.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1379,6 +1361,25 @@ public final class InstancesClientImpl implements InstancesClient {
         TagUpdate tagUpdatePayload,
         Context context) {
         return updateWithResponseAsync(resourceGroupName, accountName, instanceName, tagUpdatePayload, context).block();
+    }
+
+    /**
+     * Updates instance's tags.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param accountName Account name.
+     * @param instanceName Instance name.
+     * @param tagUpdatePayload Updated tags.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return device Update instance details.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public InstanceInner update(
+        String resourceGroupName, String accountName, String instanceName, TagUpdate tagUpdatePayload) {
+        return updateWithResponse(resourceGroupName, accountName, instanceName, tagUpdatePayload, Context.NONE)
+            .getValue();
     }
 
     /**

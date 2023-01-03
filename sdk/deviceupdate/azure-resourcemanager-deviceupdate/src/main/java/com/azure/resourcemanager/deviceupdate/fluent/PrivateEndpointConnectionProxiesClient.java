@@ -55,24 +55,6 @@ public interface PrivateEndpointConnectionProxiesClient {
      * @param accountName Account name.
      * @param privateEndpointConnectionProxyId The ID of the private endpoint connection proxy object.
      * @param privateEndpointConnectionProxy The parameters for creating a private endpoint connection proxy.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    void validate(
-        String resourceGroupName,
-        String accountName,
-        String privateEndpointConnectionProxyId,
-        PrivateEndpointConnectionProxyInner privateEndpointConnectionProxy);
-
-    /**
-     * (INTERNAL - DO NOT USE) Validates a private endpoint connection proxy object.
-     *
-     * @param resourceGroupName The resource group name.
-     * @param accountName Account name.
-     * @param privateEndpointConnectionProxyId The ID of the private endpoint connection proxy object.
-     * @param privateEndpointConnectionProxy The parameters for creating a private endpoint connection proxy.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -88,22 +70,22 @@ public interface PrivateEndpointConnectionProxiesClient {
         Context context);
 
     /**
-     * (INTERNAL - DO NOT USE) Updates a private endpoint inside the private endpoint connection proxy object.
+     * (INTERNAL - DO NOT USE) Validates a private endpoint connection proxy object.
      *
      * @param resourceGroupName The resource group name.
      * @param accountName Account name.
      * @param privateEndpointConnectionProxyId The ID of the private endpoint connection proxy object.
-     * @param privateEndpointUpdate The parameters for updating a private endpoint connection proxy.
+     * @param privateEndpointConnectionProxy The parameters for creating a private endpoint connection proxy.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    void updatePrivateEndpointProperties(
+    void validate(
         String resourceGroupName,
         String accountName,
         String privateEndpointConnectionProxyId,
-        PrivateEndpointUpdate privateEndpointUpdate);
+        PrivateEndpointConnectionProxyInner privateEndpointConnectionProxy);
 
     /**
      * (INTERNAL - DO NOT USE) Updates a private endpoint inside the private endpoint connection proxy object.
@@ -127,20 +109,22 @@ public interface PrivateEndpointConnectionProxiesClient {
         Context context);
 
     /**
-     * (INTERNAL - DO NOT USE) Get the specified private endpoint connection proxy associated with the device update
-     * account.
+     * (INTERNAL - DO NOT USE) Updates a private endpoint inside the private endpoint connection proxy object.
      *
      * @param resourceGroupName The resource group name.
      * @param accountName Account name.
      * @param privateEndpointConnectionProxyId The ID of the private endpoint connection proxy object.
+     * @param privateEndpointUpdate The parameters for updating a private endpoint connection proxy.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return private endpoint connection proxy details.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    PrivateEndpointConnectionProxyInner get(
-        String resourceGroupName, String accountName, String privateEndpointConnectionProxyId);
+    void updatePrivateEndpointProperties(
+        String resourceGroupName,
+        String accountName,
+        String privateEndpointConnectionProxyId,
+        PrivateEndpointUpdate privateEndpointUpdate);
 
     /**
      * (INTERNAL - DO NOT USE) Get the specified private endpoint connection proxy associated with the device update
@@ -158,6 +142,22 @@ public interface PrivateEndpointConnectionProxiesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<PrivateEndpointConnectionProxyInner> getWithResponse(
         String resourceGroupName, String accountName, String privateEndpointConnectionProxyId, Context context);
+
+    /**
+     * (INTERNAL - DO NOT USE) Get the specified private endpoint connection proxy associated with the device update
+     * account.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param accountName Account name.
+     * @param privateEndpointConnectionProxyId The ID of the private endpoint connection proxy object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return private endpoint connection proxy details.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    PrivateEndpointConnectionProxyInner get(
+        String resourceGroupName, String accountName, String privateEndpointConnectionProxyId);
 
     /**
      * (INTERNAL - DO NOT USE) Creates or updates the specified private endpoint connection proxy resource associated

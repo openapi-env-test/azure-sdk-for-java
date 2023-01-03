@@ -56,7 +56,7 @@ public final class PrivateLinkResourcesClientImpl implements PrivateLinkResource
      */
     @Host("{$host}")
     @ServiceInterface(name = "DeviceUpdatePrivateL")
-    private interface PrivateLinkResourcesService {
+    public interface PrivateLinkResourcesService {
         @Headers({"Content-Type: application/json"})
         @Get(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate"
@@ -387,22 +387,6 @@ public final class PrivateLinkResourcesClientImpl implements PrivateLinkResource
      * @param resourceGroupName The resource group name.
      * @param accountName Account name.
      * @param groupId The group ID of the private link resource.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the specified private link resource associated with the device update account.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public GroupInformationInner get(String resourceGroupName, String accountName, String groupId) {
-        return getAsync(resourceGroupName, accountName, groupId).block();
-    }
-
-    /**
-     * Get the specified private link resource associated with the device update account.
-     *
-     * @param resourceGroupName The resource group name.
-     * @param accountName Account name.
-     * @param groupId The group ID of the private link resource.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -414,5 +398,21 @@ public final class PrivateLinkResourcesClientImpl implements PrivateLinkResource
     public Response<GroupInformationInner> getWithResponse(
         String resourceGroupName, String accountName, String groupId, Context context) {
         return getWithResponseAsync(resourceGroupName, accountName, groupId, context).block();
+    }
+
+    /**
+     * Get the specified private link resource associated with the device update account.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param accountName Account name.
+     * @param groupId The group ID of the private link resource.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the specified private link resource associated with the device update account.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public GroupInformationInner get(String resourceGroupName, String accountName, String groupId) {
+        return getWithResponse(resourceGroupName, accountName, groupId, Context.NONE).getValue();
     }
 }
