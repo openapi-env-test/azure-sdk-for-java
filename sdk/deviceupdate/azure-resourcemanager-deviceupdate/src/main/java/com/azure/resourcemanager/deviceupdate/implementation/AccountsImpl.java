@@ -47,15 +47,6 @@ public final class AccountsImpl implements Accounts {
         return Utils.mapPage(inner, inner1 -> new AccountImpl(inner1, this.manager()));
     }
 
-    public Account getByResourceGroup(String resourceGroupName, String accountName) {
-        AccountInner inner = this.serviceClient().getByResourceGroup(resourceGroupName, accountName);
-        if (inner != null) {
-            return new AccountImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Response<Account> getByResourceGroupWithResponse(
         String resourceGroupName, String accountName, Context context) {
         Response<AccountInner> inner =
@@ -71,12 +62,21 @@ public final class AccountsImpl implements Accounts {
         }
     }
 
-    public void head(String resourceGroupName, String accountName) {
-        this.serviceClient().head(resourceGroupName, accountName);
+    public Account getByResourceGroup(String resourceGroupName, String accountName) {
+        AccountInner inner = this.serviceClient().getByResourceGroup(resourceGroupName, accountName);
+        if (inner != null) {
+            return new AccountImpl(inner, this.manager());
+        } else {
+            return null;
+        }
     }
 
     public Response<Void> headWithResponse(String resourceGroupName, String accountName, Context context) {
         return this.serviceClient().headWithResponse(resourceGroupName, accountName, context);
+    }
+
+    public void head(String resourceGroupName, String accountName) {
+        this.serviceClient().head(resourceGroupName, accountName);
     }
 
     public void deleteByResourceGroup(String resourceGroupName, String accountName) {

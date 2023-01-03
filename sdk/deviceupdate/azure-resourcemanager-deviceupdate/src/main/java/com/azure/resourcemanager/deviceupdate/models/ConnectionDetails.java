@@ -40,6 +40,10 @@ public final class ConnectionDetails {
     @JsonProperty(value = "memberName", access = JsonProperty.Access.WRITE_ONLY)
     private String memberName;
 
+    /** Creates an instance of ConnectionDetails class. */
+    public ConnectionDetails() {
+    }
+
     /**
      * Get the id property: Connection details ID.
      *

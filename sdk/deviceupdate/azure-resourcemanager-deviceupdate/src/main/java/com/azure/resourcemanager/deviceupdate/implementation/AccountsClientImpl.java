@@ -65,7 +65,7 @@ public final class AccountsClientImpl implements AccountsClient {
      */
     @Host("{$host}")
     @ServiceInterface(name = "DeviceUpdateAccounts")
-    private interface AccountsService {
+    public interface AccountsService {
         @Headers({"Content-Type: application/json"})
         @Get("/subscriptions/{subscriptionId}/providers/Microsoft.DeviceUpdate/accounts")
         @ExpectedResponses({200})
@@ -608,21 +608,6 @@ public final class AccountsClientImpl implements AccountsClient {
      *
      * @param resourceGroupName The resource group name.
      * @param accountName Account name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return device Update account details.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public AccountInner getByResourceGroup(String resourceGroupName, String accountName) {
-        return getByResourceGroupAsync(resourceGroupName, accountName).block();
-    }
-
-    /**
-     * Returns account details for the given account name.
-     *
-     * @param resourceGroupName The resource group name.
-     * @param accountName Account name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -633,6 +618,21 @@ public final class AccountsClientImpl implements AccountsClient {
     public Response<AccountInner> getByResourceGroupWithResponse(
         String resourceGroupName, String accountName, Context context) {
         return getByResourceGroupWithResponseAsync(resourceGroupName, accountName, context).block();
+    }
+
+    /**
+     * Returns account details for the given account name.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param accountName Account name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return device Update account details.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public AccountInner getByResourceGroup(String resourceGroupName, String accountName) {
+        return getByResourceGroupWithResponse(resourceGroupName, accountName, Context.NONE).getValue();
     }
 
     /**
@@ -747,20 +747,6 @@ public final class AccountsClientImpl implements AccountsClient {
      *
      * @param resourceGroupName The resource group name.
      * @param accountName Account name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void head(String resourceGroupName, String accountName) {
-        headAsync(resourceGroupName, accountName).block();
-    }
-
-    /**
-     * Checks whether account exists.
-     *
-     * @param resourceGroupName The resource group name.
-     * @param accountName Account name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -770,6 +756,20 @@ public final class AccountsClientImpl implements AccountsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> headWithResponse(String resourceGroupName, String accountName, Context context) {
         return headWithResponseAsync(resourceGroupName, accountName, context).block();
+    }
+
+    /**
+     * Checks whether account exists.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param accountName Account name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void head(String resourceGroupName, String accountName) {
+        headWithResponse(resourceGroupName, accountName, Context.NONE);
     }
 
     /**

@@ -17,6 +17,10 @@ public final class IotHubSettings {
     @JsonProperty(value = "resourceId", required = true)
     private String resourceId;
 
+    /** Creates an instance of IotHubSettings class. */
+    public IotHubSettings() {
+    }
+
     /**
      * Get the resourceId property: IoTHub resource ID.
      *

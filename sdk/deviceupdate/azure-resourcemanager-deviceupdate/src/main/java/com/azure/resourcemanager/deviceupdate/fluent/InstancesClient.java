@@ -49,20 +49,6 @@ public interface InstancesClient {
      * @param resourceGroupName The resource group name.
      * @param accountName Account name.
      * @param instanceName Instance name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return device Update instance details.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    InstanceInner get(String resourceGroupName, String accountName, String instanceName);
-
-    /**
-     * Returns instance details for the given instance and account name.
-     *
-     * @param resourceGroupName The resource group name.
-     * @param accountName Account name.
-     * @param instanceName Instance name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -74,7 +60,7 @@ public interface InstancesClient {
         String resourceGroupName, String accountName, String instanceName, Context context);
 
     /**
-     * Checks whether instance exists.
+     * Returns instance details for the given instance and account name.
      *
      * @param resourceGroupName The resource group name.
      * @param accountName Account name.
@@ -82,9 +68,10 @@ public interface InstancesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return device Update instance details.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    void head(String resourceGroupName, String accountName, String instanceName);
+    InstanceInner get(String resourceGroupName, String accountName, String instanceName);
 
     /**
      * Checks whether instance exists.
@@ -100,6 +87,19 @@ public interface InstancesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> headWithResponse(String resourceGroupName, String accountName, String instanceName, Context context);
+
+    /**
+     * Checks whether instance exists.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param accountName Account name.
+     * @param instanceName Instance name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    void head(String resourceGroupName, String accountName, String instanceName);
 
     /**
      * Creates or updates instance.
@@ -230,21 +230,6 @@ public interface InstancesClient {
      * @param accountName Account name.
      * @param instanceName Instance name.
      * @param tagUpdatePayload Updated tags.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return device Update instance details.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    InstanceInner update(String resourceGroupName, String accountName, String instanceName, TagUpdate tagUpdatePayload);
-
-    /**
-     * Updates instance's tags.
-     *
-     * @param resourceGroupName The resource group name.
-     * @param accountName Account name.
-     * @param instanceName Instance name.
-     * @param tagUpdatePayload Updated tags.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -254,4 +239,19 @@ public interface InstancesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<InstanceInner> updateWithResponse(
         String resourceGroupName, String accountName, String instanceName, TagUpdate tagUpdatePayload, Context context);
+
+    /**
+     * Updates instance's tags.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param accountName Account name.
+     * @param instanceName Instance name.
+     * @param tagUpdatePayload Updated tags.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return device Update instance details.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    InstanceInner update(String resourceGroupName, String accountName, String instanceName, TagUpdate tagUpdatePayload);
 }

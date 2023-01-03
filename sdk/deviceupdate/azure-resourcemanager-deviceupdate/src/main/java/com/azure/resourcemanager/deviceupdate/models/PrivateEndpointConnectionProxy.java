@@ -208,16 +208,6 @@ public interface PrivateEndpointConnectionProxy {
      * (INTERNAL - DO NOT USE) Validates a private endpoint connection proxy object.
      *
      * @param privateEndpointConnectionProxy The parameters for creating a private endpoint connection proxy.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    void validate(PrivateEndpointConnectionProxyInner privateEndpointConnectionProxy);
-
-    /**
-     * (INTERNAL - DO NOT USE) Validates a private endpoint connection proxy object.
-     *
-     * @param privateEndpointConnectionProxy The parameters for creating a private endpoint connection proxy.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -228,14 +218,14 @@ public interface PrivateEndpointConnectionProxy {
         PrivateEndpointConnectionProxyInner privateEndpointConnectionProxy, Context context);
 
     /**
-     * (INTERNAL - DO NOT USE) Updates a private endpoint inside the private endpoint connection proxy object.
+     * (INTERNAL - DO NOT USE) Validates a private endpoint connection proxy object.
      *
-     * @param privateEndpointUpdate The parameters for updating a private endpoint connection proxy.
+     * @param privateEndpointConnectionProxy The parameters for creating a private endpoint connection proxy.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void updatePrivateEndpointProperties(PrivateEndpointUpdate privateEndpointUpdate);
+    void validate(PrivateEndpointConnectionProxyInner privateEndpointConnectionProxy);
 
     /**
      * (INTERNAL - DO NOT USE) Updates a private endpoint inside the private endpoint connection proxy object.
@@ -249,4 +239,14 @@ public interface PrivateEndpointConnectionProxy {
      */
     Response<Void> updatePrivateEndpointPropertiesWithResponse(
         PrivateEndpointUpdate privateEndpointUpdate, Context context);
+
+    /**
+     * (INTERNAL - DO NOT USE) Updates a private endpoint inside the private endpoint connection proxy object.
+     *
+     * @param privateEndpointUpdate The parameters for updating a private endpoint connection proxy.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void updatePrivateEndpointProperties(PrivateEndpointUpdate privateEndpointUpdate);
 }

@@ -58,18 +58,6 @@ public interface Accounts {
      *
      * @param resourceGroupName The resource group name.
      * @param accountName Account name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return device Update account details.
-     */
-    Account getByResourceGroup(String resourceGroupName, String accountName);
-
-    /**
-     * Returns account details for the given account name.
-     *
-     * @param resourceGroupName The resource group name.
-     * @param accountName Account name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -79,15 +67,16 @@ public interface Accounts {
     Response<Account> getByResourceGroupWithResponse(String resourceGroupName, String accountName, Context context);
 
     /**
-     * Checks whether account exists.
+     * Returns account details for the given account name.
      *
      * @param resourceGroupName The resource group name.
      * @param accountName Account name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return device Update account details.
      */
-    void head(String resourceGroupName, String accountName);
+    Account getByResourceGroup(String resourceGroupName, String accountName);
 
     /**
      * Checks whether account exists.
@@ -101,6 +90,17 @@ public interface Accounts {
      * @return the {@link Response}.
      */
     Response<Void> headWithResponse(String resourceGroupName, String accountName, Context context);
+
+    /**
+     * Checks whether account exists.
+     *
+     * @param resourceGroupName The resource group name.
+     * @param accountName Account name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    void head(String resourceGroupName, String accountName);
 
     /**
      * Deletes account.

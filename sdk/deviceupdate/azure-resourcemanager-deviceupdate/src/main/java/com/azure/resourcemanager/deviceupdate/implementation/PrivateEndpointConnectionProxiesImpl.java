@@ -42,16 +42,6 @@ public final class PrivateEndpointConnectionProxiesImpl implements PrivateEndpoi
         return Utils.mapPage(inner, inner1 -> new PrivateEndpointConnectionProxyImpl(inner1, this.manager()));
     }
 
-    public void validate(
-        String resourceGroupName,
-        String accountName,
-        String privateEndpointConnectionProxyId,
-        PrivateEndpointConnectionProxyInner privateEndpointConnectionProxy) {
-        this
-            .serviceClient()
-            .validate(resourceGroupName, accountName, privateEndpointConnectionProxyId, privateEndpointConnectionProxy);
-    }
-
     public Response<Void> validateWithResponse(
         String resourceGroupName,
         String accountName,
@@ -68,15 +58,14 @@ public final class PrivateEndpointConnectionProxiesImpl implements PrivateEndpoi
                 context);
     }
 
-    public void updatePrivateEndpointProperties(
+    public void validate(
         String resourceGroupName,
         String accountName,
         String privateEndpointConnectionProxyId,
-        PrivateEndpointUpdate privateEndpointUpdate) {
+        PrivateEndpointConnectionProxyInner privateEndpointConnectionProxy) {
         this
             .serviceClient()
-            .updatePrivateEndpointProperties(
-                resourceGroupName, accountName, privateEndpointConnectionProxyId, privateEndpointUpdate);
+            .validate(resourceGroupName, accountName, privateEndpointConnectionProxyId, privateEndpointConnectionProxy);
     }
 
     public Response<Void> updatePrivateEndpointPropertiesWithResponse(
@@ -91,15 +80,15 @@ public final class PrivateEndpointConnectionProxiesImpl implements PrivateEndpoi
                 resourceGroupName, accountName, privateEndpointConnectionProxyId, privateEndpointUpdate, context);
     }
 
-    public PrivateEndpointConnectionProxy get(
-        String resourceGroupName, String accountName, String privateEndpointConnectionProxyId) {
-        PrivateEndpointConnectionProxyInner inner =
-            this.serviceClient().get(resourceGroupName, accountName, privateEndpointConnectionProxyId);
-        if (inner != null) {
-            return new PrivateEndpointConnectionProxyImpl(inner, this.manager());
-        } else {
-            return null;
-        }
+    public void updatePrivateEndpointProperties(
+        String resourceGroupName,
+        String accountName,
+        String privateEndpointConnectionProxyId,
+        PrivateEndpointUpdate privateEndpointUpdate) {
+        this
+            .serviceClient()
+            .updatePrivateEndpointProperties(
+                resourceGroupName, accountName, privateEndpointConnectionProxyId, privateEndpointUpdate);
     }
 
     public Response<PrivateEndpointConnectionProxy> getWithResponse(
@@ -114,6 +103,17 @@ public final class PrivateEndpointConnectionProxiesImpl implements PrivateEndpoi
                 inner.getStatusCode(),
                 inner.getHeaders(),
                 new PrivateEndpointConnectionProxyImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
+    }
+
+    public PrivateEndpointConnectionProxy get(
+        String resourceGroupName, String accountName, String privateEndpointConnectionProxyId) {
+        PrivateEndpointConnectionProxyInner inner =
+            this.serviceClient().get(resourceGroupName, accountName, privateEndpointConnectionProxyId);
+        if (inner != null) {
+            return new PrivateEndpointConnectionProxyImpl(inner, this.manager());
         } else {
             return null;
         }

@@ -23,6 +23,10 @@ public final class AccountUpdate extends TagUpdate {
     @JsonProperty(value = "location")
     private String location;
 
+    /** Creates an instance of AccountUpdate class. */
+    public AccountUpdate() {
+    }
+
     /**
      * Get the identity property: The type of identity used for the resource.
      *

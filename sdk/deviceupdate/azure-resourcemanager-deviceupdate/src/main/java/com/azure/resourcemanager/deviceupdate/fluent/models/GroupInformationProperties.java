@@ -19,6 +19,10 @@ public final class GroupInformationProperties extends PrivateLinkResourcePropert
     @JsonProperty(value = "provisioningState", access = JsonProperty.Access.WRITE_ONLY)
     private GroupIdProvisioningState provisioningState;
 
+    /** Creates an instance of GroupInformationProperties class. */
+    public GroupInformationProperties() {
+    }
+
     /**
      * Get the provisioningState property: The provisioning state of private link group ID.
      *

@@ -19,6 +19,10 @@ public class TagUpdate {
     @JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)
     private Map<String, String> tags;
 
+    /** Creates an instance of TagUpdate class. */
+    public TagUpdate() {
+    }
+
     /**
      * Get the tags property: List of key value pairs that describe the resource. This will overwrite the existing tags.
      *
