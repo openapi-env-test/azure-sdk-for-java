@@ -1,0 +1,47 @@
+# NOTE: Please refer to https://aka.ms/azsdk/engsys/ci-yaml before editing this file.
+
+trigger:
+  branches:
+    include:
+      - main
+      - hotfix/*
+      - release/*
+  paths:
+    include:
+      - sdk/releaseplannertest/ci.yml
+      - sdk/releaseplannertest/azure-resourcemanager-releaseplannertest/
+    exclude:
+      - sdk/releaseplannertest/pom.xml
+      - sdk/releaseplannertest/azure-resourcemanager-releaseplannertest/pom.xml
+
+pr:
+  branches:
+    include:
+      - main
+      - feature/*
+      - hotfix/*
+      - release/*
+  paths:
+    include:
+      - sdk/releaseplannertest/ci.yml
+      - sdk/releaseplannertest/azure-resourcemanager-releaseplannertest/
+    exclude:
+      - sdk/releaseplannertest/pom.xml
+      - sdk/releaseplannertest/azure-resourcemanager-releaseplannertest/pom.xml
+
+parameters:
+  - name: release_azureresourcemanagerreleaseplannertest
+    displayName: azure-resourcemanager-releaseplannertest
+    type: boolean
+    default: false
+
+extends:
+  template: ../../eng/pipelines/templates/stages/archetype-sdk-client.yml
+  parameters:
+    ServiceDirectory: releaseplannertest
+    EnableBatchRelease: true
+    Artifacts:
+      - name: azure-resourcemanager-releaseplannertest
+        groupId: com.azure.resourcemanager
+        safeName: azureresourcemanagerreleaseplannertest
+        releaseInBatch: ${{ parameters.release_azureresourcemanagerreleaseplannertest }}
