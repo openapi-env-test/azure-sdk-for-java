@@ -949,7 +949,7 @@ public final class AnomalyDetectorClientImpl {
      *     slidingWindow: Integer (Optional)
      *     alignPolicy (Optional): {
      *         alignMode: String(Inner/Outer) (Optional)
-     *         fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed) (Optional)
+     *         fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed/None) (Optional)
      *         paddingValue: Double (Optional)
      *     }
      *     status: String(CREATED/RUNNING/READY/FAILED) (Optional)
@@ -1003,7 +1003,7 @@ public final class AnomalyDetectorClientImpl {
      *         slidingWindow: Integer (Optional)
      *         alignPolicy (Optional): {
      *             alignMode: String(Inner/Outer) (Optional)
-     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed) (Optional)
+     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed/None) (Optional)
      *             paddingValue: Double (Optional)
      *         }
      *         status: String(CREATED/RUNNING/READY/FAILED) (Optional)
@@ -1086,7 +1086,7 @@ public final class AnomalyDetectorClientImpl {
      *     slidingWindow: Integer (Optional)
      *     alignPolicy (Optional): {
      *         alignMode: String(Inner/Outer) (Optional)
-     *         fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed) (Optional)
+     *         fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed/None) (Optional)
      *         paddingValue: Double (Optional)
      *     }
      *     status: String(CREATED/RUNNING/READY/FAILED) (Optional)
@@ -1140,7 +1140,7 @@ public final class AnomalyDetectorClientImpl {
      *         slidingWindow: Integer (Optional)
      *         alignPolicy (Optional): {
      *             alignMode: String(Inner/Outer) (Optional)
-     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed) (Optional)
+     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed/None) (Optional)
      *             paddingValue: Double (Optional)
      *         }
      *         status: String(CREATED/RUNNING/READY/FAILED) (Optional)
@@ -1225,7 +1225,7 @@ public final class AnomalyDetectorClientImpl {
      *         slidingWindow: Integer (Optional)
      *         alignPolicy (Optional): {
      *             alignMode: String(Inner/Outer) (Optional)
-     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed) (Optional)
+     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed/None) (Optional)
      *             paddingValue: Double (Optional)
      *         }
      *         status: String(CREATED/RUNNING/READY/FAILED) (Optional)
@@ -1325,7 +1325,7 @@ public final class AnomalyDetectorClientImpl {
      *         slidingWindow: Integer (Optional)
      *         alignPolicy (Optional): {
      *             alignMode: String(Inner/Outer) (Optional)
-     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed) (Optional)
+     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed/None) (Optional)
      *             paddingValue: Double (Optional)
      *         }
      *         status: String(CREATED/RUNNING/READY/FAILED) (Optional)
@@ -1415,7 +1415,7 @@ public final class AnomalyDetectorClientImpl {
      *         slidingWindow: Integer (Optional)
      *         alignPolicy (Optional): {
      *             alignMode: String(Inner/Outer) (Optional)
-     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed) (Optional)
+     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed/None) (Optional)
      *             paddingValue: Double (Optional)
      *         }
      *         status: String(CREATED/RUNNING/READY/FAILED) (Optional)
@@ -1533,7 +1533,7 @@ public final class AnomalyDetectorClientImpl {
      *         slidingWindow: Integer (Optional)
      *         alignPolicy (Optional): {
      *             alignMode: String(Inner/Outer) (Optional)
-     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed) (Optional)
+     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed/None) (Optional)
      *             paddingValue: Double (Optional)
      *         }
      *         status: String(CREATED/RUNNING/READY/FAILED) (Optional)
@@ -1617,7 +1617,7 @@ public final class AnomalyDetectorClientImpl {
      *         slidingWindow: Integer (Optional)
      *         alignPolicy (Optional): {
      *             alignMode: String(Inner/Outer) (Optional)
-     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed) (Optional)
+     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed/None) (Optional)
      *             paddingValue: Double (Optional)
      *         }
      *         status: String(CREATED/RUNNING/READY/FAILED) (Optional)
@@ -2062,7 +2062,7 @@ public final class AnomalyDetectorClientImpl {
      *         slidingWindow: Integer (Optional)
      *         alignPolicy (Optional): {
      *             alignMode: String(Inner/Outer) (Optional)
-     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed) (Optional)
+     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed/None) (Optional)
      *             paddingValue: Double (Optional)
      *         }
      *         status: String(CREATED/RUNNING/READY/FAILED) (Optional)

@@ -332,7 +332,7 @@ public final class AnomalyDetectorAsyncClient {
      *     slidingWindow: Integer (Optional)
      *     alignPolicy (Optional): {
      *         alignMode: String(Inner/Outer) (Optional)
-     *         fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed) (Optional)
+     *         fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed/None) (Optional)
      *         paddingValue: Double (Optional)
      *     }
      *     status: String(CREATED/RUNNING/READY/FAILED) (Optional)
@@ -386,7 +386,7 @@ public final class AnomalyDetectorAsyncClient {
      *         slidingWindow: Integer (Optional)
      *         alignPolicy (Optional): {
      *             alignMode: String(Inner/Outer) (Optional)
-     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed) (Optional)
+     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed/None) (Optional)
      *             paddingValue: Double (Optional)
      *         }
      *         status: String(CREATED/RUNNING/READY/FAILED) (Optional)
@@ -472,7 +472,7 @@ public final class AnomalyDetectorAsyncClient {
      *         slidingWindow: Integer (Optional)
      *         alignPolicy (Optional): {
      *             alignMode: String(Inner/Outer) (Optional)
-     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed) (Optional)
+     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed/None) (Optional)
      *             paddingValue: Double (Optional)
      *         }
      *         status: String(CREATED/RUNNING/READY/FAILED) (Optional)
@@ -564,7 +564,7 @@ public final class AnomalyDetectorAsyncClient {
      *         slidingWindow: Integer (Optional)
      *         alignPolicy (Optional): {
      *             alignMode: String(Inner/Outer) (Optional)
-     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed) (Optional)
+     *             fillNAMethod: String(Previous/Subsequent/Linear/Zero/Fixed/None) (Optional)
      *             paddingValue: Double (Optional)
      *         }
      *         status: String(CREATED/RUNNING/READY/FAILED) (Optional)
@@ -940,8 +940,9 @@ public final class AnomalyDetectorAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return response of listing models as paginated response with {@link PagedFlux}.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedFlux<AnomalyDetectionModel> listMultivariateModels(Integer skip, Integer top) {
+    public PagedFlux<AnomalyDetectionModel> listMultivariateModels(Integer skip, Integer top) {
         // Generated convenience method for listMultivariateModels
         RequestOptions requestOptions = new RequestOptions();
         if (skip != null) {
