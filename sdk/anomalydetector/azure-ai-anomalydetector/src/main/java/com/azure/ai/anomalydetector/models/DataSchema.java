@@ -8,7 +8,7 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for DataSchema. */
+/** Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable. */
 public final class DataSchema extends ExpandableStringEnum<DataSchema> {
     /** Static value OneTable for DataSchema. */
     public static final DataSchema ONE_TABLE = fromString("OneTable");
