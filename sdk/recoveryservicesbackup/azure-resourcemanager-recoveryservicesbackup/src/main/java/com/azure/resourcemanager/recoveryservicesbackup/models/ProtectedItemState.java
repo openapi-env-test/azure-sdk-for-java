@@ -28,6 +28,9 @@ public final class ProtectedItemState extends ExpandableStringEnum<ProtectedItem
     /** Static value ProtectionPaused for ProtectedItemState. */
     public static final ProtectedItemState PROTECTION_PAUSED = fromString("ProtectionPaused");
 
+    /** Static value BackupsSuspended for ProtectedItemState. */
+    public static final ProtectedItemState BACKUPS_SUSPENDED = fromString("BackupsSuspended");
+
     /**
      * Creates or finds a ProtectedItemState from its string representation.
      *
