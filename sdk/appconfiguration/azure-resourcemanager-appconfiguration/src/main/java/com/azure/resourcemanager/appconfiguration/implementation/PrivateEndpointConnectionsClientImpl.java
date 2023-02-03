@@ -65,7 +65,7 @@ public final class PrivateEndpointConnectionsClientImpl implements PrivateEndpoi
      */
     @Host("{$host}")
     @ServiceInterface(name = "AppConfigurationMana")
-    private interface PrivateEndpointConnectionsService {
+    public interface PrivateEndpointConnectionsService {
         @Headers({"Content-Type: application/json"})
         @Get(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration"
@@ -466,23 +466,6 @@ public final class PrivateEndpointConnectionsClientImpl implements PrivateEndpoi
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param configStoreName The name of the configuration store.
      * @param privateEndpointConnectionName Private endpoint connection name.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the specified private endpoint connection associated with the configuration store.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PrivateEndpointConnectionInner get(
-        String resourceGroupName, String configStoreName, String privateEndpointConnectionName) {
-        return getAsync(resourceGroupName, configStoreName, privateEndpointConnectionName).block();
-    }
-
-    /**
-     * Gets the specified private endpoint connection associated with the configuration store.
-     *
-     * @param resourceGroupName The name of the resource group to which the container registry belongs.
-     * @param configStoreName The name of the configuration store.
-     * @param privateEndpointConnectionName Private endpoint connection name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -497,7 +480,27 @@ public final class PrivateEndpointConnectionsClientImpl implements PrivateEndpoi
     }
 
     /**
-     * Update the state of the specified private endpoint connection associated with the configuration store.
+     * Gets the specified private endpoint connection associated with the configuration store.
+     *
+     * @param resourceGroupName The name of the resource group to which the container registry belongs.
+     * @param configStoreName The name of the configuration store.
+     * @param privateEndpointConnectionName Private endpoint connection name.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the specified private endpoint connection associated with the configuration store.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PrivateEndpointConnectionInner get(
+        String resourceGroupName, String configStoreName, String privateEndpointConnectionName) {
+        return getWithResponse(resourceGroupName, configStoreName, privateEndpointConnectionName, Context.NONE)
+            .getValue();
+    }
+
+    /**
+     * Update the state of the specified private endpoint connection associated with the configuration store. This
+     * operation cannot be used to create a private endpoint connection. Private endpoint connections must be created
+     * with the Network resource provider.
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param configStoreName The name of the configuration store.
@@ -567,7 +570,9 @@ public final class PrivateEndpointConnectionsClientImpl implements PrivateEndpoi
     }
 
     /**
-     * Update the state of the specified private endpoint connection associated with the configuration store.
+     * Update the state of the specified private endpoint connection associated with the configuration store. This
+     * operation cannot be used to create a private endpoint connection. Private endpoint connections must be created
+     * with the Network resource provider.
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param configStoreName The name of the configuration store.
@@ -636,7 +641,9 @@ public final class PrivateEndpointConnectionsClientImpl implements PrivateEndpoi
     }
 
     /**
-     * Update the state of the specified private endpoint connection associated with the configuration store.
+     * Update the state of the specified private endpoint connection associated with the configuration store. This
+     * operation cannot be used to create a private endpoint connection. Private endpoint connections must be created
+     * with the Network resource provider.
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param configStoreName The name of the configuration store.
@@ -668,7 +675,9 @@ public final class PrivateEndpointConnectionsClientImpl implements PrivateEndpoi
     }
 
     /**
-     * Update the state of the specified private endpoint connection associated with the configuration store.
+     * Update the state of the specified private endpoint connection associated with the configuration store. This
+     * operation cannot be used to create a private endpoint connection. Private endpoint connections must be created
+     * with the Network resource provider.
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param configStoreName The name of the configuration store.
@@ -703,7 +712,9 @@ public final class PrivateEndpointConnectionsClientImpl implements PrivateEndpoi
     }
 
     /**
-     * Update the state of the specified private endpoint connection associated with the configuration store.
+     * Update the state of the specified private endpoint connection associated with the configuration store. This
+     * operation cannot be used to create a private endpoint connection. Private endpoint connections must be created
+     * with the Network resource provider.
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param configStoreName The name of the configuration store.
@@ -726,7 +737,9 @@ public final class PrivateEndpointConnectionsClientImpl implements PrivateEndpoi
     }
 
     /**
-     * Update the state of the specified private endpoint connection associated with the configuration store.
+     * Update the state of the specified private endpoint connection associated with the configuration store. This
+     * operation cannot be used to create a private endpoint connection. Private endpoint connections must be created
+     * with the Network resource provider.
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param configStoreName The name of the configuration store.
@@ -751,7 +764,9 @@ public final class PrivateEndpointConnectionsClientImpl implements PrivateEndpoi
     }
 
     /**
-     * Update the state of the specified private endpoint connection associated with the configuration store.
+     * Update the state of the specified private endpoint connection associated with the configuration store. This
+     * operation cannot be used to create a private endpoint connection. Private endpoint connections must be created
+     * with the Network resource provider.
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param configStoreName The name of the configuration store.
@@ -775,7 +790,9 @@ public final class PrivateEndpointConnectionsClientImpl implements PrivateEndpoi
     }
 
     /**
-     * Update the state of the specified private endpoint connection associated with the configuration store.
+     * Update the state of the specified private endpoint connection associated with the configuration store. This
+     * operation cannot be used to create a private endpoint connection. Private endpoint connections must be created
+     * with the Network resource provider.
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param configStoreName The name of the configuration store.
@@ -801,7 +818,9 @@ public final class PrivateEndpointConnectionsClientImpl implements PrivateEndpoi
     }
 
     /**
-     * Update the state of the specified private endpoint connection associated with the configuration store.
+     * Update the state of the specified private endpoint connection associated with the configuration store. This
+     * operation cannot be used to create a private endpoint connection. Private endpoint connections must be created
+     * with the Network resource provider.
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param configStoreName The name of the configuration store.
@@ -824,7 +843,9 @@ public final class PrivateEndpointConnectionsClientImpl implements PrivateEndpoi
     }
 
     /**
-     * Update the state of the specified private endpoint connection associated with the configuration store.
+     * Update the state of the specified private endpoint connection associated with the configuration store. This
+     * operation cannot be used to create a private endpoint connection. Private endpoint connections must be created
+     * with the Network resource provider.
      *
      * @param resourceGroupName The name of the resource group to which the container registry belongs.
      * @param configStoreName The name of the configuration store.
@@ -1115,7 +1136,8 @@ public final class PrivateEndpointConnectionsClientImpl implements PrivateEndpoi
     /**
      * Get the next page of items.
      *
-     * @param nextLink The nextLink parameter.
+     * @param nextLink The URL to get the next list of items
+     *     <p>The nextLink parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1153,7 +1175,8 @@ public final class PrivateEndpointConnectionsClientImpl implements PrivateEndpoi
     /**
      * Get the next page of items.
      *
-     * @param nextLink The nextLink parameter.
+     * @param nextLink The URL to get the next list of items
+     *     <p>The nextLink parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
