@@ -9,7 +9,7 @@ import com.azure.core.util.Context;
 /** Samples for StreamingLocators ListPaths. */
 public final class StreamingLocatorsListPathsSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-locators-list-paths-streaming-only.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Metadata/stable/2022-08-01/examples/streaming-locators-list-paths-streaming-only.json
      */
     /**
      * Sample code: List Paths which has streaming paths only.
@@ -20,11 +20,11 @@ public final class StreamingLocatorsListPathsSamples {
         com.azure.resourcemanager.mediaservices.MediaServicesManager manager) {
         manager
             .streamingLocators()
-            .listPathsWithResponse("contoso", "contosomedia", "secureStreamingLocator", Context.NONE);
+            .listPathsWithResponse("contosorg", "contosomedia", "secureStreamingLocator", Context.NONE);
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-locators-list-paths-streaming-and-download.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Metadata/stable/2022-08-01/examples/streaming-locators-list-paths-streaming-and-download.json
      */
     /**
      * Sample code: List Paths which has streaming paths and download paths.
@@ -35,6 +35,6 @@ public final class StreamingLocatorsListPathsSamples {
         com.azure.resourcemanager.mediaservices.MediaServicesManager manager) {
         manager
             .streamingLocators()
-            .listPathsWithResponse("contoso", "contosomedia", "clearStreamingLocator", Context.NONE);
+            .listPathsWithResponse("contosorg", "contosomedia", "clearStreamingLocator", Context.NONE);
     }
 }

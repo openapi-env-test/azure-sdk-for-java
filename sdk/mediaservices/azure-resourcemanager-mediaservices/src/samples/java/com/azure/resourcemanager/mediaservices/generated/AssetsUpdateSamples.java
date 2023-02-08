@@ -10,7 +10,7 @@ import com.azure.resourcemanager.mediaservices.models.Asset;
 /** Samples for Assets Update. */
 public final class AssetsUpdateSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/assets-update.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Metadata/stable/2022-08-01/examples/assets-update.json
      */
     /**
      * Sample code: Update an Asset.
@@ -19,7 +19,10 @@ public final class AssetsUpdateSamples {
      */
     public static void updateAnAsset(com.azure.resourcemanager.mediaservices.MediaServicesManager manager) {
         Asset resource =
-            manager.assets().getWithResponse("contoso", "contosomedia", "ClimbingMountBaker", Context.NONE).getValue();
+            manager
+                .assets()
+                .getWithResponse("contosorg", "contosomedia", "ClimbingMountBaker", Context.NONE)
+                .getValue();
         resource.update().withDescription("A documentary showing the ascent of Mount Baker in HD").apply();
     }
 }

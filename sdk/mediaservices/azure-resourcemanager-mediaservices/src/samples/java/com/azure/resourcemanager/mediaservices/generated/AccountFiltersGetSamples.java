@@ -9,7 +9,7 @@ import com.azure.core.util.Context;
 /** Samples for AccountFilters Get. */
 public final class AccountFiltersGetSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/accountFilters-get-by-name.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Metadata/stable/2022-08-01/examples/accountFilters-get-by-name.json
      */
     /**
      * Sample code: Get an Account Filter by name.
@@ -17,6 +17,6 @@ public final class AccountFiltersGetSamples {
      * @param manager Entry point to MediaServicesManager.
      */
     public static void getAnAccountFilterByName(com.azure.resourcemanager.mediaservices.MediaServicesManager manager) {
-        manager.accountFilters().getWithResponse("contoso", "contosomedia", "accountFilterWithTrack", Context.NONE);
+        manager.accountFilters().getWithResponse("contosorg", "contosomedia", "accountFilterWithTrack", Context.NONE);
     }
 }

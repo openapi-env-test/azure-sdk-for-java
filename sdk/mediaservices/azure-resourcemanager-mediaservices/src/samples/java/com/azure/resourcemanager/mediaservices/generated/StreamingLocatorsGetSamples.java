@@ -9,7 +9,7 @@ import com.azure.core.util.Context;
 /** Samples for StreamingLocators Get. */
 public final class StreamingLocatorsGetSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/streaming-locators-get-by-name.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Metadata/stable/2022-08-01/examples/streaming-locators-get-by-name.json
      */
     /**
      * Sample code: Get a Streaming Locator by name.
@@ -18,6 +18,6 @@ public final class StreamingLocatorsGetSamples {
      */
     public static void getAStreamingLocatorByName(
         com.azure.resourcemanager.mediaservices.MediaServicesManager manager) {
-        manager.streamingLocators().getWithResponse("contoso", "contosomedia", "clearStreamingLocator", Context.NONE);
+        manager.streamingLocators().getWithResponse("contosorg", "contosomedia", "clearStreamingLocator", Context.NONE);
     }
 }

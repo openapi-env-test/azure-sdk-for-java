@@ -12,7 +12,7 @@ import com.azure.resourcemanager.mediaservices.models.PrivateLinkServiceConnecti
 /** Samples for PrivateEndpointConnections CreateOrUpdate. */
 public final class PrivateEndpointConnectionsCreateOrUpdateSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/private-endpoint-connection-put.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Accounts/stable/2021-11-01/examples/private-endpoint-connection-put.json
      */
     /**
      * Sample code: Update private endpoint connection.
@@ -24,7 +24,7 @@ public final class PrivateEndpointConnectionsCreateOrUpdateSamples {
         PrivateEndpointConnection resource =
             manager
                 .privateEndpointConnections()
-                .getWithResponse("contoso", "contososports", "connectionName1", Context.NONE)
+                .getWithResponse("contosorg", "contososports", "connectionName1", Context.NONE)
                 .getValue();
         resource
             .update()

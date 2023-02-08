@@ -14,7 +14,7 @@ import java.util.Arrays;
 /** Samples for ContentKeyPolicies Update. */
 public final class ContentKeyPoliciesUpdateSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/content-key-policies-update.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Metadata/stable/2022-08-01/examples/content-key-policies-update.json
      */
     /**
      * Sample code: Update a Content Key Policy.
@@ -25,7 +25,8 @@ public final class ContentKeyPoliciesUpdateSamples {
         ContentKeyPolicy resource =
             manager
                 .contentKeyPolicies()
-                .getWithResponse("contoso", "contosomedia", "PolicyWithClearKeyOptionAndTokenRestriction", Context.NONE)
+                .getWithResponse(
+                    "contosorg", "contosomedia", "PolicyWithClearKeyOptionAndTokenRestriction", Context.NONE)
                 .getValue();
         resource
             .update()

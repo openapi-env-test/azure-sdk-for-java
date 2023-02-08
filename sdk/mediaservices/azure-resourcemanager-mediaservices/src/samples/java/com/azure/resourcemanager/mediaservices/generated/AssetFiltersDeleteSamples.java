@@ -9,7 +9,7 @@ import com.azure.core.util.Context;
 /** Samples for AssetFilters Delete. */
 public final class AssetFiltersDeleteSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/assetFilters-delete.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Metadata/stable/2022-08-01/examples/assetFilters-delete.json
      */
     /**
      * Sample code: Delete an Asset Filter.
@@ -20,6 +20,6 @@ public final class AssetFiltersDeleteSamples {
         manager
             .assetFilters()
             .deleteWithResponse(
-                "contoso", "contosomedia", "ClimbingMountRainer", "assetFilterWithTimeWindowAndTrack", Context.NONE);
+                "contosorg", "contosomedia", "ClimbingMountRainer", "assetFilterWithTimeWindowAndTrack", Context.NONE);
     }
 }

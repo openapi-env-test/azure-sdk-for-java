@@ -9,7 +9,7 @@ import com.azure.core.util.Context;
 /** Samples for OperationStatuses Get. */
 public final class OperationStatusesGetSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/asset-tracks-operation-status-by-id-terminal-state-failed.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Metadata/stable/2022-08-01/examples/asset-tracks-operation-status-by-id-terminal-state-failed.json
      */
     /**
      * Sample code: Get status of asynchronous operation when it is completed with error.
@@ -21,7 +21,7 @@ public final class OperationStatusesGetSamples {
         manager
             .operationStatuses()
             .getWithResponse(
-                "contoso",
+                "contosorg",
                 "contosomedia",
                 "ClimbingMountRainer",
                 "text1",
@@ -30,7 +30,7 @@ public final class OperationStatusesGetSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/asset-tracks-operation-status-by-id-terminal-state.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Metadata/stable/2022-08-01/examples/asset-tracks-operation-status-by-id-terminal-state.json
      */
     /**
      * Sample code: Get status of asynchronous operation when it is completed.
@@ -42,7 +42,7 @@ public final class OperationStatusesGetSamples {
         manager
             .operationStatuses()
             .getWithResponse(
-                "contoso",
+                "contosorg",
                 "contosomedia",
                 "ClimbingMountRainer",
                 "text1",
@@ -51,7 +51,7 @@ public final class OperationStatusesGetSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/asset-tracks-operation-status-by-id-non-terminal-state.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Metadata/stable/2022-08-01/examples/asset-tracks-operation-status-by-id-non-terminal-state.json
      */
     /**
      * Sample code: Get status of asynchronous operation when it is ongoing.
@@ -63,7 +63,7 @@ public final class OperationStatusesGetSamples {
         manager
             .operationStatuses()
             .getWithResponse(
-                "contoso",
+                "contosorg",
                 "contosomedia",
                 "ClimbingMountRainer",
                 "text1",

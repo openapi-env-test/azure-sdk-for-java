@@ -9,7 +9,7 @@ import com.azure.core.util.Context;
 /** Samples for PrivateEndpointConnections Delete. */
 public final class PrivateEndpointConnectionsDeleteSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2021-11-01/examples/private-endpoint-connection-delete.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Accounts/stable/2021-11-01/examples/private-endpoint-connection-delete.json
      */
     /**
      * Sample code: Delete private endpoint connection.
@@ -20,6 +20,6 @@ public final class PrivateEndpointConnectionsDeleteSamples {
         com.azure.resourcemanager.mediaservices.MediaServicesManager manager) {
         manager
             .privateEndpointConnections()
-            .deleteWithResponse("contoso", "contososports", "connectionName1", Context.NONE);
+            .deleteWithResponse("contosorg", "contososports", "connectionName1", Context.NONE);
     }
 }

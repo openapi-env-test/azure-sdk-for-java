@@ -9,7 +9,7 @@ import com.azure.core.util.Context;
 /** Samples for ContentKeyPolicies List. */
 public final class ContentKeyPoliciesListSamples {
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/content-key-policies-list-all.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Metadata/stable/2022-08-01/examples/content-key-policies-list-all.json
      */
     /**
      * Sample code: Lists all Content Key Policies.
@@ -18,11 +18,11 @@ public final class ContentKeyPoliciesListSamples {
      */
     public static void listsAllContentKeyPolicies(
         com.azure.resourcemanager.mediaservices.MediaServicesManager manager) {
-        manager.contentKeyPolicies().list("contoso", "contosomedia", null, null, null, Context.NONE);
+        manager.contentKeyPolicies().list("contosorg", "contosomedia", null, null, null, Context.NONE);
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/content-key-policies-list-in-date-range.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Metadata/stable/2022-08-01/examples/content-key-policies-list-in-date-range.json
      */
     /**
      * Sample code: Lists Content Key Policies with created and last modified filters.
@@ -34,7 +34,7 @@ public final class ContentKeyPoliciesListSamples {
         manager
             .contentKeyPolicies()
             .list(
-                "contoso",
+                "contosorg",
                 "contosomedia",
                 "properties/lastModified gt 2016-06-01 and properties/created lt 2013-07-01",
                 null,
@@ -43,7 +43,7 @@ public final class ContentKeyPoliciesListSamples {
     }
 
     /*
-     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/stable/2022-08-01/examples/content-key-policies-list-by-lastModified.json
+     * x-ms-original-file: specification/mediaservices/resource-manager/Microsoft.Media/Metadata/stable/2022-08-01/examples/content-key-policies-list-by-lastModified.json
      */
     /**
      * Sample code: Lists Content Key Policies ordered by last modified.
@@ -54,6 +54,6 @@ public final class ContentKeyPoliciesListSamples {
         com.azure.resourcemanager.mediaservices.MediaServicesManager manager) {
         manager
             .contentKeyPolicies()
-            .list("contoso", "contosomedia", null, null, "properties/lastModified", Context.NONE);
+            .list("contosorg", "contosomedia", null, null, "properties/lastModified", Context.NONE);
     }
 }
