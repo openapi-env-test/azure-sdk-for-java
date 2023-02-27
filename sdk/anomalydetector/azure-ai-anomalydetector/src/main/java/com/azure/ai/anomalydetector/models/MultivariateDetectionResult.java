@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** Detection results for the given resultId. */
+/** Detections results for the given resultId. */
 @Immutable
 public final class MultivariateDetectionResult {
     /*

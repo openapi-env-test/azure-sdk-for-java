@@ -301,7 +301,7 @@ public final class AnomalyDetectorAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return detection results for the given resultId along with {@link Response} on successful completion of {@link
+     * @return detections results for the given resultId along with {@link Response} on successful completion of {@link
      *     Mono}.
      */
     @Generated
@@ -701,7 +701,7 @@ public final class AnomalyDetectorAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return detection results for the given resultId along with {@link Response} on successful completion of {@link
+     * @return detections results for the given resultId along with {@link Response} on successful completion of {@link
      *     Mono}.
      */
     @Generated
@@ -885,7 +885,7 @@ public final class AnomalyDetectorAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return detection results for the given resultId on successful completion of {@link Mono}.
+     * @return detections results for the given resultId on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -940,8 +940,9 @@ public final class AnomalyDetectorAsyncClient {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return response of listing models as paginated response with {@link PagedFlux}.
      */
+    @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedFlux<AnomalyDetectionModel> listMultivariateModels(Integer skip, Integer top) {
+    public PagedFlux<AnomalyDetectionModel> listMultivariateModels(Integer skip, Integer top) {
         // Generated convenience method for listMultivariateModels
         RequestOptions requestOptions = new RequestOptions();
         if (skip != null) {
@@ -1081,7 +1082,7 @@ public final class AnomalyDetectorAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return detection results for the given resultId on successful completion of {@link Mono}.
+     * @return detections results for the given resultId on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
