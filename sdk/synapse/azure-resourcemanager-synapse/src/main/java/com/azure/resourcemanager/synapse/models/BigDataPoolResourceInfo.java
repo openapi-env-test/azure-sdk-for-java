@@ -89,15 +89,6 @@ public interface BigDataPoolResourceInfo {
     Boolean isComputeIsolationEnabled();
 
     /**
-     * Gets the isAutotuneEnabled property: Enable Autotune
-     *
-     * <p>Whether autotune is required or not.
-     *
-     * @return the isAutotuneEnabled value.
-     */
-    Boolean isAutotuneEnabled();
-
-    /**
      * Gets the sessionLevelPackagesEnabled property: Whether session level packages enabled.
      *
      * @return the sessionLevelPackagesEnabled value.
@@ -271,8 +262,8 @@ public interface BigDataPoolResourceInfo {
                 DefinitionStages.WithAutoScale,
                 DefinitionStages.WithAutoPause,
                 DefinitionStages.WithIsComputeIsolationEnabled,
-                DefinitionStages.WithIsAutotuneEnabled,
                 DefinitionStages.WithSessionLevelPackagesEnabled,
+                DefinitionStages.WithCacheSize,
                 DefinitionStages.WithDynamicExecutorAllocation,
                 DefinitionStages.WithSparkEventsFolder,
                 DefinitionStages.WithNodeCount,
@@ -355,19 +346,6 @@ public interface BigDataPoolResourceInfo {
              */
             WithCreate withIsComputeIsolationEnabled(Boolean isComputeIsolationEnabled);
         }
-        /** The stage of the BigDataPoolResourceInfo definition allowing to specify isAutotuneEnabled. */
-        interface WithIsAutotuneEnabled {
-            /**
-             * Specifies the isAutotuneEnabled property: Enable Autotune
-             *
-             * <p>Whether autotune is required or not..
-             *
-             * @param isAutotuneEnabled Enable Autotune
-             *     <p>Whether autotune is required or not.
-             * @return the next definition stage.
-             */
-            WithCreate withIsAutotuneEnabled(Boolean isAutotuneEnabled);
-        }
         /** The stage of the BigDataPoolResourceInfo definition allowing to specify sessionLevelPackagesEnabled. */
         interface WithSessionLevelPackagesEnabled {
             /**
@@ -377,6 +355,16 @@ public interface BigDataPoolResourceInfo {
              * @return the next definition stage.
              */
             WithCreate withSessionLevelPackagesEnabled(Boolean sessionLevelPackagesEnabled);
+        }
+        /** The stage of the BigDataPoolResourceInfo definition allowing to specify cacheSize. */
+        interface WithCacheSize {
+            /**
+             * Specifies the cacheSize property: The cache size.
+             *
+             * @param cacheSize The cache size.
+             * @return the next definition stage.
+             */
+            WithCreate withCacheSize(Integer cacheSize);
         }
         /** The stage of the BigDataPoolResourceInfo definition allowing to specify dynamicExecutorAllocation. */
         interface WithDynamicExecutorAllocation {

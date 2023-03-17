@@ -51,22 +51,12 @@ public final class SqlPoolsImpl implements SqlPools {
         }
     }
 
-    public SqlPool delete(String resourceGroupName, String workspaceName, String sqlPoolName) {
-        SqlPoolInner inner = this.serviceClient().delete(resourceGroupName, workspaceName, sqlPoolName);
-        if (inner != null) {
-            return new SqlPoolImpl(inner, this.manager());
-        } else {
-            return null;
-        }
+    public Object delete(String resourceGroupName, String workspaceName, String sqlPoolName) {
+        return this.serviceClient().delete(resourceGroupName, workspaceName, sqlPoolName);
     }
 
-    public SqlPool delete(String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
-        SqlPoolInner inner = this.serviceClient().delete(resourceGroupName, workspaceName, sqlPoolName, context);
-        if (inner != null) {
-            return new SqlPoolImpl(inner, this.manager());
-        } else {
-            return null;
-        }
+    public Object delete(String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
+        return this.serviceClient().delete(resourceGroupName, workspaceName, sqlPoolName, context);
     }
 
     public PagedIterable<SqlPool> listByWorkspace(String resourceGroupName, String workspaceName) {
@@ -80,40 +70,20 @@ public final class SqlPoolsImpl implements SqlPools {
         return Utils.mapPage(inner, inner1 -> new SqlPoolImpl(inner1, this.manager()));
     }
 
-    public SqlPool pause(String resourceGroupName, String workspaceName, String sqlPoolName) {
-        SqlPoolInner inner = this.serviceClient().pause(resourceGroupName, workspaceName, sqlPoolName);
-        if (inner != null) {
-            return new SqlPoolImpl(inner, this.manager());
-        } else {
-            return null;
-        }
+    public Object pause(String resourceGroupName, String workspaceName, String sqlPoolName) {
+        return this.serviceClient().pause(resourceGroupName, workspaceName, sqlPoolName);
     }
 
-    public SqlPool pause(String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
-        SqlPoolInner inner = this.serviceClient().pause(resourceGroupName, workspaceName, sqlPoolName, context);
-        if (inner != null) {
-            return new SqlPoolImpl(inner, this.manager());
-        } else {
-            return null;
-        }
+    public Object pause(String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
+        return this.serviceClient().pause(resourceGroupName, workspaceName, sqlPoolName, context);
     }
 
-    public SqlPool resume(String resourceGroupName, String workspaceName, String sqlPoolName) {
-        SqlPoolInner inner = this.serviceClient().resume(resourceGroupName, workspaceName, sqlPoolName);
-        if (inner != null) {
-            return new SqlPoolImpl(inner, this.manager());
-        } else {
-            return null;
-        }
+    public Object resume(String resourceGroupName, String workspaceName, String sqlPoolName) {
+        return this.serviceClient().resume(resourceGroupName, workspaceName, sqlPoolName);
     }
 
-    public SqlPool resume(String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
-        SqlPoolInner inner = this.serviceClient().resume(resourceGroupName, workspaceName, sqlPoolName, context);
-        if (inner != null) {
-            return new SqlPoolImpl(inner, this.manager());
-        } else {
-            return null;
-        }
+    public Object resume(String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
+        return this.serviceClient().resume(resourceGroupName, workspaceName, sqlPoolName, context);
     }
 
     public Response<Void> renameWithResponse(
@@ -184,7 +154,7 @@ public final class SqlPoolsImpl implements SqlPools {
         return this.getWithResponse(resourceGroupName, workspaceName, sqlPoolName, context);
     }
 
-    public SqlPool deleteById(String id) {
+    public Object deleteById(String id) {
         String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
             throw LOGGER
@@ -210,7 +180,7 @@ public final class SqlPoolsImpl implements SqlPools {
         return this.delete(resourceGroupName, workspaceName, sqlPoolName, Context.NONE);
     }
 
-    public SqlPool deleteByIdWithResponse(String id, Context context) {
+    public Object deleteByIdWithResponse(String id, Context context) {
         String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
             throw LOGGER

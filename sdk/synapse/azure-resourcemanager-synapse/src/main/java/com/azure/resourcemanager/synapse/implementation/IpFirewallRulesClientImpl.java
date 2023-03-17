@@ -69,8 +69,7 @@ public final class IpFirewallRulesClientImpl implements IpFirewallRulesClient {
     public interface IpFirewallRulesService {
         @Headers({"Content-Type: application/json"})
         @Get(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/firewallRules")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/firewallRules")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<IpFirewallRuleInfoListResult>> listByWorkspace(
@@ -84,8 +83,7 @@ public final class IpFirewallRulesClientImpl implements IpFirewallRulesClient {
 
         @Headers({"Content-Type: application/json"})
         @Put(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/firewallRules/{ruleName}")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/firewallRules/{ruleName}")
         @ExpectedResponses({200, 201, 202})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> createOrUpdate(
@@ -101,8 +99,7 @@ public final class IpFirewallRulesClientImpl implements IpFirewallRulesClient {
 
         @Headers({"Content-Type: application/json"})
         @Delete(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/firewallRules/{ruleName}")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/firewallRules/{ruleName}")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> delete(
@@ -117,8 +114,7 @@ public final class IpFirewallRulesClientImpl implements IpFirewallRulesClient {
 
         @Headers({"Content-Type: application/json"})
         @Get(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/firewallRules/{ruleName}")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/firewallRules/{ruleName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<IpFirewallRuleInfoInner>> get(
@@ -133,8 +129,7 @@ public final class IpFirewallRulesClientImpl implements IpFirewallRulesClient {
 
         @Headers({"Content-Type: application/json"})
         @Post(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/replaceAllIpFirewallRules")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/replaceAllIpFirewallRules")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> replaceAll(
@@ -666,7 +661,7 @@ public final class IpFirewallRulesClientImpl implements IpFirewallRulesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return iP firewall rule along with {@link Response} on successful completion of {@link Mono}.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(
@@ -721,7 +716,7 @@ public final class IpFirewallRulesClientImpl implements IpFirewallRulesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return iP firewall rule along with {@link Response} on successful completion of {@link Mono}.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(
@@ -772,20 +767,16 @@ public final class IpFirewallRulesClientImpl implements IpFirewallRulesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of iP firewall rule.
+     * @return the {@link PollerFlux} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    private PollerFlux<PollResult<IpFirewallRuleInfoInner>, IpFirewallRuleInfoInner> beginDeleteAsync(
+    private PollerFlux<PollResult<Object>, Object> beginDeleteAsync(
         String resourceGroupName, String workspaceName, String ruleName) {
         Mono<Response<Flux<ByteBuffer>>> mono = deleteWithResponseAsync(resourceGroupName, workspaceName, ruleName);
         return this
             .client
-            .<IpFirewallRuleInfoInner, IpFirewallRuleInfoInner>getLroResult(
-                mono,
-                this.client.getHttpPipeline(),
-                IpFirewallRuleInfoInner.class,
-                IpFirewallRuleInfoInner.class,
-                this.client.getContext());
+            .<Object, Object>getLroResult(
+                mono, this.client.getHttpPipeline(), Object.class, Object.class, this.client.getContext());
     }
 
     /**
@@ -798,22 +789,17 @@ public final class IpFirewallRulesClientImpl implements IpFirewallRulesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of iP firewall rule.
+     * @return the {@link PollerFlux} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    private PollerFlux<PollResult<IpFirewallRuleInfoInner>, IpFirewallRuleInfoInner> beginDeleteAsync(
+    private PollerFlux<PollResult<Object>, Object> beginDeleteAsync(
         String resourceGroupName, String workspaceName, String ruleName, Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono =
             deleteWithResponseAsync(resourceGroupName, workspaceName, ruleName, context);
         return this
             .client
-            .<IpFirewallRuleInfoInner, IpFirewallRuleInfoInner>getLroResult(
-                mono,
-                this.client.getHttpPipeline(),
-                IpFirewallRuleInfoInner.class,
-                IpFirewallRuleInfoInner.class,
-                context);
+            .<Object, Object>getLroResult(mono, this.client.getHttpPipeline(), Object.class, Object.class, context);
     }
 
     /**
@@ -825,10 +811,10 @@ public final class IpFirewallRulesClientImpl implements IpFirewallRulesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of iP firewall rule.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<IpFirewallRuleInfoInner>, IpFirewallRuleInfoInner> beginDelete(
+    public SyncPoller<PollResult<Object>, Object> beginDelete(
         String resourceGroupName, String workspaceName, String ruleName) {
         return this.beginDeleteAsync(resourceGroupName, workspaceName, ruleName).getSyncPoller();
     }
@@ -843,10 +829,10 @@ public final class IpFirewallRulesClientImpl implements IpFirewallRulesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of iP firewall rule.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<IpFirewallRuleInfoInner>, IpFirewallRuleInfoInner> beginDelete(
+    public SyncPoller<PollResult<Object>, Object> beginDelete(
         String resourceGroupName, String workspaceName, String ruleName, Context context) {
         return this.beginDeleteAsync(resourceGroupName, workspaceName, ruleName, context).getSyncPoller();
     }
@@ -860,10 +846,10 @@ public final class IpFirewallRulesClientImpl implements IpFirewallRulesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return iP firewall rule on successful completion of {@link Mono}.
+     * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<IpFirewallRuleInfoInner> deleteAsync(String resourceGroupName, String workspaceName, String ruleName) {
+    private Mono<Object> deleteAsync(String resourceGroupName, String workspaceName, String ruleName) {
         return beginDeleteAsync(resourceGroupName, workspaceName, ruleName)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
@@ -879,11 +865,10 @@ public final class IpFirewallRulesClientImpl implements IpFirewallRulesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return iP firewall rule on successful completion of {@link Mono}.
+     * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<IpFirewallRuleInfoInner> deleteAsync(
-        String resourceGroupName, String workspaceName, String ruleName, Context context) {
+    private Mono<Object> deleteAsync(String resourceGroupName, String workspaceName, String ruleName, Context context) {
         return beginDeleteAsync(resourceGroupName, workspaceName, ruleName, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
@@ -898,10 +883,10 @@ public final class IpFirewallRulesClientImpl implements IpFirewallRulesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return iP firewall rule.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public IpFirewallRuleInfoInner delete(String resourceGroupName, String workspaceName, String ruleName) {
+    public Object delete(String resourceGroupName, String workspaceName, String ruleName) {
         return deleteAsync(resourceGroupName, workspaceName, ruleName).block();
     }
 
@@ -915,11 +900,10 @@ public final class IpFirewallRulesClientImpl implements IpFirewallRulesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return iP firewall rule.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public IpFirewallRuleInfoInner delete(
-        String resourceGroupName, String workspaceName, String ruleName, Context context) {
+    public Object delete(String resourceGroupName, String workspaceName, String ruleName, Context context) {
         return deleteAsync(resourceGroupName, workspaceName, ruleName, context).block();
     }
 

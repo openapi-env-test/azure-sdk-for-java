@@ -66,9 +66,9 @@ public interface Workspaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a workspace.
+     * @return any object.
      */
-    Workspace deleteByResourceGroup(String resourceGroupName, String workspaceName);
+    Object deleteByResourceGroup(String resourceGroupName, String workspaceName);
 
     /**
      * Deletes a workspace.
@@ -79,9 +79,9 @@ public interface Workspaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a workspace.
+     * @return any object.
      */
-    Workspace delete(String resourceGroupName, String workspaceName, Context context);
+    Object delete(String resourceGroupName, String workspaceName, Context context);
 
     /**
      * Returns a list of workspaces in a subscription.
@@ -133,9 +133,9 @@ public interface Workspaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a workspace.
+     * @return any object.
      */
-    Workspace deleteById(String id);
+    Object deleteById(String id);
 
     /**
      * Deletes a workspace.
@@ -145,9 +145,9 @@ public interface Workspaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a workspace.
+     * @return any object.
      */
-    Workspace deleteByIdWithResponse(String id, Context context);
+    Object deleteByIdWithResponse(String id, Context context);
 
     /**
      * Begins definition for a new Workspace resource.

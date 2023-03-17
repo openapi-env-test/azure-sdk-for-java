@@ -57,8 +57,7 @@ public final class SqlPoolMetadataSyncConfigsClientImpl implements SqlPoolMetada
     public interface SqlPoolMetadataSyncConfigsService {
         @Headers({"Content-Type: application/json"})
         @Get(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/sqlPools/{sqlPoolName}/metadataSync/config")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/metadataSync/config")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<MetadataSyncConfigInner>> get(
@@ -73,9 +72,8 @@ public final class SqlPoolMetadataSyncConfigsClientImpl implements SqlPoolMetada
 
         @Headers({"Content-Type: application/json"})
         @Put(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/sqlPools/{sqlPoolName}/metadataSync/config")
-        @ExpectedResponses({200})
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/metadataSync/config")
+        @ExpectedResponses({200, 404})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<MetadataSyncConfigInner>> create(
             @HostParam("$host") String endpoint,

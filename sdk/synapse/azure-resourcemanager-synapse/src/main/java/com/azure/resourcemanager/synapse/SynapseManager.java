@@ -29,7 +29,6 @@ import com.azure.resourcemanager.synapse.implementation.BigDataPoolsImpl;
 import com.azure.resourcemanager.synapse.implementation.DataMaskingPoliciesImpl;
 import com.azure.resourcemanager.synapse.implementation.DataMaskingRulesImpl;
 import com.azure.resourcemanager.synapse.implementation.ExtendedSqlPoolBlobAuditingPoliciesImpl;
-import com.azure.resourcemanager.synapse.implementation.GetsImpl;
 import com.azure.resourcemanager.synapse.implementation.IntegrationRuntimeAuthKeysOperationsImpl;
 import com.azure.resourcemanager.synapse.implementation.IntegrationRuntimeConnectionInfosImpl;
 import com.azure.resourcemanager.synapse.implementation.IntegrationRuntimeCredentialsImpl;
@@ -48,7 +47,6 @@ import com.azure.resourcemanager.synapse.implementation.KustoPoolDataConnections
 import com.azure.resourcemanager.synapse.implementation.KustoPoolDatabasePrincipalAssignmentsImpl;
 import com.azure.resourcemanager.synapse.implementation.KustoPoolDatabasesImpl;
 import com.azure.resourcemanager.synapse.implementation.KustoPoolPrincipalAssignmentsImpl;
-import com.azure.resourcemanager.synapse.implementation.KustoPoolPrivateLinkResourcesOperationsImpl;
 import com.azure.resourcemanager.synapse.implementation.KustoPoolsImpl;
 import com.azure.resourcemanager.synapse.implementation.LibrariesImpl;
 import com.azure.resourcemanager.synapse.implementation.LibrariesOperationsImpl;
@@ -57,7 +55,7 @@ import com.azure.resourcemanager.synapse.implementation.PrivateEndpointConnectio
 import com.azure.resourcemanager.synapse.implementation.PrivateEndpointConnectionsPrivateLinkHubsImpl;
 import com.azure.resourcemanager.synapse.implementation.PrivateLinkHubPrivateLinkResourcesImpl;
 import com.azure.resourcemanager.synapse.implementation.PrivateLinkHubsImpl;
-import com.azure.resourcemanager.synapse.implementation.PrivateLinkResourcesOperationsImpl;
+import com.azure.resourcemanager.synapse.implementation.PrivateLinkResourcesImpl;
 import com.azure.resourcemanager.synapse.implementation.RestorableDroppedSqlPoolsImpl;
 import com.azure.resourcemanager.synapse.implementation.SparkConfigurationsImpl;
 import com.azure.resourcemanager.synapse.implementation.SparkConfigurationsOperationsImpl;
@@ -105,7 +103,6 @@ import com.azure.resourcemanager.synapse.models.BigDataPools;
 import com.azure.resourcemanager.synapse.models.DataMaskingPolicies;
 import com.azure.resourcemanager.synapse.models.DataMaskingRules;
 import com.azure.resourcemanager.synapse.models.ExtendedSqlPoolBlobAuditingPolicies;
-import com.azure.resourcemanager.synapse.models.Gets;
 import com.azure.resourcemanager.synapse.models.IntegrationRuntimeAuthKeysOperations;
 import com.azure.resourcemanager.synapse.models.IntegrationRuntimeConnectionInfos;
 import com.azure.resourcemanager.synapse.models.IntegrationRuntimeCredentials;
@@ -124,7 +121,6 @@ import com.azure.resourcemanager.synapse.models.KustoPoolDataConnections;
 import com.azure.resourcemanager.synapse.models.KustoPoolDatabasePrincipalAssignments;
 import com.azure.resourcemanager.synapse.models.KustoPoolDatabases;
 import com.azure.resourcemanager.synapse.models.KustoPoolPrincipalAssignments;
-import com.azure.resourcemanager.synapse.models.KustoPoolPrivateLinkResourcesOperations;
 import com.azure.resourcemanager.synapse.models.KustoPools;
 import com.azure.resourcemanager.synapse.models.Libraries;
 import com.azure.resourcemanager.synapse.models.LibrariesOperations;
@@ -133,7 +129,7 @@ import com.azure.resourcemanager.synapse.models.PrivateEndpointConnections;
 import com.azure.resourcemanager.synapse.models.PrivateEndpointConnectionsPrivateLinkHubs;
 import com.azure.resourcemanager.synapse.models.PrivateLinkHubPrivateLinkResources;
 import com.azure.resourcemanager.synapse.models.PrivateLinkHubs;
-import com.azure.resourcemanager.synapse.models.PrivateLinkResourcesOperations;
+import com.azure.resourcemanager.synapse.models.PrivateLinkResources;
 import com.azure.resourcemanager.synapse.models.RestorableDroppedSqlPools;
 import com.azure.resourcemanager.synapse.models.SparkConfigurations;
 import com.azure.resourcemanager.synapse.models.SparkConfigurationsOperations;
@@ -194,7 +190,7 @@ public final class SynapseManager {
 
     private PrivateEndpointConnections privateEndpointConnections;
 
-    private PrivateLinkResourcesOperations privateLinkResourcesOperations;
+    private PrivateLinkResources privateLinkResources;
 
     private PrivateLinkHubPrivateLinkResources privateLinkHubPrivateLinkResources;
 
@@ -311,8 +307,6 @@ public final class SynapseManager {
 
     private IntegrationRuntimeStatusOperations integrationRuntimeStatusOperations;
 
-    private Gets gets;
-
     private SparkConfigurations sparkConfigurations;
 
     private SparkConfigurationsOperations sparkConfigurationsOperations;
@@ -332,8 +326,6 @@ public final class SynapseManager {
     private KustoPoolPrincipalAssignments kustoPoolPrincipalAssignments;
 
     private KustoPoolDatabasePrincipalAssignments kustoPoolDatabasePrincipalAssignments;
-
-    private KustoPoolPrivateLinkResourcesOperations kustoPoolPrivateLinkResourcesOperations;
 
     private final SynapseManagementClient clientObject;
 
@@ -500,7 +492,7 @@ public final class SynapseManager {
                 .append("-")
                 .append("com.azure.resourcemanager.synapse")
                 .append("/")
-                .append("1.0.0-beta.7");
+                .append("1.0.0-beta.1");
             if (!Configuration.getGlobalConfiguration().get("AZURE_TELEMETRY_DISABLED", false)) {
                 userAgentBuilder
                     .append(" (")
@@ -620,16 +612,15 @@ public final class SynapseManager {
     }
 
     /**
-     * Gets the resource collection API of PrivateLinkResourcesOperations.
+     * Gets the resource collection API of PrivateLinkResources.
      *
-     * @return Resource collection API of PrivateLinkResourcesOperations.
+     * @return Resource collection API of PrivateLinkResources.
      */
-    public PrivateLinkResourcesOperations privateLinkResourcesOperations() {
-        if (this.privateLinkResourcesOperations == null) {
-            this.privateLinkResourcesOperations =
-                new PrivateLinkResourcesOperationsImpl(clientObject.getPrivateLinkResourcesOperations(), this);
+    public PrivateLinkResources privateLinkResources() {
+        if (this.privateLinkResources == null) {
+            this.privateLinkResources = new PrivateLinkResourcesImpl(clientObject.getPrivateLinkResources(), this);
         }
-        return privateLinkResourcesOperations;
+        return privateLinkResources;
     }
 
     /**
@@ -1379,18 +1370,6 @@ public final class SynapseManager {
     }
 
     /**
-     * Gets the resource collection API of Gets.
-     *
-     * @return Resource collection API of Gets.
-     */
-    public Gets gets() {
-        if (this.gets == null) {
-            this.gets = new GetsImpl(clientObject.getGets(), this);
-        }
-        return gets;
-    }
-
-    /**
      * Gets the resource collection API of SparkConfigurations.
      *
      * @return Resource collection API of SparkConfigurations.
@@ -1518,20 +1497,6 @@ public final class SynapseManager {
                     clientObject.getKustoPoolDatabasePrincipalAssignments(), this);
         }
         return kustoPoolDatabasePrincipalAssignments;
-    }
-
-    /**
-     * Gets the resource collection API of KustoPoolPrivateLinkResourcesOperations.
-     *
-     * @return Resource collection API of KustoPoolPrivateLinkResourcesOperations.
-     */
-    public KustoPoolPrivateLinkResourcesOperations kustoPoolPrivateLinkResourcesOperations() {
-        if (this.kustoPoolPrivateLinkResourcesOperations == null) {
-            this.kustoPoolPrivateLinkResourcesOperations =
-                new KustoPoolPrivateLinkResourcesOperationsImpl(
-                    clientObject.getKustoPoolPrivateLinkResourcesOperations(), this);
-        }
-        return kustoPoolPrivateLinkResourcesOperations;
     }
 
     /**

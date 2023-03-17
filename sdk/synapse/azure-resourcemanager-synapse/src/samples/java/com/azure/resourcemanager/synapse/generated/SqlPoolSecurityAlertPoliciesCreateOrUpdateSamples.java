@@ -7,6 +7,7 @@ package com.azure.resourcemanager.synapse.generated;
 import com.azure.resourcemanager.synapse.models.SecurityAlertPolicyName;
 import com.azure.resourcemanager.synapse.models.SecurityAlertPolicyState;
 import com.azure.resourcemanager.synapse.models.SqlPoolSecurityAlertPolicy;
+import java.util.Arrays;
 
 /** Samples for SqlPoolSecurityAlertPolicies CreateOrUpdate. */
 public final class SqlPoolSecurityAlertPoliciesCreateOrUpdateSamples {
@@ -33,6 +34,8 @@ public final class SqlPoolSecurityAlertPoliciesCreateOrUpdateSamples {
         resource
             .update()
             .withState(SecurityAlertPolicyState.ENABLED)
+            .withDisabledAlerts(Arrays.asList("Sql_Injection", "Usage_Anomaly"))
+            .withEmailAddresses(Arrays.asList("test@microsoft.com", "user@microsoft.com"))
             .withEmailAccountAdmins(true)
             .withStorageEndpoint("https://mystorage.blob.core.windows.net")
             .withStorageAccountAccessKey(

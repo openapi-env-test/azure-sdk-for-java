@@ -73,10 +73,6 @@ public final class BigDataPoolResourceInfoImpl
         return this.innerModel().isComputeIsolationEnabled();
     }
 
-    public Boolean isAutotuneEnabled() {
-        return this.innerModel().isAutotuneEnabled();
-    }
-
     public Boolean sessionLevelPackagesEnabled() {
         return this.innerModel().sessionLevelPackagesEnabled();
     }
@@ -293,13 +289,13 @@ public final class BigDataPoolResourceInfoImpl
         return this;
     }
 
-    public BigDataPoolResourceInfoImpl withIsAutotuneEnabled(Boolean isAutotuneEnabled) {
-        this.innerModel().withIsAutotuneEnabled(isAutotuneEnabled);
+    public BigDataPoolResourceInfoImpl withSessionLevelPackagesEnabled(Boolean sessionLevelPackagesEnabled) {
+        this.innerModel().withSessionLevelPackagesEnabled(sessionLevelPackagesEnabled);
         return this;
     }
 
-    public BigDataPoolResourceInfoImpl withSessionLevelPackagesEnabled(Boolean sessionLevelPackagesEnabled) {
-        this.innerModel().withSessionLevelPackagesEnabled(sessionLevelPackagesEnabled);
+    public BigDataPoolResourceInfoImpl withCacheSize(Integer cacheSize) {
+        this.innerModel().withCacheSize(cacheSize);
         return this;
     }
 

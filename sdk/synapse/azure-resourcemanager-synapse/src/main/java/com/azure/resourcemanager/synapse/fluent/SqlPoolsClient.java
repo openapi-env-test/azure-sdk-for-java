@@ -60,32 +60,14 @@ public interface SqlPoolsClient {
      * @param workspaceName The name of the workspace.
      * @param sqlPoolName SQL pool name.
      * @param sqlPoolInfo The updated SQL pool properties.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of sQL pool.
-     */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<SqlPoolInner>, SqlPoolInner> beginUpdate(
-        String resourceGroupName, String workspaceName, String sqlPoolName, SqlPoolPatchInfo sqlPoolInfo);
-
-    /**
-     * Update SQL pool
-     *
-     * <p>Apply a partial update to a SQL pool.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param workspaceName The name of the workspace.
-     * @param sqlPoolName SQL pool name.
-     * @param sqlPoolInfo The updated SQL pool properties.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of sQL pool.
+     * @return sQL pool along with {@link Response}.
      */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<SqlPoolInner>, SqlPoolInner> beginUpdate(
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<SqlPoolInner> updateWithResponse(
         String resourceGroupName,
         String workspaceName,
         String sqlPoolName,
@@ -109,29 +91,6 @@ public interface SqlPoolsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     SqlPoolInner update(
         String resourceGroupName, String workspaceName, String sqlPoolName, SqlPoolPatchInfo sqlPoolInfo);
-
-    /**
-     * Update SQL pool
-     *
-     * <p>Apply a partial update to a SQL pool.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param workspaceName The name of the workspace.
-     * @param sqlPoolName SQL pool name.
-     * @param sqlPoolInfo The updated SQL pool properties.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    SqlPoolInner update(
-        String resourceGroupName,
-        String workspaceName,
-        String sqlPoolName,
-        SqlPoolPatchInfo sqlPoolInfo,
-        Context context);
 
     /**
      * Create SQL pool
@@ -217,10 +176,10 @@ public interface SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of sQL pool.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<SqlPoolInner>, SqlPoolInner> beginDelete(
+    SyncPoller<PollResult<Object>, Object> beginDelete(
         String resourceGroupName, String workspaceName, String sqlPoolName);
 
     /**
@@ -235,10 +194,10 @@ public interface SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of sQL pool.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<SqlPoolInner>, SqlPoolInner> beginDelete(
+    SyncPoller<PollResult<Object>, Object> beginDelete(
         String resourceGroupName, String workspaceName, String sqlPoolName, Context context);
 
     /**
@@ -252,10 +211,10 @@ public interface SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    SqlPoolInner delete(String resourceGroupName, String workspaceName, String sqlPoolName);
+    Object delete(String resourceGroupName, String workspaceName, String sqlPoolName);
 
     /**
      * Delete SQL pool
@@ -269,10 +228,10 @@ public interface SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    SqlPoolInner delete(String resourceGroupName, String workspaceName, String sqlPoolName, Context context);
+    Object delete(String resourceGroupName, String workspaceName, String sqlPoolName, Context context);
 
     /**
      * List SQL pools
@@ -316,10 +275,10 @@ public interface SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of sQL pool.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<SqlPoolInner>, SqlPoolInner> beginPause(
+    SyncPoller<PollResult<Object>, Object> beginPause(
         String resourceGroupName, String workspaceName, String sqlPoolName);
 
     /**
@@ -334,10 +293,10 @@ public interface SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of sQL pool.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<SqlPoolInner>, SqlPoolInner> beginPause(
+    SyncPoller<PollResult<Object>, Object> beginPause(
         String resourceGroupName, String workspaceName, String sqlPoolName, Context context);
 
     /**
@@ -351,10 +310,10 @@ public interface SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    SqlPoolInner pause(String resourceGroupName, String workspaceName, String sqlPoolName);
+    Object pause(String resourceGroupName, String workspaceName, String sqlPoolName);
 
     /**
      * Pause SQL pool
@@ -368,10 +327,10 @@ public interface SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    SqlPoolInner pause(String resourceGroupName, String workspaceName, String sqlPoolName, Context context);
+    Object pause(String resourceGroupName, String workspaceName, String sqlPoolName, Context context);
 
     /**
      * Resume SQL pool
@@ -384,10 +343,10 @@ public interface SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of sQL pool.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<SqlPoolInner>, SqlPoolInner> beginResume(
+    SyncPoller<PollResult<Object>, Object> beginResume(
         String resourceGroupName, String workspaceName, String sqlPoolName);
 
     /**
@@ -402,10 +361,10 @@ public interface SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of sQL pool.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<SqlPoolInner>, SqlPoolInner> beginResume(
+    SyncPoller<PollResult<Object>, Object> beginResume(
         String resourceGroupName, String workspaceName, String sqlPoolName, Context context);
 
     /**
@@ -419,10 +378,10 @@ public interface SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    SqlPoolInner resume(String resourceGroupName, String workspaceName, String sqlPoolName);
+    Object resume(String resourceGroupName, String workspaceName, String sqlPoolName);
 
     /**
      * Resume SQL pool
@@ -436,10 +395,10 @@ public interface SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    SqlPoolInner resume(String resourceGroupName, String workspaceName, String sqlPoolName, Context context);
+    Object resume(String resourceGroupName, String workspaceName, String sqlPoolName, Context context);
 
     /**
      * Rename a SQL pool

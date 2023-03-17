@@ -56,13 +56,6 @@ public final class SparkConfigurationInfo {
     @JsonProperty(value = "created")
     private OffsetDateTime created;
 
-    /*
-     * SparkConfiguration merge configs.
-     */
-    @JsonProperty(value = "configMergeRule")
-    @JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)
-    private Map<String, String> configMergeRule;
-
     /** Creates an instance of SparkConfigurationInfo class. */
     public SparkConfigurationInfo() {
     }
@@ -184,26 +177,6 @@ public final class SparkConfigurationInfo {
      */
     public SparkConfigurationInfo withCreated(OffsetDateTime created) {
         this.created = created;
-        return this;
-    }
-
-    /**
-     * Get the configMergeRule property: SparkConfiguration merge configs.
-     *
-     * @return the configMergeRule value.
-     */
-    public Map<String, String> configMergeRule() {
-        return this.configMergeRule;
-    }
-
-    /**
-     * Set the configMergeRule property: SparkConfiguration merge configs.
-     *
-     * @param configMergeRule the configMergeRule value to set.
-     * @return the SparkConfigurationInfo object itself.
-     */
-    public SparkConfigurationInfo withConfigMergeRule(Map<String, String> configMergeRule) {
-        this.configMergeRule = configMergeRule;
         return this;
     }
 

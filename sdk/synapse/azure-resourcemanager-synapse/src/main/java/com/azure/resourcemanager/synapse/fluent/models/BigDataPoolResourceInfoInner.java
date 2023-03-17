@@ -172,33 +172,6 @@ public final class BigDataPoolResourceInfoInner extends Resource {
     }
 
     /**
-     * Get the isAutotuneEnabled property: Enable Autotune
-     *
-     * <p>Whether autotune is required or not.
-     *
-     * @return the isAutotuneEnabled value.
-     */
-    public Boolean isAutotuneEnabled() {
-        return this.innerProperties() == null ? null : this.innerProperties().isAutotuneEnabled();
-    }
-
-    /**
-     * Set the isAutotuneEnabled property: Enable Autotune
-     *
-     * <p>Whether autotune is required or not.
-     *
-     * @param isAutotuneEnabled the isAutotuneEnabled value to set.
-     * @return the BigDataPoolResourceInfoInner object itself.
-     */
-    public BigDataPoolResourceInfoInner withIsAutotuneEnabled(Boolean isAutotuneEnabled) {
-        if (this.innerProperties() == null) {
-            this.innerProperties = new BigDataPoolResourceProperties();
-        }
-        this.innerProperties().withIsAutotuneEnabled(isAutotuneEnabled);
-        return this;
-    }
-
-    /**
      * Get the sessionLevelPackagesEnabled property: Whether session level packages enabled.
      *
      * @return the sessionLevelPackagesEnabled value.
@@ -228,6 +201,20 @@ public final class BigDataPoolResourceInfoInner extends Resource {
      */
     public Integer cacheSize() {
         return this.innerProperties() == null ? null : this.innerProperties().cacheSize();
+    }
+
+    /**
+     * Set the cacheSize property: The cache size.
+     *
+     * @param cacheSize the cacheSize value to set.
+     * @return the BigDataPoolResourceInfoInner object itself.
+     */
+    public BigDataPoolResourceInfoInner withCacheSize(Integer cacheSize) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new BigDataPoolResourceProperties();
+        }
+        this.innerProperties().withCacheSize(cacheSize);
+        return this;
     }
 
     /**

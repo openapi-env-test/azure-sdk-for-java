@@ -18,7 +18,7 @@ public final class SqlPoolOperationResultsGetLocationHeaderResultSamples {
         com.azure.resourcemanager.synapse.SynapseManager manager) {
         manager
             .sqlPoolOperationResults()
-            .getLocationHeaderResult(
+            .getLocationHeaderResultWithResponse(
                 "ExampleResourceGroup",
                 "ExampleWorkspace",
                 "ExampleSqlPool",
