@@ -81,8 +81,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
 
         @Headers({"Content-Type: application/json"})
         @Get(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<WorkspaceInner>> getByResourceGroup(
@@ -96,8 +95,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
 
         @Headers({"Content-Type: application/json"})
         @Patch(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> update(
@@ -112,8 +110,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
 
         @Headers({"Content-Type: application/json"})
         @Put(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> createOrUpdate(
@@ -128,8 +125,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
 
         @Headers({"Content-Type: application/json"})
         @Delete(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> delete(
@@ -1029,7 +1025,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a workspace along with {@link Response} on successful completion of {@link Mono}.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(String resourceGroupName, String workspaceName) {
@@ -1078,7 +1074,7 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a workspace along with {@link Response} on successful completion of {@link Mono}.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(
@@ -1124,20 +1120,15 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of a workspace.
+     * @return the {@link PollerFlux} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    private PollerFlux<PollResult<WorkspaceInner>, WorkspaceInner> beginDeleteAsync(
-        String resourceGroupName, String workspaceName) {
+    private PollerFlux<PollResult<Object>, Object> beginDeleteAsync(String resourceGroupName, String workspaceName) {
         Mono<Response<Flux<ByteBuffer>>> mono = deleteWithResponseAsync(resourceGroupName, workspaceName);
         return this
             .client
-            .<WorkspaceInner, WorkspaceInner>getLroResult(
-                mono,
-                this.client.getHttpPipeline(),
-                WorkspaceInner.class,
-                WorkspaceInner.class,
-                this.client.getContext());
+            .<Object, Object>getLroResult(
+                mono, this.client.getHttpPipeline(), Object.class, Object.class, this.client.getContext());
     }
 
     /**
@@ -1149,17 +1140,16 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of a workspace.
+     * @return the {@link PollerFlux} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    private PollerFlux<PollResult<WorkspaceInner>, WorkspaceInner> beginDeleteAsync(
+    private PollerFlux<PollResult<Object>, Object> beginDeleteAsync(
         String resourceGroupName, String workspaceName, Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono = deleteWithResponseAsync(resourceGroupName, workspaceName, context);
         return this
             .client
-            .<WorkspaceInner, WorkspaceInner>getLroResult(
-                mono, this.client.getHttpPipeline(), WorkspaceInner.class, WorkspaceInner.class, context);
+            .<Object, Object>getLroResult(mono, this.client.getHttpPipeline(), Object.class, Object.class, context);
     }
 
     /**
@@ -1170,11 +1160,10 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of a workspace.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<WorkspaceInner>, WorkspaceInner> beginDelete(
-        String resourceGroupName, String workspaceName) {
+    public SyncPoller<PollResult<Object>, Object> beginDelete(String resourceGroupName, String workspaceName) {
         return this.beginDeleteAsync(resourceGroupName, workspaceName).getSyncPoller();
     }
 
@@ -1187,10 +1176,10 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of a workspace.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<WorkspaceInner>, WorkspaceInner> beginDelete(
+    public SyncPoller<PollResult<Object>, Object> beginDelete(
         String resourceGroupName, String workspaceName, Context context) {
         return this.beginDeleteAsync(resourceGroupName, workspaceName, context).getSyncPoller();
     }
@@ -1203,10 +1192,10 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a workspace on successful completion of {@link Mono}.
+     * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<WorkspaceInner> deleteAsync(String resourceGroupName, String workspaceName) {
+    private Mono<Object> deleteAsync(String resourceGroupName, String workspaceName) {
         return beginDeleteAsync(resourceGroupName, workspaceName).last().flatMap(this.client::getLroFinalResultOrError);
     }
 
@@ -1219,10 +1208,10 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a workspace on successful completion of {@link Mono}.
+     * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<WorkspaceInner> deleteAsync(String resourceGroupName, String workspaceName, Context context) {
+    private Mono<Object> deleteAsync(String resourceGroupName, String workspaceName, Context context) {
         return beginDeleteAsync(resourceGroupName, workspaceName, context)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
@@ -1236,10 +1225,10 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a workspace.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public WorkspaceInner delete(String resourceGroupName, String workspaceName) {
+    public Object delete(String resourceGroupName, String workspaceName) {
         return deleteAsync(resourceGroupName, workspaceName).block();
     }
 
@@ -1252,10 +1241,10 @@ public final class WorkspacesClientImpl implements WorkspacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a workspace.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public WorkspaceInner delete(String resourceGroupName, String workspaceName, Context context) {
+    public Object delete(String resourceGroupName, String workspaceName, Context context) {
         return deleteAsync(resourceGroupName, workspaceName, context).block();
     }
 

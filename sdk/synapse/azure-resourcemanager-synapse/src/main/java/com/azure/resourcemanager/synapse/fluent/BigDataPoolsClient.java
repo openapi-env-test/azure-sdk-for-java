@@ -197,10 +197,10 @@ public interface BigDataPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of big Data pool.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<BigDataPoolResourceInfoInner>, BigDataPoolResourceInfoInner> beginDelete(
+    SyncPoller<PollResult<Object>, Object> beginDelete(
         String resourceGroupName, String workspaceName, String bigDataPoolName);
 
     /**
@@ -215,10 +215,10 @@ public interface BigDataPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of big Data pool.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<PollResult<BigDataPoolResourceInfoInner>, BigDataPoolResourceInfoInner> beginDelete(
+    SyncPoller<PollResult<Object>, Object> beginDelete(
         String resourceGroupName, String workspaceName, String bigDataPoolName, Context context);
 
     /**
@@ -232,10 +232,10 @@ public interface BigDataPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return big Data pool.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    BigDataPoolResourceInfoInner delete(String resourceGroupName, String workspaceName, String bigDataPoolName);
+    Object delete(String resourceGroupName, String workspaceName, String bigDataPoolName);
 
     /**
      * Delete a Big Data pool.
@@ -249,11 +249,10 @@ public interface BigDataPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return big Data pool.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    BigDataPoolResourceInfoInner delete(
-        String resourceGroupName, String workspaceName, String bigDataPoolName, Context context);
+    Object delete(String resourceGroupName, String workspaceName, String bigDataPoolName, Context context);
 
     /**
      * List the Big Data pools in a workspace.
