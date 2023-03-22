@@ -338,6 +338,7 @@ public interface KustoPool {
             UpdateStages.WithOptimizedAutoscale,
             UpdateStages.WithEnableStreamingIngest,
             UpdateStages.WithEnablePurge,
+            UpdateStages.WithWorkspaceUid,
             UpdateStages.WithIfMatch {
         /**
          * Executes the update request.
@@ -406,6 +407,16 @@ public interface KustoPool {
              * @return the next definition stage.
              */
             Update withEnablePurge(Boolean enablePurge);
+        }
+        /** The stage of the KustoPool update allowing to specify workspaceUid. */
+        interface WithWorkspaceUid {
+            /**
+             * Specifies the workspaceUid property: The workspace unique identifier..
+             *
+             * @param workspaceUid The workspace unique identifier.
+             * @return the next definition stage.
+             */
+            Update withWorkspaceUid(String workspaceUid);
         }
         /** The stage of the KustoPool update allowing to specify ifMatch. */
         interface WithIfMatch {

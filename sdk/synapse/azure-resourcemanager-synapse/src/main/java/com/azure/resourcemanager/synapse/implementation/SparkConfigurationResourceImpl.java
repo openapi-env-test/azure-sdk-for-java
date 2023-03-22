@@ -72,15 +72,6 @@ public final class SparkConfigurationResourceImpl implements SparkConfigurationR
         return this.innerModel().created();
     }
 
-    public Map<String, String> configMergeRule() {
-        Map<String, String> inner = this.innerModel().configMergeRule();
-        if (inner != null) {
-            return Collections.unmodifiableMap(inner);
-        } else {
-            return Collections.emptyMap();
-        }
-    }
-
     public SparkConfigurationResourceInner innerModel() {
         return this.innerObject;
     }

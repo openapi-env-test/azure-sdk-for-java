@@ -53,9 +53,9 @@ public interface SqlPools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
-    SqlPool delete(String resourceGroupName, String workspaceName, String sqlPoolName);
+    Object delete(String resourceGroupName, String workspaceName, String sqlPoolName);
 
     /**
      * Delete SQL pool
@@ -69,9 +69,9 @@ public interface SqlPools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
-    SqlPool delete(String resourceGroupName, String workspaceName, String sqlPoolName, Context context);
+    Object delete(String resourceGroupName, String workspaceName, String sqlPoolName, Context context);
 
     /**
      * List SQL pools
@@ -113,9 +113,9 @@ public interface SqlPools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
-    SqlPool pause(String resourceGroupName, String workspaceName, String sqlPoolName);
+    Object pause(String resourceGroupName, String workspaceName, String sqlPoolName);
 
     /**
      * Pause SQL pool
@@ -129,9 +129,9 @@ public interface SqlPools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
-    SqlPool pause(String resourceGroupName, String workspaceName, String sqlPoolName, Context context);
+    Object pause(String resourceGroupName, String workspaceName, String sqlPoolName, Context context);
 
     /**
      * Resume SQL pool
@@ -144,9 +144,9 @@ public interface SqlPools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
-    SqlPool resume(String resourceGroupName, String workspaceName, String sqlPoolName);
+    Object resume(String resourceGroupName, String workspaceName, String sqlPoolName);
 
     /**
      * Resume SQL pool
@@ -160,9 +160,9 @@ public interface SqlPools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
-    SqlPool resume(String resourceGroupName, String workspaceName, String sqlPoolName, Context context);
+    Object resume(String resourceGroupName, String workspaceName, String sqlPoolName, Context context);
 
     /**
      * Rename a SQL pool
@@ -237,9 +237,9 @@ public interface SqlPools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
-    SqlPool deleteById(String id);
+    Object deleteById(String id);
 
     /**
      * Delete SQL pool
@@ -251,9 +251,9 @@ public interface SqlPools {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
-    SqlPool deleteByIdWithResponse(String id, Context context);
+    Object deleteByIdWithResponse(String id, Context context);
 
     /**
      * Begins definition for a new SqlPool resource.

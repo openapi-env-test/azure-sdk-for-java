@@ -394,9 +394,11 @@ public interface SqlPool {
         extends UpdateStages.WithTags,
             UpdateStages.WithSku,
             UpdateStages.WithMaxSizeBytes,
+            UpdateStages.WithCollation,
             UpdateStages.WithSourceDatabaseId,
             UpdateStages.WithRecoverableDatabaseId,
             UpdateStages.WithProvisioningState,
+            UpdateStages.WithRestorePointInTime,
             UpdateStages.WithCreateMode,
             UpdateStages.WithStorageAccountType {
         /**
@@ -449,6 +451,16 @@ public interface SqlPool {
              */
             Update withMaxSizeBytes(Long maxSizeBytes);
         }
+        /** The stage of the SqlPool update allowing to specify collation. */
+        interface WithCollation {
+            /**
+             * Specifies the collation property: Collation mode.
+             *
+             * @param collation Collation mode.
+             * @return the next definition stage.
+             */
+            Update withCollation(String collation);
+        }
         /** The stage of the SqlPool update allowing to specify sourceDatabaseId. */
         interface WithSourceDatabaseId {
             /**
@@ -478,6 +490,16 @@ public interface SqlPool {
              * @return the next definition stage.
              */
             Update withProvisioningState(String provisioningState);
+        }
+        /** The stage of the SqlPool update allowing to specify restorePointInTime. */
+        interface WithRestorePointInTime {
+            /**
+             * Specifies the restorePointInTime property: Snapshot time to restore.
+             *
+             * @param restorePointInTime Snapshot time to restore.
+             * @return the next definition stage.
+             */
+            Update withRestorePointInTime(OffsetDateTime restorePointInTime);
         }
         /** The stage of the SqlPool update allowing to specify createMode. */
         interface WithCreateMode {
@@ -544,9 +566,9 @@ public interface SqlPool {
      *
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
-    SqlPool pause();
+    Object pause();
 
     /**
      * Pause SQL pool
@@ -557,9 +579,9 @@ public interface SqlPool {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
-    SqlPool pause(Context context);
+    Object pause(Context context);
 
     /**
      * Resume SQL pool
@@ -568,9 +590,9 @@ public interface SqlPool {
      *
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
-    SqlPool resume();
+    Object resume();
 
     /**
      * Resume SQL pool
@@ -581,9 +603,9 @@ public interface SqlPool {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
-    SqlPool resume(Context context);
+    Object resume(Context context);
 
     /**
      * Rename a SQL pool
