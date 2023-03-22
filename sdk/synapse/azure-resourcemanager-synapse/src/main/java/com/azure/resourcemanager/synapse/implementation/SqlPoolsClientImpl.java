@@ -69,8 +69,7 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
     public interface SqlPoolsService {
         @Headers({"Content-Type: application/json"})
         @Get(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/sqlPools/{sqlPoolName}")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<SqlPoolInner>> get(
@@ -85,11 +84,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
 
         @Headers({"Content-Type: application/json"})
         @Patch(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/sqlPools/{sqlPoolName}")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<Flux<ByteBuffer>>> update(
+        Mono<Response<SqlPoolInner>> update(
             @HostParam("$host") String endpoint,
             @QueryParam("api-version") String apiVersion,
             @PathParam("subscriptionId") String subscriptionId,
@@ -102,9 +100,8 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
 
         @Headers({"Content-Type: application/json"})
         @Put(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/sqlPools/{sqlPoolName}")
-        @ExpectedResponses({200, 202})
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}")
+        @ExpectedResponses({200, 202, 404})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> create(
             @HostParam("$host") String endpoint,
@@ -119,8 +116,7 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
 
         @Headers({"Content-Type: application/json"})
         @Delete(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/sqlPools/{sqlPoolName}")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> delete(
@@ -135,8 +131,7 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
 
         @Headers({"Content-Type: application/json"})
         @Get(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/sqlPools")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<SqlPoolInfoListResult>> listByWorkspace(
@@ -150,8 +145,7 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
 
         @Headers({"Content-Type: application/json"})
         @Post(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/sqlPools/{sqlPoolName}/pause")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/pause")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> pause(
@@ -166,8 +160,7 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
 
         @Headers({"Content-Type: application/json"})
         @Post(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/sqlPools/{sqlPoolName}/resume")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/resume")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> resume(
@@ -182,8 +175,7 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
 
         @Headers({"Accept: application/json;q=0.9", "Content-Type: application/json"})
         @Post(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/sqlPools/{sqlPoolName}/move")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/move")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Void>> rename(
@@ -389,7 +381,7 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @return sQL pool along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Flux<ByteBuffer>>> updateWithResponseAsync(
+    private Mono<Response<SqlPoolInner>> updateWithResponseAsync(
         String resourceGroupName, String workspaceName, String sqlPoolName, SqlPoolPatchInfo sqlPoolInfo) {
         if (this.client.getEndpoint() == null) {
             return Mono
@@ -453,7 +445,7 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @return sQL pool along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Flux<ByteBuffer>>> updateWithResponseAsync(
+    private Mono<Response<SqlPoolInner>> updateWithResponseAsync(
         String resourceGroupName,
         String workspaceName,
         String sqlPoolName,
@@ -514,117 +506,13 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of sQL pool.
-     */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    private PollerFlux<PollResult<SqlPoolInner>, SqlPoolInner> beginUpdateAsync(
-        String resourceGroupName, String workspaceName, String sqlPoolName, SqlPoolPatchInfo sqlPoolInfo) {
-        Mono<Response<Flux<ByteBuffer>>> mono =
-            updateWithResponseAsync(resourceGroupName, workspaceName, sqlPoolName, sqlPoolInfo);
-        return this
-            .client
-            .<SqlPoolInner, SqlPoolInner>getLroResult(
-                mono, this.client.getHttpPipeline(), SqlPoolInner.class, SqlPoolInner.class, this.client.getContext());
-    }
-
-    /**
-     * Update SQL pool
-     *
-     * <p>Apply a partial update to a SQL pool.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param workspaceName The name of the workspace.
-     * @param sqlPoolName SQL pool name.
-     * @param sqlPoolInfo The updated SQL pool properties.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of sQL pool.
-     */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    private PollerFlux<PollResult<SqlPoolInner>, SqlPoolInner> beginUpdateAsync(
-        String resourceGroupName,
-        String workspaceName,
-        String sqlPoolName,
-        SqlPoolPatchInfo sqlPoolInfo,
-        Context context) {
-        context = this.client.mergeContext(context);
-        Mono<Response<Flux<ByteBuffer>>> mono =
-            updateWithResponseAsync(resourceGroupName, workspaceName, sqlPoolName, sqlPoolInfo, context);
-        return this
-            .client
-            .<SqlPoolInner, SqlPoolInner>getLroResult(
-                mono, this.client.getHttpPipeline(), SqlPoolInner.class, SqlPoolInner.class, context);
-    }
-
-    /**
-     * Update SQL pool
-     *
-     * <p>Apply a partial update to a SQL pool.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param workspaceName The name of the workspace.
-     * @param sqlPoolName SQL pool name.
-     * @param sqlPoolInfo The updated SQL pool properties.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of sQL pool.
-     */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<SqlPoolInner>, SqlPoolInner> beginUpdate(
-        String resourceGroupName, String workspaceName, String sqlPoolName, SqlPoolPatchInfo sqlPoolInfo) {
-        return this.beginUpdateAsync(resourceGroupName, workspaceName, sqlPoolName, sqlPoolInfo).getSyncPoller();
-    }
-
-    /**
-     * Update SQL pool
-     *
-     * <p>Apply a partial update to a SQL pool.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param workspaceName The name of the workspace.
-     * @param sqlPoolName SQL pool name.
-     * @param sqlPoolInfo The updated SQL pool properties.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of sQL pool.
-     */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<SqlPoolInner>, SqlPoolInner> beginUpdate(
-        String resourceGroupName,
-        String workspaceName,
-        String sqlPoolName,
-        SqlPoolPatchInfo sqlPoolInfo,
-        Context context) {
-        return this
-            .beginUpdateAsync(resourceGroupName, workspaceName, sqlPoolName, sqlPoolInfo, context)
-            .getSyncPoller();
-    }
-
-    /**
-     * Update SQL pool
-     *
-     * <p>Apply a partial update to a SQL pool.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param workspaceName The name of the workspace.
-     * @param sqlPoolName SQL pool name.
-     * @param sqlPoolInfo The updated SQL pool properties.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return sQL pool on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<SqlPoolInner> updateAsync(
         String resourceGroupName, String workspaceName, String sqlPoolName, SqlPoolPatchInfo sqlPoolInfo) {
-        return beginUpdateAsync(resourceGroupName, workspaceName, sqlPoolName, sqlPoolInfo)
-            .last()
-            .flatMap(this.client::getLroFinalResultOrError);
+        return updateWithResponseAsync(resourceGroupName, workspaceName, sqlPoolName, sqlPoolInfo)
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
@@ -640,18 +528,16 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool on successful completion of {@link Mono}.
+     * @return sQL pool along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<SqlPoolInner> updateAsync(
+    public Response<SqlPoolInner> updateWithResponse(
         String resourceGroupName,
         String workspaceName,
         String sqlPoolName,
         SqlPoolPatchInfo sqlPoolInfo,
         Context context) {
-        return beginUpdateAsync(resourceGroupName, workspaceName, sqlPoolName, sqlPoolInfo, context)
-            .last()
-            .flatMap(this.client::getLroFinalResultOrError);
+        return updateWithResponseAsync(resourceGroupName, workspaceName, sqlPoolName, sqlPoolInfo, context).block();
     }
 
     /**
@@ -671,32 +557,7 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public SqlPoolInner update(
         String resourceGroupName, String workspaceName, String sqlPoolName, SqlPoolPatchInfo sqlPoolInfo) {
-        return updateAsync(resourceGroupName, workspaceName, sqlPoolName, sqlPoolInfo).block();
-    }
-
-    /**
-     * Update SQL pool
-     *
-     * <p>Apply a partial update to a SQL pool.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param workspaceName The name of the workspace.
-     * @param sqlPoolName SQL pool name.
-     * @param sqlPoolInfo The updated SQL pool properties.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public SqlPoolInner update(
-        String resourceGroupName,
-        String workspaceName,
-        String sqlPoolName,
-        SqlPoolPatchInfo sqlPoolInfo,
-        Context context) {
-        return updateAsync(resourceGroupName, workspaceName, sqlPoolName, sqlPoolInfo, context).block();
+        return updateWithResponse(resourceGroupName, workspaceName, sqlPoolName, sqlPoolInfo, Context.NONE).getValue();
     }
 
     /**
@@ -1015,7 +876,7 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool along with {@link Response} on successful completion of {@link Mono}.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(
@@ -1072,7 +933,7 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool along with {@link Response} on successful completion of {@link Mono}.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(
@@ -1125,16 +986,16 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of sQL pool.
+     * @return the {@link PollerFlux} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    private PollerFlux<PollResult<SqlPoolInner>, SqlPoolInner> beginDeleteAsync(
+    private PollerFlux<PollResult<Object>, Object> beginDeleteAsync(
         String resourceGroupName, String workspaceName, String sqlPoolName) {
         Mono<Response<Flux<ByteBuffer>>> mono = deleteWithResponseAsync(resourceGroupName, workspaceName, sqlPoolName);
         return this
             .client
-            .<SqlPoolInner, SqlPoolInner>getLroResult(
-                mono, this.client.getHttpPipeline(), SqlPoolInner.class, SqlPoolInner.class, this.client.getContext());
+            .<Object, Object>getLroResult(
+                mono, this.client.getHttpPipeline(), Object.class, Object.class, this.client.getContext());
     }
 
     /**
@@ -1149,18 +1010,17 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of sQL pool.
+     * @return the {@link PollerFlux} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    private PollerFlux<PollResult<SqlPoolInner>, SqlPoolInner> beginDeleteAsync(
+    private PollerFlux<PollResult<Object>, Object> beginDeleteAsync(
         String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono =
             deleteWithResponseAsync(resourceGroupName, workspaceName, sqlPoolName, context);
         return this
             .client
-            .<SqlPoolInner, SqlPoolInner>getLroResult(
-                mono, this.client.getHttpPipeline(), SqlPoolInner.class, SqlPoolInner.class, context);
+            .<Object, Object>getLroResult(mono, this.client.getHttpPipeline(), Object.class, Object.class, context);
     }
 
     /**
@@ -1174,10 +1034,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of sQL pool.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<SqlPoolInner>, SqlPoolInner> beginDelete(
+    public SyncPoller<PollResult<Object>, Object> beginDelete(
         String resourceGroupName, String workspaceName, String sqlPoolName) {
         return this.beginDeleteAsync(resourceGroupName, workspaceName, sqlPoolName).getSyncPoller();
     }
@@ -1194,10 +1054,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of sQL pool.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<SqlPoolInner>, SqlPoolInner> beginDelete(
+    public SyncPoller<PollResult<Object>, Object> beginDelete(
         String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
         return this.beginDeleteAsync(resourceGroupName, workspaceName, sqlPoolName, context).getSyncPoller();
     }
@@ -1213,10 +1073,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool on successful completion of {@link Mono}.
+     * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<SqlPoolInner> deleteAsync(String resourceGroupName, String workspaceName, String sqlPoolName) {
+    private Mono<Object> deleteAsync(String resourceGroupName, String workspaceName, String sqlPoolName) {
         return beginDeleteAsync(resourceGroupName, workspaceName, sqlPoolName)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
@@ -1234,10 +1094,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool on successful completion of {@link Mono}.
+     * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<SqlPoolInner> deleteAsync(
+    private Mono<Object> deleteAsync(
         String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
         return beginDeleteAsync(resourceGroupName, workspaceName, sqlPoolName, context)
             .last()
@@ -1255,10 +1115,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SqlPoolInner delete(String resourceGroupName, String workspaceName, String sqlPoolName) {
+    public Object delete(String resourceGroupName, String workspaceName, String sqlPoolName) {
         return deleteAsync(resourceGroupName, workspaceName, sqlPoolName).block();
     }
 
@@ -1274,10 +1134,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SqlPoolInner delete(String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
+    public Object delete(String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
         return deleteAsync(resourceGroupName, workspaceName, sqlPoolName, context).block();
     }
 
@@ -1486,7 +1346,7 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool along with {@link Response} on successful completion of {@link Mono}.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> pauseWithResponseAsync(
@@ -1543,7 +1403,7 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool along with {@link Response} on successful completion of {@link Mono}.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> pauseWithResponseAsync(
@@ -1596,16 +1456,16 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of sQL pool.
+     * @return the {@link PollerFlux} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    private PollerFlux<PollResult<SqlPoolInner>, SqlPoolInner> beginPauseAsync(
+    private PollerFlux<PollResult<Object>, Object> beginPauseAsync(
         String resourceGroupName, String workspaceName, String sqlPoolName) {
         Mono<Response<Flux<ByteBuffer>>> mono = pauseWithResponseAsync(resourceGroupName, workspaceName, sqlPoolName);
         return this
             .client
-            .<SqlPoolInner, SqlPoolInner>getLroResult(
-                mono, this.client.getHttpPipeline(), SqlPoolInner.class, SqlPoolInner.class, this.client.getContext());
+            .<Object, Object>getLroResult(
+                mono, this.client.getHttpPipeline(), Object.class, Object.class, this.client.getContext());
     }
 
     /**
@@ -1620,18 +1480,17 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of sQL pool.
+     * @return the {@link PollerFlux} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    private PollerFlux<PollResult<SqlPoolInner>, SqlPoolInner> beginPauseAsync(
+    private PollerFlux<PollResult<Object>, Object> beginPauseAsync(
         String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono =
             pauseWithResponseAsync(resourceGroupName, workspaceName, sqlPoolName, context);
         return this
             .client
-            .<SqlPoolInner, SqlPoolInner>getLroResult(
-                mono, this.client.getHttpPipeline(), SqlPoolInner.class, SqlPoolInner.class, context);
+            .<Object, Object>getLroResult(mono, this.client.getHttpPipeline(), Object.class, Object.class, context);
     }
 
     /**
@@ -1645,10 +1504,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of sQL pool.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<SqlPoolInner>, SqlPoolInner> beginPause(
+    public SyncPoller<PollResult<Object>, Object> beginPause(
         String resourceGroupName, String workspaceName, String sqlPoolName) {
         return this.beginPauseAsync(resourceGroupName, workspaceName, sqlPoolName).getSyncPoller();
     }
@@ -1665,10 +1524,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of sQL pool.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<SqlPoolInner>, SqlPoolInner> beginPause(
+    public SyncPoller<PollResult<Object>, Object> beginPause(
         String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
         return this.beginPauseAsync(resourceGroupName, workspaceName, sqlPoolName, context).getSyncPoller();
     }
@@ -1684,10 +1543,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool on successful completion of {@link Mono}.
+     * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<SqlPoolInner> pauseAsync(String resourceGroupName, String workspaceName, String sqlPoolName) {
+    private Mono<Object> pauseAsync(String resourceGroupName, String workspaceName, String sqlPoolName) {
         return beginPauseAsync(resourceGroupName, workspaceName, sqlPoolName)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
@@ -1705,10 +1564,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool on successful completion of {@link Mono}.
+     * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<SqlPoolInner> pauseAsync(
+    private Mono<Object> pauseAsync(
         String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
         return beginPauseAsync(resourceGroupName, workspaceName, sqlPoolName, context)
             .last()
@@ -1726,10 +1585,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SqlPoolInner pause(String resourceGroupName, String workspaceName, String sqlPoolName) {
+    public Object pause(String resourceGroupName, String workspaceName, String sqlPoolName) {
         return pauseAsync(resourceGroupName, workspaceName, sqlPoolName).block();
     }
 
@@ -1745,10 +1604,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SqlPoolInner pause(String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
+    public Object pause(String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
         return pauseAsync(resourceGroupName, workspaceName, sqlPoolName, context).block();
     }
 
@@ -1763,7 +1622,7 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool along with {@link Response} on successful completion of {@link Mono}.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> resumeWithResponseAsync(
@@ -1820,7 +1679,7 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool along with {@link Response} on successful completion of {@link Mono}.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> resumeWithResponseAsync(
@@ -1873,16 +1732,16 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of sQL pool.
+     * @return the {@link PollerFlux} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    private PollerFlux<PollResult<SqlPoolInner>, SqlPoolInner> beginResumeAsync(
+    private PollerFlux<PollResult<Object>, Object> beginResumeAsync(
         String resourceGroupName, String workspaceName, String sqlPoolName) {
         Mono<Response<Flux<ByteBuffer>>> mono = resumeWithResponseAsync(resourceGroupName, workspaceName, sqlPoolName);
         return this
             .client
-            .<SqlPoolInner, SqlPoolInner>getLroResult(
-                mono, this.client.getHttpPipeline(), SqlPoolInner.class, SqlPoolInner.class, this.client.getContext());
+            .<Object, Object>getLroResult(
+                mono, this.client.getHttpPipeline(), Object.class, Object.class, this.client.getContext());
     }
 
     /**
@@ -1897,18 +1756,17 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of sQL pool.
+     * @return the {@link PollerFlux} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    private PollerFlux<PollResult<SqlPoolInner>, SqlPoolInner> beginResumeAsync(
+    private PollerFlux<PollResult<Object>, Object> beginResumeAsync(
         String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono =
             resumeWithResponseAsync(resourceGroupName, workspaceName, sqlPoolName, context);
         return this
             .client
-            .<SqlPoolInner, SqlPoolInner>getLroResult(
-                mono, this.client.getHttpPipeline(), SqlPoolInner.class, SqlPoolInner.class, context);
+            .<Object, Object>getLroResult(mono, this.client.getHttpPipeline(), Object.class, Object.class, context);
     }
 
     /**
@@ -1922,10 +1780,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of sQL pool.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<SqlPoolInner>, SqlPoolInner> beginResume(
+    public SyncPoller<PollResult<Object>, Object> beginResume(
         String resourceGroupName, String workspaceName, String sqlPoolName) {
         return this.beginResumeAsync(resourceGroupName, workspaceName, sqlPoolName).getSyncPoller();
     }
@@ -1942,10 +1800,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of sQL pool.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<SqlPoolInner>, SqlPoolInner> beginResume(
+    public SyncPoller<PollResult<Object>, Object> beginResume(
         String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
         return this.beginResumeAsync(resourceGroupName, workspaceName, sqlPoolName, context).getSyncPoller();
     }
@@ -1961,10 +1819,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool on successful completion of {@link Mono}.
+     * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<SqlPoolInner> resumeAsync(String resourceGroupName, String workspaceName, String sqlPoolName) {
+    private Mono<Object> resumeAsync(String resourceGroupName, String workspaceName, String sqlPoolName) {
         return beginResumeAsync(resourceGroupName, workspaceName, sqlPoolName)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
@@ -1982,10 +1840,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool on successful completion of {@link Mono}.
+     * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<SqlPoolInner> resumeAsync(
+    private Mono<Object> resumeAsync(
         String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
         return beginResumeAsync(resourceGroupName, workspaceName, sqlPoolName, context)
             .last()
@@ -2003,10 +1861,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SqlPoolInner resume(String resourceGroupName, String workspaceName, String sqlPoolName) {
+    public Object resume(String resourceGroupName, String workspaceName, String sqlPoolName) {
         return resumeAsync(resourceGroupName, workspaceName, sqlPoolName).block();
     }
 
@@ -2022,10 +1880,10 @@ public final class SqlPoolsClientImpl implements SqlPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sQL pool.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SqlPoolInner resume(String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
+    public Object resume(String resourceGroupName, String workspaceName, String sqlPoolName, Context context) {
         return resumeAsync(resourceGroupName, workspaceName, sqlPoolName, context).block();
     }
 

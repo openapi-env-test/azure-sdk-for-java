@@ -371,8 +371,13 @@ public final class KustoPoolImpl implements KustoPool, KustoPool.Definition, Kus
     }
 
     public KustoPoolImpl withWorkspaceUid(String workspaceUid) {
-        this.innerModel().withWorkspaceUid(workspaceUid);
-        return this;
+        if (isInCreateMode()) {
+            this.innerModel().withWorkspaceUid(workspaceUid);
+            return this;
+        } else {
+            this.updateParameters.withWorkspaceUid(workspaceUid);
+            return this;
+        }
     }
 
     public KustoPoolImpl withIfMatch(String ifMatch) {

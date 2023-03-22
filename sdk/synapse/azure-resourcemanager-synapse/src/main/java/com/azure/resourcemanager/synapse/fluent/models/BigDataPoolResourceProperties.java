@@ -58,14 +58,6 @@ public final class BigDataPoolResourceProperties {
     private Boolean isComputeIsolationEnabled;
 
     /*
-     * Enable Autotune
-     *
-     * Whether autotune is required or not.
-     */
-    @JsonProperty(value = "isAutotuneEnabled")
-    private Boolean isAutotuneEnabled;
-
-    /*
      * Whether session level packages enabled.
      */
     @JsonProperty(value = "sessionLevelPackagesEnabled")
@@ -74,7 +66,7 @@ public final class BigDataPoolResourceProperties {
     /*
      * The cache size
      */
-    @JsonProperty(value = "cacheSize", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "cacheSize")
     private Integer cacheSize;
 
     /*
@@ -249,30 +241,6 @@ public final class BigDataPoolResourceProperties {
     }
 
     /**
-     * Get the isAutotuneEnabled property: Enable Autotune
-     *
-     * <p>Whether autotune is required or not.
-     *
-     * @return the isAutotuneEnabled value.
-     */
-    public Boolean isAutotuneEnabled() {
-        return this.isAutotuneEnabled;
-    }
-
-    /**
-     * Set the isAutotuneEnabled property: Enable Autotune
-     *
-     * <p>Whether autotune is required or not.
-     *
-     * @param isAutotuneEnabled the isAutotuneEnabled value to set.
-     * @return the BigDataPoolResourceProperties object itself.
-     */
-    public BigDataPoolResourceProperties withIsAutotuneEnabled(Boolean isAutotuneEnabled) {
-        this.isAutotuneEnabled = isAutotuneEnabled;
-        return this;
-    }
-
-    /**
      * Get the sessionLevelPackagesEnabled property: Whether session level packages enabled.
      *
      * @return the sessionLevelPackagesEnabled value.
@@ -299,6 +267,17 @@ public final class BigDataPoolResourceProperties {
      */
     public Integer cacheSize() {
         return this.cacheSize;
+    }
+
+    /**
+     * Set the cacheSize property: The cache size.
+     *
+     * @param cacheSize the cacheSize value to set.
+     * @return the BigDataPoolResourceProperties object itself.
+     */
+    public BigDataPoolResourceProperties withCacheSize(Integer cacheSize) {
+        this.cacheSize = cacheSize;
+        return this;
     }
 
     /**

@@ -27,7 +27,6 @@ import com.azure.resourcemanager.synapse.fluent.BigDataPoolsClient;
 import com.azure.resourcemanager.synapse.fluent.DataMaskingPoliciesClient;
 import com.azure.resourcemanager.synapse.fluent.DataMaskingRulesClient;
 import com.azure.resourcemanager.synapse.fluent.ExtendedSqlPoolBlobAuditingPoliciesClient;
-import com.azure.resourcemanager.synapse.fluent.GetsClient;
 import com.azure.resourcemanager.synapse.fluent.IntegrationRuntimeAuthKeysOperationsClient;
 import com.azure.resourcemanager.synapse.fluent.IntegrationRuntimeConnectionInfosClient;
 import com.azure.resourcemanager.synapse.fluent.IntegrationRuntimeCredentialsClient;
@@ -46,7 +45,6 @@ import com.azure.resourcemanager.synapse.fluent.KustoPoolDataConnectionsClient;
 import com.azure.resourcemanager.synapse.fluent.KustoPoolDatabasePrincipalAssignmentsClient;
 import com.azure.resourcemanager.synapse.fluent.KustoPoolDatabasesClient;
 import com.azure.resourcemanager.synapse.fluent.KustoPoolPrincipalAssignmentsClient;
-import com.azure.resourcemanager.synapse.fluent.KustoPoolPrivateLinkResourcesOperationsClient;
 import com.azure.resourcemanager.synapse.fluent.KustoPoolsClient;
 import com.azure.resourcemanager.synapse.fluent.LibrariesClient;
 import com.azure.resourcemanager.synapse.fluent.LibrariesOperationsClient;
@@ -55,7 +53,7 @@ import com.azure.resourcemanager.synapse.fluent.PrivateEndpointConnectionsClient
 import com.azure.resourcemanager.synapse.fluent.PrivateEndpointConnectionsPrivateLinkHubsClient;
 import com.azure.resourcemanager.synapse.fluent.PrivateLinkHubPrivateLinkResourcesClient;
 import com.azure.resourcemanager.synapse.fluent.PrivateLinkHubsClient;
-import com.azure.resourcemanager.synapse.fluent.PrivateLinkResourcesOperationsClient;
+import com.azure.resourcemanager.synapse.fluent.PrivateLinkResourcesClient;
 import com.azure.resourcemanager.synapse.fluent.RestorableDroppedSqlPoolsClient;
 import com.azure.resourcemanager.synapse.fluent.SparkConfigurationsClient;
 import com.azure.resourcemanager.synapse.fluent.SparkConfigurationsOperationsClient;
@@ -230,16 +228,16 @@ public final class SynapseManagementClientImpl implements SynapseManagementClien
         return this.privateEndpointConnections;
     }
 
-    /** The PrivateLinkResourcesOperationsClient object to access its operations. */
-    private final PrivateLinkResourcesOperationsClient privateLinkResourcesOperations;
+    /** The PrivateLinkResourcesClient object to access its operations. */
+    private final PrivateLinkResourcesClient privateLinkResources;
 
     /**
-     * Gets the PrivateLinkResourcesOperationsClient object to access its operations.
+     * Gets the PrivateLinkResourcesClient object to access its operations.
      *
-     * @return the PrivateLinkResourcesOperationsClient object.
+     * @return the PrivateLinkResourcesClient object.
      */
-    public PrivateLinkResourcesOperationsClient getPrivateLinkResourcesOperations() {
-        return this.privateLinkResourcesOperations;
+    public PrivateLinkResourcesClient getPrivateLinkResources() {
+        return this.privateLinkResources;
     }
 
     /** The PrivateLinkHubPrivateLinkResourcesClient object to access its operations. */
@@ -932,18 +930,6 @@ public final class SynapseManagementClientImpl implements SynapseManagementClien
         return this.integrationRuntimeStatusOperations;
     }
 
-    /** The GetsClient object to access its operations. */
-    private final GetsClient gets;
-
-    /**
-     * Gets the GetsClient object to access its operations.
-     *
-     * @return the GetsClient object.
-     */
-    public GetsClient getGets() {
-        return this.gets;
-    }
-
     /** The SparkConfigurationsClient object to access its operations. */
     private final SparkConfigurationsClient sparkConfigurations;
 
@@ -1064,18 +1050,6 @@ public final class SynapseManagementClientImpl implements SynapseManagementClien
         return this.kustoPoolDatabasePrincipalAssignments;
     }
 
-    /** The KustoPoolPrivateLinkResourcesOperationsClient object to access its operations. */
-    private final KustoPoolPrivateLinkResourcesOperationsClient kustoPoolPrivateLinkResourcesOperations;
-
-    /**
-     * Gets the KustoPoolPrivateLinkResourcesOperationsClient object to access its operations.
-     *
-     * @return the KustoPoolPrivateLinkResourcesOperationsClient object.
-     */
-    public KustoPoolPrivateLinkResourcesOperationsClient getKustoPoolPrivateLinkResourcesOperations() {
-        return this.kustoPoolPrivateLinkResourcesOperations;
-    }
-
     /**
      * Initializes an instance of SynapseManagementClient client.
      *
@@ -1103,7 +1077,7 @@ public final class SynapseManagementClientImpl implements SynapseManagementClien
         this.ipFirewallRules = new IpFirewallRulesClientImpl(this);
         this.keys = new KeysClientImpl(this);
         this.privateEndpointConnections = new PrivateEndpointConnectionsClientImpl(this);
-        this.privateLinkResourcesOperations = new PrivateLinkResourcesOperationsClientImpl(this);
+        this.privateLinkResources = new PrivateLinkResourcesClientImpl(this);
         this.privateLinkHubPrivateLinkResources = new PrivateLinkHubPrivateLinkResourcesClientImpl(this);
         this.privateLinkHubs = new PrivateLinkHubsClientImpl(this);
         this.privateEndpointConnectionsPrivateLinkHubs = new PrivateEndpointConnectionsPrivateLinkHubsClientImpl(this);
@@ -1170,7 +1144,6 @@ public final class SynapseManagementClientImpl implements SynapseManagementClien
         this.integrationRuntimeAuthKeysOperations = new IntegrationRuntimeAuthKeysOperationsClientImpl(this);
         this.integrationRuntimeMonitoringDatas = new IntegrationRuntimeMonitoringDatasClientImpl(this);
         this.integrationRuntimeStatusOperations = new IntegrationRuntimeStatusOperationsClientImpl(this);
-        this.gets = new GetsClientImpl(this);
         this.sparkConfigurations = new SparkConfigurationsClientImpl(this);
         this.sparkConfigurationsOperations = new SparkConfigurationsOperationsClientImpl(this);
         this.kustoOperations = new KustoOperationsClientImpl(this);
@@ -1181,7 +1154,6 @@ public final class SynapseManagementClientImpl implements SynapseManagementClien
         this.kustoPoolDataConnections = new KustoPoolDataConnectionsClientImpl(this);
         this.kustoPoolPrincipalAssignments = new KustoPoolPrincipalAssignmentsClientImpl(this);
         this.kustoPoolDatabasePrincipalAssignments = new KustoPoolDatabasePrincipalAssignmentsClientImpl(this);
-        this.kustoPoolPrivateLinkResourcesOperations = new KustoPoolPrivateLinkResourcesOperationsClientImpl(this);
     }
 
     /**

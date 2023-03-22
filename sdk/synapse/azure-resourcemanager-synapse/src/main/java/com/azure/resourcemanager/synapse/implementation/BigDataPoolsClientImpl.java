@@ -68,8 +68,7 @@ public final class BigDataPoolsClientImpl implements BigDataPoolsClient {
     public interface BigDataPoolsService {
         @Headers({"Content-Type: application/json"})
         @Get(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/bigDataPools/{bigDataPoolName}")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/bigDataPools/{bigDataPoolName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<BigDataPoolResourceInfoInner>> get(
@@ -84,8 +83,7 @@ public final class BigDataPoolsClientImpl implements BigDataPoolsClient {
 
         @Headers({"Content-Type: application/json"})
         @Patch(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/bigDataPools/{bigDataPoolName}")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/bigDataPools/{bigDataPoolName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<BigDataPoolResourceInfoInner>> update(
@@ -101,8 +99,7 @@ public final class BigDataPoolsClientImpl implements BigDataPoolsClient {
 
         @Headers({"Content-Type: application/json"})
         @Put(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/bigDataPools/{bigDataPoolName}")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/bigDataPools/{bigDataPoolName}")
         @ExpectedResponses({200, 202})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> createOrUpdate(
@@ -119,8 +116,7 @@ public final class BigDataPoolsClientImpl implements BigDataPoolsClient {
 
         @Headers({"Content-Type: application/json"})
         @Delete(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/bigDataPools/{bigDataPoolName}")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/bigDataPools/{bigDataPoolName}")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> delete(
@@ -135,8 +131,7 @@ public final class BigDataPoolsClientImpl implements BigDataPoolsClient {
 
         @Headers({"Content-Type: application/json"})
         @Get(
-            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces"
-                + "/{workspaceName}/bigDataPools")
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/bigDataPools")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<BigDataPoolResourceInfoListResult>> listByWorkspace(
@@ -986,7 +981,7 @@ public final class BigDataPoolsClientImpl implements BigDataPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return big Data pool along with {@link Response} on successful completion of {@link Mono}.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(
@@ -1044,7 +1039,7 @@ public final class BigDataPoolsClientImpl implements BigDataPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return big Data pool along with {@link Response} on successful completion of {@link Mono}.
+     * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(
@@ -1098,21 +1093,17 @@ public final class BigDataPoolsClientImpl implements BigDataPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of big Data pool.
+     * @return the {@link PollerFlux} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    private PollerFlux<PollResult<BigDataPoolResourceInfoInner>, BigDataPoolResourceInfoInner> beginDeleteAsync(
+    private PollerFlux<PollResult<Object>, Object> beginDeleteAsync(
         String resourceGroupName, String workspaceName, String bigDataPoolName) {
         Mono<Response<Flux<ByteBuffer>>> mono =
             deleteWithResponseAsync(resourceGroupName, workspaceName, bigDataPoolName);
         return this
             .client
-            .<BigDataPoolResourceInfoInner, BigDataPoolResourceInfoInner>getLroResult(
-                mono,
-                this.client.getHttpPipeline(),
-                BigDataPoolResourceInfoInner.class,
-                BigDataPoolResourceInfoInner.class,
-                this.client.getContext());
+            .<Object, Object>getLroResult(
+                mono, this.client.getHttpPipeline(), Object.class, Object.class, this.client.getContext());
     }
 
     /**
@@ -1127,22 +1118,17 @@ public final class BigDataPoolsClientImpl implements BigDataPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of big Data pool.
+     * @return the {@link PollerFlux} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    private PollerFlux<PollResult<BigDataPoolResourceInfoInner>, BigDataPoolResourceInfoInner> beginDeleteAsync(
+    private PollerFlux<PollResult<Object>, Object> beginDeleteAsync(
         String resourceGroupName, String workspaceName, String bigDataPoolName, Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono =
             deleteWithResponseAsync(resourceGroupName, workspaceName, bigDataPoolName, context);
         return this
             .client
-            .<BigDataPoolResourceInfoInner, BigDataPoolResourceInfoInner>getLroResult(
-                mono,
-                this.client.getHttpPipeline(),
-                BigDataPoolResourceInfoInner.class,
-                BigDataPoolResourceInfoInner.class,
-                context);
+            .<Object, Object>getLroResult(mono, this.client.getHttpPipeline(), Object.class, Object.class, context);
     }
 
     /**
@@ -1156,10 +1142,10 @@ public final class BigDataPoolsClientImpl implements BigDataPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of big Data pool.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<BigDataPoolResourceInfoInner>, BigDataPoolResourceInfoInner> beginDelete(
+    public SyncPoller<PollResult<Object>, Object> beginDelete(
         String resourceGroupName, String workspaceName, String bigDataPoolName) {
         return this.beginDeleteAsync(resourceGroupName, workspaceName, bigDataPoolName).getSyncPoller();
     }
@@ -1176,10 +1162,10 @@ public final class BigDataPoolsClientImpl implements BigDataPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of big Data pool.
+     * @return the {@link SyncPoller} for polling of any object.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult<BigDataPoolResourceInfoInner>, BigDataPoolResourceInfoInner> beginDelete(
+    public SyncPoller<PollResult<Object>, Object> beginDelete(
         String resourceGroupName, String workspaceName, String bigDataPoolName, Context context) {
         return this.beginDeleteAsync(resourceGroupName, workspaceName, bigDataPoolName, context).getSyncPoller();
     }
@@ -1195,11 +1181,10 @@ public final class BigDataPoolsClientImpl implements BigDataPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return big Data pool on successful completion of {@link Mono}.
+     * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<BigDataPoolResourceInfoInner> deleteAsync(
-        String resourceGroupName, String workspaceName, String bigDataPoolName) {
+    private Mono<Object> deleteAsync(String resourceGroupName, String workspaceName, String bigDataPoolName) {
         return beginDeleteAsync(resourceGroupName, workspaceName, bigDataPoolName)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
@@ -1217,10 +1202,10 @@ public final class BigDataPoolsClientImpl implements BigDataPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return big Data pool on successful completion of {@link Mono}.
+     * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<BigDataPoolResourceInfoInner> deleteAsync(
+    private Mono<Object> deleteAsync(
         String resourceGroupName, String workspaceName, String bigDataPoolName, Context context) {
         return beginDeleteAsync(resourceGroupName, workspaceName, bigDataPoolName, context)
             .last()
@@ -1238,10 +1223,10 @@ public final class BigDataPoolsClientImpl implements BigDataPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return big Data pool.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BigDataPoolResourceInfoInner delete(String resourceGroupName, String workspaceName, String bigDataPoolName) {
+    public Object delete(String resourceGroupName, String workspaceName, String bigDataPoolName) {
         return deleteAsync(resourceGroupName, workspaceName, bigDataPoolName).block();
     }
 
@@ -1257,11 +1242,10 @@ public final class BigDataPoolsClientImpl implements BigDataPoolsClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return big Data pool.
+     * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BigDataPoolResourceInfoInner delete(
-        String resourceGroupName, String workspaceName, String bigDataPoolName, Context context) {
+    public Object delete(String resourceGroupName, String workspaceName, String bigDataPoolName, Context context) {
         return deleteAsync(resourceGroupName, workspaceName, bigDataPoolName, context).block();
     }
 

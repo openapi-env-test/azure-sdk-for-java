@@ -43,23 +43,12 @@ public final class IpFirewallRulesImpl implements IpFirewallRules {
         return Utils.mapPage(inner, inner1 -> new IpFirewallRuleInfoImpl(inner1, this.manager()));
     }
 
-    public IpFirewallRuleInfo delete(String resourceGroupName, String workspaceName, String ruleName) {
-        IpFirewallRuleInfoInner inner = this.serviceClient().delete(resourceGroupName, workspaceName, ruleName);
-        if (inner != null) {
-            return new IpFirewallRuleInfoImpl(inner, this.manager());
-        } else {
-            return null;
-        }
+    public Object delete(String resourceGroupName, String workspaceName, String ruleName) {
+        return this.serviceClient().delete(resourceGroupName, workspaceName, ruleName);
     }
 
-    public IpFirewallRuleInfo delete(String resourceGroupName, String workspaceName, String ruleName, Context context) {
-        IpFirewallRuleInfoInner inner =
-            this.serviceClient().delete(resourceGroupName, workspaceName, ruleName, context);
-        if (inner != null) {
-            return new IpFirewallRuleInfoImpl(inner, this.manager());
-        } else {
-            return null;
-        }
+    public Object delete(String resourceGroupName, String workspaceName, String ruleName, Context context) {
+        return this.serviceClient().delete(resourceGroupName, workspaceName, ruleName, context);
     }
 
     public Response<IpFirewallRuleInfo> getWithResponse(
@@ -160,7 +149,7 @@ public final class IpFirewallRulesImpl implements IpFirewallRules {
         return this.getWithResponse(resourceGroupName, workspaceName, ruleName, context);
     }
 
-    public IpFirewallRuleInfo deleteById(String id) {
+    public Object deleteById(String id) {
         String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
             throw LOGGER
@@ -186,7 +175,7 @@ public final class IpFirewallRulesImpl implements IpFirewallRules {
         return this.delete(resourceGroupName, workspaceName, ruleName, Context.NONE);
     }
 
-    public IpFirewallRuleInfo deleteByIdWithResponse(String id, Context context) {
+    public Object deleteByIdWithResponse(String id, Context context) {
         String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
             throw LOGGER
