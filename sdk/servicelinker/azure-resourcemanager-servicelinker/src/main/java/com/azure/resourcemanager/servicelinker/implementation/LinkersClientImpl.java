@@ -21,10 +21,6 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
-import com.azure.core.http.rest.PagedFlux;
-import com.azure.core.http.rest.PagedIterable;
-import com.azure.core.http.rest.PagedResponse;
-import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.management.exception.ManagementException;
@@ -37,7 +33,6 @@ import com.azure.resourcemanager.servicelinker.fluent.LinkersClient;
 import com.azure.resourcemanager.servicelinker.fluent.models.LinkerResourceInner;
 import com.azure.resourcemanager.servicelinker.fluent.models.SourceConfigurationResultInner;
 import com.azure.resourcemanager.servicelinker.fluent.models.ValidateOperationResultInner;
-import com.azure.resourcemanager.servicelinker.models.LinkerList;
 import com.azure.resourcemanager.servicelinker.models.LinkerPatch;
 import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;
@@ -67,18 +62,7 @@ public final class LinkersClientImpl implements LinkersClient {
      */
     @Host("{$host}")
     @ServiceInterface(name = "ServiceLinkerManagem")
-    private interface LinkersService {
-        @Headers({"Content-Type: application/json"})
-        @Get("/{resourceUri}/providers/Microsoft.ServiceLinker/linkers")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<LinkerList>> list(
-            @HostParam("$host") String endpoint,
-            @PathParam(value = "resourceUri", encoded = true) String resourceUri,
-            @QueryParam("api-version") String apiVersion,
-            @HeaderParam("Accept") String accept,
-            Context context);
-
+    public interface LinkersService {
         @Headers({"Content-Type: application/json"})
         @Get("/{resourceUri}/providers/Microsoft.ServiceLinker/linkers/{linkerName}")
         @ExpectedResponses({200})
@@ -152,148 +136,6 @@ public final class LinkersClientImpl implements LinkersClient {
             @PathParam("linkerName") String linkerName,
             @HeaderParam("Accept") String accept,
             Context context);
-
-        @Headers({"Content-Type: application/json"})
-        @Get("{nextLink}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<LinkerList>> listNext(
-            @PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HostParam("$host") String endpoint,
-            @HeaderParam("Accept") String accept,
-            Context context);
-    }
-
-    /**
-     * Returns list of Linkers which connects to the resource.
-     *
-     * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be connected.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of Linker along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<LinkerResourceInner>> listSinglePageAsync(String resourceUri) {
-        if (this.client.getEndpoint() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
-        if (resourceUri == null) {
-            return Mono.error(new IllegalArgumentException("Parameter resourceUri is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(
-                context ->
-                    service.list(this.client.getEndpoint(), resourceUri, this.client.getApiVersion(), accept, context))
-            .<PagedResponse<LinkerResourceInner>>map(
-                res ->
-                    new PagedResponseBase<>(
-                        res.getRequest(),
-                        res.getStatusCode(),
-                        res.getHeaders(),
-                        res.getValue().value(),
-                        res.getValue().nextLink(),
-                        null))
-            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
-    }
-
-    /**
-     * Returns list of Linkers which connects to the resource.
-     *
-     * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be connected.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of Linker along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<LinkerResourceInner>> listSinglePageAsync(String resourceUri, Context context) {
-        if (this.client.getEndpoint() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
-        if (resourceUri == null) {
-            return Mono.error(new IllegalArgumentException("Parameter resourceUri is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        context = this.client.mergeContext(context);
-        return service
-            .list(this.client.getEndpoint(), resourceUri, this.client.getApiVersion(), accept, context)
-            .map(
-                res ->
-                    new PagedResponseBase<>(
-                        res.getRequest(),
-                        res.getStatusCode(),
-                        res.getHeaders(),
-                        res.getValue().value(),
-                        res.getValue().nextLink(),
-                        null));
-    }
-
-    /**
-     * Returns list of Linkers which connects to the resource.
-     *
-     * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be connected.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of Linker as paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<LinkerResourceInner> listAsync(String resourceUri) {
-        return new PagedFlux<>(() -> listSinglePageAsync(resourceUri), nextLink -> listNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * Returns list of Linkers which connects to the resource.
-     *
-     * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be connected.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of Linker as paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<LinkerResourceInner> listAsync(String resourceUri, Context context) {
-        return new PagedFlux<>(
-            () -> listSinglePageAsync(resourceUri, context), nextLink -> listNextSinglePageAsync(nextLink, context));
-    }
-
-    /**
-     * Returns list of Linkers which connects to the resource.
-     *
-     * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be connected.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of Linker as paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<LinkerResourceInner> list(String resourceUri) {
-        return new PagedIterable<>(listAsync(resourceUri));
-    }
-
-    /**
-     * Returns list of Linkers which connects to the resource.
-     *
-     * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be connected.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of Linker as paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<LinkerResourceInner> list(String resourceUri, Context context) {
-        return new PagedIterable<>(listAsync(resourceUri, context));
     }
 
     /**
@@ -389,21 +231,6 @@ public final class LinkersClientImpl implements LinkersClient {
      *
      * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be connected.
      * @param linkerName The name Linker resource.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return linker of source and target resource.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public LinkerResourceInner get(String resourceUri, String linkerName) {
-        return getAsync(resourceUri, linkerName).block();
-    }
-
-    /**
-     * Returns Linker resource for a given name.
-     *
-     * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be connected.
-     * @param linkerName The name Linker resource.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -413,6 +240,21 @@ public final class LinkersClientImpl implements LinkersClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<LinkerResourceInner> getWithResponse(String resourceUri, String linkerName, Context context) {
         return getWithResponseAsync(resourceUri, linkerName, context).block();
+    }
+
+    /**
+     * Returns Linker resource for a given name.
+     *
+     * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be connected.
+     * @param linkerName The name Linker resource.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return linker of source and target resource.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public LinkerResourceInner get(String resourceUri, String linkerName) {
+        return getWithResponse(resourceUri, linkerName, Context.NONE).getValue();
     }
 
     /**
@@ -572,7 +414,7 @@ public final class LinkersClientImpl implements LinkersClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<LinkerResourceInner>, LinkerResourceInner> beginCreateOrUpdate(
         String resourceUri, String linkerName, LinkerResourceInner parameters) {
-        return beginCreateOrUpdateAsync(resourceUri, linkerName, parameters).getSyncPoller();
+        return this.beginCreateOrUpdateAsync(resourceUri, linkerName, parameters).getSyncPoller();
     }
 
     /**
@@ -590,7 +432,7 @@ public final class LinkersClientImpl implements LinkersClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<LinkerResourceInner>, LinkerResourceInner> beginCreateOrUpdate(
         String resourceUri, String linkerName, LinkerResourceInner parameters, Context context) {
-        return beginCreateOrUpdateAsync(resourceUri, linkerName, parameters, context).getSyncPoller();
+        return this.beginCreateOrUpdateAsync(resourceUri, linkerName, parameters, context).getSyncPoller();
     }
 
     /**
@@ -789,7 +631,7 @@ public final class LinkersClientImpl implements LinkersClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete(String resourceUri, String linkerName) {
-        return beginDeleteAsync(resourceUri, linkerName).getSyncPoller();
+        return this.beginDeleteAsync(resourceUri, linkerName).getSyncPoller();
     }
 
     /**
@@ -805,7 +647,7 @@ public final class LinkersClientImpl implements LinkersClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete(String resourceUri, String linkerName, Context context) {
-        return beginDeleteAsync(resourceUri, linkerName, context).getSyncPoller();
+        return this.beginDeleteAsync(resourceUri, linkerName, context).getSyncPoller();
     }
 
     /**
@@ -1024,7 +866,7 @@ public final class LinkersClientImpl implements LinkersClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<LinkerResourceInner>, LinkerResourceInner> beginUpdate(
         String resourceUri, String linkerName, LinkerPatch parameters) {
-        return beginUpdateAsync(resourceUri, linkerName, parameters).getSyncPoller();
+        return this.beginUpdateAsync(resourceUri, linkerName, parameters).getSyncPoller();
     }
 
     /**
@@ -1042,7 +884,7 @@ public final class LinkersClientImpl implements LinkersClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<LinkerResourceInner>, LinkerResourceInner> beginUpdate(
         String resourceUri, String linkerName, LinkerPatch parameters, Context context) {
-        return beginUpdateAsync(resourceUri, linkerName, parameters, context).getSyncPoller();
+        return this.beginUpdateAsync(resourceUri, linkerName, parameters, context).getSyncPoller();
     }
 
     /**
@@ -1252,7 +1094,7 @@ public final class LinkersClientImpl implements LinkersClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ValidateOperationResultInner>, ValidateOperationResultInner> beginValidate(
         String resourceUri, String linkerName) {
-        return beginValidateAsync(resourceUri, linkerName).getSyncPoller();
+        return this.beginValidateAsync(resourceUri, linkerName).getSyncPoller();
     }
 
     /**
@@ -1269,7 +1111,7 @@ public final class LinkersClientImpl implements LinkersClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ValidateOperationResultInner>, ValidateOperationResultInner> beginValidate(
         String resourceUri, String linkerName, Context context) {
-        return beginValidateAsync(resourceUri, linkerName, context).getSyncPoller();
+        return this.beginValidateAsync(resourceUri, linkerName, context).getSyncPoller();
     }
 
     /**
@@ -1433,21 +1275,6 @@ public final class LinkersClientImpl implements LinkersClient {
      *
      * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be connected.
      * @param linkerName The name Linker resource.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return configurations for source resource, include appSettings, connectionString and serviceBindings.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public SourceConfigurationResultInner listConfigurations(String resourceUri, String linkerName) {
-        return listConfigurationsAsync(resourceUri, linkerName).block();
-    }
-
-    /**
-     * list source configurations for a linker.
-     *
-     * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be connected.
-     * @param linkerName The name Linker resource.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1462,73 +1289,17 @@ public final class LinkersClientImpl implements LinkersClient {
     }
 
     /**
-     * Get the next page of items.
+     * list source configurations for a linker.
      *
-     * @param nextLink The nextLink parameter.
+     * @param resourceUri The fully qualified Azure Resource manager identifier of the resource to be connected.
+     * @param linkerName The name Linker resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of Linker along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return configurations for source resource, include appSettings, connectionString and serviceBindings.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<LinkerResourceInner>> listNextSinglePageAsync(String nextLink) {
-        if (nextLink == null) {
-            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
-        }
-        if (this.client.getEndpoint() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.listNext(nextLink, this.client.getEndpoint(), accept, context))
-            .<PagedResponse<LinkerResourceInner>>map(
-                res ->
-                    new PagedResponseBase<>(
-                        res.getRequest(),
-                        res.getStatusCode(),
-                        res.getHeaders(),
-                        res.getValue().value(),
-                        res.getValue().nextLink(),
-                        null))
-            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
-    }
-
-    /**
-     * Get the next page of items.
-     *
-     * @param nextLink The nextLink parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of Linker along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<LinkerResourceInner>> listNextSinglePageAsync(String nextLink, Context context) {
-        if (nextLink == null) {
-            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
-        }
-        if (this.client.getEndpoint() == null) {
-            return Mono
-                .error(
-                    new IllegalArgumentException(
-                        "Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        context = this.client.mergeContext(context);
-        return service
-            .listNext(nextLink, this.client.getEndpoint(), accept, context)
-            .map(
-                res ->
-                    new PagedResponseBase<>(
-                        res.getRequest(),
-                        res.getStatusCode(),
-                        res.getHeaders(),
-                        res.getValue().value(),
-                        res.getValue().nextLink(),
-                        null));
+    public SourceConfigurationResultInner listConfigurations(String resourceUri, String linkerName) {
+        return listConfigurationsWithResponse(resourceUri, linkerName, Context.NONE).getValue();
     }
 }

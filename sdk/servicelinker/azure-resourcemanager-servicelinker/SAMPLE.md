@@ -6,7 +6,6 @@
 - [CreateOrUpdate](#linker_createorupdate)
 - [Delete](#linker_delete)
 - [Get](#linker_get)
-- [List](#linker_list)
 - [ListConfigurations](#linker_listconfigurations)
 - [Update](#linker_update)
 - [Validate](#linker_validate)
@@ -46,10 +45,7 @@ public final class LinkerCreateOrUpdateSamples {
                     .withId(
                         "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc/mongodbDatabases/test-db"))
             .withAuthInfo(new SecretAuthInfo())
-            .withSecretStore(
-                new SecretStore()
-                    .withKeyVaultId(
-                        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.KeyVault/vaults/test-kv"))
+            .withSecretStore(new SecretStore().withKeyVaultId("fakeTokenPlaceholder"))
             .create();
     }
 
@@ -111,8 +107,6 @@ public final class LinkerCreateOrUpdateSamples {
 ### Linker_Delete
 
 ```java
-import com.azure.core.util.Context;
-
 /** Samples for Linker Delete. */
 public final class LinkerDeleteSamples {
     /*
@@ -129,7 +123,7 @@ public final class LinkerDeleteSamples {
             .delete(
                 "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app",
                 "linkName",
-                Context.NONE);
+                com.azure.core.util.Context.NONE);
     }
 }
 ```
@@ -137,8 +131,6 @@ public final class LinkerDeleteSamples {
 ### Linker_Get
 
 ```java
-import com.azure.core.util.Context;
-
 /** Samples for Linker Get. */
 public final class LinkerGetSamples {
     /*
@@ -155,32 +147,7 @@ public final class LinkerGetSamples {
             .getWithResponse(
                 "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app",
                 "linkName",
-                Context.NONE);
-    }
-}
-```
-
-### Linker_List
-
-```java
-import com.azure.core.util.Context;
-
-/** Samples for Linker List. */
-public final class LinkerListSamples {
-    /*
-     * x-ms-original-file: specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/examples/LinkList.json
-     */
-    /**
-     * Sample code: LinkList.
-     *
-     * @param manager Entry point to ServiceLinkerManager.
-     */
-    public static void linkList(com.azure.resourcemanager.servicelinker.ServiceLinkerManager manager) {
-        manager
-            .linkers()
-            .list(
-                "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app",
-                Context.NONE);
+                com.azure.core.util.Context.NONE);
     }
 }
 ```
@@ -188,8 +155,6 @@ public final class LinkerListSamples {
 ### Linker_ListConfigurations
 
 ```java
-import com.azure.core.util.Context;
-
 /** Samples for Linker ListConfigurations. */
 public final class LinkerListConfigurationsSamples {
     /*
@@ -206,7 +171,7 @@ public final class LinkerListConfigurationsSamples {
             .listConfigurationsWithResponse(
                 "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app",
                 "linkName",
-                Context.NONE);
+                com.azure.core.util.Context.NONE);
     }
 }
 ```
@@ -214,7 +179,6 @@ public final class LinkerListConfigurationsSamples {
 ### Linker_Update
 
 ```java
-import com.azure.core.util.Context;
 import com.azure.resourcemanager.servicelinker.models.AzureResource;
 import com.azure.resourcemanager.servicelinker.models.LinkerResource;
 import com.azure.resourcemanager.servicelinker.models.ServicePrincipalSecretAuthInfo;
@@ -236,7 +200,7 @@ public final class LinkerUpdateSamples {
                 .getWithResponse(
                     "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app",
                     "linkName",
-                    Context.NONE)
+                    com.azure.core.util.Context.NONE)
                 .getValue();
         resource
             .update()
@@ -245,7 +209,10 @@ public final class LinkerUpdateSamples {
                     .withId(
                         "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DocumentDb/databaseAccounts/test-acc/mongodbDatabases/test-db"))
             .withAuthInfo(
-                new ServicePrincipalSecretAuthInfo().withClientId("name").withPrincipalId("id").withSecret("secret"))
+                new ServicePrincipalSecretAuthInfo()
+                    .withClientId("name")
+                    .withPrincipalId("id")
+                    .withSecret("fakeTokenPlaceholder"))
             .apply();
     }
 }
@@ -254,8 +221,6 @@ public final class LinkerUpdateSamples {
 ### Linker_Validate
 
 ```java
-import com.azure.core.util.Context;
-
 /** Samples for Linker Validate. */
 public final class LinkerValidateSamples {
     /*
@@ -272,7 +237,7 @@ public final class LinkerValidateSamples {
             .validate(
                 "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app",
                 "linkName",
-                Context.NONE);
+                com.azure.core.util.Context.NONE);
     }
 }
 ```
@@ -280,8 +245,6 @@ public final class LinkerValidateSamples {
 ### Operations_List
 
 ```java
-import com.azure.core.util.Context;
-
 /** Samples for Operations List. */
 public final class OperationsListSamples {
     /*
@@ -293,7 +256,7 @@ public final class OperationsListSamples {
      * @param manager Entry point to ServiceLinkerManager.
      */
     public static void getConfiguration(com.azure.resourcemanager.servicelinker.ServiceLinkerManager manager) {
-        manager.operations().list(Context.NONE);
+        manager.operations().list(com.azure.core.util.Context.NONE);
     }
 }
 ```
