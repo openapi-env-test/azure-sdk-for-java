@@ -7,7 +7,7 @@ package com.azure.resourcemanager.recoveryservicesbackup.generated;
 /** Samples for BackupWorkloadItems List. */
 public final class BackupWorkloadItemsListSamples {
     /*
-     * x-ms-original-file: specification/recoveryservicesbackup/resource-manager/Microsoft.RecoveryServices/stable/2023-02-01/examples/AzureWorkload/BackupWorkloadItems_List.json
+     * x-ms-original-file: specification/recoveryservicesbackup/resource-manager/Microsoft.RecoveryServices/preview/2022-06-01-preview/examples/AzureWorkload/BackupWorkloadItems_List.json
      */
     /**
      * Sample code: List Workload Items in Container.

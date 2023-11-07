@@ -360,13 +360,6 @@ public interface RecoveryServicesBackupClient {
     BackupProtectionContainersClient getBackupProtectionContainers();
 
     /**
-     * Gets the DeletedProtectionContainersClient object to access its operations.
-     *
-     * @return the DeletedProtectionContainersClient object.
-     */
-    DeletedProtectionContainersClient getDeletedProtectionContainers();
-
-    /**
      * Gets the SecurityPINsClient object to access its operations.
      *
      * @return the SecurityPINsClient object.

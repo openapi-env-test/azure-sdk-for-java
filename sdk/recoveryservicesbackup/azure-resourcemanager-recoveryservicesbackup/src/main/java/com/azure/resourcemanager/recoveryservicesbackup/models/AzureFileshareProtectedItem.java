@@ -303,13 +303,6 @@ public final class AzureFileshareProtectedItem extends ProtectedItem {
         return this;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public AzureFileshareProtectedItem withSoftDeleteRetentionPeriod(Integer softDeleteRetentionPeriod) {
-        super.withSoftDeleteRetentionPeriod(softDeleteRetentionPeriod);
-        return this;
-    }
-
     /**
      * Validates the instance.
      *

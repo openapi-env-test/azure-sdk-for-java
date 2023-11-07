@@ -170,13 +170,6 @@ public final class AzureIaaSClassicComputeVMProtectedItem extends AzureIaaSvmPro
         return this;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public AzureIaaSClassicComputeVMProtectedItem withSoftDeleteRetentionPeriod(Integer softDeleteRetentionPeriod) {
-        super.withSoftDeleteRetentionPeriod(softDeleteRetentionPeriod);
-        return this;
-    }
-
     /**
      * Validates the instance.
      *

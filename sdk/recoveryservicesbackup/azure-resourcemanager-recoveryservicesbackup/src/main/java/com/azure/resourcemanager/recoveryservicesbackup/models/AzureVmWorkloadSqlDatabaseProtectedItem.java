@@ -200,13 +200,6 @@ public final class AzureVmWorkloadSqlDatabaseProtectedItem extends AzureVmWorklo
         return this;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public AzureVmWorkloadSqlDatabaseProtectedItem withSoftDeleteRetentionPeriod(Integer softDeleteRetentionPeriod) {
-        super.withSoftDeleteRetentionPeriod(softDeleteRetentionPeriod);
-        return this;
-    }
-
     /**
      * Validates the instance.
      *

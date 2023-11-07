@@ -198,13 +198,6 @@ public final class AzureSqlProtectedItem extends ProtectedItem {
         return this;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public AzureSqlProtectedItem withSoftDeleteRetentionPeriod(Integer softDeleteRetentionPeriod) {
-        super.withSoftDeleteRetentionPeriod(softDeleteRetentionPeriod);
-        return this;
-    }
-
     /**
      * Validates the instance.
      *

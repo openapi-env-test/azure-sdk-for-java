@@ -204,14 +204,6 @@ public final class AzureVmWorkloadSapHanaDBInstanceProtectedItem extends AzureVm
         return this;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public AzureVmWorkloadSapHanaDBInstanceProtectedItem withSoftDeleteRetentionPeriod(
-        Integer softDeleteRetentionPeriod) {
-        super.withSoftDeleteRetentionPeriod(softDeleteRetentionPeriod);
-        return this;
-    }
-
     /**
      * Validates the instance.
      *

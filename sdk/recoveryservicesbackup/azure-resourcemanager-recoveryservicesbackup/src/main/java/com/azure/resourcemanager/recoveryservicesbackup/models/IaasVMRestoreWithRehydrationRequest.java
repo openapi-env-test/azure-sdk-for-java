@@ -187,28 +187,6 @@ public final class IaasVMRestoreWithRehydrationRequest extends IaasVMRestoreRequ
         return this;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public IaasVMRestoreWithRehydrationRequest withExtendedLocation(ExtendedLocation extendedLocation) {
-        super.withExtendedLocation(extendedLocation);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public IaasVMRestoreWithRehydrationRequest withSecuredVMDetails(SecuredVMDetails securedVMDetails) {
-        super.withSecuredVMDetails(securedVMDetails);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public IaasVMRestoreWithRehydrationRequest withTargetDiskNetworkAccessSettings(
-        TargetDiskNetworkAccessSettings targetDiskNetworkAccessSettings) {
-        super.withTargetDiskNetworkAccessSettings(targetDiskNetworkAccessSettings);
-        return this;
-    }
-
     /**
      * Validates the instance.
      *

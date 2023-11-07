@@ -203,13 +203,6 @@ public final class AzureVmWorkloadSapAseDatabaseProtectedItem extends AzureVmWor
         return this;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public AzureVmWorkloadSapAseDatabaseProtectedItem withSoftDeleteRetentionPeriod(Integer softDeleteRetentionPeriod) {
-        super.withSoftDeleteRetentionPeriod(softDeleteRetentionPeriod);
-        return this;
-    }
-
     /**
      * Validates the instance.
      *
