@@ -5,9 +5,11 @@
 package com.azure.resourcemanager.datafactory.models;
 
 import com.azure.core.annotation.Fluent;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.util.Map;
 
 /** A copy activity SQL sink. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
@@ -36,7 +38,8 @@ public final class SqlSink extends CopySink {
      * SQL stored procedure parameters.
      */
     @JsonProperty(value = "storedProcedureParameters")
-    private Object storedProcedureParameters;
+    @JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)
+    private Map<String, StoredProcedureParameter> storedProcedureParameters;
 
     /*
      * The stored procedure parameter name of the table type. Type: string (or Expression with resultType string).
@@ -141,7 +144,7 @@ public final class SqlSink extends CopySink {
      *
      * @return the storedProcedureParameters value.
      */
-    public Object storedProcedureParameters() {
+    public Map<String, StoredProcedureParameter> storedProcedureParameters() {
         return this.storedProcedureParameters;
     }
 
@@ -151,7 +154,7 @@ public final class SqlSink extends CopySink {
      * @param storedProcedureParameters the storedProcedureParameters value to set.
      * @return the SqlSink object itself.
      */
-    public SqlSink withStoredProcedureParameters(Object storedProcedureParameters) {
+    public SqlSink withStoredProcedureParameters(Map<String, StoredProcedureParameter> storedProcedureParameters) {
         this.storedProcedureParameters = storedProcedureParameters;
         return this;
     }
@@ -314,6 +317,16 @@ public final class SqlSink extends CopySink {
     @Override
     public void validate() {
         super.validate();
+        if (storedProcedureParameters() != null) {
+            storedProcedureParameters()
+                .values()
+                .forEach(
+                    e -> {
+                        if (e != null) {
+                            e.validate();
+                        }
+                    });
+        }
         if (upsertSettings() != null) {
             upsertSettings().validate();
         }

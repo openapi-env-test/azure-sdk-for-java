@@ -5,7 +5,6 @@
 package com.azure.resourcemanager.datafactory.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -24,7 +23,7 @@ public final class SnowflakeSource extends CopySource {
     /*
      * Snowflake export settings.
      */
-    @JsonProperty(value = "exportSettings", required = true)
+    @JsonProperty(value = "exportSettings")
     private SnowflakeExportCopyCommand exportSettings;
 
     /** Creates an instance of SnowflakeSource class. */
@@ -107,14 +106,8 @@ public final class SnowflakeSource extends CopySource {
     @Override
     public void validate() {
         super.validate();
-        if (exportSettings() == null) {
-            throw LOGGER
-                .logExceptionAsError(
-                    new IllegalArgumentException("Missing required property exportSettings in model SnowflakeSource"));
-        } else {
+        if (exportSettings() != null) {
             exportSettings().validate();
         }
     }
-
-    private static final ClientLogger LOGGER = new ClientLogger(SnowflakeSource.class);
 }

@@ -5,13 +5,6 @@
 
 - [QueryByPipelineRun](#activityruns_querybypipelinerun)
 
-## CredentialOperations
-
-- [CreateOrUpdate](#credentialoperations_createorupdate)
-- [Delete](#credentialoperations_delete)
-- [Get](#credentialoperations_get)
-- [ListByFactory](#credentialoperations_listbyfactory)
-
 ## DataFlowDebugSession
 
 - [AddDataFlow](#dataflowdebugsession_adddataflow)
@@ -189,104 +182,6 @@ public final class ActivityRunsQueryByPipelineRunSamples {
                     .withLastUpdatedAfter(OffsetDateTime.parse("2018-06-16T00:36:44.3345758Z"))
                     .withLastUpdatedBefore(OffsetDateTime.parse("2018-06-16T00:49:48.3686473Z")),
                 com.azure.core.util.Context.NONE);
-    }
-}
-```
-
-### CredentialOperations_CreateOrUpdate
-
-```java
-import com.azure.resourcemanager.datafactory.models.ManagedIdentityCredential;
-
-/** Samples for CredentialOperations CreateOrUpdate. */
-public final class CredentialOperationsCreateOrUpdateSamples {
-    /*
-     * x-ms-original-file: specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/examples/Credentials_Create.json
-     */
-    /**
-     * Sample code: Credentials_Create.
-     *
-     * @param manager Entry point to DataFactoryManager.
-     */
-    public static void credentialsCreate(com.azure.resourcemanager.datafactory.DataFactoryManager manager) {
-        manager
-            .credentialOperations()
-            .define("exampleCredential")
-            .withExistingFactory("exampleResourceGroup", "exampleFactoryName")
-            .withProperties(
-                new ManagedIdentityCredential()
-                    .withResourceId(
-                        "/subscriptions/12345678-1234-1234-1234-12345678abc/resourcegroups/exampleResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleUami"))
-            .create();
-    }
-}
-```
-
-### CredentialOperations_Delete
-
-```java
-/** Samples for CredentialOperations Delete. */
-public final class CredentialOperationsDeleteSamples {
-    /*
-     * x-ms-original-file: specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/examples/Credentials_Delete.json
-     */
-    /**
-     * Sample code: Credentials_Delete.
-     *
-     * @param manager Entry point to DataFactoryManager.
-     */
-    public static void credentialsDelete(com.azure.resourcemanager.datafactory.DataFactoryManager manager) {
-        manager
-            .credentialOperations()
-            .deleteWithResponse(
-                "exampleResourceGroup", "exampleFactoryName", "exampleCredential", com.azure.core.util.Context.NONE);
-    }
-}
-```
-
-### CredentialOperations_Get
-
-```java
-/** Samples for CredentialOperations Get. */
-public final class CredentialOperationsGetSamples {
-    /*
-     * x-ms-original-file: specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/examples/Credentials_Get.json
-     */
-    /**
-     * Sample code: Credentials_Get.
-     *
-     * @param manager Entry point to DataFactoryManager.
-     */
-    public static void credentialsGet(com.azure.resourcemanager.datafactory.DataFactoryManager manager) {
-        manager
-            .credentialOperations()
-            .getWithResponse(
-                "exampleResourceGroup",
-                "exampleFactoryName",
-                "exampleCredential",
-                null,
-                com.azure.core.util.Context.NONE);
-    }
-}
-```
-
-### CredentialOperations_ListByFactory
-
-```java
-/** Samples for CredentialOperations ListByFactory. */
-public final class CredentialOperationsListByFactorySamples {
-    /*
-     * x-ms-original-file: specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/examples/Credentials_ListByFactory.json
-     */
-    /**
-     * Sample code: Credentials_ListByFactory.
-     *
-     * @param manager Entry point to DataFactoryManager.
-     */
-    public static void credentialsListByFactory(com.azure.resourcemanager.datafactory.DataFactoryManager manager) {
-        manager
-            .credentialOperations()
-            .listByFactory("exampleResourceGroup", "exampleFactoryName", com.azure.core.util.Context.NONE);
     }
 }
 ```
@@ -619,32 +514,19 @@ public final class DataFlowsCreateOrUpdateSamples {
                                 new DataFlowSink()
                                     .withName("CADSink")
                                     .withDataset(new DatasetReference().withReferenceName("CADOutput"))))
-                    .withScriptLines(
-                        Arrays
-                            .asList(
-                                "source(output(",
-                                "PreviousConversionRate as double,",
-                                "Country as string,",
-                                "DateTime1 as string,",
-                                "CurrentConversionRate as double",
-                                "),",
-                                "allowSchemaDrift: false,",
-                                "validateSchema: false) ~> USDCurrency",
-                                "source(output(",
-                                "PreviousConversionRate as double,",
-                                "Country as string,",
-                                "DateTime1 as string,",
-                                "CurrentConversionRate as double",
-                                "),",
-                                "allowSchemaDrift: true,",
-                                "validateSchema: false) ~> CADSource",
-                                "USDCurrency, CADSource union(byName: true)~> Union",
-                                "Union derive(NewCurrencyRate = round(CurrentConversionRate*1.25)) ~>"
-                                    + " NewCurrencyColumn",
-                                "NewCurrencyColumn split(Country == 'USD',",
-                                "Country == 'CAD',disjoint: false) ~> ConditionalSplit1@(USD, CAD)",
-                                "ConditionalSplit1@USD sink(saveMode:'overwrite' ) ~> USDSink",
-                                "ConditionalSplit1@CAD sink(saveMode:'overwrite' ) ~> CADSink")))
+                    .withScript(
+                        "source(output(PreviousConversionRate as double,Country as string,DateTime1 as"
+                            + " string,CurrentConversionRate as double),allowSchemaDrift: false,validateSchema: false)"
+                            + " ~> USDCurrency\n"
+                            + "source(output(PreviousConversionRate as double,Country as string,DateTime1 as"
+                            + " string,CurrentConversionRate as double),allowSchemaDrift: true,validateSchema: false)"
+                            + " ~> CADSource\n"
+                            + "USDCurrency, CADSource union(byName: true)~> Union\n"
+                            + "Union derive(NewCurrencyRate = round(CurrentConversionRate*1.25)) ~> NewCurrencyColumn\n"
+                            + "NewCurrencyColumn split(Country == 'USD',Country == 'CAD',disjoint: false) ~>"
+                            + " ConditionalSplit1@(USD, CAD)\n"
+                            + "ConditionalSplit1@USD sink(saveMode:'overwrite' ) ~> USDSink\n"
+                            + "ConditionalSplit1@CAD sink(saveMode:'overwrite' ) ~> CADSink"))
             .create();
     }
 
@@ -692,32 +574,19 @@ public final class DataFlowsCreateOrUpdateSamples {
                                 new DataFlowSink()
                                     .withName("CADSink")
                                     .withDataset(new DatasetReference().withReferenceName("CADOutput"))))
-                    .withScriptLines(
-                        Arrays
-                            .asList(
-                                "source(output(",
-                                "PreviousConversionRate as double,",
-                                "Country as string,",
-                                "DateTime1 as string,",
-                                "CurrentConversionRate as double",
-                                "),",
-                                "allowSchemaDrift: false,",
-                                "validateSchema: false) ~> USDCurrency",
-                                "source(output(",
-                                "PreviousConversionRate as double,",
-                                "Country as string,",
-                                "DateTime1 as string,",
-                                "CurrentConversionRate as double",
-                                "),",
-                                "allowSchemaDrift: true,",
-                                "validateSchema: false) ~> CADSource",
-                                "USDCurrency, CADSource union(byName: true)~> Union",
-                                "Union derive(NewCurrencyRate = round(CurrentConversionRate*1.25)) ~>"
-                                    + " NewCurrencyColumn",
-                                "NewCurrencyColumn split(Country == 'USD',",
-                                "Country == 'CAD',disjoint: false) ~> ConditionalSplit1@(USD, CAD)",
-                                "ConditionalSplit1@USD sink(saveMode:'overwrite' ) ~> USDSink",
-                                "ConditionalSplit1@CAD sink(saveMode:'overwrite' ) ~> CADSink")))
+                    .withScript(
+                        "source(output(PreviousConversionRate as double,Country as string,DateTime1 as"
+                            + " string,CurrentConversionRate as double),allowSchemaDrift: false,validateSchema: false)"
+                            + " ~> USDCurrency\n"
+                            + "source(output(PreviousConversionRate as double,Country as string,DateTime1 as"
+                            + " string,CurrentConversionRate as double),allowSchemaDrift: true,validateSchema: false)"
+                            + " ~> CADSource\n"
+                            + "USDCurrency, CADSource union(byName: true)~> Union\n"
+                            + "Union derive(NewCurrencyRate = round(CurrentConversionRate*1.25)) ~> NewCurrencyColumn\n"
+                            + "NewCurrencyColumn split(Country == 'USD',Country == 'CAD',disjoint: false) ~>"
+                            + " ConditionalSplit1@(USD, CAD)\n"
+                            + "ConditionalSplit1@USD sink(saveMode:'overwrite' ) ~> USDSink\n"
+                            + "ConditionalSplit1@CAD sink(saveMode:'overwrite' ) ~> CADSink"))
             .apply();
     }
 }

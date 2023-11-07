@@ -87,7 +87,6 @@ import java.util.Map;
     @JsonSubTypes.Type(name = "AppFigures", value = AppFiguresLinkedService.class),
     @JsonSubTypes.Type(name = "Asana", value = AsanaLinkedService.class),
     @JsonSubTypes.Type(name = "Twilio", value = TwilioLinkedService.class),
-    @JsonSubTypes.Type(name = "GoogleSheets", value = GoogleSheetsLinkedService.class),
     @JsonSubTypes.Type(name = "AmazonS3", value = AmazonS3LinkedService.class),
     @JsonSubTypes.Type(name = "AmazonRedshift", value = AmazonRedshiftLinkedService.class),
     @JsonSubTypes.Type(name = "CustomDataSource", value = CustomDataSourceLinkedService.class),
@@ -140,7 +139,8 @@ import java.util.Map;
     @JsonSubTypes.Type(name = "AzureFunction", value = AzureFunctionLinkedService.class),
     @JsonSubTypes.Type(name = "Snowflake", value = SnowflakeLinkedService.class),
     @JsonSubTypes.Type(name = "SharePointOnlineList", value = SharePointOnlineListLinkedService.class),
-    @JsonSubTypes.Type(name = "AzureSynapseArtifacts", value = AzureSynapseArtifactsLinkedService.class)
+    @JsonSubTypes.Type(name = "AzureSynapseArtifacts", value = AzureSynapseArtifactsLinkedService.class),
+    @JsonSubTypes.Type(name = "LakeHouse", value = LakeHouseLinkedService.class)
 })
 @Fluent
 public class LinkedService {

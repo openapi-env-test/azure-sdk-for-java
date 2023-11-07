@@ -117,33 +117,6 @@ public final class AzureSynapseArtifactsLinkedService extends LinkedService {
     }
 
     /**
-     * Get the workspaceResourceId property: The resource ID of the Synapse workspace. The format should be:
-     * /subscriptions/{subscriptionID}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}.
-     * Type: string (or Expression with resultType string).
-     *
-     * @return the workspaceResourceId value.
-     */
-    public Object workspaceResourceId() {
-        return this.innerTypeProperties() == null ? null : this.innerTypeProperties().workspaceResourceId();
-    }
-
-    /**
-     * Set the workspaceResourceId property: The resource ID of the Synapse workspace. The format should be:
-     * /subscriptions/{subscriptionID}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}.
-     * Type: string (or Expression with resultType string).
-     *
-     * @param workspaceResourceId the workspaceResourceId value to set.
-     * @return the AzureSynapseArtifactsLinkedService object itself.
-     */
-    public AzureSynapseArtifactsLinkedService withWorkspaceResourceId(Object workspaceResourceId) {
-        if (this.innerTypeProperties() == null) {
-            this.innerTypeProperties = new AzureSynapseArtifactsLinkedServiceTypeProperties();
-        }
-        this.innerTypeProperties().withWorkspaceResourceId(workspaceResourceId);
-        return this;
-    }
-
-    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.

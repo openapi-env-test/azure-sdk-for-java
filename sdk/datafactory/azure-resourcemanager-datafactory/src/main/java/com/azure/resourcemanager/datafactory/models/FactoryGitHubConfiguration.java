@@ -131,13 +131,6 @@ public final class FactoryGitHubConfiguration extends FactoryRepoConfiguration {
         return this;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public FactoryGitHubConfiguration withDisablePublish(Boolean disablePublish) {
-        super.withDisablePublish(disablePublish);
-        return this;
-    }
-
     /**
      * Validates the instance.
      *

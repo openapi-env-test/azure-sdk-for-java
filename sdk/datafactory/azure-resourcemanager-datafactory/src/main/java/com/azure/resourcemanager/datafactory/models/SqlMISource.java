@@ -5,9 +5,11 @@
 package com.azure.resourcemanager.datafactory.models;
 
 import com.azure.core.annotation.Fluent;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.util.Map;
 
 /** A copy activity Azure SQL Managed Instance source. */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
@@ -31,7 +33,8 @@ public final class SqlMISource extends TabularSource {
      * Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}".
      */
     @JsonProperty(value = "storedProcedureParameters")
-    private Object storedProcedureParameters;
+    @JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)
+    private Map<String, StoredProcedureParameter> storedProcedureParameters;
 
     /*
      * Which additional types to produce.
@@ -106,7 +109,7 @@ public final class SqlMISource extends TabularSource {
      *
      * @return the storedProcedureParameters value.
      */
-    public Object storedProcedureParameters() {
+    public Map<String, StoredProcedureParameter> storedProcedureParameters() {
         return this.storedProcedureParameters;
     }
 
@@ -117,7 +120,7 @@ public final class SqlMISource extends TabularSource {
      * @param storedProcedureParameters the storedProcedureParameters value to set.
      * @return the SqlMISource object itself.
      */
-    public SqlMISource withStoredProcedureParameters(Object storedProcedureParameters) {
+    public SqlMISource withStoredProcedureParameters(Map<String, StoredProcedureParameter> storedProcedureParameters) {
         this.storedProcedureParameters = storedProcedureParameters;
         return this;
     }
@@ -234,6 +237,16 @@ public final class SqlMISource extends TabularSource {
     @Override
     public void validate() {
         super.validate();
+        if (storedProcedureParameters() != null) {
+            storedProcedureParameters()
+                .values()
+                .forEach(
+                    e -> {
+                        if (e != null) {
+                            e.validate();
+                        }
+                    });
+        }
         if (partitionSettings() != null) {
             partitionSettings().validate();
         }

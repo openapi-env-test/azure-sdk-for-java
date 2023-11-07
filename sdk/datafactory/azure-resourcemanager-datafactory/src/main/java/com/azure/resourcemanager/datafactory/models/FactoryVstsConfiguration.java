@@ -106,13 +106,6 @@ public final class FactoryVstsConfiguration extends FactoryRepoConfiguration {
         return this;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public FactoryVstsConfiguration withDisablePublish(Boolean disablePublish) {
-        super.withDisablePublish(disablePublish);
-        return this;
-    }
-
     /**
      * Validates the instance.
      *
