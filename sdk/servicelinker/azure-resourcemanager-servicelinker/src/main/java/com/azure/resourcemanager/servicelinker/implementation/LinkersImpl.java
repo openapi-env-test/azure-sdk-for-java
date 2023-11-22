@@ -12,11 +12,9 @@ import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.servicelinker.fluent.LinkersClient;
 import com.azure.resourcemanager.servicelinker.fluent.models.LinkerResourceInner;
 import com.azure.resourcemanager.servicelinker.fluent.models.SourceConfigurationResultInner;
-import com.azure.resourcemanager.servicelinker.fluent.models.ValidateOperationResultInner;
 import com.azure.resourcemanager.servicelinker.models.LinkerResource;
 import com.azure.resourcemanager.servicelinker.models.Linkers;
 import com.azure.resourcemanager.servicelinker.models.SourceConfigurationResult;
-import com.azure.resourcemanager.servicelinker.models.ValidateOperationResult;
 
 public final class LinkersImpl implements Linkers {
     private static final ClientLogger LOGGER = new ClientLogger(LinkersImpl.class);
@@ -41,15 +39,6 @@ public final class LinkersImpl implements Linkers {
         return Utils.mapPage(inner, inner1 -> new LinkerResourceImpl(inner1, this.manager()));
     }
 
-    public LinkerResource get(String resourceUri, String linkerName) {
-        LinkerResourceInner inner = this.serviceClient().get(resourceUri, linkerName);
-        if (inner != null) {
-            return new LinkerResourceImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public Response<LinkerResource> getWithResponse(String resourceUri, String linkerName, Context context) {
         Response<LinkerResourceInner> inner = this.serviceClient().getWithResponse(resourceUri, linkerName, context);
         if (inner != null) {
@@ -63,39 +52,21 @@ public final class LinkersImpl implements Linkers {
         }
     }
 
+    public LinkerResource get(String resourceUri, String linkerName) {
+        LinkerResourceInner inner = this.serviceClient().get(resourceUri, linkerName);
+        if (inner != null) {
+            return new LinkerResourceImpl(inner, this.manager());
+        } else {
+            return null;
+        }
+    }
+
     public void deleteByResourceGroup(String resourceUri, String linkerName) {
         this.serviceClient().delete(resourceUri, linkerName);
     }
 
     public void delete(String resourceUri, String linkerName, Context context) {
         this.serviceClient().delete(resourceUri, linkerName, context);
-    }
-
-    public ValidateOperationResult validate(String resourceUri, String linkerName) {
-        ValidateOperationResultInner inner = this.serviceClient().validate(resourceUri, linkerName);
-        if (inner != null) {
-            return new ValidateOperationResultImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public ValidateOperationResult validate(String resourceUri, String linkerName, Context context) {
-        ValidateOperationResultInner inner = this.serviceClient().validate(resourceUri, linkerName, context);
-        if (inner != null) {
-            return new ValidateOperationResultImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
-    public SourceConfigurationResult listConfigurations(String resourceUri, String linkerName) {
-        SourceConfigurationResultInner inner = this.serviceClient().listConfigurations(resourceUri, linkerName);
-        if (inner != null) {
-            return new SourceConfigurationResultImpl(inner, this.manager());
-        } else {
-            return null;
-        }
     }
 
     public Response<SourceConfigurationResult> listConfigurationsWithResponse(
@@ -108,6 +79,15 @@ public final class LinkersImpl implements Linkers {
                 inner.getStatusCode(),
                 inner.getHeaders(),
                 new SourceConfigurationResultImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
+    }
+
+    public SourceConfigurationResult listConfigurations(String resourceUri, String linkerName) {
+        SourceConfigurationResultInner inner = this.serviceClient().listConfigurations(resourceUri, linkerName);
+        if (inner != null) {
+            return new SourceConfigurationResultImpl(inner, this.manager());
         } else {
             return null;
         }

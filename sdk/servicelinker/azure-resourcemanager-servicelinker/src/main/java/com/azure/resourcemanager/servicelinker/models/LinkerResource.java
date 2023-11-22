@@ -309,35 +309,6 @@ public interface LinkerResource {
     LinkerResource refresh(Context context);
 
     /**
-     * Validate a link.
-     *
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the validation operation result for a linker.
-     */
-    ValidateOperationResult validate();
-
-    /**
-     * Validate a link.
-     *
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the validation operation result for a linker.
-     */
-    ValidateOperationResult validate(Context context);
-
-    /**
-     * list source configurations for a linker.
-     *
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return configurations for source resource, include appSettings, connectionString and serviceBindings.
-     */
-    SourceConfigurationResult listConfigurations();
-
-    /**
      * list source configurations for a linker.
      *
      * @param context The context to associate with this operation.
@@ -348,4 +319,13 @@ public interface LinkerResource {
      *     {@link Response}.
      */
     Response<SourceConfigurationResult> listConfigurationsWithResponse(Context context);
+
+    /**
+     * list source configurations for a linker.
+     *
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return configurations for source resource, include appSettings, connectionString and serviceBindings.
+     */
+    SourceConfigurationResult listConfigurations();
 }
