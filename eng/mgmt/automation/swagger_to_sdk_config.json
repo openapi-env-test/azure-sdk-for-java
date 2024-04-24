@@ -7,8 +7,8 @@
         "JAVA_HOME_11_X64"
       ],
       "stderr": {
-        "scriptError": false,
-        "scriptWarning": false
+        "scriptError": true,
+        "scriptWarning": true
       },
       "stdout": {
         "showInComment": "Downloading"
