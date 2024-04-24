@@ -5,12 +5,26 @@
       "path": "./eng/mgmt/automation/init.sh",
       "envs": [
         "JAVA_HOME_11_X64"
-      ]
+      ],
+      "stderr": {
+        "scriptError": false,
+        "scriptWarning": false
+      },
+      "stdout": {
+        "showInComment": "Downloading"
+      }
     }
   },
   "generateOptions": {
     "generateScript": {
-      "path": "./eng/mgmt/automation/generate.py"
+      "path": "./eng/mgmt/automation/generate.py",
+      "stderr": {
+        "scriptError": true,
+        "scriptWarning": true
+      },
+      "stdout": {
+        "showInComment": true
+      }
     }
   },
   "artifactOptions": {
